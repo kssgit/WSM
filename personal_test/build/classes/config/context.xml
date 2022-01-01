@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+    <!--
+      spring webmvc common start
+      -->
+      
+    <!-- spring component scan -->
+    <!-- UI Publish Controller를 찾기 위한 package 경로 설정 -->
+    <context:component-scan base-package="com.test"/>
+    
+<!--     view resolver -->
+    <bean id="jstlViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/view/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+<!--    spring custom datasource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
+		<property name="username" value="ojt" />
+		<property name="password" value="1234" />
+	</bean>
+
+    <!-- spring database process session -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="classpath*:com/test/dao/sql/*.xml" />
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+    </bean>
+
+<!--     spring database process template -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSession"/>
+    </bean>
+
+<!--     spring transaction for database using aop -->
+    <bean id="txManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED" rollback-for="Throwable" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="serviceMethod"
+            expression="execution(* com.test..web.*Controller.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
+    </aop:config>
+    <!--
+      spring webmvc common end
+    -->
+
+    <!--
+      exbuilder server config for spring webmvc start
+    -->
+    <!-- exbuilder request mapping adapter -->
+    <!-- eXbuilder6 프로토콜을 파싱하여 DataRequest 파라미터를 자동으로 생성해주는 리졸버 추가 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="customArgumentResolvers">
+            <list>
+                <bean class="com.cleopatra.spring.DataRequestResolver">
+                </bean>
+            </list>
+        </property>
+    </bean>
+    <!--
+      exbuilder server config for spring webmvc end
+    -->	
+
+</beans>

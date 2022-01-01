@@ -13,7 +13,7 @@
 /* 내부에 아이템을 갖는 컨트롤의 Disabled된 경우, 각 아이템이 선택된 경우 배경 색상 */
 /* 모든 UIControl 공통 스타일 */
 .cl-control {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
 }
 /* 오류 발생시 표시되는 메시지 스타일 */
@@ -44,7 +44,7 @@ body.cl-has-modal {
 }
 /* 넘버 에디터  */
 .cl-numbereditor {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   border: 1px solid #bbb;
   color: #333;
   /* 넘버 에디터 disabled 상태  */
@@ -75,7 +75,7 @@ body.cl-has-modal {
 }
 /* 데이트 인풋 */
 .cl-dateinput {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   text-align: left;
@@ -215,7 +215,7 @@ body.cl-has-modal {
 /* 캘린더 disabled 상태 */
 /* 리스트 박스 */
 .cl-listbox {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   background-color: #fff;
   border: 1px solid #bbb;
   color: #333;
@@ -263,7 +263,7 @@ body.cl-has-modal {
 }
 /* 링크드 리스트 박스 루트 */
 .cl-linkedlistbox {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   /* 리스트 박스 */
   /* 링크드리스트박스 disabled 상태*/
@@ -329,7 +329,7 @@ body.cl-has-modal {
   /* 선택된 아이템 드릴 다운 아이콘 */
 }
 .cl-menu {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   /* 메뉴 리스트 */
 }
 .cl-menu .cl-menu-list {
@@ -402,7 +402,7 @@ body.cl-has-modal {
 }
 /* 파일 업로드 루트 */
 .cl-fileupload {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   background-color: #fff;
@@ -454,7 +454,7 @@ body.cl-has-modal {
 }
 /* 버튼 */
 .cl-button {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   background-image: linear-gradient(#FCFEFF, #E0E1E2);
   border-radius: 4px;
@@ -485,7 +485,7 @@ body.cl-has-modal {
 .cl-accordion {
   border: 1px solid #bbb;
   color: #333;
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   /** 아코디언의 각 헤더 */
 }
 .cl-accordion .cl-accordion-header {
@@ -532,7 +532,7 @@ body.cl-has-modal {
 }
 /* 인풋 박스 루트 */
 .cl-inputbox {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   background-color: #fff;
@@ -550,7 +550,7 @@ body.cl-has-modal {
 }
 /* 서치 인풋 */
 .cl-searchinput {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   text-align: left;
@@ -625,7 +625,7 @@ body.cl-has-modal {
 }
 /* 아웃풋 */
 .cl-output {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
 }
 .cl-output.cl-disabled {
@@ -633,7 +633,7 @@ body.cl-has-modal {
 }
 /* 텍스트 에리어 */
 .cl-textarea {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   border: 1px solid #bbb;
   color: #333;
   /* 텍스트 에리어 텍스트 */
@@ -761,7 +761,7 @@ body.cl-has-modal {
 }
 /* 마스크 에디터 루트 */
 .cl-maskeditor {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   border: 1px solid #bbb;
   background-color: #fff;
   color: #333;
@@ -779,7 +779,7 @@ body.cl-has-modal {
 }
 /* 콤보 박스 루트 */
 .cl-combobox {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   background-color: #fff;
@@ -801,7 +801,7 @@ body.cl-has-modal {
 }
 /* 콤보 박스 리스트 박스 */
 .cl-combobox-list {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   border: 1px solid #1369C5;
   color: #333;
   /*리스트박스의 쉐도우*/
@@ -855,7 +855,7 @@ body.cl-has-modal {
 }
 /* 링크드 콤보 박스 루트 */
 .cl-linkedcombobox {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   /* 콤보 박스 */
   /* 콤보 박스 - 포커스 상태 */
@@ -884,7 +884,7 @@ body.cl-has-modal {
 }
 /* 콤보 박스 리스트 박스 */
 .cl-linkedcombobox-list {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #1369C5;
   background-color: white;
@@ -949,7 +949,7 @@ body.cl-has-modal {
 /* 트리 */
 .cl-tree {
   border: 1px solid #bbb;
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   background-color: #fff;
   /* 트리 아이템 */
@@ -1025,7 +1025,7 @@ body.cl-has-modal {
 }
 /* 그리드 */
 .cl-grid {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   border: solid 1px #bbb;
   min-height: 100px;
@@ -1210,7 +1210,7 @@ body.cl-has-modal {
 }
 /* 네비게이션 바 */
 .cl-navigationbar {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   background-color: white;
   border: solid 1px #bbb;
   color: #333;
@@ -1260,7 +1260,7 @@ body.cl-has-modal {
 /* 네비게이션 바 드랍다운 메뉴 */
 .cl-navigationbar-list {
   border: solid 1px #bbb;
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   /* megamenu 타입의 카테고리 */
   /* submenu의 up스크롤 버튼*/
   /* submenu의 down스크롤 버튼*/
@@ -1320,7 +1320,7 @@ body.cl-has-modal {
 /* 탭 폴더 */
 .cl-tabfolder {
   color: #333;
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   /* 헤더 */
   /* 탭폴더 바디 */
 }
@@ -1362,7 +1362,7 @@ body.cl-has-modal {
 }
 /* 페이지 인덱서 */
 .cl-pageindexer {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   /* 페이지 인덱서 버튼 공통 */
   /* 페이지 인덱서 처음으로 버튼 */
@@ -1424,7 +1424,7 @@ body.cl-has-modal {
 }
 /* 노티파이어 아이템 */
 .cl-notifier-item {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   /* 노티파이어 아이템 텍스트 */
   /* 노티파이어 아이템 아이콘 */
   /* 노티파이어 아이템 닫기 버튼 */
@@ -1468,7 +1468,7 @@ body.cl-has-modal {
 }
 /* 파일 인풋 루트 */
 .cl-fileinput {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
+  font: 1rem "Noto Sans KR", "Malgun Gothic", sans-serif;
   color: #333;
   border: solid 1px #bbb;
   /*autoSize 설정시 표시되는 기본크기*/

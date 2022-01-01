@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-b9f9326c" version="1.0.3485">
+  <head std:sid="head-13ca99fd">
+    <screen std:sid="screen-7a2cb2e0" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-e712fd5a" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-ca10e7af" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-4b5ee7d1">
+      <cl:dataset std:sid="d-set-79905b77" id="dsList" info="USER_TEST@EMAIL">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e80890cd" name="FIRSTNAME" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-dcc4e399" name="LASTNAME"/>
+          <cl:datacolumn std:sid="d-column-17ef10ac" name="PHONE_NUMBER"/>
+          <cl:datacolumn std:sid="d-column-cf31d9ef" name="AGE"/>
+          <cl:datacolumn std:sid="d-column-bafee8b1" name="NAME" datatype="expression" expression="FIRSTNAME + LASTNAME"/>
+          <cl:datacolumn std:sid="d-column-ce5ba092" name="EMAIL"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-42b45cf2" id="dmEmail">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-48ef6b46" name="EMAIL" defaultvalue=""/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-baecae2b" id="smsOnLoad" action="/user/onload.do">
+        <cl:listener std:sid="listener-591a9a56" name="submit-success" handler="onSmsOnLoadSubmitSuccess"/>
+        <cl:responsedata dataid="dsList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-782dcec3" id="smsSearchEmail" action="/user/searchEmail.do">
+        <cl:requestdata dataid="dmEmail"/>
+        <cl:responsedata dataid="dsList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-1c1bc3f7" id="smsSave" action="/user/save.do">
+        <cl:listener std:sid="listener-330fdac6" name="submit-success" handler="onSmsSaveSubmitSuccess"/>
+        <cl:requestdata dataid="dsList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-3e633a9d">
+    <cl:listener std:sid="listener-2edd5707" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-9e5c2e7e" class="search-box">
+      <cl:xylayoutdata std:sid="xyl-data-f8722caa" top="10px" right="20px" left="20px" height="30px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:button std:sid="button-eb1a79fa" id="btnsearch" value="조회">
+        <cl:listener std:sid="listener-d198a71f" name="click" handler="onButtonClick"/>
+        <cl:formdata std:sid="f-data-5c9fe3ed" row="0" col="2"/>
+      </cl:button>
+      <cl:inputbox std:sid="i-box-e678c945" id="ipbSearch">
+        <cl:datamapbind property="value" datacontrolid="dmEmail" columnname="EMAIL"/>
+        <cl:formdata std:sid="f-data-44685f8d" row="0" col="1"/>
+      </cl:inputbox>
+      <cl:output std:sid="output-c9e549cc" value="Email">
+        <cl:formdata std:sid="f-data-0d3239b3" row="0" col="0"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-f32be699" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:udc std:sid="ud-control-0e997f59" type="udc.IDS">
+      <cl:listener std:sid="listener-396d1335" name="save" handler="onIDSSave"/>
+      <cl:xylayoutdata std:sid="xyl-data-95eb857b" top="50px" right="20px" width="300px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+      <cl:property name="grd" value="grd1" type="control"/>
+    </cl:udc>
+    <cl:grid std:sid="grid-048ee6ca" id="grd1" datasetid="dsList" autofit="8" columnMovable="true">
+      <cl:xylayoutdata std:sid="xyl-data-711a3c62" top="100px" right="20px" left="20px" height="382px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:gridcolumn std:sid="g-column-5274dab1" width="25px"/>
+      <cl:gridcolumn std:sid="g-column-2d209695" width="50px"/>
+      <cl:gridcolumn std:sid="g-column-192987ec" width="50px"/>
+      <cl:gridcolumn std:sid="g-column-b9889380"/>
+      <cl:gridcolumn std:sid="g-column-2e8f27b9"/>
+      <cl:gridcolumn std:sid="g-column-1d2444ca"/>
+      <cl:gridcolumn std:sid="g-column-8b43a57c" width="150px"/>
+      <cl:gridcolumn std:sid="g-column-40bb842f" width="50px"/>
+      <cl:gridcolumn std:sid="g-column-feb04959"/>
+      <cl:gridheader std:sid="gh-band-0e60be03">
+        <cl:gridrow std:sid="g-row-07dcad9f"/>
+        <cl:gridcell std:sid="gh-cell-7463e8c0" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+        <cl:gridcell std:sid="gh-cell-937d4d01" rowindex="0" colindex="1" text="F"/>
+        <cl:gridcell std:sid="gh-cell-325a7504" rowindex="0" colindex="2" sortable="false" filterable="false"/>
+        <cl:gridcell std:sid="gh-cell-fb3f1907" rowindex="0" colindex="3" targetcolumnname="NAME" sortable="false" filterable="false" text="NAME"/>
+        <cl:gridcell std:sid="gh-cell-4c6004be" rowindex="0" colindex="4" targetcolumnname="FIRSTNAME" sortable="false" filterable="false" text="FIRSTNAME"/>
+        <cl:gridcell std:sid="gh-cell-1ab6fe07" rowindex="0" colindex="5" targetcolumnname="LASTNAME" sortable="false" filterable="false" text="LASTNAME"/>
+        <cl:gridcell std:sid="gh-cell-b8bd6154" rowindex="0" colindex="6" targetcolumnname="PHONE_NUMBER" sortable="false" filterable="false" text="PHONE_NUMBER"/>
+        <cl:gridcell std:sid="gh-cell-3b6b0857" rowindex="0" colindex="7" targetcolumnname="AGE" sortable="false" filterable="false" text="AGE"/>
+        <cl:gridcell std:sid="gh-cell-5613ce4a" rowindex="0" colindex="8" targetcolumnname="EMAIL" text="EMAIL"/>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-b57b690c">
+        <cl:gridrow std:sid="g-row-cd30f75d"/>
+        <cl:gridcell std:sid="gd-cell-312d7a9e" rowindex="0" colindex="0" columntype="checkbox"/>
+        <cl:gridcell std:sid="gd-cell-2d2d41c3" rowindex="0" colindex="1">
+          <cl:output std:sid="output-88289645">
+            <cl:celldata std:sid="c-data-8b063f37"/>
+          </cl:output>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-2560d20c" rowindex="0" colindex="2" columntype="rowindex"/>
+        <cl:gridcell std:sid="gd-cell-cbdeb05f" rowindex="0" colindex="3" columnname="NAME"/>
+        <cl:gridcell std:sid="gd-cell-3f246cd3" rowindex="0" colindex="4" columnname="FIRSTNAME">
+          <cl:inputbox std:sid="i-box-7c7e3d5f" id="ipb2">
+            <cl:celldata std:sid="c-data-f51e53e2"/>
+          </cl:inputbox>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-42ec28a0" rowindex="0" colindex="5" columnname="LASTNAME">
+          <cl:inputbox std:sid="i-box-846cb0e0" id="ipb3">
+            <cl:celldata std:sid="c-data-8403e2b7"/>
+          </cl:inputbox>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-31a27f18" rowindex="0" colindex="6" columnname="PHONE_NUMBER">
+          <cl:maskeditor std:sid="m-editor-7d9a3395" id="mse1" mask="000-0000-0000">
+            <cl:celldata std:sid="c-data-a192e671" halign="FILL"/>
+          </cl:maskeditor>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-5f0d79f3" rowindex="0" colindex="7" columnname="AGE">
+          <cl:numbereditor std:sid="n-editor-57f42749" id="nbe1" min="0.0" max="200.0">
+            <cl:celldata std:sid="c-data-e179c5e3"/>
+          </cl:numbereditor>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-bfa4e293" rowindex="0" colindex="8" columnname="EMAIL">
+          <cl:inputbox std:sid="i-box-d6dc9c04" id="ipb4">
+            <cl:celldata std:sid="c-data-ab975be3"/>
+          </cl:inputbox>
+        </cl:gridcell>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:xylayout std:sid="xylayout-f3f5e107"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

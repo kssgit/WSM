@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-00d6fa1d" version="1.0.3485">
+  <head std:sid="head-56c9a7ea">
+    <screen std:sid="screen-5b8ba35f" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-80d46bbc" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-945b6f5a" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-4fbc09e0"/>
+    <cl:appspec>
+      <cl:property name="grd" type="control"/>
+      <cl:event name="save" type="cpr.events.CAppEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-1a2cc7e4" style="top:0px; left:0px; width:300px; height:30px;">
+    <cl:button std:sid="button-2106adf3" id="btnInsert" value="신규">
+      <cl:listener std:sid="listener-f4f5107d" name="click" handler="onBtnInsertClick"/>
+      <cl:formdata std:sid="f-data-37af14ab" row="0" col="0"/>
+    </cl:button>
+    <cl:button std:sid="button-acd71da3" id="btnDelete" value="삭제">
+      <cl:listener std:sid="listener-f15264f2" name="click" handler="onBtnDeleteClick"/>
+      <cl:formdata std:sid="f-data-c0f0cf6a" row="0" col="1"/>
+    </cl:button>
+    <cl:button std:sid="button-a0c9852a" id="btnSave" value="저장">
+      <cl:listener std:sid="listener-db2a8c5e" name="click" handler="onBtnSaveClick"/>
+      <cl:formdata std:sid="f-data-e6e178ea" row="0" col="2"/>
+    </cl:button>
+    <cl:formlayout std:sid="f-layout-b290666b" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:columns length="1" unit="FRACTION"/>
+      <cl:columns length="1" unit="FRACTION"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

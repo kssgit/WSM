@@ -1,6 +1,6 @@
 {
   "deploy-path": [
-    "/personal_test_ui"
+    "/ui"
   ],
   "deploy-config-base": [],
   "cache-control": false,

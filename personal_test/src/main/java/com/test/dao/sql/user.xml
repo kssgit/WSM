@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+
+	<select id="onloadUserlist" resultType="hashmap">
+		SELECT * 
+		FROM USER_TEST
+	</select>
+	
+	<select id="searchEmail" resultType="hashmap">
+		SELECT *
+		FROM USER_TEST
+		<if test="EMAIL != '' and EMAIL != null">
+			WHERE EMAIL LIKE '%' || #{EMAIL} || '%'
+		</if>
+		
+	</select>
+	
+
+	<insert id="insertUser">
+		INSERT INTO USER_TEST
+		VALUES(
+			#{FIRSTNAME},
+			#{LASTNAME},
+			#{EMAIL},
+			#{AGE},
+			#{PHONE_NUMBER}
+		)
+	</insert>
+	
+	<update id="updateUser">
+		UPDATE USER_TEST
+		SET 
+			FIRSTNAME = #{FIRSTNAME},
+			LASTNAME = #{LASTNAME},
+			AGE = #{AGE},
+			PHONE_NUMBER = #{PHONE_NUMBER}
+		WHERE 
+			<if test="EMAIL != null and EMAIL != '' ">
+				EMAIL = #{EMAIL}
+			</if>
+	</update>
+	
+	<delete id="deleteUser">
+		DELETE
+		FROM USER_TEST
+		WHERE EMAIL = #{EMAIL}
+	</delete>
+	
+</mapper>
