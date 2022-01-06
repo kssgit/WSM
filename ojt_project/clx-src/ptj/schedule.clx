@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-835355e3" version="1.0.3485">
+  <head std:sid="head-953d3810">
+    <screen std:sid="screen-8bb303ea" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-8c38f379" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-50865384" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-9a8a444b">
+      <cl:dataset std:sid="d-set-9536e828" id="dstoday">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5e7540b7" name="wherejob"/>
+          <cl:datacolumn std:sid="d-column-561273d2" name="start_time"/>
+          <cl:datacolumn std:sid="d-column-76400c9b" name="end_time"/>
+          <cl:datacolumn std:sid="d-column-eee86182" name="total_time"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="wherejob"><![CDATA[근무지 A]]></cl:datavalue>
+            <cl:datavalue columnname="start_time"><![CDATA[09:00]]></cl:datavalue>
+            <cl:datavalue columnname="end_time"><![CDATA[15:00]]></cl:datavalue>
+            <cl:datavalue columnname="total_time"><![CDATA[6]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="wherejob"><![CDATA[근무지 B]]></cl:datavalue>
+            <cl:datavalue columnname="start_time"><![CDATA[16:00]]></cl:datavalue>
+            <cl:datavalue columnname="end_time"><![CDATA[20:00]]></cl:datavalue>
+            <cl:datavalue columnname="total_time"><![CDATA[4]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-74e9cf2c">
+    <cl:listener std:sid="listener-99801ba2" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-68ca02de">
+      <cl:xylayoutdata std:sid="xyl-data-eae51a7e" top="10px" right="10px" left="10px" height="590px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-0749940e" id="grpToday">
+        <cl:formdata std:sid="f-data-60a89bdb" row="0" col="2" rowspan="1" colspan="1"/>
+        <cl:group std:sid="group-79def710">
+          <cl:verticaldata std:sid="v-data-d425369a" width="400px" height="60px"/>
+          <cl:xylayout std:sid="xylayout-ba6747a4"/>
+        </cl:group>
+        <cl:output std:sid="output-f112b947" style="border-bottom-width:1px; border-bottom-style:solid;" value="당일 근무 정보">
+          <cl:verticaldata std:sid="v-data-78ed1076" width="100px" height="20px"/>
+        </cl:output>
+        <cl:verticallayout std:sid="v-layout-153a2022"/>
+      </cl:group>
+      <cl:group std:sid="group-8e8a008e">
+        <cl:formdata std:sid="f-data-32da8093" row="0" col="1" rowspan="1" colspan="1"/>
+        <cl:group std:sid="group-7e207a1c">
+          <cl:verticaldata std:sid="v-data-8af98c26" width="400px" height="30px"/>
+          <cl:verticallayout std:sid="v-layout-21ac899d"/>
+        </cl:group>
+        <cl:group std:sid="group-0e50dbf3">
+          <cl:verticaldata std:sid="v-data-6a662919" width="900px" height="30px"/>
+          <cl:button std:sid="button-47b278a3" value="근무지 리스트">
+            <cl:listener std:sid="listener-3510b8a3" name="click" handler="onButtonClick"/>
+            <cl:verticaldata std:sid="v-data-ed4398f9" width="100px" height="30px"/>
+          </cl:button>
+          <cl:verticallayout std:sid="v-layout-099e4abc" distribution="trailing"/>
+        </cl:group>
+        <cl:group std:sid="group-bb25e750" class="cl-form-group">
+          <cl:verticaldata std:sid="v-data-05952ec0" width="400px" height="30px"/>
+          <cl:output std:sid="output-7641f9c9" value="주당 근무 시간">
+            <cl:formdata std:sid="f-data-b962402f" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-77438a7b" value="당월 근무 시간">
+            <cl:formdata std:sid="f-data-7bfadf34" row="0" col="2"/>
+          </cl:output>
+          <cl:output std:sid="output-1618112a" style="border-bottom-width:1px; border-bottom-style:solid;" value="Output">
+            <cl:formdata std:sid="f-data-0c80e755" row="0" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-cd323767" style="border-bottom-width:1px; border-bottom-style:solid;" value="Output">
+            <cl:formdata std:sid="f-data-12c80d64" row="0" col="3"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-1992fa13" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:calendar std:sid="calendar-dbbb7684">
+          <cl:listener std:sid="listener-fc51c052" name="date-click" handler="onCalendarDateClick2"/>
+          <cl:verticaldata std:sid="v-data-976c5b83" width="240px" height="467px"/>
+        </cl:calendar>
+        <cl:verticallayout std:sid="v-layout-de5e1b0c"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-e4c789ec" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="150" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-5a3dfd9c"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -27,25 +27,20 @@ public class userController {
 	
 	private Logger logger = LogManager.getLogger(userController.class);
 	
-	@Autowired
-	private UserDao userdao;
+
+	private final UserDao userdao;
 	
-	@RequestMapping("/onload.do")
-	public View getUserList(HttpServletRequest request , HttpServletResponse response,DataRequest dataRequest ) throws Exception{
-		
-		List<Map<String, Object>> getUserList = this.userdao.getUserListOnLoad();
-		System.out.println(getUserList.toString());
-		dataRequest.setResponse("dsList", getUserList);
-		return new JSONDataView();
+	@Autowired
+	public userController(UserDao userdao) {
+		this.userdao = userdao;
 	}
 	
-	
-	@RequestMapping("/searchEmail.do")
+	@RequestMapping("/load.do")
 	public View getSearchEmail(HttpServletRequest request , HttpServletResponse response, DataRequest datarequest) throws Exception{
 		
 		ParameterGroup param = datarequest.getParameterGroup("dmEmail");
 		
-		System.out.println(request.getAttribute("com.cleopatra.data_request"));
+//		System.out.println(request.getAttribute("com.cleopatra.data_request"));
 		
 		Map<String , Object> paramMap = new HashMap<String, Object>();
 		
@@ -82,10 +77,14 @@ public class userController {
 			}
 			iter = param.getUpdatedRows();
 			while(iter.hasNext()) {
+				// 유효성 검사 EMAIL 값이 들어왔는지 
+				
 				this.userdao.updateUser(iter.next().toMap());	
 			}
 			iter = param.getDeletedRows();
 			while(iter.hasNext()) {
+				// 유효성 검사 EMAIL 값이 들어왔는지 
+				
 				this.userdao.deleteUser(iter.next().toMap());
 			}
 		}

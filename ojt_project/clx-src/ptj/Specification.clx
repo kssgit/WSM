@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-f656b167" version="1.0.3485">
+  <head std:sid="head-10b47a4e">
+    <screen std:sid="screen-7485bfa6" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-d3764a24" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-f9fed239" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-13042ebb"/>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-dac6631e">
+    <cl:group std:sid="group-737f2b13">
+      <cl:verticaldata std:sid="v-data-80f5d6f0" width="400px" height="65px"/>
+      <cl:group std:sid="group-9eb1e502">
+        <cl:verticaldata std:sid="v-data-707b5f5d" width="400px" height="30px"/>
+        <cl:output std:sid="output-0e798586" value="근무지 선택">
+          <cl:formdata std:sid="f-data-7b7cbd31" row="0" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-f7c29561" id="cmb1">
+          <cl:formdata std:sid="f-data-89763583" row="0" col="1"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-67219df0" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-26080558">
+        <cl:verticaldata std:sid="v-data-cbfd1c35" width="600px" height="30px"/>
+        <cl:output std:sid="output-0140613c" value="종료 일자">
+          <cl:formdata std:sid="f-data-a8496c3e" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-41cc1d66" value="시작 일자">
+          <cl:formdata std:sid="f-data-762053a3" row="0" col="0"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-a19dedbb" id="dti1">
+          <cl:formdata std:sid="f-data-f783e025" row="0" col="1"/>
+        </cl:dateinput>
+        <cl:dateinput std:sid="d-input-820b76e4" id="dti2">
+          <cl:formdata std:sid="f-data-2059945c" row="0" col="3"/>
+        </cl:dateinput>
+        <cl:formlayout std:sid="f-layout-0e62f34b" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:verticallayout std:sid="v-layout-4cf0b9f5" distribution="center"/>
+    </cl:group>
+    <cl:embeddedapp std:sid="e-app-3bd5bf54" id="ea1" src="payslip-part1.clx">
+      <cl:verticaldata std:sid="v-data-22853602" width="320px" height="685px"/>
+    </cl:embeddedapp>
+    <cl:verticallayout std:sid="v-layout-3cc70a59"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -25,7 +25,7 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(/* cpr.events.CEvent */ e){
-				app.lookup("smsOnLoad").send()
+				app.lookup("smsSearchEmail").send()
 			}
 			
 			
@@ -102,27 +102,19 @@
 				}]
 			});
 			app.register(dataMap_1);
-			var submission_1 = new cpr.protocols.Submission("smsOnLoad");
-			submission_1.action = "/user/onload.do";
+			var submission_1 = new cpr.protocols.Submission("smsSearchEmail");
+			submission_1.action = "/user/load.do";
+			submission_1.addRequestData(dataMap_1);
 			submission_1.addResponseData(dataSet_1, false);
-			if(typeof onSmsOnLoadSubmitSuccess == "function") {
-				submission_1.addEventListener("submit-success", onSmsOnLoadSubmitSuccess);
-			}
 			app.register(submission_1);
 			
-			var submission_2 = new cpr.protocols.Submission("smsSearchEmail");
-			submission_2.action = "/user/searchEmail.do";
-			submission_2.addRequestData(dataMap_1);
-			submission_2.addResponseData(dataSet_1, false);
-			app.register(submission_2);
-			
-			var submission_3 = new cpr.protocols.Submission("smsSave");
-			submission_3.action = "/user/save.do";
-			submission_3.addRequestData(dataSet_1);
+			var submission_2 = new cpr.protocols.Submission("smsSave");
+			submission_2.action = "/user/save.do";
+			submission_2.addRequestData(dataSet_1);
 			if(typeof onSmsSaveSubmitSuccess == "function") {
-				submission_3.addEventListener("submit-success", onSmsSaveSubmitSuccess);
+				submission_2.addEventListener("submit-success", onSmsSaveSubmitSuccess);
 			}
-			app.register(submission_3);
+			app.register(submission_2);
 			
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");

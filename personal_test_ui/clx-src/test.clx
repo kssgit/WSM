@@ -20,11 +20,7 @@
           <cl:datacolumn std:sid="d-column-48ef6b46" name="EMAIL" defaultvalue=""/>
         </cl:datacolumnlist>
       </cl:datamap>
-      <cl:submission std:sid="submission-baecae2b" id="smsOnLoad" action="/user/onload.do">
-        <cl:listener std:sid="listener-591a9a56" name="submit-success" handler="onSmsOnLoadSubmitSuccess"/>
-        <cl:responsedata dataid="dsList"/>
-      </cl:submission>
-      <cl:submission std:sid="submission-782dcec3" id="smsSearchEmail" action="/user/searchEmail.do">
+      <cl:submission std:sid="submission-782dcec3" id="smsSearchEmail" action="/user/load.do">
         <cl:requestdata dataid="dmEmail"/>
         <cl:responsedata dataid="dsList"/>
       </cl:submission>

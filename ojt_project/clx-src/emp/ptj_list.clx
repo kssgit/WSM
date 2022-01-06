@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-1ab7b049" version="1.0.3485">
+  <head std:sid="head-a25f0529">
+    <screen std:sid="screen-dbe4d958" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-e79e3790" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-8fef2949" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-8be980db">
+      <cl:dataset std:sid="d-set-524786f8" id="dsptjList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-19cc5e95" name="이름"/>
+          <cl:datacolumn std:sid="d-column-2cc3f9e3" name="연락처"/>
+          <cl:datacolumn std:sid="d-column-1f7f970f" name="급여 형태"/>
+          <cl:datacolumn std:sid="d-column-eda35476" name="매장이름"/>
+          <cl:datacolumn std:sid="d-column-5289c510" name="총 근무 시간"/>
+          <cl:datacolumn std:sid="d-column-96d69e9a" name="총 급여"/>
+          <cl:datacolumn std:sid="d-column-4df1415d" name="월급날"/>
+          <cl:datacolumn std:sid="d-column-5e3edc92" name="세금 여부"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="이름">이름1</cl:datavalue>
+            <cl:datavalue columnname="연락처">연락처1</cl:datavalue>
+            <cl:datavalue columnname="급여 형태">급여 형태1</cl:datavalue>
+            <cl:datavalue columnname="매장이름">매장이름1</cl:datavalue>
+            <cl:datavalue columnname="총 근무 시간">총 근무 시간1</cl:datavalue>
+            <cl:datavalue columnname="총 급여">총 급여1</cl:datavalue>
+            <cl:datavalue columnname="월급날">월급날1</cl:datavalue>
+            <cl:datavalue columnname="세금 여부">세금 여부1</cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="이름">이름2</cl:datavalue>
+            <cl:datavalue columnname="연락처">연락처2</cl:datavalue>
+            <cl:datavalue columnname="급여 형태">급여 형태2</cl:datavalue>
+            <cl:datavalue columnname="매장이름">매장이름2</cl:datavalue>
+            <cl:datavalue columnname="총 근무 시간">총 근무 시간2</cl:datavalue>
+            <cl:datavalue columnname="총 급여">총 급여2</cl:datavalue>
+            <cl:datavalue columnname="월급날">월급날2</cl:datavalue>
+            <cl:datavalue columnname="세금 여부">세금 여부2</cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="이름">이름3</cl:datavalue>
+            <cl:datavalue columnname="연락처">연락처3</cl:datavalue>
+            <cl:datavalue columnname="급여 형태">급여 형태3</cl:datavalue>
+            <cl:datavalue columnname="매장이름">매장이름3</cl:datavalue>
+            <cl:datavalue columnname="총 근무 시간">총 근무 시간3</cl:datavalue>
+            <cl:datavalue columnname="총 급여">총 급여3</cl:datavalue>
+            <cl:datavalue columnname="월급날">월급날3</cl:datavalue>
+            <cl:datavalue columnname="세금 여부">세금 여부3</cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="이름">이름4</cl:datavalue>
+            <cl:datavalue columnname="연락처">연락처4</cl:datavalue>
+            <cl:datavalue columnname="급여 형태">급여 형태4</cl:datavalue>
+            <cl:datavalue columnname="매장이름">매장이름4</cl:datavalue>
+            <cl:datavalue columnname="총 근무 시간">총 근무 시간4</cl:datavalue>
+            <cl:datavalue columnname="총 급여">총 급여4</cl:datavalue>
+            <cl:datavalue columnname="월급날">월급날4</cl:datavalue>
+            <cl:datavalue columnname="세금 여부">세금 여부4</cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="이름">이름5</cl:datavalue>
+            <cl:datavalue columnname="연락처">연락처5</cl:datavalue>
+            <cl:datavalue columnname="급여 형태">급여 형태5</cl:datavalue>
+            <cl:datavalue columnname="매장이름">매장이름5</cl:datavalue>
+            <cl:datavalue columnname="총 근무 시간">총 근무 시간5</cl:datavalue>
+            <cl:datavalue columnname="총 급여">총 급여5</cl:datavalue>
+            <cl:datavalue columnname="월급날">월급날5</cl:datavalue>
+            <cl:datavalue columnname="세금 여부">세금 여부5</cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="이름">이름6</cl:datavalue>
+            <cl:datavalue columnname="연락처">연락처6</cl:datavalue>
+            <cl:datavalue columnname="급여 형태">급여 형태6</cl:datavalue>
+            <cl:datavalue columnname="매장이름">매장이름6</cl:datavalue>
+            <cl:datavalue columnname="총 근무 시간">총 근무 시간6</cl:datavalue>
+            <cl:datavalue columnname="총 급여">총 급여6</cl:datavalue>
+            <cl:datavalue columnname="월급날">월급날6</cl:datavalue>
+            <cl:datavalue columnname="세금 여부">세금 여부6</cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ce087a42">
+    <cl:group std:sid="group-46f1e5fb">
+      <cl:verticaldata std:sid="v-data-c61a4843" width="400px" height="30px"/>
+      <cl:formlayout std:sid="f-layout-6bfcd90d" scrollable="false" hspace="2px" vspace="2px" top-margin="2px" right-margin="2px" bottom-margin="2px" left-margin="2px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="150" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-d6840651">
+      <cl:verticaldata std:sid="v-data-156b3e36" width="400px" height="35px"/>
+      <cl:output std:sid="output-6830d8ec" style="text-align:center;" value="매장 선택">
+        <cl:formdata std:sid="f-data-b469ce0b" row="0" col="0"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-da000308" id="cmb1">
+        <cl:formdata std:sid="f-data-273b10bb" row="0" col="1"/>
+        <cl:item std:sid="t-item-25303a2d" label="전체" value="all"/>
+      </cl:combobox>
+      <cl:output std:sid="output-40d7bf4a" style="text-align:center;" value="오늘 기준 급여">
+        <cl:formdata std:sid="f-data-3b0bd066" row="0" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-bbef1175" value="Output" format="s#,##0">
+        <cl:formdata std:sid="f-data-700d455a" row="0" col="3"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-82cf989e" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="150" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-1c290459">
+      <cl:verticaldata std:sid="v-data-59e32169" width="400px" height="500px"/>
+      <cl:grid std:sid="grid-21170e49" id="grd1" datasetid="dsptjList">
+        <cl:formdata std:sid="f-data-b12d6008" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-53926666" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-4b10f786" width="50px"/>
+        <cl:gridcolumn std:sid="g-column-8724590a"/>
+        <cl:gridcolumn std:sid="g-column-cff5f3a3"/>
+        <cl:gridcolumn std:sid="g-column-377314ae"/>
+        <cl:gridcolumn std:sid="g-column-ce97b566"/>
+        <cl:gridcolumn std:sid="g-column-13f36739"/>
+        <cl:gridcolumn std:sid="g-column-9194d098"/>
+        <cl:gridcolumn std:sid="g-column-2d78f0ad"/>
+        <cl:gridcolumn std:sid="g-column-45522284"/>
+        <cl:gridheader std:sid="gh-band-fde41370">
+          <cl:gridrow std:sid="g-row-101553dd"/>
+          <cl:gridcell std:sid="gh-cell-dfc85d8c" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-0b72f8ed" rowindex="0" colindex="1" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-c7962068" rowindex="0" colindex="2" targetcolumnname="이름" sortable="false" filterable="false" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-3f97cb08" rowindex="0" colindex="3" targetcolumnname="연락처" sortable="false" filterable="false" text="연락처"/>
+          <cl:gridcell std:sid="gh-cell-4e42fbca" rowindex="0" colindex="4" targetcolumnname="급여 형태" sortable="false" filterable="false" text="급여 형태"/>
+          <cl:gridcell std:sid="gh-cell-79cb7454" rowindex="0" colindex="5" targetcolumnname="매장이름" sortable="false" filterable="false" text="매장이름"/>
+          <cl:gridcell std:sid="gh-cell-dc64e223" rowindex="0" colindex="6" targetcolumnname="총 근무 시간" sortable="false" filterable="false" text="총 근무 시간"/>
+          <cl:gridcell std:sid="gh-cell-65a82f62" rowindex="0" colindex="7" targetcolumnname="총 급여" sortable="false" filterable="false" text="총 급여"/>
+          <cl:gridcell std:sid="gh-cell-3ddddf73" rowindex="0" colindex="8" targetcolumnname="월급날" sortable="false" filterable="false" text="월급날"/>
+          <cl:gridcell std:sid="gh-cell-d2231e35" rowindex="0" colindex="9" targetcolumnname="세금 여부" sortable="false" filterable="false" text="세금 여부"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-7c618144">
+          <cl:gridrow std:sid="g-row-54ba48a5"/>
+          <cl:gridcell std:sid="gd-cell-18687591" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-57fdb83d" rowindex="0" colindex="1" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-e55d9f9a" rowindex="0" colindex="2" columnname="이름"/>
+          <cl:gridcell std:sid="gd-cell-85feb807" rowindex="0" colindex="3" columnname="연락처"/>
+          <cl:gridcell std:sid="gd-cell-f3d7cce3" rowindex="0" colindex="4" columnname="급여 형태"/>
+          <cl:gridcell std:sid="gd-cell-2ceae8e8" rowindex="0" colindex="5" columnname="매장이름"/>
+          <cl:gridcell std:sid="gd-cell-152331fd" rowindex="0" colindex="6" columnname="총 근무 시간"/>
+          <cl:gridcell std:sid="gd-cell-a04f2f77" rowindex="0" colindex="7" columnname="총 급여"/>
+          <cl:gridcell std:sid="gd-cell-293135cc" rowindex="0" colindex="8" columnname="월급날"/>
+          <cl:gridcell std:sid="gd-cell-6b118e6c" rowindex="0" colindex="9" columnname="세금 여부"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-94312512">
+        <cl:formdata std:sid="f-data-6657da8c" row="0" col="0"/>
+        <cl:udc std:sid="ud-control-8d2c6085" type="udc.crudUDC">
+          <cl:verticaldata std:sid="v-data-24356b19" width="300px" height="30px"/>
+        </cl:udc>
+        <cl:verticallayout std:sid="v-layout-92c7d642" distribution="trailing"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-3a5bcaa7" scrollable="false" hspace="5px" vspace="5px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:verticallayout std:sid="v-layout-4d1e450a"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

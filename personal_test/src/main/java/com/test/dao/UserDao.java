@@ -13,27 +13,26 @@ import org.springframework.stereotype.Repository;
 public class UserDao {
 	private Logger logger = LogManager.getLogger(UserDao.class);
 	
-	@Autowired
-	private SqlSessionTemplate sqlsession;
+	private final SqlSessionTemplate sqlsession;
 	
-	public List getUserListOnLoad() {
-		
-		return this.sqlsession.selectList("user.onloadUserlist");
+	@Autowired
+	public UserDao(SqlSessionTemplate sqlsession) {
+		this.sqlsession = sqlsession;
 	}
 	
+	//select
 	public List getSearchEmailList(Map<String , Object> param) {
-		
 		return this.sqlsession.selectList("user.searchEmail",param);
 	}
-	
+	//update
 	public int updateUser(Map param) {
 		return this.sqlsession.update("user.updateUser",param);
 	}
-	
+	//insert
 	public int insertUser(Map param) {
 		return this.sqlsession.insert("user.insertUser",param);
 	}
-	
+	//delete
 	public int deleteUser(Map param) {
 		return this.sqlsession.delete("user.deleteUser",param);
 	}
