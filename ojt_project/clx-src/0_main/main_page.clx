@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-48bc16e9" version="1.0.3485">
+  <head std:sid="head-f4492477">
+    <screen std:sid="screen-94c1a8c3" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1080" customWidth="1920" active="true"/>
+    <screen std:sid="screen-c4ae6326" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" active="false"/>
+    <screen std:sid="screen-46c89d82" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" active="false"/>
+    <cl:model std:sid="model-6e8b4b4b">
+      <cl:dataset std:sid="d-set-f4252369" id="dsMn">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b22924bf" name="label"/>
+          <cl:datacolumn std:sid="d-column-184ade3e" name="value"/>
+          <cl:datacolumn std:sid="d-column-47b1c157" name="parent"/>
+          <cl:datacolumn std:sid="d-column-bc59c586" name="appId"/>
+          <cl:datacolumn std:sid="d-column-b7befbf5" name="icon"/>
+          <cl:datacolumn std:sid="d-column-a235a760" name="class"/>
+          <cl:datacolumn std:sid="d-column-c832c436" name="topValue"/>
+        </cl:datacolumnlist>
+        <cl:dataview std:sid="d-view-96e7c8b8" id="dvRtMn" filtercondition="parent == ''"/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-f7938597" id="dmUserinfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1756718f" name="USER_NUMBER" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-dabcc366" name="USER_NAME" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-96d0ae72" name="USER_KIND" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-80f362e4" name="USER_EMAIL"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ad88922c" id="smsUserInfo" async="true" action="/main/userinfo.do">
+        <cl:listener std:sid="listener-e5f660e4" name="submit-success" handler="onSmsUserInfoSubmitSuccess"/>
+        <cl:responsedata dataid="dmUserinfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-3b7b13f0" id="subEmpMn" action="data/emp_menu.json">
+        <cl:responsedata dataid="dsMn"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a68fccbd" id="subPtjMn" action="data/ptj_menu.json">
+        <cl:responsedata dataid="dsMn"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec title="🧡메인🧡"/>
+  </head>
+  <body std:sid="body-8dbef5d9" class="body-bg">
+    <cl:listener std:sid="listener-0dc1949a" name="init" handler="onBodyInit"/>
+    <cl:listener std:sid="listener-adc761aa" name="touchstart" handler="onBodyTouchstart"/>
+    <cl:listener std:sid="listener-922740d3" name="click" handler="onBodyClick"/>
+    <cl:listener std:sid="listener-8bc6027f" name="screen-change" handler="onBodyScreenChange"/>
+    <cl:listener std:sid="listener-ba015d70" name="load" handler="onBodyLoad"/>
+    <cl:menu std:sid="menu-9869c78d" id="left-menu" style="padding-bottom:30px;" class="left-menu">
+      <cl:listener std:sid="listener-e884a9bf" name="selection-change" handler="onMenuSelectionChange"/>
+      <cl:listener std:sid="listener-ccd2d34e" name="item-click" handler="onMenuItemClick"/>
+      <cl:responsivexylayoutdata std:sid="rxyl-data-7aaf4da9">
+        <cl:xylayoutdata std:sid="sxyl-data-97a6fd12" left="50px" width="228px" height="374px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-9f9be00f" left="31px" width="147px" height="231px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="tablet"/>
+        <cl:xylayoutdata std:sid="sxyl-data-b10c8941" left="22px" width="103px" height="231px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+      <cl:menuitemset datasetid="dsMn" label="label" value="value" icon="icon" parent="parent"/>
+    </cl:menu>
+    <cl:img std:sid="image-68e4d16c" src="../theme/images/logo-main.png">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-2ad659d8">
+        <cl:xylayoutdata std:sid="sxyl-data-168bb654" top="44px" left="50px" width="227px" height="91px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-2fadbd52" top="10px" left="5px" width="73px" height="150px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+        <cl:xylayoutdata std:sid="sxyl-data-b2d6052a" top="10px" left="4px" width="51px" height="150px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+    </cl:img>
+    <cl:embeddedapp std:sid="e-app-7757ede1" id="ea1">
+      <cl:listener std:sid="listener-8383ecd3" name="dblclick" handler="onEa1Dblclick"/>
+      <cl:responsivexylayoutdata std:sid="rxyl-data-d72ecc42">
+        <cl:xylayoutdata std:sid="sxyl-data-562949e6" right="61px" width="1379px" height="880px" horizontalAnchor="RIGHT" verticalAnchor="CENTER" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-cc8de9a7" right="43px" left="323px" height="880px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="tablet"/>
+        <cl:xylayoutdata std:sid="sxyl-data-03fe0e51" right="30px" left="226px" height="880px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+    </cl:embeddedapp>
+    <cl:output std:sid="output-52cd681c" id="ipbUserName" style="background-repeat:no-repeat; padding-left:12px; background-image:url('../theme/images/user-5-line.png'); background-position:left; text-align:center;" class="h1" value="UserName">
+      <cl:listener std:sid="listener-d4aa8a4b" name="click" handler="onIpbUserNameClick"/>
+      <cl:responsivexylayoutdata std:sid="rxyl-data-eaa2c872">
+        <cl:xylayoutdata std:sid="sxyl-data-7eee0349" top="22px" right="20px" width="127px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-d06376ce" top="22px" right="10px" width="62px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="tablet"/>
+        <cl:xylayoutdata std:sid="sxyl-data-11c68a34" top="22px" right="7px" width="43px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+    </cl:output>
+    <cl:group std:sid="group-f50ee279" id="grplogout" style="background-color:white; border-radius:5px; box-shadow:0px 0px 8px 0px rgba(0,0,0,0.45);" visible="false">
+      <cl:listener std:sid="listener-2176289e" name="focusout" handler="onGrplogoutFocusout"/>
+      <cl:listener std:sid="listener-ef41b78a" name="mouseleave" handler="onGrplogoutMouseleave"/>
+      <cl:responsivexylayoutdata std:sid="rxyl-data-0e0a80a7">
+        <cl:xylayoutdata std:sid="sxyl-data-998f25ea" top="22px" right="20px" width="216px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-75af1339" top="61px" right="10px" width="105px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="tablet"/>
+        <cl:xylayoutdata std:sid="sxyl-data-5ee1c9fb" top="61px" right="7px" width="74px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+      <cl:output std:sid="output-3cfa4bc2" id="user_email" style="text-align:center;" class="h4">
+        <cl:datamapbind property="value" datacontrolid="dmUserinfo" columnname="USER_EMAIL"/>
+        <cl:formdata std:sid="f-data-892328e1" row="2" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:button std:sid="button-a28752af" style="color:white;" class="btn-success" value="로그 아웃">
+        <cl:listener std:sid="listener-2eca8d15" name="click" handler="onButtonClick"/>
+        <cl:formdata std:sid="f-data-dc3584b2" row="4" col="0" rowspan="1" colspan="2"/>
+      </cl:button>
+      <cl:output std:sid="output-31b8c68c" value="My Page">
+        <cl:listener std:sid="listener-a30d0791" name="click" handler="onOutputClick"/>
+        <cl:formdata std:sid="f-data-2abbc363" row="3" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:output comment="시용자 종류" std:sid="output-3260457a" style="text-align:center;" class="h3">
+        <cl:datamapbind property="value" datacontrolid="dmUserinfo" columnname="USER_KIND"/>
+        <cl:formdata std:sid="f-data-b53dac2c" row="0" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:output std:sid="output-3b37a49e" id="user_name" style="text-align:center;" class="h3" value="Output">
+        <cl:formdata std:sid="f-data-7808292e" row="1" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-5c90ecfa" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-cad84c4b"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

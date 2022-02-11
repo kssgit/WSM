@@ -1,16 +1,14 @@
-@import "../settings.part.less";
+@import "../custom-settings.part.less";
 
 /* 체크 박스 */
 .cl-checkbox {
-	// font: @default-font;
-	// color: @default-text-color;
-
-	/* 내부 아이템 요소 */
-	.cl-checkbox-field {}
-
+	font: @font-base;
+	color: @input-text-color;
+	padding: 0px;
+	
 	/* 아이콘 정렬을 설정 */
 	.cl-icon-wrapper {
-		// vertical-align: baseline;
+		vertical-align: middle;
 	}
 
 	/* 체크 박스 텍스트 */
@@ -18,65 +16,74 @@
 		/* 말줄임 style 적용(한줄) */
 		// overflow: hidden;
 		// text-overflow: ellipsis;
-		// white-space: nowrap;
+		// white-space: pre;
 
 		/* 여러 줄 style 적용 */
 		// white-space: pre-wrap;
 		// word-break: break-all;
+		padding-left: 5px;
 	}
 
 	/* 체크박스 아이콘 스타일 */
 	.cl-checkbox-icon {
-		// background-image: url(icons/checkbox.png);
+		background-image: url("../images/controls/checkbox/icon-checkbox.png");
+		margin-left: 1px;
+		transition:@transition-base;
 	}
 
 	/* 체크박스 hover시 아이콘 스타일 */
 	&:hover,
 	&.cl-hover {
 		.cl-checkbox-icon {
-			// background-image: url(icons/checkbox-hover.png);
+			 background-image: url("../images/controls/checkbox/icon-checkbox-focus.png");
 		}
 	}
 
 	/* 체크된 체크박스 아이콘 스타일 */
 	&.cl-checked {
 		.cl-checkbox-icon {
-			// background-image: url(icons/checkbox-selected.png);
+			 background-image: url("../images/controls/checkbox/icon-checkbox-selected.png");
 		}
 
 		/* 체크된 체크박스 hover시 아이콘 스타일 */
 		&:hover,
 		&.cl-hover {
 			.cl-checkbox-icon {
-				// background-image: url(icons/checkbox-hover-selected.png);
+				 background-image: url("../images/controls/checkbox/icon-checkbox-selected.png");
 			}
 		}
 	}
 
 	/* disabled 체크박스 스타일 */
 	&.cl-disabled {
-
-		.cl-text {}
-
+		
+		.cl-text {
+			color: @input-disabled-text-color;
+		}
+		
+		.cl-checkbox-icon {
+			background-image: url("../images/controls/checkbox/icon-checkbox-disabled.png");
+		}
+		
 		/* disabled 체크박스 hover시 아이콘 스타일 */
 		&:hover,
 		&.cl-hover {
 			.cl-checkbox-icon {
-				// background-image: url(icons/checkbox.png);
+				background-image: url("../images/controls/checkbox/icon-checkbox-disabled.png");
 			}
 		}
 
 		/* 체크된 disabled 체크박스 아이콘 스타일 */
 		&.cl-checked {
 			.cl-checkbox-icon {
-				// background-image: url(icons/checkbox-disabled-selected.png);
+				 background-image: url("../images/controls/checkbox/icon-checkbox-disabled-selected.png");
 			}
 
 			/* 체크된 disabled 체크박스 hover시 아이콘 스타일 */
 			&:hover,
 			&.cl-hover {
 				.cl-checkbox-icon {
-					// background-image: url(icons/checkbox-disabled-selected.png);
+					 background-image: url("../images/controls/checkbox/icon-checkbox-disabled-selected.png");
 				}
 			}
 		}
@@ -87,80 +94,32 @@
 		.cl-checkbox-icon {
 			// outline: 1px dotted black;
 		}
-		&.cl-iconalign-none {
-			.cl-text {
-				// outline: 1px dotted black;
-			}
-		}
 	}
 
 	// TODO hover일 때랑 아닐 때 스타일이 필요함
 	&.cl-partialchecked {
 		.cl-checkbox-icon {
-			// background-image: url(icons/checkbox-partial-selected.png);
+			 background-image: url("../images/controls/checkbox/icon-checkbox-partial.png");
 		}
 
 		&:hover,
 		&.cl-hover {
 			.cl-checkbox-icon {
-				// background-image: url(icons/checkbox-partial-selected.png);
+				 background-image: url("../images/controls/checkbox/icon-checkbox-partial.png");
 			}
 		}
 
 		&.cl-disabled {
 			.cl-checkbox-icon {
-				// background-image: url(icons/checkbox-disabled-partial-selected.png);
+				 background-image: url("../images/controls/checkbox/icon-checkbox-partial-disabled.png");
 			}
 
 			&:hover,
 			&.cl-hover {
 				.cl-checkbox-icon {
-					// background-image: url(icons/checkbox-disabled-partial-selected.png);
+					 background-image: url("../images/controls/checkbox/icon-checkbox-partial-disabled.png");
 				}
 			}
-		}
-	}
-
-	/* iconAlign=right 스타일 */
-	&.cl-iconalign-right {
-		.cl-text{
-			// padding-left: 0px;
-			// padding-right: 3px;
-		}
-	}
-	/* iconAlign=top 스타일 */
-	&.cl-iconalign-top {
-		.cl-icon-wrapper {
-			// vertical-align: top;
-			// text-align: center;
-		}
-		.cl-text{
-			// padding-left: 0px;
-			// padding-top: 3px;
-		}
-	}
-	/* iconAlign=bottom 스타일 */
-	&.cl-iconalign-bottom {
-		.cl-icon-wrapper {
-			// vertical-align: top;
-			// text-align: center;
-		}
-		.cl-text{
-			// padding-left: 0px;
-			// padding-bottom: 3px;
-		}
-	}
-	/* hideIcon=true 스타일 */
-	&.cl-iconalign-none {
-		.cl-text{
-			// padding-left: 0px;
-		}
-	}
-
-	/* fixedWidth설정시 .cl-checkbox-icon의 width와 같은 값으로 설정 */
-	&.cl-fixedWidth {
-		.cl-icon-wrapper {
-			// width: 18px;
 		}
 	}
 }
@@ -168,8 +127,8 @@
 
 /* 체크박스그룹 */
 .cl-checkboxgroup {
-	// font: @default-font;
-	// color: @default-text-color;
+	font: @font-base;
+	color: @input-text-color;
 
 	/* 체크박스그룹 focus 스타일 */
 	&.cl-focus {
@@ -177,7 +136,6 @@
 		/* 체크박스그룹 내에 focus를 받은 체크박스 focus 아이콘 스타일 */
 		.cl-checkbox {
 			.cl-checkbox-icon {
-
 				&:focus,
 				&.cl-focus {
 					// outline: 1px dotted black;
@@ -188,35 +146,37 @@
 
 	/* disabled 체크박스그룹 스타일 */
 	&.cl-disabled {
-		// color: @disabled-text-color;
-
+		 color: @input-disabled-text-color;
 
 		/* disabled 체크박스그룹에 체크박스 스타일 */
 		.cl-checkbox {
 			.cl-text {
-				// color: @disabled-text-color;
+				 color: @input-disabled-text-color;
 			}
-
-
+			
+			.cl-checkbox-icon {
+				background-image: url("../images/controls/checkbox/icon-checkbox-disabled.png");
+			}
+			
 			/* disabled 체크박스그룹에 체크박스 hover시 아이콘 스타일 */
 			&:hover,
 			&.cl-hover {
 				.cl-checkbox-icon {
-					// background-image: url(icons/checkbox.png);
+					background-image: url("../images/controls/checkbox/icon-checkbox-disabled.png");
 				}
 			}
 
 			/* disabled 체크박스그룹 내에 체크된 체크박스 아이콘 스타일 */
 			&.cl-checked {
 				.cl-checkbox-icon {
-					// background-image: url(icons/checkbox-disabled-selected.png);
+					background-image: url("../images/controls/checkbox/icon-checkbox-disabled-selected.png");
 				}
 
 				/* disabled 체크박스그룹 내에 체크된 체크박스 hover시 아이콘 스타일 */
 				&:hover,
 				&.cl-hover {
 					.cl-checkbox-icon {
-						// background-image: url(icons/checkbox-disabled-selected.png);
+						background-image: url("../images/controls/checkbox/icon-checkbox-disabled-selected.png");
 					}
 				}
 			}
@@ -225,31 +185,35 @@
 
 	/* 체크박스그룹에 체크박스 스타일 */
 	.cl-checkbox {
+		padding: 0px;
+		
+		.cl-icon-wrapper {
+			vertical-align: middle;
+		}
 
-		/* 내부 아이템 요소 */
-		.cl-checkbox-field {}
-		.cl-icon-wrapper {}
-		.cl-text {}
+		.cl-text {
+			padding-left: 5px;
+		}
 
 		/* 체크박스그룹에 체크박스 hover시 아이콘 스타일 */
 		&:hover,
 		&.cl-hover {
 			.cl-checkbox-icon {
-				// background-image: url(icons/checkbox-hover.png);
+				background-image: url("../images/controls/checkbox/icon-checkbox-focus.png");
 			}
 		}
 
 		/* 체크박스그룹에 체크된 체크박스 아이콘 스타일 */
 		&.cl-checked {
 			.cl-checkbox-icon {
-				// background-image: url(icons/checkbox-selected.png);
+				background-image: url("../images/controls/checkbox/icon-checkbox-selected.png");
 			}
 
 			/* 체크박스그룹에 체크된 체크박스 hover시 아이콘 스타일 */
 			&:hover,
 			&.cl-hover {
 				.cl-checkbox-icon {
-					// background-image: url(icons/checkbox-hover-selected.png);
+					background-image: url("../images/controls/checkbox/icon-checkbox-selected.png");
 				}
 			}
 		}
@@ -262,93 +226,24 @@
 			&:hover,
 			&.cl-hover {
 				.cl-checkbox-icon {
-					// background-image: url(icons/checkbox.png);
+					background-image: url("../images/controls/checkbox/icon-checkbox-disabled.png");
 				}
 			}
 
 			/* 체크박스그룹에 disabled 체크된 체크박스 아이콘 스타일 */
 			&.cl-checked {
 				.cl-checkbox-icon {
-					// background-image: url(icons/checkbox-disabled-selected.png);
+					background-image: url("../images/controls/checkbox/icon-checkbox-disabled-selected.png");
 				}
 
 				/* 체크박스그룹에 disabled 체크된 체크박스 hover시 아이콘 스타일 */
 				&:hover,
 				&.cl-hover {
 					.cl-checkbox-icon {
-						// background-image: url(icons/checkbox-disabled-selected.png);
+						background-image: url("../images/controls/checkbox/icon-checkbox-disabled-selected.png");
 					}
 				}
 			}
 		}
 	}
-
-	/* fixedWidth를 고정값으로 설정시 .cl-checkbox-icon의 width와 같은 값으로 설정 */
-	&.cl-fixedWidth {
-		.cl-checkbox {
-			.cl-icon-wrapper {
-				// width: 18px;
-			}
-		}
-	}
-
-	/* iconAlign=right 스타일 */
-	&.cl-iconalign-right {
-		.cl-checkbox {
-			.cl-text{
-				// padding-left: 0px;
-				// padding-right: 3px;
-			}
-		}
-	}
-
-	/* iconAlign=top 스타일 */
-	&.cl-iconalign-top {
-		.cl-checkbox {
-			.cl-icon-wrapper {
-				// vertical-align: top;
-				// text-align: center;
-			}
-			.cl-text{
-				// padding-left: 0px;
-				// padding-top: 3px;
-			}
-		}
-
-		&.cl-fixedWidth {
-			.cl-icon-wrapper {
-				// width: auto;
-			}
-		}
-	}
-
-	/* iconAlign=bottom 스타일 */
-	&.cl-iconalign-bottom {
-		.cl-checkbox {
-			.cl-icon-wrapper {
-				// vertical-align: top;
-				// text-align: center;
-			}
-			.cl-text{
-				// padding-left: 0px;
-				// padding-bottom: 3px;
-			}
-		}
-
-		&.cl-fixedWidth {
-			.cl-icon-wrapper {
-				// width: auto;
-			}
-		}
-	}
-
-	/* hideIcon=true 스타일 */
-	&.cl-iconalign-none {
-		.cl-checkbox {
-			.cl-text{
-				// padding-left: 0px;
-			}
-		}
-	}
-	
 }

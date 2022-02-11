@@ -1,0 +1,22 @@
+{
+	"dsMn": [
+		{
+			"label": "　나의 근무 요일",
+			"value": "m1",
+			"parent": "",
+			"appId": "2_ptj/page/ptj_schedule",
+			"icon": "theme/images/navbar-icon/calendar-todo-fill.svg",
+			"class" : "",
+			"topValue" : ""
+		},
+		{
+			"label": "　변경 근무 확인",
+			"value": "m2",
+			"parent": "",
+			"appId": "2_ptj/page/ptj_schedule_change_req",
+			"icon": "theme/images/navbar-icon/refresh-ccw.svg",
+			"class" : "",
+			"topValue" : ""
+		}
+	]
+}

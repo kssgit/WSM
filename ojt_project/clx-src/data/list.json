@@ -1,0 +1,32 @@
+{
+	"dsSmCategory" : [
+		{
+			"lgCategory" : "파트타임",
+			"smCategory" : "파트타임 소분류1"
+		},
+		{
+			"lgCategory" : "파트타임",
+			"smCategory" : "파트타임 소분류2"
+		},
+		{
+			"lgCategory" : "파트타임",
+			"smCategory" : "파트타임 소분류3"
+		},
+		{
+			"lgCategory" : "파트타임",
+			"smCategory" : "파트타임 소분류4"
+		},
+		{
+			"lgCategory" : "파트타임",
+			"smCategory" : "파트타임 소분류5"
+		},
+		{
+			"lgCategory" : "파트타임",
+			"smCategory" : "파트타임 소분류6"
+		},
+		{
+			"lgCategory" : "파트타임",
+			"smCategory" : "파트타임 소분류7"
+		}
+	]
+}

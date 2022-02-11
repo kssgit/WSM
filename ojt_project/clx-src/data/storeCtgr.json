@@ -1,0 +1,95 @@
+{
+	"dsSmCategory" : [
+		{
+			"label" : "아르바이트",
+			"value" : "아르바이트",
+			"parentValue" : ""
+		},
+		{
+			"label" : "음식점",
+			"value" : "음식점",
+			"parent" : "아르바이트"
+		},
+		{
+			"label" : "커피전문점",
+			"value" : "커피전문점",
+			"parent" : "아르바이트"
+		},
+		{
+			"label" : "편의점",
+			"value" : "편의점",
+			"parent" : "아르바이트"
+		},
+		{
+			"label" : "패스트푸드",
+			"value" : "패스트푸드",
+			"parent" : "아르바이트"
+		},
+		{
+			"label" : "쇼핑몰/마트",
+			"value" : "쇼핑몰/마트",
+			"parent" : "아르바이트"
+		},
+		{
+			"label" : "호프/일반주점",
+			"value" : "호프/일반주점",
+			"parent" : "아르바이트"
+		},
+		{
+			"label" : "베이커리/디저트",
+			"value" : "베이커리/디저트",
+			"parent" : "아르바이트"
+		},
+		{
+			"label" : "생산",
+			"value" : "생산",
+			"parent" : ""
+		},
+		{
+			"label" : "물류업",
+			"value" : "물류업",
+			"parent" : ""
+		},
+		{
+			"label" : "운송/배송업",
+			"value" : "운송/배송업",
+			"parent" : ""
+		},
+		{
+			"label" : "강사/교육업",
+			"value" : "강사/교육업",
+			"parent" : ""
+		},
+		{
+			"label" : "대행/중개업",
+			"value" : "대행/중개업",
+			"parent" : ""
+		},
+		{
+			"label" : "외주 제작업",
+			"value" : "외주 제작업",
+			"parent" : ""
+		},
+		{
+			"label" : "전문 서비스업",
+			"value" : "전문 서비스업",
+			"parent" : ""
+		},
+		{
+			"label" : "크리에이터",
+			"value" : "크리에이터",
+			"parent" : ""
+		},
+		{
+			"label" : "온라인 판매업",
+			"value" : "온라인 판매업",
+			"parent" : ""
+		},
+		{
+			"label" : "직접 입력",
+			"value" : "직접 입력",
+			"parent" : ""
+		}
+		
+	]
+}

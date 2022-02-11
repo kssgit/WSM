@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="emp">
+	
+	<!-- 고용주 직원 스케줄 정보 조회-->
+	<select id="storeSchedule" resultType="hashmap">
+		SELECT
+			s.all_day as allDay,
+			s.breaktime,
+			s.schedule_code as id,
+			s.store_code,
+			u.NAME as label,
+			s.user_code_emp,
+			s.user_code_ptj,
+			(select color from part_timer where user_code_ptj = s.user_code_ptj and store_code = s.store_code) as class,
+			s.work_begin_time as beginDt,
+			DATE_FORMAT(s.work_date, '%Y%m%d') as start,
+			s.work_end_time as endDt,
+			DATE_FORMAT(s.work_begin_time, '%H:%i') as startTime,
+			DATE_FORMAT(s.work_end_time, '%H:%i') as endTime
+		FROM (schedule s JOIN part_timer pt 
+			ON s.store_code = pt.store_code AND s.user_code_ptj = pt.user_code_ptj  ) JOIN USER u 
+			ON u.user_number = s.user_code_ptj 
+		<trim prefix="WHERE" prefixOverrides="AND |OR">
+			<if test="USER_CODE_EMP != null and USER_CODE_EMP !=''"> user_code_emp = #{USER_CODE_EMP} AND pt.resignation !='N'</if>
+			<if test="WORK_DATE != null and WORK_DATE !=''">AND work_date = #{WORK_DATE}</if>
+			<if test="STROE_CODE != null and STROE_CODE !=''">AND store_code = #{STROE_CODE}</if>
+		</trim>
+	</select>
+	
+	<!-- storeList -->
+	<select id="storeList" resultType="hashmap">
+		SELECT
+			store_name,
+			store_code,
+			business_type_small,
+			business_type_large
+		FROM store
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="USER_NUMBER_EMP != null and USER_NUMBER_EMP !=''"> USER_NUMBER_EMP = #{USER_NUMBER_EMP}</if>
+			<if test="USER_EMAIL != null and USER_EMAIL != '' "> 
+				emp_email =  #{USER_EMAIL} 
+				AND store_code NOT IN
+					(SELECT store_code FROM part_timer WHERE user_code_ptj = #{user_code_ptj})
+			</if>
+		</trim>
+		
+	</select>
+	
+	<!-- Add Store -->
+	<insert id="addStore">
+		INSERT INTO store(
+			store_name,
+			USER_NUMBER_EMP,
+			business_type_small,
+			business_type_large,
+			emp_email
+		)VALUES(
+			#{store_name},
+			#{USER_NUMBER_EMP},
+			#{business_type_small},
+			#{business_type_large},
+			#{USER_EMAIL}
+		)
+	</insert>
+	
+	<!-- 직원 목록  -->
+	<select id="ptjList" resultType="hashmap">
+		SELECT 
+			  pt.PTJ_CODE
+			, u.NAME 
+			, u.EMAIL 
+			, u.USER_CALL
+			, u.BIRTHDATE 
+			, s.STORE_NAME
+			, pt.PAY_KIND
+			, pt.UNIT_PAY
+			, pt.PAY_DAY
+			, pt.TAX_STAT 
+			, pt.LINK_STAT
+			, u.USER_NUMBER
+			, s.STORE_CODE
+			, pt.COLOR 
+			<!-- 해당 직원의 당월 근무 총시간 -->
+			, IFNULL((
+				SELECT
+				sum(DATE_FORMAT(TIMEDIFF(work_end_time, work_begin_time) , '%H:%i'))
+				FROM schedule sch
+				WHERE user_code_ptj = u.USER_NUMBER AND sch.store_code =  s.store_code 
+				),0 )AS TOTAL_WORK_HOUR <!-- 근무 시간 계산 -->
+		FROM 
+			(part_timer pt JOIN store s ON pt.store_code =s.store_code) 
+			JOIN `user` u ON user_code_ptj =  u.USER_NUMBER
+		WHERE
+			s.USER_NUMBER_EMP = #{USER_NUMBER} AND pt.LINK_STAT = 'Y' AND pt.resignation = 'Y'
+
+	</select>
+	
+	
+	<!-- 매장 연결을 요청한 직원의 정보 -->
+	<select id="linkReqList" resultType="hashmap">
+		 select 
+			  pt.PTJ_CODE
+			, u.USER_NUMBER 
+			, s.STORE_NAME
+			, u.NAME 
+			, pt.PTJ_CALL AS USER_CALL 
+			, DATE_FORMAT(u.BIRTHDATE  , '%Y-%m-%d') BIRTHDATE
+			, pt.LINK_STAT
+			, pt.GENDER 
+			, s.STORE_CODE
+			, pt.USER_CODE_PTJ
+			, pt.role
+		FROM 
+			part_timer pt JOIN `user` u ON pt.user_code_ptj = u.USER_NUMBER	JOIN store s ON pt.store_code = s.store_code 
+		WHERE 
+			s.USER_NUMBER_EMP = #{USER_NUMBER} AND link_stat ='N'
+	</select>
+	
+	<!-- 메장 연결 요청 거절  -->
+	<delete id="deleteLinkRequest">
+		DELETE 
+		FROM part_timer 
+		WHERE USER_CODE_PTJ = #{USER_CODE_PTJ} AND STORE_CODE = #{STORE_CODE}
+	</delete>
+	
+	<!-- 매장,직원별 총 근무시간 workHour  -->
+	<select id="workHour" resultType="Int">
+		SELECT
+			sum(DATE_FORMAT(TIMEDIFF(work_end_time, work_begin_time) , '%H:%i'))
+		FROM schedule s 
+		WHERE user_code_ptj = #{USER_NUMBER} AND store_code = #{STORE_CODE}
+	</select>
+	
+	
+	<!-- getschedule 매장,직원 검색기간 별 스케줄 일정 불러오기  -->
+	<select id="getschedule" resultType="hashmap">
+		SELECT
+			  u.NAME as PTJ_NAME
+			, DATE_FORMAT(WORK_DATE , '%Y%m%d') AS WORK_DATE
+			, DATE_FORMAT(work_begin_time , '%H%i') AS WORK_BEGIN_TIME
+			, DATE_FORMAT(work_end_time , '%H%i') AS WORK_END_TIME
+			, BREAKTIME
+			, st.STORE_NAME
+			, s.STORE_CODE
+			, SCHEDULE_CODE
+			, USER_CODE_PTJ
+			, USER_CODE_EMP
+			,(SELECT color FROM request_schedule WHERE ud_schedule_number = s.SCHEDULE_CODE AND(ACCEPT_EMP !='D' AND ACCEPT_PTJ != 'D') ) AS Class
+		FROM (schedule s JOIN user u ON s.USER_CODE_PTJ = u.user_number ) JOIN store st ON s.store_code = st.store_code
+		WHERE
+			work_date between #{DT_BEGIN} AND #{DT_END}
+		AND 
+			user_code_ptj = #{USER_NUMBER} AND s.store_code = #{STORE_CODE} 
+	</select>
+	
+	<!--매장 연결 승인  -->
+	<update id="ptjLinkRequest">
+		UPDATE part_timer SET
+			link_stat = #{LINK_STAT}
+			,color = #{color}
+		WHERE ptj_code = #{PTJ_CODE}
+	</update>
+	
+	<!-- 고용주 근무 추가 변경 삭제 요청 -->
+	<insert id="reqScheduleWork">
+		INSERT INTO request_schedule(
+			store_code,
+			user_code_emp,
+			user_code_ptj,
+			work_date,
+			work_begin_time,
+			work_end_time,
+			breaktime,
+			accept_emp,
+			accept_ptj,
+			dc
+			<!-- 변경, 삭제 -->
+			<if test="SCHEDULE_CODE != null and SCHEDULE_CODE != '' ">,ud_schedule_number,COLOR</if>
+		)VALUES(
+			#{STORE_CODE},
+			#{USER_CODE_EMP},
+			#{USER_CODE_PTJ},
+			#{WORK_DATE},
+			#{WORK_BEGIN_TIME},
+			#{WORK_END_TIME},
+			#{BREAKTIME},
+			"Y",
+			"N",
+			#{DC}
+			<if test="SCHEDULE_CODE != null and SCHEDULE_CODE != ''">,#{SCHEDULE_CODE},#{COLOR}</if>
+		)
+	</insert>
+	
+	<!-- 삭제 중복 요청을 막기위한 쿼리  -->
+	<select id="shcedule_exists" resultType="Integer">
+		SELECT EXISTS
+		(SELECT 
+				reqschedule_number
+			FROM request_schedule
+			WHERE ud_schedule_number = #{SCHEDULE_CODE} AND user_code_emp = #{USER_CODE_EMP} AND dc = "D" AND (ACCEPT_EMP !='D' AND ACCEPT_PTJ != 'D')
+			LIMIT 1) AS SUCCESS
+	</select>
+	
+	
+	<!-- 스케줄 변경 요청 조회 -->
+	<select id="scheduleChangeList" resultType="hashmap">
+		SELECT
+			 reqschedule_number as REQ_CODE
+			,r.STORE_CODE
+			,BREAKTIME
+			,USER_CODE_EMP
+			,USER_CODE_PTJ
+			,st.STORE_NAME
+			,u.NAME AS PTJ_NAME
+			,WORK_DATE
+			,WORK_BEGIN_TIME
+			,WORK_END_TIME
+			,DATE_FORMAT(work_begin_time , '%H%i') AS WBT
+			,DATE_FORMAT(work_end_time , '%H%i') AS WET
+			,ACCEPT_EMP
+			,ACCEPT_PTJ
+			,DC
+			,UD_SCHEDULE_NUMBER
+		FROM (REQUEST_SCHEDULE r JOIN USER u ON r.USER_CODE_PTJ = u.USER_NUMBER) JOIN STORE st 
+			ON r.STORE_CODE = st.STORE_CODE
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="USER_CODE_EMP != null and USER_CODE_EMP != '' ">
+				<!-- 고용주가 승낙하지 않은 스케줄 요청 중 직원테이블에 등록된 사용자의 요청만 받아오기 -->
+				USER_CODE_EMP = #{USER_CODE_EMP} AND ACCEPT_EMP = 'N' AND r.USER_CODE_PTJ IN (SELECT USER_CODE_PTJ FROM PART_TIMER p WHERE p.STORE_CODE = r.STORE_CODE)
+			</if>
+			<if test="(USER_CODE_EMP2 != null and USER_CODE_EMP2 != '') and( USER_KIND != null and USER_KIND != '') ">
+				<!-- 고용주가 요청한 스케줄 목록중 직원 테이블에 등록된 요청목록만 조회 -->
+				USER_CODE_EMP = #{USER_CODE_EMP2} AND(ACCEPT_PTJ = 'N' OR ACCEPT_PTJ = 'D')  AND r.USER_CODE_PTJ IN (SELECT USER_CODE_PTJ FROM PART_TIMER p WHERE p.STORE_CODE = r.STORE_CODE)
+			</if>
+			<if test="USER_CODE_PTJ != null and USER_CODE_PTJ != '' ">
+				<!-- 알바생이 요청받은 스케줄 목록 중 근무지로 등록된 매장 요청만 조회 -->
+				USER_CODE_PTJ = #{USER_CODE_PTJ} AND ACCEPT_PTJ = 'N' AND r.STORE_CODE IN (SELECT w.STORE_CODE FROM WORKPLACE w WHERE w.STORE_CODE = r.STORE_CODE)
+			</if>
+			<if test="(USER_CODE_PTJ2 != null and USER_CODE_PTJ2 != '' )and (USER_KIND != null and USER_KIND != '') ">
+				USER_CODE_PTJ = #{USER_CODE_PTJ2} AND (ACCEPT_EMP = 'N' OR ACCEPT_EMP = 'D') AND r.STORE_CODE IN (SELECT w.STORE_CODE FROM WORKPLACE w WHERE w.STORE_CODE = r.STORE_CODE)
+			</if>
+		</trim>	
+	</select>
+	
+	
+	<!--선택한 매장의 하루 근무 스케줄 정보   -->
+	<select id="storedaySchedule" resultType="hashmap">
+		SELECT
+			 SCHEDULE_CODE
+			,st.STORE_NAME
+			,u.NAME AS PTJ_NAME
+			,WORK_DATE
+			,DATE_FORMAT(work_begin_time , '%H%i') AS WBT
+			,DATE_FORMAT(work_end_time , '%H%i') AS WET
+		FROM (schedule s JOIN USER u ON s.USER_CODE_PTJ = u.USER_NUMBER) JOIN STORE st 
+			ON s.STORE_CODE = st.STORE_CODE
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="STORE_CODE != null and STORE_CODE != '' ">WORK_DATE = #{WORK_DATE} AND s.STORE_CODE = #{STORE_CODE}</if>
+			<if test="USER_CODE_PTJ != null and USER_CODE_PTJ != '' ">WORK_DATE = #{WORK_DATE} AND USER_CODE_PTJ = #{USER_CODE_PTJ}</if>
+		</trim>
+	</select>
+	
+	
+	<!-- 스케줄 삭제 -->
+	<delete id="deletSchedule">
+		DELETE 
+		FROM schedule
+		WHERE schedule_code = #{UD_SCHEDULE_NUMBER}
+	</delete>
+	
+	<update id="updateSchedule">
+		UPDATE SCHEDULE 
+		SET 
+			 breaktime = #{BREAKTIME}
+			,store_code = #{STORE_CODE}
+			,user_code_emp = #{USER_CODE_EMP}
+			,user_code_ptj = #{USER_CODE_PTJ}
+			,work_begin_time = #{WORK_BEGIN_TIME}
+			,work_date = #{WORK_DATE}
+			,work_end_time = #{WORK_END_TIME}
+		WHERE schedule_code = #{UD_SCHEDULE_NUMBER}
+	</update>
+	
+	
+	<!-- 스케줄 추가 -->
+	<insert id="insertSchedule">
+		INSERT INTO schedule(
+			 breaktime
+			,store_code
+			,user_code_emp
+			,user_code_ptj
+			,work_begin_time
+			,work_date
+			,work_end_time
+		)VALUES(
+			 #{BREAKTIME}
+			,#{STORE_CODE}
+			,#{USER_CODE_EMP}
+			,#{USER_CODE_PTJ}
+			,#{WORK_BEGIN_TIME}
+			,#{WORK_DATE}
+			,#{WORK_END_TIME}		
+		)
+	</insert>
+	
+	<!-- 고용주가 승인 거절한 요청 업데이트 -->
+	<update id="deniedRequest">
+		UPDATE REQUEST_SCHEDULE SET
+			ACCEPT_EMP = 'D'
+		WHERE reqschedule_number = #{REQ_CODE}
+	</update>
+	
+	<!-- 고용주가 승인한 요청목록 삭제, 고용주가 삭제 -->
+	<delete id="deleteReqScheduleChage">
+		DELETE
+		FROM REQUEST_SCHEDULE
+		WHERE reqschedule_number = #{REQ_CODE}
+	</delete>
+	
+	<!-- 고용주가 직원 퇴사 시키는  -->
+	<update id="deletePtj">
+		UPDATE PART_TIMER SET
+			resignation = 'N'
+		WHERE PTJ_CODE = #{PTJ_CODE}
+	</update>
+	
+	<!-- 변경 요청을 하는 근무가 이미 요청중인지 확인  -->
+	<select id="checkRequestSchedule" parameterType="String" resultType="hashMap">
+		SELECT 
+			DC
+		FROM REQUEST_SCHEDULE
+		WHERE ud_schedule_number = #{schedule_code} AND (ACCEPT_EMP !='D' AND ACCEPT_PTJ != 'D')
+	</select>
+	
+	<!-- 매장 삭제 -->
+	<delete id="deleteStore">
+		DELETE 
+		FROM store
+		WHERE store_code = #{STORE_CODE}
+	</delete>
+	
+	
+	<!-- 퇴사시 parttimer 삭제 -->
+	<delete id="deletePartTimer">
+		DELETE 
+		FROM PART_TIMER
+		WHERE PTJ_CODE = #{PTJ_CODE}
+	</delete>
+	
+	<!-- 퇴사시 workplace 삭제 -->
+	<delete id="deleteworkplace">
+		DELETE
+		FROM WORKPLACE
+		WHERE USER_CODE_PTJ = #{USER_CODE_PTJ}
+	</delete>
+		
+</mapper>

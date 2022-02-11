@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-7d3d24f7" version="1.0.3485">
+  <head std:sid="head-2d96fd8c">
+    <screen std:sid="screen-a85a550e" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-55cae6e4" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-cf3e3dc4" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-70f0893a">
+      <cl:dataset std:sid="d-set-f9463c3b" id="dsRequest">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a68b67f1" name="NAME" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-f3fb16ef" name="USER_CALL"/>
+          <cl:datacolumn std:sid="d-column-9d98d32a" name="GENDER"/>
+          <cl:datacolumn std:sid="d-column-1745de5c" name="BIRTHDATE" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-f5d336c4" name="color"/>
+          <cl:datacolumn std:sid="d-column-a7f10494" name="LINK_STAT" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-62fc649d" name="STORE_NAME"/>
+          <cl:datacolumn std:sid="d-column-c989f951" name="role" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-d14ab55a" name="STORE_CODE"/>
+          <cl:datacolumn std:sid="d-column-600c270c" name="USER_CODE_PTJ"/>
+          <cl:datacolumn std:sid="d-column-939eaf3a" name="PTJ_CODE"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="NAME">name1</cl:datavalue>
+            <cl:datavalue columnname="USER_CALL">call1</cl:datavalue>
+            <cl:datavalue columnname="GENDER">gender1</cl:datavalue>
+            <cl:datavalue columnname="BIRTHDATE">birthday1</cl:datavalue>
+            <cl:datavalue columnname="LINK_STAT">N</cl:datavalue>
+            <cl:datavalue columnname="STORE_NAME">store_name1</cl:datavalue>
+            <cl:datavalue columnname="role">role1</cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-6947af40" id="dsStoreList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-665c784d" name="store_name"/>
+          <cl:datacolumn std:sid="d-column-b0583c50" name="ptjCount"/>
+          <cl:datacolumn std:sid="d-column-873e8705" name="store_code" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-93ab7f78" name="business_type_small"/>
+          <cl:datacolumn std:sid="d-column-a1205dea" name="business_type_large"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-edd1fecc" id="dmOnLoad">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b2657908" name="USER_EMAIL"/>
+          <cl:datacolumn std:sid="d-column-060a6b72" name="USER_NUMBER"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-f1f9a76b" id="subOnLoad" action="/emp/requestList.do">
+        <cl:listener std:sid="listener-f4b04886" name="submit-success" handler="onSubOnLoadSubmitSuccess"/>
+        <cl:requestdata dataid="dmOnLoad"/>
+        <cl:responsedata dataid="dsStoreList"/>
+        <cl:responsedata dataid="dsRequest"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0adca68a" id="smsSave" action="/emp/acceptPtjRequest.do">
+        <cl:requestdata dataid="dsRequest"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec title="매장 연결 요청 승인"/>
+  </head>
+  <body std:sid="body-d0df2778">
+    <cl:listener std:sid="listener-07125afa" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-4070792b" name="init" handler="onBodyInit"/>
+    <cl:group std:sid="group-acfb6c12" id="grpselect" class="cl-grp-box">
+      <cl:selectioncontext selectionProvider="#grid-72c3bd89"/>
+      <cl:xylayoutdata std:sid="xyl-data-83c87d8c" top="35px" right="10px" left="10px" height="40px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-d92eeb59" class="grp-header" value="매장 이름">
+        <cl:formdata std:sid="f-data-aa64d4dd" row="0" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-6de8cf06" class="grp-header" value="직원 이름">
+        <cl:formdata std:sid="f-data-915a85f7" row="0" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-0ec16b70" class="grp-header" value="성별">
+        <cl:formdata std:sid="f-data-064bf424" row="0" col="4"/>
+      </cl:output>
+      <cl:output std:sid="output-6ba7b4a5" class="grp-header" value="연락처">
+        <cl:formdata std:sid="f-data-df09c2ca" row="0" col="6"/>
+      </cl:output>
+      <cl:output std:sid="output-029bcd6c" class="grp-header" value="구분">
+        <cl:formdata std:sid="f-data-599f3b0d" row="0" col="8"/>
+      </cl:output>
+      <cl:output std:sid="output-60bfa674" id="call" style="text-align:center;">
+        <cl:relativebind property="value" columnname="USER_CALL"/>
+        <cl:formdata std:sid="f-data-aae58474" row="0" col="7"/>
+      </cl:output>
+      <cl:output std:sid="output-32b470b6" id="ptj_name" style="text-align:center;">
+        <cl:relativebind property="value" columnname="NAME"/>
+        <cl:formdata std:sid="f-data-82843bf9" row="0" col="3"/>
+      </cl:output>
+      <cl:output std:sid="output-26e017ba" id="store_name" style="text-align:center;">
+        <cl:relativebind property="value" category="PROPERTY" columnname="STORE_NAME"/>
+        <cl:formdata std:sid="f-data-58eefcbe" row="0" col="1"/>
+      </cl:output>
+      <cl:output std:sid="output-877aedea" class="grp-header" value="승인 여부">
+        <cl:formdata std:sid="f-data-f1a45253" row="0" col="12"/>
+      </cl:output>
+      <cl:output std:sid="output-74f914b8" id="gender">
+        <cl:relativebind property="value" category="PROPERTY" columnname="GENDER"/>
+        <cl:formdata std:sid="f-data-5c4a72ce" row="0" col="5"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-289a5460" id="cmb2" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" placeholder="N">
+        <cl:relativebind property="fieldLabel" category="PROPERTY" columnname="LINK_STAT"/>
+        <cl:relativebind property="value" category="PROPERTY" columnname="LINK_STAT"/>
+        <cl:selectioncontext selectionProvider="#grid-72c3bd89"/>
+        <cl:formdata std:sid="f-data-b897754f" row="0" col="13"/>
+        <cl:item std:sid="t-item-08d80ae0" label="Y" value="Y"/>
+        <cl:item std:sid="t-item-7a0c5167" label="D" value="D"/>
+      </cl:combobox>
+      <cl:htmlsnippet std:sid="htmlsnippet-b18e5efc" id="colorPicker" value="&lt;p>HTML Snippet&lt;/p>">
+        <cl:listener std:sid="listener-b0c678aa" name="value-change" handler="onColorPickerValueChange"/>
+        <cl:formdata std:sid="f-data-583a1da5" row="0" col="9"/>
+      </cl:htmlsnippet>
+      <cl:output std:sid="output-163251c8" class="grp-header" value="담당업무">
+        <cl:formdata std:sid="f-data-9991e8c9" row="0" col="10"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-ea6913bd" id="ipb1" placeholder="미입력">
+        <cl:relativebind property="value" category="PROPERTY" columnname="role"/>
+        <cl:formdata std:sid="f-data-a1143209" row="0" col="11"/>
+      </cl:inputbox>
+      <cl:output comment="색상값 돌려넣기" std:sid="output-42cd88d7" id="cpV" visible="false">
+        <cl:relativebind property="value" category="PROPERTY" columnname="color"/>
+        <cl:formdata std:sid="f-data-5a4751dc" row="0" col="14"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-8c0c4907" scrollable="true" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-469ecf82">
+      <cl:xylayoutdata std:sid="xyl-data-71ebc914" top="85px" right="10px" left="10px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-2ba03b2f" style="text-align:center;" value="승인 요청수 ">
+        <cl:formdata std:sid="f-data-d73ead7d" valign="CENTER" height="35" row="0" col="3"/>
+      </cl:output>
+      <cl:button std:sid="button-f6103907" class="btn-outline-danger" visible="false" value="거절">
+        <cl:formdata std:sid="f-data-e2cabf9d" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="7"/>
+      </cl:button>
+      <cl:button std:sid="button-7e884b7c" class="btn-outline-secondary" value="저장">
+        <cl:listener std:sid="listener-b94de674" name="click" handler="onButtonClick"/>
+        <cl:formdata std:sid="f-data-730198bc" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="8"/>
+      </cl:button>
+      <cl:output std:sid="output-bad32b69" id="rowCount" style="text-align:center;">
+        <cl:formdata std:sid="f-data-f4e44c56" valign="CENTER" height="35" row="0" col="4"/>
+      </cl:output>
+      <cl:button std:sid="button-fcc1cc19" class="btn-outline-success" visible="false" value="승인">
+        <cl:listener std:sid="listener-79c311cf" name="click" handler="onButtonClick2"/>
+        <cl:formdata std:sid="f-data-a8058eee" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="6"/>
+      </cl:button>
+      <cl:combobox std:sid="c-box-8aa0015e" id="cmbStore" class="cl-combobox-green" placeholder="매장 선택">
+        <cl:listener std:sid="listener-ae7ebf98" name="selection-change" handler="onComboBoxSelectionChange"/>
+        <cl:formdata std:sid="f-data-a27082e5" valign="CENTER" height="35" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:itemset datasetid="dsStoreList" label="store_name" value="store_code"/>
+      </cl:combobox>
+      <cl:formlayout std:sid="f-layout-914b12ab" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="120" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="120" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-f3e5e5c5">
+      <cl:xylayoutdata std:sid="xyl-data-281f7085" top="145px" right="10px" bottom="12px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-72c3bd89" id="grd1" class="cl-grp-box" readonly="true" datasetid="dsRequest">
+        <cl:listener std:sid="listener-817414bf" name="before-editrow-change" handler="onGrd1BeforeEditrowChange"/>
+        <cl:listener std:sid="listener-2d0523a0" name="before-update" handler="onGrd1BeforeUpdate"/>
+        <cl:formdata std:sid="f-data-954c3ca0" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:gridcolumn std:sid="g-column-bc66cb96" width="50px"/>
+        <cl:gridcolumn std:sid="g-column-c02468d8"/>
+        <cl:gridcolumn std:sid="g-column-f54455db"/>
+        <cl:gridcolumn std:sid="g-column-9d39e9af"/>
+        <cl:gridcolumn std:sid="g-column-12e4f2c5"/>
+        <cl:gridcolumn std:sid="g-column-24628605"/>
+        <cl:gridcolumn std:sid="g-column-4ee9f5da"/>
+        <cl:gridcolumn std:sid="g-column-ff48fb28"/>
+        <cl:gridcolumn std:sid="g-column-9986bd5d"/>
+        <cl:gridheader std:sid="gh-band-bd4c089c">
+          <cl:gridrow std:sid="g-row-c1d15ef7" height="30px"/>
+          <cl:gridcell std:sid="gh-cell-1416c9b9" rowindex="0" colindex="0" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-7a81022e" rowindex="0" colindex="1" targetcolumnname="NAME" sortable="false" filterable="false" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-b077137b" rowindex="0" colindex="2" targetcolumnname="STORE_NAME" sortable="false" filterable="false" text="매장명"/>
+          <cl:gridcell std:sid="gh-cell-39babc95" rowindex="0" colindex="3" targetcolumnname="USER_CALL" sortable="false" filterable="false" text="연락처"/>
+          <cl:gridcell std:sid="gh-cell-dab2cfc7" rowindex="0" colindex="4" targetcolumnname="GENDER" sortable="false" filterable="false" text="성별"/>
+          <cl:gridcell std:sid="gh-cell-ae04a23f" rowindex="0" colindex="5" targetcolumnname="BIRTHDATE" sortable="false" filterable="false" text="생년월일"/>
+          <cl:gridcell std:sid="gh-cell-8db5e3c8" rowindex="0" colindex="6" targetcolumnname="color" sortable="false" filterable="false" text="구분"/>
+          <cl:gridcell std:sid="gh-cell-54ba7c6c" rowindex="0" colindex="7" targetcolumnname="LINK_STAT" sortable="false" filterable="false" text="연결여부"/>
+          <cl:gridcell std:sid="gh-cell-c9e7b8b9" rowindex="0" colindex="8" targetcolumnname="role" sortable="false" filterable="false" text="담당업무"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-bae0c4c8">
+          <cl:gridrow std:sid="g-row-a0a79f8a" height="30px"/>
+          <cl:gridcell std:sid="gd-cell-ce4d7a65" rowindex="0" colindex="0" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-333624fb" rowindex="0" colindex="1" columnname="NAME"/>
+          <cl:gridcell std:sid="gd-cell-7c1ee3b5" rowindex="0" colindex="2" columnname="STORE_NAME"/>
+          <cl:gridcell std:sid="gd-cell-a407de91" rowindex="0" colindex="3" columnname="USER_CALL">
+            <cl:maskeditor std:sid="m-editor-414e98d9" id="mse1" style="text-align:center;" readonly="true" mask="000-0000-0000">
+              <cl:celldata std:sid="c-data-157a440f"/>
+            </cl:maskeditor>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-0d650ae6" rowindex="0" colindex="4" columnname="GENDER"/>
+          <cl:gridcell std:sid="gd-cell-26508a08" rowindex="0" colindex="5" columnname="BIRTHDATE">
+            <cl:output std:sid="output-540c916f" style="text-align:center;" readonly="true" datatype="date" format="YYYY-MM-DD">
+              <cl:celldata std:sid="c-data-760debec"/>
+            </cl:output>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-962a9f1b" rowindex="0" colindex="6" columnname="color"/>
+          <cl:gridcell std:sid="gd-cell-dbdb43f2" rowindex="0" colindex="7" columnname="LINK_STAT"/>
+          <cl:gridcell std:sid="gd-cell-b1a10748" rowindex="0" colindex="8" columnname="role"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-3cb48cd5" scrollable="false" hspace="2px" vspace="2px" top-margin="2px" right-margin="2px" bottom-margin="2px" left-margin="2px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="300" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-7af638e7"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

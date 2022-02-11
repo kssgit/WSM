@@ -94,3 +94,9 @@ local.properties
 hs_err_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
+context.xml
+.svn
+.exbuilder-fragments/
+.settings/
+clx-build/
+theme/

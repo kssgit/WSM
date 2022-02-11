@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-4096f295" version="1.0.3485">
+  <head std:sid="head-ff74c4b4">
+    <screen std:sid="screen-8cdf9aae" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-cfc5fe77" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-4f0e51de" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-191a642d">
+      <cl:datamap std:sid="d-map-8ac29a4e" id="dmLogin">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-afd0fb5e" name="EMAIL"/>
+          <cl:datacolumn std:sid="d-column-0fbab945" name="PASSWORD"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b3d58d8c" id="dmLoginCheck">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8a4dc798" name="MSG"/>
+          <cl:datacolumn std:sid="d-column-5180845c" name="FOCUS"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-a40eb76c" id="smsLogin" async="true" action="/user/login.do">
+        <cl:listener std:sid="listener-733f0593" name="submit-success" handler="onSmsLoginSubmitSuccess"/>
+        <cl:requestdata dataid="dmLogin"/>
+        <cl:responsedata dataid="dmLoginCheck"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec title="로그인"/>
+  </head>
+  <body std:sid="body-760d36c5" class="login-box body1">
+    <cl:group std:sid="group-fc534c17" style="border-right-style:none; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;" class="cl-form-group">
+      <cl:formdata std:sid="f-data-fc5c2fe4" row="1" col="0" rowspan="1" colspan="3"/>
+      <cl:img std:sid="image-d0bb1625" src="../theme/images/logo-login.png">
+        <cl:formdata std:sid="f-data-c5ea5a26" halign="FILL" valign="FILL" row="1" col="1"/>
+      </cl:img>
+      <cl:formlayout std:sid="f-layout-f8112b4d" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="0" vseparatorwidth="0">
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="154" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="461" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-0172396e" class="login-box">
+      <cl:formdata std:sid="f-data-2e443b35" row="2" col="1"/>
+      <cl:output std:sid="output-81115980" class="h1" value="Sign In">
+        <cl:formdata std:sid="f-data-d738fa58" row="0" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-114b3786">
+        <cl:formdata std:sid="f-data-f62fccd6" row="1" col="0"/>
+        <cl:output std:sid="output-0468c620" class="h5" value="Email">
+          <cl:verticaldata std:sid="v-data-4b9affc8" width="100px" height="25px"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-2ea8aaf3" id="ipbId" class="form-control" nextcontrol="#i-box-cd67fb94" placeholder="Email-Address">
+          <cl:datamapbind property="value" datacontrolid="dmLogin" columnname="EMAIL"/>
+          <cl:verticaldata std:sid="v-data-647ed329" width="100px" height="35px"/>
+        </cl:inputbox>
+        <cl:verticallayout std:sid="v-layout-c4571506"/>
+      </cl:group>
+      <cl:group std:sid="group-28a56fb9">
+        <cl:formdata std:sid="f-data-f31c2f21" row="2" col="0"/>
+        <cl:output std:sid="output-7c7750ad" class="h5" value="Password">
+          <cl:verticaldata std:sid="v-data-9cc0d353" width="302px" height="25px" autosize="none"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-cd67fb94" id="ipbpwd" class="form-control" nextcontrol="#button-f10f4662" prevcontrol="#i-box-2ea8aaf3" secret="true" placeholder="Password">
+          <cl:listener std:sid="listener-2a2570dc" name="keydown" handler="onIpbpwdKeydown"/>
+          <cl:datamapbind property="value" datacontrolid="dmLogin" columnname="PASSWORD"/>
+          <cl:verticaldata std:sid="v-data-9512a97d" width="100px" height="35px"/>
+        </cl:inputbox>
+        <cl:verticallayout std:sid="v-layout-d802cf34"/>
+      </cl:group>
+      <cl:button std:sid="button-f10f4662" class="btn-success" prevcontrol="#i-box-cd67fb94" value="Login">
+        <cl:listener std:sid="listener-fd787b31" name="click" handler="onButtonClick2"/>
+        <cl:listener std:sid="listener-2783bc92" name="keydown" handler="onButtonKeydown"/>
+        <cl:formdata std:sid="f-data-0f30f683" row="3" col="0"/>
+      </cl:button>
+      <cl:group std:sid="group-08693a42">
+        <cl:formdata std:sid="f-data-bcf1c1f5" row="4" col="0"/>
+        <cl:output std:sid="output-874453f5" style="text-align:right;" class="h3" value="Sign Up">
+          <cl:listener std:sid="listener-9b37ffc3" name="click" handler="onOutputClick2"/>
+          <cl:formdata std:sid="f-data-8ad4b868" row="1" col="1"/>
+        </cl:output>
+        <cl:output std:sid="output-da2a5f01" value="Don't have an account?">
+          <cl:formdata std:sid="f-data-45aa554c" row="1" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-a52cc26f" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="25" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-211e0190" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="65" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="65" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="38" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-f89657c1" scrollable="true" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="0" vseparatorwidth="0">
+      <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="300" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="350" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="400" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

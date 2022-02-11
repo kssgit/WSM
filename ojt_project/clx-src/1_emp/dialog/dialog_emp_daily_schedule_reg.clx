@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-3fd308de" version="1.0.3485">
+  <head std:sid="head-22a5e5a4">
+    <screen std:sid="screen-bc881139" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="450" customWidth="450"/>
+    <screen std:sid="screen-20d82cce" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-14f513f4" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-4e04015f">
+      <cl:dataset std:sid="d-set-5371410a" id="dsHour">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b84d156b" name="label"/>
+          <cl:datacolumn std:sid="d-column-ac83aa97" name="value"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[00 AM]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[00]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[01]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[01]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[02]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[02]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[03]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[03]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[04]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[04]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[05]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[05]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[06]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[06]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[07]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[07]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[08]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[08]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[09]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[09]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[10]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[10]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[11]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[11]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[12]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[12]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[13]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[13]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[14]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[14]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[15]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[15]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[16]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[16]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[17]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[17]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[18]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[18]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[19]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[19]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[20]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[20]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[21]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[21]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[22]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[22]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[23]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[23]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-247a35d8" id="dsMinut">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ac121e29" name="lable" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-f3beb644" name="value"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="lable"><![CDATA[00]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[00]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="lable"><![CDATA[10]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[10]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="lable"><![CDATA[20]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[20]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="lable"><![CDATA[30]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[30]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="lable"><![CDATA[40]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[40]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="lable"><![CDATA[50]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[50]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-1109d924" id="dsEndHour">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f2ba377b" name="label"/>
+          <cl:datacolumn std:sid="d-column-c074a964" name="value"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[00]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[00]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[01]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[01]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[02]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[02]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[03]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[03]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[04]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[04]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[05]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[05]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[06]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[06]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[07]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[07]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[08]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[08]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[09]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[09]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[10]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[10]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[11]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[11]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[12]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[12]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[13]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[13]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[14]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[14]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[15]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[15]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[16]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[16]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[17]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[17]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[18]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[18]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[19]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[19]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[20]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[20]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[21]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[21]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[22]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[22]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[23]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[23]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-aaf27e73" id="dmNewSchedule"/>
+      <cl:submission std:sid="submission-7b69aee2" id="smsReqSchedule"/>
+    </cl:model>
+    <cl:appspec title="근무 등록 및 변경"/>
+  </head>
+  <body std:sid="body-5a9fdedf">
+    <cl:listener std:sid="listener-cf9c4033" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-80e66c20">
+      <cl:xylayoutdata std:sid="xyl-data-46c8c47b" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-2e93da0c">
+        <cl:formdata std:sid="f-data-f997b688" row="0" col="0" rowspan="1" colspan="1"/>
+        <cl:output std:sid="output-3c30cdf5" id="opb1" style="font-size:24px; text-align:center;" value="근무 등록">
+          <cl:formdata std:sid="f-data-acfddaf6" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:output std:sid="output-2fff88e6" class="h3" value="근무지">
+          <cl:formdata std:sid="f-data-77640654" row="1" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-be6463fc" class="h3" value="근무 일자">
+          <cl:formdata std:sid="f-data-50e4b528" row="2" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-0263d1f9" class="h3" value="근무 시작 시간">
+          <cl:formdata std:sid="f-data-c4f59f71" row="3" col="0"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-019c029a" id="dti1" class="input-center-green">
+          <cl:listener std:sid="listener-c4c31756" name="value-change" handler="onDti1ValueChange"/>
+          <cl:formdata std:sid="f-data-fad564be" row="2" col="1"/>
+        </cl:dateinput>
+        <cl:output std:sid="output-e802c781" class="h3" value="휴게 시간">
+          <cl:formdata std:sid="f-data-cc73c8c0" row="5" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-d18e1c9f" class="h3" value="근무 종료 시간">
+          <cl:formdata std:sid="f-data-6bc1c52c" row="4" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-d107ddf4">
+          <cl:formdata std:sid="f-data-725b8f88" row="4" col="1"/>
+          <cl:combobox std:sid="c-box-9162670d" id="cmb5" class="input-center-green" enabled="false" placeholder="00">
+            <cl:formdata std:sid="f-data-bbd568b6" row="0" col="0"/>
+            <cl:itemset datasetid="dsEndHour" label="label" value="value"/>
+          </cl:combobox>
+          <cl:combobox std:sid="c-box-2b3e2226" id="cmb6" class="input-center-green" enabled="false" value="00" placeholder="00">
+            <cl:formdata std:sid="f-data-25ce8fde" row="0" col="2"/>
+            <cl:itemset datasetid="dsMinut" label="lable" value="value"/>
+          </cl:combobox>
+          <cl:output std:sid="output-df08ef9b" value="시">
+            <cl:formdata std:sid="f-data-bb2d1cef" row="0" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-4a7e7867" value="분">
+            <cl:formdata std:sid="f-data-c9cf9fb7" row="0" col="3"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-c7e3ad24" scrollable="true" hspace="5px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:inputbox std:sid="i-box-d5596f39" id="ipb2" class="input-center-green" placeholder="분 단위로 입력해주세요" inputfilter="[0-9]">
+          <cl:formdata std:sid="f-data-a3b5db79" row="5" col="1"/>
+        </cl:inputbox>
+        <cl:group std:sid="group-0788d766">
+          <cl:formdata std:sid="f-data-dd773546" row="3" col="1"/>
+          <cl:combobox std:sid="c-box-bf83be74" id="cmb3" class="input-center-green" enabled="false" placeholder="00">
+            <cl:listener std:sid="listener-70d5a78d" name="context-value-change" handler="onCmb3ContextValueChange"/>
+            <cl:listener std:sid="listener-58c36e4f" name="selection-change" handler="onCmb3SelectionChange"/>
+            <cl:formdata std:sid="f-data-5c1c08af" row="0" col="0"/>
+            <cl:itemset datasetid="dsHour" label="label" value="value"/>
+          </cl:combobox>
+          <cl:combobox std:sid="c-box-963af300" id="cmb4" class="input-center-green" enabled="false" value="00" placeholder="00">
+            <cl:formdata std:sid="f-data-c8ccdef8" row="0" col="2"/>
+            <cl:itemset datasetid="dsMinut" label="lable" value="value"/>
+          </cl:combobox>
+          <cl:output std:sid="output-43447a29" value="시">
+            <cl:formdata std:sid="f-data-6721f52c" row="0" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-d1dfcdcf" value="분">
+            <cl:formdata std:sid="f-data-58571cf1" row="0" col="3"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-6bf066b8" scrollable="true" hspace="5px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-070335d7" id="opbStoreName" style="text-align:center;" class="output-center-green" value="매장 이름">
+          <cl:formdata std:sid="f-data-9c927a38" row="1" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-b0393cf6" scrollable="true" hspace="10px" vspace="15px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-566b1f8d">
+        <cl:formdata std:sid="f-data-a3f30fb6" row="1" col="0" rowspan="1" colspan="1"/>
+        <cl:button std:sid="button-3dce5eef" class="btn-dark" value="닫기">
+          <cl:listener std:sid="listener-f7579988" name="click" handler="onButtonClick"/>
+          <cl:formdata std:sid="f-data-7e550eea" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="0"/>
+        </cl:button>
+        <cl:button std:sid="button-9e22774e" id="btnAddUpdate" class="btn-success" value="추가">
+          <cl:listener std:sid="listener-34854fe4" name="click" handler="onButtonClick2"/>
+          <cl:formdata std:sid="f-data-026140c9" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-85094522" scrollable="true" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-d2f35dfe" scrollable="true" hspace="0px" vspace="5px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="12" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-93b8c971"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

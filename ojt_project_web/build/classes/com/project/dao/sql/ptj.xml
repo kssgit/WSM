@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ptj">
+	
+	<!-- workList-->
+	<select id="workList" resultType="hashmap">
+		SELECT
+			all_day as allDay,
+			breaktime,
+			register_date,
+			schedule_code as id,
+			s.store_code,
+			st.store_name as label,
+			user_code_emp,
+			(SELECT color from workplace where user_code_ptj = s.user_code_ptj and store_code = s.store_code) as class,
+			work_begin_time as beginDt,
+			work_date,
+			work_end_time as endDt,
+			(time_to_sec(TIMEDIFF(work_end_time, work_begin_time))/60/60) as WH,
+			DATE_FORMAT(work_date, '%Y%m%d') as start,
+			DATE_FORMAT(work_begin_time, '%H:%i') as startTime,
+			DATE_FORMAT(work_end_time, '%H:%i') as endTime
+		FROM schedule s JOIN STORE st ON s.store_code = st.store_code
+		<trim prefix="WHERE" prefixOverrides="AND |OR">
+			<if test="user_code_ptj != null and user_code_ptj !=''"> user_code_ptj = #{user_code_ptj} AND s.store_code In (SELECT store_Code from workplace WHERE user_code_ptj = #{user_code_ptj})</if>
+			<if test="WORK_DATE != null and WORK_DATE !=''">AND work_date = #{WORK_DATE}</if>
+			<if test="STROE_CODE != null and STROE_CODE !=''">AND store_code = #{STROE_CODE}</if>
+		</trim>
+	</select>
+	
+	<!-- daily schedule -->
+	<select id="dailySchedule" resultType="hashmap">
+		SELECT
+			st.store_name as storeName	,	
+			sc.work_begin_time as workStartDt	,			
+			sc.work_end_time as workEndDt	,			
+			date_format(timediff(work_end_time,work_begin_time),'%H:%i') as workedHour	 ,
+			sc.store_code		,
+			sc.breaktime	,
+			sc.schedule_code
+		FROM 
+			schedule sc JOIN store st ON sc.store_code = st.store_code
+		WHERE sc.work_date = #{WORK_DATE} and sc.user_code_ptj = #{user_code_ptj}
+	</select>
+	
+	<select id="dailyScheduleReq" resultType="hashmap">
+		SELECT 
+			ud_schedule_number ,
+			dc
+		FROM request_schedule rs 
+		WHERE rs.user_code_ptj = #{USER_CODE_PTJ} AND dc != 'C'
+	</select>
+	
+	<!-- workPlaceList -->
+	<select id="workPlace" resultType="hashmap">
+		SELECT
+			w.store_code,
+			st.store_name,
+			workplace_code
+		FROM workplace w JOIN STORE st ON w.store_code = st.store_code
+		<trim prefix="WHERE" prefixOverrides="AND |OR">
+			<if test="user_code_ptj !=null and user_code_ptj != 0 "> user_code_ptj = #{user_code_ptj}</if>
+		</trim>
+	</select>
+	
+	<insert id="linkRequest">
+		INSERT INTO part_timer(
+			user_code_ptj,
+			store_code,
+			link_stat,
+			gender,
+			ptj_call
+		)
+		VALUES(
+			#{user_code_ptj},
+			#{store_code},
+			#{link_stat},
+			#{gender},
+			#{call}
+		)
+	</insert>
+	
+	
+	<!-- 연결 요청 승인 시 근무지 추가 -->
+	<insert id="insertWorkPlace">
+		INSERT INTO workplace(
+			store_code,
+			user_code_ptj,
+			COLOR
+		)VALUES(
+			#{STORE_CODE},
+			#{USER_CODE_PTJ},
+			(SELECT CODE FROM COLOR WHERE CODE NOT IN (SELECT COLOR FROM WORKPLACE as ALIASIS WHERE user_code_ptj = #{USER_CODE_PTJ}) LIMIT 1)
+		)
+	</insert>
+	<!-- 고용주 근무 추가 변경 삭제 요청 -->
+	<insert id="reqScheduleWork">
+		INSERT INTO request_schedule(
+			store_code,
+			user_code_emp,
+			user_code_ptj,
+			work_date,
+			work_begin_time,
+			work_end_time,
+			breaktime,
+			accept_emp,
+			accept_ptj,
+			dc
+			<if test="SCHEDULE_CODE != null and SCHEDULE_CODE != '' ">,ud_schedule_number, COLOR</if>
+		)VALUES(
+			#{STORE_CODE},
+			(SELECT emp_email FROM store WHERE store_code = #{STORE_CODE} LIMIT 1),
+			#{USER_CODE_PTJ},
+			#{WORK_DATE},
+			#{WORK_BEGIN_TIME},
+			#{WORK_END_TIME},
+			#{BREAKTIME},
+			"N",
+			"Y",
+			#{DC}
+			<if test="SCHEDULE_CODE != null and SCHEDULE_CODE != ''">,#{SCHEDULE_CODE}, #{COLOR}</if>
+		)
+	</insert>
+	
+	<!-- 근무지 삭제 -->
+	<delete id="deleteWorkplace">
+		DELETE 
+		FROM WORKPLACE
+		WHERE  store_code = #{STORE_CODE} AND USER_CODE_PTJ = #{USER_CODE_PTJ}
+	</delete>
+	
+	<!-- 직원 목록 삭제 -->
+	<delete id="deletePartTimer">
+		DELETE
+		FROM PART_TIMER
+		WHERE store_code = #{STORE_CODE} AND USER_CODE_PTJ = #{USER_CODE_PTJ} 
+	</delete>
+	
+	
+	<!-- 알바생이 승인 거절한 요청 업데이트 -->
+	<update id="deniedRequest">
+		UPDATE REQUEST_SCHEDULE SET
+			ACCEPT_PTJ = 'D'
+		WHERE reqschedule_number = #{REQ_CODE}
+	</update>	
+</mapper>

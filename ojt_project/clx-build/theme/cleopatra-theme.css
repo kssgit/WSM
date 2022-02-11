@@ -73,84 +73,249 @@ body.cl-has-modal {
 .cl-numbereditor.cl-focus .cl-numbereditor-buttons {
   border-left-color: #1369C5;
 }
+/* 
+ * Define Custom variables
+ * Template Name : common-template-v3
+ * Author : Da-eun Ryu
+ * File : less
+ */
+/************************************************
+ * Color System
+ ************************************************/
+/*OJT 프로젝트 테마 컬러*/
+/************************************************
+ * Body
+ ************************************************/
+/************************************************
+ * Main
+ ************************************************/
+/************************************************
+ * Font
+ ************************************************/
+/************************************************
+ * Common Components (Controls)
+ ************************************************/
+/* Transition */
+/************************************************
+ * Input Groups
+ ************************************************/
+/************************************************
+ * Selection Group
+ ************************************************/
+/************************************************
+ * Button
+ ************************************************/
+/************************************************
+ * Form
+ ************************************************/
+/************************************************
+ * Table
+ ************************************************/
+/* Row - Insert */
+/* Row - Update */
+/* Row - Delete */
+/* Row - Hover */
+/* Row - Select */
+/* Row - Edit */
+/************************************************
+ * Tab
+ ************************************************/
+/************************************************
+ * Modal
+ ************************************************/
+/************************************************
+ * Notification (Alert)
+ ************************************************/
+/************************************************
+ * Calendar
+ ************************************************/
+/* Calendar Root */
+/* Header */
+/* Content header */
+/* Other month */
+/* Dates */
+/* Footer */
 /* 데이트 인풋 */
 .cl-dateinput {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
-  color: #333;
-  border: 1px solid #bbb;
-  text-align: left;
+  font: 400 14px "Noto Sans KR", sans-serif;
+  background-color: #FFFFFF;
+  background-image: none;
+  border: 1px solid #BABFC7;
+  border-radius: 3px;
+  color: #4E5154;
+  text-align: center;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   /* 데이트 인풋 텍스트 */
   /* 데이트 인풋 버튼 */
 }
-.cl-dateinput .cl-dateinput-spinbuttons {
-  border-left: solid 1px #bbb;
+.cl-dateinput .cl-text {
+  padding: 0px 6px;
+}
+.cl-dateinput .cl-text.cl-placeholder {
+  color: #cfd2d8 !important;
+  font-style: normal;
+  font-weight: 300;
+}
+.cl-dateinput .cl-dateinput-button {
+  background-image: url("images/controls/dateinput/icon-calendar.svg");
+  background-size: 16px;
+  background-position: left center;
+  width: calc(16px + 6px);
 }
 .cl-dateinput.cl-disabled {
-  color: #666;
-  background-color: #ccc;
-  border-color: #ddd;
   /* 데이트 인풋 disabled 상태 버튼 */
 }
+.cl-dateinput.cl-disabled .cl-dateinput-button {
+  background-image: url("images/controls/dateinput/icon-calendar-disabled.svg");
+}
+.cl-dateinput .cl-dateinput-spinbuttons {
+  border-left: 1px solid #BABFC7;
+}
+.cl-dateinput .cl-dateinput-spinbuttons .cl-dateinput-increase {
+  background-image: url("images/controls/dateinput/icon-arrow-up-s-line.svg");
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.cl-dateinput .cl-dateinput-spinbuttons .cl-dateinput-decrease {
+  background-image: url("images/controls/dateinput/icon-arrow-down-s-line.svg");
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.cl-dateinput:not(.cl-disabled) .cl-dateinput-increase:hover {
+  background-image: url("images/controls/dateinput/icon-arrow-up-s-line.svg");
+  background-color: #EFF5FF;
+}
+.cl-dateinput:not(.cl-disabled) .cl-dateinput-increase:active {
+  background-image: url("images/controls/dateinput/icon-arrow-up-s-line-active.svg");
+  background-color: #1E9FF2;
+}
+.cl-dateinput:not(.cl-disabled) .cl-dateinput-decrease:hover {
+  background-image: url("images/controls/dateinput/icon-arrow-down-s-line.svg");
+  background-color: #EFF5FF;
+}
+.cl-dateinput:not(.cl-disabled) .cl-dateinput-decrease:active {
+  background-image: url("images/controls/dateinput/icon-arrow-up-s-line-active.svg");
+  background-color: #1E9FF2;
+}
+/* 데이트 인풋 disabled 상태 */
+.cl-dateinput.cl-disabled {
+  background-color: #ECEFF1;
+  border-color: #BABFC7;
+  color: #BABFC7;
+}
+.cl-dateinput.cl-disabled .cl-dateinput-spinbuttons {
+  border-left: 1px solid #BABFC7;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.cl-dateinput.cl-disabled .cl-dateinput-spinbuttons .cl-dateinput-increase {
+  background-image: url("images/controls/dateinput/icon-arrow-up-s-line-disabled.svg");
+}
+.cl-dateinput.cl-disabled .cl-dateinput-spinbuttons .cl-dateinput-decrease {
+  background-image: url("images/controls/dateinput/icon-arrow-down-s-line-disabled.svg");
+}
+/* 데이트 인풋 포커스 상태 */
 .cl-dateinput.cl-focus {
-  border-color: #1369C5;
+  border-color: #1E9FF2;
+}
+.cl-dateinput.cl-focus .cl-dateinput-spinbuttons {
+  border-left-color: #1E9FF2;
 }
 /* 캘린더 */
+.cl-anniversary.cl-holiday {
+  background-color: green;
+  color: white;
+}
 .cl-calendar {
-  border: 1px solid #bbb;
-  background-color: #fff;
+  background-color: #FFFFFF;
+  border: 1px solid #BABFC7;
+  border-radius: 3px;
+  /* 데이트인풋 등에 팝업으로 나타날때 스타일 */
   /* 캘린더 컨텐츠의 일, 월, 년 스타일*/
   /* 캘린더 컨텐츠 스타일*/
   /* 캘린더 푸터 */
   /* 캘린더 포커스 상태 */
-  /* 데이트인풋 등에 팝업으로 나타날때 스타일 */
+}
+.cl-calendar.cl-popup {
+  box-shadow: 0 2px 18px 1px rgba(49, 53, 72, 0.15);
+  /* 데이트인풋 위에 표시될때 상태 */
+  /* 데이트인풋 아래에 표시될때 상태 */
+}
+.cl-calendar.cl-popup.cl-bottom .cl-popup {
+  box-shadow: 0 2px 18px 1px rgba(49, 53, 72, 0.15);
 }
 .cl-calendar:not(.cl-disabled) .cl-calendar-header-before:hover,
 .cl-calendar:not(.cl-disabled) .cl-calendar-header-before.cl-hover {
   /* 캘린더 이전 년도 버튼 호버 상태 */
+  background-image: url("images/controls/calendar/icon-chevron-left-on.svg");
 }
 .cl-calendar:not(.cl-disabled) .cl-calendar-header-after:hover,
 .cl-calendar:not(.cl-disabled) .cl-calendar-header-after.cl-hover {
   /* 캘린더 이후 년도 버튼 호버 상태 */
+  background-image: url("images/controls/calendar/icon-chevron-right-on.svg");
 }
 .cl-calendar:not(.cl-disabled) .cl-calendar-header-prev:hover,
 .cl-calendar:not(.cl-disabled) .cl-calendar-header-prev.cl-hover {
   /* 캘린더 이전 달 버튼 호버 상태 */
+  background-image: url("images/controls/calendar/icon-chevron-left-on.svg");
 }
 .cl-calendar:not(.cl-disabled) .cl-calendar-header-next:hover,
 .cl-calendar:not(.cl-disabled) .cl-calendar-header-next.cl-hover {
   /* 캘린더 다음 달 버튼 호버 상태 */
+  background-image: url("images/controls/calendar/icon-chevron-right-on.svg");
 }
 .cl-calendar .cl-calendar-header {
   /* 캘린더 헤더 */
+  background-color: transparent;
+}
+.cl-calendar .cl-calendar-header .cl-calendar-header-before,
+.cl-calendar .cl-calendar-header .cl-calendar-header-after,
+.cl-calendar .cl-calendar-header .cl-calendar-header-prev,
+.cl-calendar .cl-calendar-header .cl-calendar-header-next {
+  background-size: 16px;
 }
 .cl-calendar .cl-calendar-header .cl-calendar-header-before {
   /* 캘린더 이전 년도 버튼 */
+  background-image: url("images/controls/calendar/icon-chevrons-left.svg");
+  visibility: false;
 }
 .cl-calendar .cl-calendar-header .cl-calendar-header-after {
   /* 캘린더 이후 년도 버튼 */
+  background-image: url("images/controls/calendar/icon-chevrons-right.svg");
 }
 .cl-calendar .cl-calendar-header .cl-calendar-header-prev {
   /* 캘린더 이전 달 버튼 */
+  background-image: url("images/controls/calendar/icon-chevron-left.svg");
 }
 .cl-calendar .cl-calendar-header .cl-calendar-header-next {
   /* 캘린더 다음 달 버튼 */
+  background-image: url("images/controls/calendar/icon-chevron-right.svg");
+}
+.cl-calendar .cl-calendar-header .cl-calendar-header-text {
+  color: #4E5154;
+  font-weight: 500;
 }
 .cl-calendar .cl-calendar-header .cl-calendar-header-text:hover,
 .cl-calendar .cl-calendar-header .cl-calendar-header-text.cl-hover {
-  color: #208AED;
+  color: #1E9FF2;
+}
+.cl-calendar:not(.cl-disabled) .cl-calendar-content-day,
+.cl-calendar:not(.cl-disabled) .cl-calendar-content-month,
+.cl-calendar:not(.cl-disabled) .cl-calendar-content-year,
+.cl-calendar:not(.cl-disabled) .cl-other-month {
+  border-radius: 0px;
 }
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-day:not(.cl-disabled):hover,
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-month:not(.cl-disabled):hover,
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-year:not(.cl-disabled):hover,
 .cl-calendar:not(.cl-disabled) .cl-other-month:not(.cl-disabled):hover {
   /* 셀 호버 스타일 */
+  background-color: #EFF5FF;
+  color: #4E5154;
 }
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-day.cl-selected,
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-month.cl-selected,
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-year.cl-selected,
 .cl-calendar:not(.cl-disabled) .cl-other-month.cl-selected {
   /* 선택된 날짜 셀 */
-  background-color: #208AED;
+  background-color: #1E9FF2;
   color: #FFFFFF;
 }
 .cl-calendar .cl-calendar-content {
@@ -160,26 +325,90 @@ body.cl-has-modal {
 .cl-calendar .cl-calendar-content .cl-calendar-content-week {
   /* week of year의 스타일 */
 }
+.cl-calendar .cl-calendar-content .cl-calendar-content-header {
+  background-color: transparent;
+  color: #607D8B;
+  font-weight: 500;
+  height: 25px;
+}
 .cl-calendar .cl-calendar-content .cl-calendar-content-day.cl-calendar-content-sun {
   /* 일요일 셀 */
+  color: #F44336;
 }
 .cl-calendar .cl-calendar-content .cl-calendar-content-day.cl-calendar-content-sat {
   /* 토요일 셀 */
+  color: #F44336;
 }
 .cl-calendar .cl-calendar-content .cl-other-month {
   /* 이전 달 또는 다음 달의 날짜 */
+  background-color: transparent;
+  color: #BABFC7;
+}
+.cl-calendar .cl-calendar-content .cl-other-month.cl-disabled {
+  background-color: transparent;
+  color: #BABFC7;
 }
 .cl-calendar .cl-calendar-content .cl-calendar-content-day,
 .cl-calendar .cl-calendar-content .cl-calendar-content-month,
 .cl-calendar .cl-calendar-content .cl-calendar-content-year {
+  color: #4E5154;
   /* 기본 날짜 - 오늘 날짜 셀*/
   /*range 선택에서 선택된 날짜 스타일*/
   /*선택된 날짜 스타일*/
+  /*키보드로 날짜 이동 스타일*/
   /*날짜가 disabled 되어 있을때 스타일*/
   /*기념일 전역 스타일*/
 }
+.cl-calendar .cl-calendar-content .cl-calendar-content-day.cl-calendar-defaultdate,
+.cl-calendar .cl-calendar-content .cl-calendar-content-month.cl-calendar-defaultdate,
+.cl-calendar .cl-calendar-content .cl-calendar-content-year.cl-calendar-defaultdate {
+  background-color: transparent;
+  color: #1E9FF2;
+}
+.cl-calendar .cl-calendar-content .cl-calendar-content-day.cl-range-selected,
+.cl-calendar .cl-calendar-content .cl-calendar-content-month.cl-range-selected,
+.cl-calendar .cl-calendar-content .cl-calendar-content-year.cl-range-selected {
+  background-color: #EFF5FF;
+  color: #4E5154;
+}
+.cl-calendar .cl-calendar-content .cl-calendar-content-day.cl-selected,
+.cl-calendar .cl-calendar-content .cl-calendar-content-month.cl-selected,
+.cl-calendar .cl-calendar-content .cl-calendar-content-year.cl-selected {
+  background-color: #1E9FF2;
+  color: #FFFFFF;
+}
+.cl-calendar .cl-calendar-content .cl-calendar-content-day.cl-calendar-current,
+.cl-calendar .cl-calendar-content .cl-calendar-content-month.cl-calendar-current,
+.cl-calendar .cl-calendar-content .cl-calendar-content-year.cl-calendar-current {
+  background-color: #EFF5FF;
+  box-shadow: none;
+  color: #4E5154;
+}
+.cl-calendar .cl-calendar-content .cl-calendar-content-day.cl-disabled,
+.cl-calendar .cl-calendar-content .cl-calendar-content-month.cl-disabled,
+.cl-calendar .cl-calendar-content .cl-calendar-content-year.cl-disabled {
+  background-color: #ECEFF1;
+  color: #BABFC7;
+}
 .cl-calendar:not(.cl-disabled) .cl-calendar-footer-text:hover {
   /* 캘린더 푸터 날짜 호버 스타일 */
+}
+.cl-calendar .cl-calendar-footer {
+  background-color: transparent;
+}
+.cl-calendar .cl-calendar-footer .cl-calendar-footer-text {
+  color: #4E5154;
+  font-size: 12px;
+  font-weight: 400;
+}
+.cl-calendar.cl-focus {
+  border-color: #1E9FF2;
+}
+.cl-calendar .cl-calendar-item {
+  background-color: #FFC900;
+}
+.cl-calendar .cl-calendar-item .cl-text {
+  color: #FFFFFF;
 }
 .cl-calendar.cl-anniversaries {
   /* 년월일 달력 스타일 */
@@ -193,26 +422,35 @@ body.cl-has-modal {
 .cl-calendar.cl-anniversaries .cl-other-month.cl-calendar-content-fri,
 .cl-calendar.cl-anniversaries .cl-other-month.cl-calendar-content-sat,
 .cl-calendar.cl-anniversaries .cl-other-month.cl-calendar-content-sun {
+  border: none;
   /* 기념일 텍스트 스타일 */
 }
-.cl-calendar.cl-focus {
-  border-color: #1369C5;
-}
-.cl-calendar.cl-focus .cl-calendar-content {
-  /* 키보드 날짜 이동 스타일 */
-}
-.cl-calendar.cl-popup.cl-top {
-  /* 데이트인풋 위에 표시될때 상태 */
-}
-.cl-calendar.cl-popup.cl-bottom {
-  /* 데이트인풋 아래에 표시될때 상태 */
-}
-.cl-calendar.cl-popup .cl-calendar-content-day,
-.cl-calendar.cl-popup .cl-calendar-content-month,
-.cl-calendar.cl-popup .cl-calendar-content-year {
-  /* 데이트인풋 캘린더 키보드로 날짜 이동 스타일*/
-}
 /* 캘린더 disabled 상태 */
+.cl-calendar.cl-disabled {
+  background-color: #ECEFF1;
+  border-color: #BABFC7;
+  color: #BABFC7;
+}
+.cl-calendar.cl-disabled .cl-calendar-header .cl-calendar-header-text {
+  color: #BABFC7;
+}
+.cl-calendar.cl-disabled .cl-calendar-header .cl-calendar-header-text:hover,
+.cl-calendar.cl-disabled .cl-calendar-header .cl-calendar-header-text.cl-hover {
+  color: #BABFC7;
+}
+.cl-calendar.cl-disabled .cl-calendar-content-day,
+.cl-calendar.cl-disabled .cl-calendar-content-month,
+.cl-calendar.cl-disabled .cl-calendar-content-year,
+.cl-calendar.cl-disabled .cl-other-month {
+  color: #BABFC7;
+  border-color: transparent;
+}
+.cl-calendar.cl-disabled .cl-calendar-content .cl-calendar-content-header {
+  color: #BABFC7;
+}
+.cl-calendar.cl-disabled .cl-calendar-footer .cl-calendar-footer-text {
+  color: #BABFC7;
+}
 /* 리스트 박스 */
 .cl-listbox {
   font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
@@ -691,7 +929,9 @@ body.cl-has-modal {
 }
 /* 체크 박스 */
 .cl-checkbox {
-  /* 내부 아이템 요소 */
+  font: 400 14px "Noto Sans KR", sans-serif;
+  color: #4E5154;
+  padding: 0px;
   /* 아이콘 정렬을 설정 */
   /* 체크 박스 텍스트 */
   /* 체크박스 아이콘 스타일 */
@@ -699,65 +939,154 @@ body.cl-has-modal {
   /* 체크된 체크박스 아이콘 스타일 */
   /* disabled 체크박스 스타일 */
   /* 체크박스 focus 스타일 */
-  /* iconAlign=right 스타일 */
-  /* iconAlign=top 스타일 */
-  /* iconAlign=bottom 스타일 */
-  /* hideIcon=true 스타일 */
-  /* fixedWidth설정시 .cl-checkbox-icon의 width와 같은 값으로 설정 */
+}
+.cl-checkbox .cl-icon-wrapper {
+  vertical-align: middle;
 }
 .cl-checkbox .cl-text {
   /* 말줄임 style 적용(한줄) */
   /* 여러 줄 style 적용 */
+  padding-left: 5px;
+}
+.cl-checkbox .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox.png");
+  margin-left: 1px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.cl-checkbox:hover .cl-checkbox-icon,
+.cl-checkbox.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-focus.png");
 }
 .cl-checkbox.cl-checked {
   /* 체크된 체크박스 hover시 아이콘 스타일 */
+}
+.cl-checkbox.cl-checked .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-selected.png");
+}
+.cl-checkbox.cl-checked:hover .cl-checkbox-icon,
+.cl-checkbox.cl-checked.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-selected.png");
 }
 .cl-checkbox.cl-disabled {
   /* disabled 체크박스 hover시 아이콘 스타일 */
   /* 체크된 disabled 체크박스 아이콘 스타일 */
 }
+.cl-checkbox.cl-disabled .cl-text {
+  color: #BABFC7;
+}
+.cl-checkbox.cl-disabled .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled.png");
+}
+.cl-checkbox.cl-disabled:hover .cl-checkbox-icon,
+.cl-checkbox.cl-disabled.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled.png");
+}
 .cl-checkbox.cl-disabled.cl-checked {
   /* 체크된 disabled 체크박스 hover시 아이콘 스타일 */
 }
+.cl-checkbox.cl-disabled.cl-checked .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled-selected.png");
+}
+.cl-checkbox.cl-disabled.cl-checked:hover .cl-checkbox-icon,
+.cl-checkbox.cl-disabled.cl-checked.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled-selected.png");
+}
+.cl-checkbox.cl-partialchecked .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-partial.png");
+}
+.cl-checkbox.cl-partialchecked:hover .cl-checkbox-icon,
+.cl-checkbox.cl-partialchecked.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-partial.png");
+}
+.cl-checkbox.cl-partialchecked.cl-disabled .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-partial-disabled.png");
+}
+.cl-checkbox.cl-partialchecked.cl-disabled:hover .cl-checkbox-icon,
+.cl-checkbox.cl-partialchecked.cl-disabled.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-partial-disabled.png");
+}
 /* 체크박스그룹 */
 .cl-checkboxgroup {
+  font: 400 14px "Noto Sans KR", sans-serif;
+  color: #4E5154;
   /* 체크박스그룹 focus 스타일 */
   /* disabled 체크박스그룹 스타일 */
   /* 체크박스그룹에 체크박스 스타일 */
-  /* fixedWidth를 고정값으로 설정시 .cl-checkbox-icon의 width와 같은 값으로 설정 */
-  /* iconAlign=right 스타일 */
-  /* iconAlign=top 스타일 */
-  /* iconAlign=bottom 스타일 */
-  /* hideIcon=true 스타일 */
 }
 .cl-checkboxgroup.cl-focus {
   /* 체크박스그룹 내에 focus를 받은 체크박스 focus 아이콘 스타일 */
 }
 .cl-checkboxgroup.cl-disabled {
+  color: #BABFC7;
   /* disabled 체크박스그룹에 체크박스 스타일 */
 }
 .cl-checkboxgroup.cl-disabled .cl-checkbox {
   /* disabled 체크박스그룹에 체크박스 hover시 아이콘 스타일 */
   /* disabled 체크박스그룹 내에 체크된 체크박스 아이콘 스타일 */
 }
+.cl-checkboxgroup.cl-disabled .cl-checkbox .cl-text {
+  color: #BABFC7;
+}
+.cl-checkboxgroup.cl-disabled .cl-checkbox .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled.png");
+}
+.cl-checkboxgroup.cl-disabled .cl-checkbox:hover .cl-checkbox-icon,
+.cl-checkboxgroup.cl-disabled .cl-checkbox.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled.png");
+}
 .cl-checkboxgroup.cl-disabled .cl-checkbox.cl-checked {
   /* disabled 체크박스그룹 내에 체크된 체크박스 hover시 아이콘 스타일 */
 }
+.cl-checkboxgroup.cl-disabled .cl-checkbox.cl-checked .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled-selected.png");
+}
+.cl-checkboxgroup.cl-disabled .cl-checkbox.cl-checked:hover .cl-checkbox-icon,
+.cl-checkboxgroup.cl-disabled .cl-checkbox.cl-checked.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled-selected.png");
+}
 .cl-checkboxgroup .cl-checkbox {
-  /* 내부 아이템 요소 */
+  padding: 0px;
   /* 체크박스그룹에 체크박스 hover시 아이콘 스타일 */
   /* 체크박스그룹에 체크된 체크박스 아이콘 스타일 */
   /* 체크박스그룹에 disabled 체크박스 스타일 */
 }
+.cl-checkboxgroup .cl-checkbox .cl-icon-wrapper {
+  vertical-align: middle;
+}
+.cl-checkboxgroup .cl-checkbox .cl-text {
+  padding-left: 5px;
+}
+.cl-checkboxgroup .cl-checkbox:hover .cl-checkbox-icon,
+.cl-checkboxgroup .cl-checkbox.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-focus.png");
+}
 .cl-checkboxgroup .cl-checkbox.cl-checked {
   /* 체크박스그룹에 체크된 체크박스 hover시 아이콘 스타일 */
+}
+.cl-checkboxgroup .cl-checkbox.cl-checked .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-selected.png");
+}
+.cl-checkboxgroup .cl-checkbox.cl-checked:hover .cl-checkbox-icon,
+.cl-checkboxgroup .cl-checkbox.cl-checked.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-selected.png");
 }
 .cl-checkboxgroup .cl-checkbox.cl-disabled {
   /* 체크박스그룹에 disabled 체크박스 hover시 아이콘 스타일 */
   /* 체크박스그룹에 disabled 체크된 체크박스 아이콘 스타일 */
 }
+.cl-checkboxgroup .cl-checkbox.cl-disabled:hover .cl-checkbox-icon,
+.cl-checkboxgroup .cl-checkbox.cl-disabled.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled.png");
+}
 .cl-checkboxgroup .cl-checkbox.cl-disabled.cl-checked {
   /* 체크박스그룹에 disabled 체크된 체크박스 hover시 아이콘 스타일 */
+}
+.cl-checkboxgroup .cl-checkbox.cl-disabled.cl-checked .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled-selected.png");
+}
+.cl-checkboxgroup .cl-checkbox.cl-disabled.cl-checked:hover .cl-checkbox-icon,
+.cl-checkboxgroup .cl-checkbox.cl-disabled.cl-checked.cl-hover .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-disabled-selected.png");
 }
 /* 마스크 에디터 루트 */
 .cl-maskeditor {
@@ -855,49 +1184,92 @@ body.cl-has-modal {
 }
 /* 링크드 콤보 박스 루트 */
 .cl-linkedcombobox {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
-  color: #333;
+  font: 400 14px "Noto Sans KR", sans-serif;
+  color: #4E5154;
   /* 콤보 박스 */
   /* 콤보 박스 - 포커스 상태 */
   /* 콤보 박스 - disabled 상태 */
 }
 .cl-linkedcombobox .cl-linkedcombobox-combo {
-  border: 1px solid #bbb;
-  background-color: #fff;
+  background-color: #FFFFFF;
+  border: 1px solid #BABFC7;
+  border-radius: 3px;
+  width: 150px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   /*선택된 아이템의 아이콘*/
   /* 콤보 박스 인풋 텍스트 */
   /* 콤보 박스 펼침 버튼 */
+  /* 콤보박스 리스트 열린 위치에 따른 스타일 */
 }
 .cl-linkedcombobox .cl-linkedcombobox-combo .cl-text {
+  padding: 0px 6px;
   /* preventInput속성일때 스타일*/
 }
+.cl-linkedcombobox .cl-linkedcombobox-combo .cl-text.cl-placeholder {
+  color: #cfd2d8 !important;
+  font-style: normal;
+  font-weight: 300;
+}
+.cl-linkedcombobox .cl-linkedcombobox-combo .cl-linkedcombobox-button {
+  background-image: url("images/controls/combobox/icon-arrow-down-s-line.svg");
+  background-size: 16px;
+  background-position: left center;
+  width: calc(14px + 6px);
+}
+.cl-linkedcombobox .cl-linkedcombobox-combo.cl-bottom {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.cl-linkedcombobox .cl-linkedcombobox-combo.cl-top {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
 .cl-linkedcombobox .cl-linkedcombobox-combo.cl-focus {
-  border-color: #1369C5;
+  border-color: #1E9FF2;
 }
 .cl-linkedcombobox.cl-disabled {
-  color: #666;
   /* 콤보 박스 펼침 버튼 - disabled 상태 */
 }
 .cl-linkedcombobox.cl-disabled .cl-linkedcombobox-combo {
-  border-color: #ddd;
-  background-color: #ccc;
+  background-color: #ECEFF1;
+  border-color: #BABFC7;
+  color: #BABFC7;
+}
+.cl-linkedcombobox.cl-disabled .cl-linkedcombobox-button {
+  background-image: url("images/controls/combobox/icon-arrow-down-s-line-disabled.svg");
 }
 /* 콤보 박스 리스트 박스 */
 .cl-linkedcombobox-list {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
-  color: #333;
-  border: 1px solid #1369C5;
-  background-color: white;
+  font: 400 14px "Noto Sans KR", sans-serif;
+  backgrond-color: #FFFFFF;
+  border-color: #1E9FF2;
+  border-radius: 3px;
+  color: #4E5154;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   /*리스트박스의 쉐도우*/
+  /* 콤보박스 위에 표시될때 상태 */
+  /* 콤보박스 아래에 표시될때 상태 */
   /* 콤보 박스 아이템 */
 }
+.cl-linkedcombobox-list.cl-popup {
+  box-shadow: 0 2px 18px 1px rgba(49, 53, 72, 0.15);
+}
 .cl-linkedcombobox-list.cl-top {
-  /* 콤보박스 위에 표시될때 상태 */
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.cl-linkedcombobox-list.cl-top.cl-popup {
+  box-shadow: 2px 0 18px 1px rgba(49, 53, 72, 0.15);
 }
 .cl-linkedcombobox-list.cl-bottom {
-  /* 콤보박스 아래에 표시될때 상태 */
+  margin-top: -1px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 .cl-linkedcombobox-list .cl-linkedcombobox-item {
+  min-height: 30px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   /* 콤보 박스 아이템 아이콘 */
   /* 콤보 박스 아이템 텍스트 */
   /* 콤보 박스 아이템 드릴다운 아이콘 */
@@ -905,26 +1277,37 @@ body.cl-has-modal {
   /* 콤보 박스 아이템 - 선택됨 */
   /* 콤보 박스 아이템 - disabled 상태 */
 }
+.cl-linkedcombobox-list .cl-linkedcombobox-item .cl-linkedcombobox-arrow.cl-folder {
+  background-image: url("images/controls/combobox/icon-arrow-right-s-line.svg");
+  width: 5px;
+}
 .cl-linkedcombobox-list .cl-linkedcombobox-item.cl-selected {
-  background-color: #208AED;
+  background-color: #1E9FF2;
   color: #FFFFFF;
   /* 콤보 박스 아이템 드릴 다운 아이콘 - 선택됨 */
 }
+.cl-linkedcombobox-list .cl-linkedcombobox-item.cl-selected .cl-linkedcombobox-arrow.cl-folder {
+  background-image: url("images/controls/combobox/icon-arrow-right-s-line-selected.svg");
+}
 .cl-linkedcombobox-list .cl-linkedcombobox-item.cl-disabled {
-  color: #666;
+  background-color: #ECEFF1;
+  color: #BABFC7;
   /* 콤보 박스 아이템 - 선택됨, disabled 상태 */
 }
+.cl-linkedcombobox-list .cl-linkedcombobox-item.cl-disabled .cl-linkedcombobox-arrow.cl-folder {
+  background-image: url("images/controls/combobox/icon-arrow-right-s-line-disabled.svg");
+}
 .cl-linkedcombobox-list .cl-linkedcombobox-item.cl-disabled.cl-selected {
-  color: #777;
-  background-color: #ccc;
+  background-color: #DBE1E6;
+  color: #6B6F82;
 }
 .cl-linkedcombobox-list .cl-linkedcombobox-item:not(.cl-disabled) {
   /* 콤보 박스 아이템 - 호버 상태 */
 }
 .cl-linkedcombobox-list .cl-linkedcombobox-item:not(.cl-disabled):not(.cl-selected):hover,
 .cl-linkedcombobox-list .cl-linkedcombobox-item:not(.cl-disabled):not(.cl-selected).cl-hover {
-  color: #333435;
-  background-color: #DAEFFC;
+  background-color: #EFF5FF;
+  color: #4E5154;
 }
 /* 다이얼로그 루트 */
 .cl-dialog {
@@ -1025,9 +1408,11 @@ body.cl-has-modal {
 }
 /* 그리드 */
 .cl-grid {
-  font: 11pt "맑은 고딕", "Malgun Gothic", sans-serif;
-  color: #333;
-  border: solid 1px #bbb;
+  font: 400 14px "Noto Sans KR", sans-serif;
+  background-color: #FFFFFF;
+  border: 1px solid #BABFC7;
+  border-radius: 3px;
+  color: #4E5154;
   min-height: 100px;
   /* 그리드 헤더 */
   /* 그리드 푸터 */
@@ -1041,6 +1426,9 @@ body.cl-has-modal {
   /* noDataMessage 보여질 때 해당 텍스트영역 스타일 */
 }
 .cl-grid .cl-grid-header {
+  background-image: none;
+  background-color: #edf1f4;
+  font-weight: 500;
   /* 그리드 헤더 셀 */
   /* 
 		@deprecated (header의 sortColumnName속성)
@@ -1050,16 +1438,48 @@ body.cl-has-modal {
   /* 그리드 헤더 셀이 소트가능 한 셀일 때 스타일 */
 }
 .cl-grid .cl-grid-header .cl-grid-cell {
+  color: #2C353E;
   /* 그리드 헤더 셀에 임베딩 된 컨트롤 */
+  /* 그리드 데이터 필수값 스타일 ( 헤더 셀에 클래스 적용할 것 ) */
+}
+.cl-grid .cl-grid-header .cl-grid-cell .cl-control {
+  color: #2C353E;
+  font-weight: 500;
+  text-align: center;
+}
+.cl-grid .cl-grid-header .cl-grid-cell.require {
+  background-color: #E2EBF9;
+  color: #1E3D73;
+}
+.cl-grid .cl-grid-header .cl-grid-cell.require .cl-control {
+  background-color: #E2EBF9;
+  color: #1E3D73;
 }
 .cl-grid .cl-grid-header .cl-sort {
   /* 그리드 헤더 셀 소트 인디케이터 - 소트 가능 */
   /* 그리드 헤더 셀 소트 인디케이터 - 오름차순 정렬됨 */
   /* 그리드 헤더 셀 소트 인디케이터 - 내림차순 정렬됨 */
 }
+.cl-grid .cl-grid-header .cl-sort.cl-sortable {
+  background-image: url("images/controls/grid/icon-grid-sortable.png");
+}
+.cl-grid .cl-grid-header .cl-sort.cl-sort-asc {
+  background-image: url("images/controls/grid/icon-grid-sort-asc.png");
+}
+.cl-grid .cl-grid-header .cl-sort.cl-sort-desc {
+  background-image: url("images/controls/grid/icon-grid-sort-desc.png");
+}
 .cl-grid .cl-grid-header .cl-filter {
+  background-image: url("images/controls/grid/icon-filter.png");
+  background-size: 12px;
   /* 그리드 헤더 셀 필터 인디케이터에 마우스가 호버되었을 때 스타일 */
   /* 그리드 헤더 셀 필터 인디케이터 - 필터되었을 때 스타일 */
+}
+.cl-grid .cl-grid-header .cl-filter:hover {
+  background-image: url("images/controls/grid/icon-filter-hover.png");
+}
+.cl-grid .cl-grid-header .cl-filter.cl-filtered {
+  background-image: url("images/controls/grid/icon-filtered.png");
 }
 .cl-grid .cl-grid-header .cl-sortable-cell {
   /* 그리드 헤더 셀 소트 인디케이터 */
@@ -1067,17 +1487,46 @@ body.cl-has-modal {
   /* 그리드 헤더 셀 소트 인디케이터 - 내림차순 정렬됨  */
 }
 .cl-grid .cl-grid-header .cl-sortable-cell .cl-sort {
+  width: 10px;
   /* 그리드 헤더 셀 소트 인디케이터 - 소트 가능한 아이콘 */
   /* 그리드 헤더 셀 소트 인디케이터 - 소트 우선 순위 영역*/
+}
+.cl-grid .cl-grid-header .cl-sortable-cell .cl-sort .cl-sort-icon {
+  height: 55% !important;
+}
+.cl-grid .cl-grid-header .cl-sortable-cell .cl-sort .cl-sort-icon:before {
+  display: block;
+  height: 100%;
+  background-image: url("images/controls/grid/icon-grid-sortable.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  color: transparent;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.cl-grid .cl-grid-header .cl-sortable-cell .cl-sort .cl-sort-seq {
+  height: 45% !important;
 }
 .cl-grid .cl-grid-header .cl-sortable-cell.cl-sort-asc {
   /* 그리드 헤더 셀 소트 인디케이터 - 오름차순 아이콘 */
 }
+.cl-grid .cl-grid-header .cl-sortable-cell.cl-sort-asc .cl-sort-icon:before {
+  background-image: url("images/controls/grid/icon-grid-sort-asc.png");
+}
 .cl-grid .cl-grid-header .cl-sortable-cell.cl-sort-desc {
   /* 그리드 헤더 셀 소트 인디케이터 - 내림차순 아이콘 */
 }
+.cl-grid .cl-grid-header .cl-sortable-cell.cl-sort-desc .cl-sort-icon:before {
+  background-image: url("images/controls/grid/icon-grid-sort-desc.png");
+}
 .cl-grid .cl-grid-footer {
-  border-top: solid 1px #bbb;
+  background-color: #F6F8FA;
+  border-top: 1px solid #BABFC7;
+  color: #4E5154;
+  font-weight: 500;
+}
+.cl-grid .cl-grid-footer .cl-control {
+  color: #4E5154;
+  font-weight: 500;
 }
 .cl-grid .cl-grid-header {
   /* 디테일에 스크롤이 생길시 우측에 생기는 빈 영역 */
@@ -1100,44 +1549,168 @@ body.cl-has-modal {
 .cl-grid.cl-leftsplit {
   /* 스플릿 시 좌측 그리드 래퍼 */
 }
+.cl-grid.cl-leftsplit .cl-grid-centersplit {
+  border-left: 1px solid #BABFC7;
+}
 .cl-grid.cl-rightsplit {
   /* 스플릿 시 우측 그리드 래퍼 */
 }
+.cl-grid.cl-rightsplit .cl-grid-centersplit {
+  border-right: 1px solid #BABFC7;
+}
 .cl-grid .cl-grid-topsplit {
-  border-bottom: double 3px #333;
+  border-bottom: double 3px #BABFC7;
 }
 .cl-grid .cl-grid-bottomsplit {
-  border-top: double 3px #333;
+  border-top: double 3px #BABFC7;
+}
+.cl-grid.cl-disabled {
+  background-color: #ECEFF1;
+  border-color: #BABFC7;
+  color: #BABFC7;
+}
+.cl-grid.cl-disabled .cl-grid-header {
+  color: #BABFC7;
+}
+.cl-grid.cl-disabled .cl-grid-header .cl-grid-cell {
+  color: #BABFC7;
+}
+.cl-grid.cl-disabled .cl-grid-header .cl-grid-cell .cl-control {
+  color: #BABFC7;
 }
 /* 그리드 필터 사용시 필터 다이얼로그가 펼쳐지는 영역 스타일*/
 .cl-gridfilter {
   /* 필터 다이얼로그 뒤에 비활성화 영역을 표현하기 위해 덮히는 막 */
   /* 필터 다이얼로그 */
 }
+.cl-gridfilter.cl-overlay {
+  background-color: rgba(30, 61, 115, 0.25);
+}
 .cl-gridfilter .cl-filterdlg {
+  padding: 0px;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 3px;
+  width: 280px;
+  height: 260px;
   /* 필터 다이얼로그 - 타이틀 영역 */
   /* 필터 다이얼로그 - 필터 찾기 영역 */
   /* 필터 다이얼로그 - 필터 아이템 리스트 영역 */
   /* 필터 다이얼로그 - 하단에 버튼 영역 */
 }
 .cl-gridfilter .cl-filterdlg .cl-filterdlg-header {
+  background-image: none;
+  padding: 6px 10px;
+  border-bottom: 1px solid #BABFC7;
   /* 필터 다이얼로그 - 타이틀 영역의 글자 스타일 */
   /* 필터 다이얼로그 - 타이틀 영역의 닫기 버튼 스타일 */
 }
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-header .cl-text {
+  color: #2C353E;
+  padding-left: 0px;
+  font-weight: 500;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-header .cl-filterdlg-sortable {
+  background-image: url("images/controls/grid/icon-grid-sortable.png");
+  width: 10px;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-header .cl-filterdlg-sortable.cl-filterdlg-asc {
+  background-image: url("images/controls/grid/icon-grid-sort-asc.png");
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-header .cl-filterdlg-sortable.cl-filterdlg-desc {
+  background-image: url("images/controls/grid/icon-grid-sort-desc.png");
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-header .cl-filterdlg-close {
+  background-image: url("images/controls/dialog/icon-close.png");
+  width: 20px;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-header .cl-filterdlg-close:hover {
+  background-image: url("images/controls/dialog/icon-close-hover.png");
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-search {
+  margin: 5px;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-search .cl-search-input {
+  height: 28px;
+  font: 400 14px "Noto Sans KR", sans-serif;
+  background-color: #FFFFFF;
+  border: 1px solid #BABFC7;
+  border-radius: 3px;
+  color: #4E5154;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, background-image 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  padding: 0px 6px;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-search .cl-search-input:focus {
+  border-color: #1E9FF2;
+  outline: none;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-search .cl-search-input::-webkit-input-placeholder {
+  /* Edge */
+  color: #cfd2d8;
+  font-style: normal;
+  font-weight: 300;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-search .cl-search-input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #cfd2d8;
+  font-style: normal;
+  font-weight: 300;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-search .cl-search-input::placeholder {
+  color: #cfd2d8;
+  font-style: normal;
+  font-weight: 300;
+  opacity: 1;
+}
 .cl-gridfilter .cl-filterdlg .cl-filterdlg-itemlist {
+  margin: 0px 5px;
+  height: calc(100% - 5px);
   /* 필터 다이얼로그 - 필터 아이템 리스트 영역의 아이템 스타일 */
 }
 .cl-gridfilter .cl-filterdlg .cl-filterdlg-itemlist .cl-filterdlg-item {
+  height: 25px;
   /* 필터 다이얼로그 - 아이템 체크박스 스타일 */
   /* 필터 다이얼로그 - 아이템 체크박스가 체크되었을 때의 스타일 */
   /* 필터 다이얼로그 - 아이템 글자 스타일 */
 }
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-itemlist .cl-filterdlg-item .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox.png");
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-itemlist .cl-filterdlg-item.cl-checked .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox-selected.png");
+}
 .cl-gridfilter .cl-filterdlg .cl-filterdlg-buttons {
+  background-color: #F5F5F5;
+  border-top: 1px solid #BABFC7;
+  padding-top: 0px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  justify-content: flex-end;
+  overflow: hidden;
   /* 필터 다이얼로그 - 하단에 버튼 영역의 버튼 스타일 */
 }
 .cl-gridfilter .cl-filterdlg .cl-filterdlg-buttons .cl-button {
+  width: 50px;
   /* 필터 다이얼로그 - 버튼 영역의 확인 버튼 스타일 */
   /* 필터 다이얼로그 - 버튼 영역의 취소 버튼 스타일 */
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-buttons .cl-button.cl-cancel {
+  margin: 0px 5px;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-buttons .cl-checkbox {
+  padding: 0px 10px 0px 0px;
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-buttons .cl-checkbox .cl-checkbox-icon {
+  background-image: url("images/controls/checkbox/icon-checkbox.png");
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-buttons .cl-checkbox.cl-checked {
+  background-image: url("images/controls/checkbox/icon-checkbox-selected.png");
+}
+.cl-gridfilter .cl-filterdlg .cl-filterdlg-buttons .cl-checkbox .cl-text {
+  font-size: 12px;
+  padding-left: 3px;
 }
 /* 행 스타일 */
 .cl-grid-row {
@@ -1147,27 +1720,54 @@ body.cl-has-modal {
   /* 추가된 로우 */
   /* 수정된 로우 */
   /* 삭제된 로우 */
-  /* 추가 후 삭제된 로우*/
   /* 선택된 로우 - 보기 모드 */
   /* 편집중인 로우 */
-  /* 체크된 로우 */
   /* 행 그룹시 그룹의 헤더 */
   /* 행 그룹시 그룹의 푸터 */
 }
+.cl-grid-row.cl-viewing .cl-grid-cell .cl-control {
+  background-color: transparent;
+  border-radius: 0px;
+}
+.cl-grid-row.cl-inserted {
+  background-color: rgba(30, 159, 242, 0.15);
+  color: inherit;
+}
+.cl-grid-row.cl-modified {
+  background-color: rgba(255, 193, 7, 0.18);
+  color: inherit;
+}
+.cl-grid-row.cl-deleted {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #BABFC7;
+}
 .cl-grid-row.cl-selected {
+  background-color: rgba(255, 235, 59, 0.45);
+  color: #4E5154;
   /* 포커스 셀 */
+}
+.cl-grid-row.cl-editing {
+  background-color: rgba(255, 235, 59, 0.65);
+  color: #4E5154;
 }
 /* 모든 셀 스타일 */
 .cl-grid-cell {
-  border-right: solid 1px #bbb;
-  border-bottom: solid 1px #bbb;
-  /* columnType=checkbox, columnType=rowindex와 같이 그리드에서 기본 제공하는 컬럼 */
+  border-right: 1px solid #BABFC7;
+  border-bottom: 1px solid #BABFC7;
   /* 셀에 포함된 컨트롤 */
   /* 그룹 펼침/접힘 버튼 */
 }
-.cl-grid-cell .cl-builtin {
-  /* columnType=checkbox */
-  /* columnType=rowindex */
+.cl-grid-cell:last-child {
+  border-right: none;
+}
+.cl-grid-cell .cl-control {
+  /* 체크 박스 특수컬럼에 대한 스타일 */
+}
+.cl-grid-cell .cl-control .cl-text {
+  padding: 0px 3px;
+}
+.cl-grid-cell .cl-control.cl-checkbox:not(.cl-border-none) .cl-checkbox-icon {
+  margin-left: 0px;
 }
 .cl-grid-cell .cl-expander {
   /* 그룹 접혀짐 버튼 */
