@@ -1,4 +1,4 @@
-# ojt_project_web
+# WSM(Work Schedule Management)
 알바생과 고용주간 근무 스케줄 관리 서비스 제작
 
 
