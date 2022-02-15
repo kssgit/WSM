@@ -34,16 +34,12 @@ function onButtonClick2(/* cpr.events.CMouseEvent */ e){
 	 */
 	var button = e.control;
 	
-	app.getHostAppInstance().dialogManager.openDialog("2_ptj/dialog/dialog_ptj_link_store", "afd",{width : 400, height : 550}, function(dialog){
-		dialog.ready(function(diloagApp){
-			
-		})
+	
+	util.Dialog.open(app, "2_ptj/dialog/dialog_ptj_link_store", "400", "550", function(e){
 		
-	});
+	}, {});
 	app.close();
 }
-
-
 /*
  * "저장" 버튼에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
@@ -74,6 +70,7 @@ function onSmsWorkPlaceSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 			console.log(dswpn.getValue(i, "store_code"));
 			wpm.wp_name = dswpn.getValue(i, "store_name");
 			wpm.store_code = dswpn.getValue(i, "store_code");
+			wpm.wp_color = dswpn.getValue(i, "class");
 			//로컬 스토리지
 			if(localStorage.getItem(""+dswpn.getValue(i, "store_code"))){
 				wpm.select = true;

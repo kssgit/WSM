@@ -144,6 +144,7 @@
 			, DATE_FORMAT(WORK_DATE , '%Y%m%d') AS WORK_DATE
 			, DATE_FORMAT(work_begin_time , '%H%i') AS WORK_BEGIN_TIME
 			, DATE_FORMAT(work_end_time , '%H%i') AS WORK_END_TIME
+			, DATE_FORMAT(WORK_END_DATE , '%Y%m%d') AS WORK_END_DATE
 			, BREAKTIME
 			, st.STORE_NAME
 			, s.STORE_CODE
@@ -173,6 +174,7 @@
 			user_code_emp,
 			user_code_ptj,
 			work_date,
+			work_end_date,
 			work_begin_time,
 			work_end_time,
 			breaktime,
@@ -186,6 +188,8 @@
 			#{USER_CODE_EMP},
 			#{USER_CODE_PTJ},
 			#{WORK_DATE},
+			<if test="WORK_END_DATE == null or WORK_END_DATE == '' ">#{WORK_DATE},</if>
+			<if test="WORK_END_DATE != null and WORK_END_DATE != '' ">#{WORK_END_DATE},</if>
 			#{WORK_BEGIN_TIME},
 			#{WORK_END_TIME},
 			#{BREAKTIME},
@@ -208,105 +212,105 @@
 	
 	
 	<!-- 스케줄 변경 요청 조회 -->
-	<select id="scheduleChangeList" resultType="hashmap">
-		SELECT
-			 reqschedule_number as REQ_CODE
-			,r.STORE_CODE
-			,BREAKTIME
-			,USER_CODE_EMP
-			,USER_CODE_PTJ
-			,st.STORE_NAME
-			,u.NAME AS PTJ_NAME
-			,WORK_DATE
-			,WORK_BEGIN_TIME
-			,WORK_END_TIME
-			,DATE_FORMAT(work_begin_time , '%H%i') AS WBT
-			,DATE_FORMAT(work_end_time , '%H%i') AS WET
-			,ACCEPT_EMP
-			,ACCEPT_PTJ
-			,DC
-			,UD_SCHEDULE_NUMBER
-		FROM (REQUEST_SCHEDULE r JOIN USER u ON r.USER_CODE_PTJ = u.USER_NUMBER) JOIN STORE st 
-			ON r.STORE_CODE = st.STORE_CODE
-		<trim prefix="WHERE" prefixOverrides="AND | OR">
-			<if test="USER_CODE_EMP != null and USER_CODE_EMP != '' ">
-				<!-- 고용주가 승낙하지 않은 스케줄 요청 중 직원테이블에 등록된 사용자의 요청만 받아오기 -->
-				USER_CODE_EMP = #{USER_CODE_EMP} AND ACCEPT_EMP = 'N' AND r.USER_CODE_PTJ IN (SELECT USER_CODE_PTJ FROM PART_TIMER p WHERE p.STORE_CODE = r.STORE_CODE)
-			</if>
-			<if test="(USER_CODE_EMP2 != null and USER_CODE_EMP2 != '') and( USER_KIND != null and USER_KIND != '') ">
-				<!-- 고용주가 요청한 스케줄 목록중 직원 테이블에 등록된 요청목록만 조회 -->
-				USER_CODE_EMP = #{USER_CODE_EMP2} AND(ACCEPT_PTJ = 'N' OR ACCEPT_PTJ = 'D')  AND r.USER_CODE_PTJ IN (SELECT USER_CODE_PTJ FROM PART_TIMER p WHERE p.STORE_CODE = r.STORE_CODE)
-			</if>
-			<if test="USER_CODE_PTJ != null and USER_CODE_PTJ != '' ">
-				<!-- 알바생이 요청받은 스케줄 목록 중 근무지로 등록된 매장 요청만 조회 -->
-				USER_CODE_PTJ = #{USER_CODE_PTJ} AND ACCEPT_PTJ = 'N' AND r.STORE_CODE IN (SELECT w.STORE_CODE FROM WORKPLACE w WHERE w.STORE_CODE = r.STORE_CODE)
-			</if>
-			<if test="(USER_CODE_PTJ2 != null and USER_CODE_PTJ2 != '' )and (USER_KIND != null and USER_KIND != '') ">
-				USER_CODE_PTJ = #{USER_CODE_PTJ2} AND (ACCEPT_EMP = 'N' OR ACCEPT_EMP = 'D') AND r.STORE_CODE IN (SELECT w.STORE_CODE FROM WORKPLACE w WHERE w.STORE_CODE = r.STORE_CODE)
-			</if>
-		</trim>	
-	</select>
+<!-- 	<select id="scheduleChangeList" resultType="hashmap"> -->
+<!-- 		SELECT -->
+<!-- 			 reqschedule_number as REQ_CODE -->
+<!-- 			,r.STORE_CODE -->
+<!-- 			,BREAKTIME -->
+<!-- 			,USER_CODE_EMP -->
+<!-- 			,USER_CODE_PTJ -->
+<!-- 			,st.STORE_NAME -->
+<!-- 			,u.NAME AS PTJ_NAME -->
+<!-- 			,WORK_DATE -->
+<!-- 			,WORK_BEGIN_TIME -->
+<!-- 			,WORK_END_TIME -->
+<!-- 			,DATE_FORMAT(work_begin_time , '%H%i') AS WBT -->
+<!-- 			,DATE_FORMAT(work_end_time , '%H%i') AS WET -->
+<!-- 			,ACCEPT_EMP -->
+<!-- 			,ACCEPT_PTJ -->
+<!-- 			,DC -->
+<!-- 			,UD_SCHEDULE_NUMBER -->
+<!-- 		FROM (REQUEST_SCHEDULE r JOIN USER u ON r.USER_CODE_PTJ = u.USER_NUMBER) JOIN STORE st  -->
+<!-- 			ON r.STORE_CODE = st.STORE_CODE -->
+<!-- 		<trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+<!-- 			<if test="USER_CODE_EMP != null and USER_CODE_EMP != '' "> -->
+<!-- 				고용주가 승낙하지 않은 스케줄 요청 중 직원테이블에 등록된 사용자의 요청만 받아오기 -->
+<!-- 				USER_CODE_EMP = #{USER_CODE_EMP} AND ACCEPT_EMP = 'N' AND r.USER_CODE_PTJ IN (SELECT USER_CODE_PTJ FROM PART_TIMER p WHERE p.STORE_CODE = r.STORE_CODE) -->
+<!-- 			</if> -->
+<!-- 			<if test="(USER_CODE_EMP2 != null and USER_CODE_EMP2 != '') and( USER_KIND != null and USER_KIND != '') "> -->
+<!-- 				고용주가 요청한 스케줄 목록중 직원 테이블에 등록된 요청목록만 조회 -->
+<!-- 				USER_CODE_EMP = #{USER_CODE_EMP2} AND(ACCEPT_PTJ = 'N' OR ACCEPT_PTJ = 'D')  AND r.USER_CODE_PTJ IN (SELECT USER_CODE_PTJ FROM PART_TIMER p WHERE p.STORE_CODE = r.STORE_CODE) -->
+<!-- 			</if> -->
+<!-- 			<if test="USER_CODE_PTJ != null and USER_CODE_PTJ != '' "> -->
+<!-- 				알바생이 요청받은 스케줄 목록 중 근무지로 등록된 매장 요청만 조회 -->
+<!-- 				USER_CODE_PTJ = #{USER_CODE_PTJ} AND ACCEPT_PTJ = 'N' AND r.STORE_CODE IN (SELECT w.STORE_CODE FROM WORKPLACE w WHERE w.STORE_CODE = r.STORE_CODE) -->
+<!-- 			</if> -->
+<!-- 			<if test="(USER_CODE_PTJ2 != null and USER_CODE_PTJ2 != '' )and (USER_KIND != null and USER_KIND != '') "> -->
+<!-- 				USER_CODE_PTJ = #{USER_CODE_PTJ2} AND (ACCEPT_EMP = 'N' OR ACCEPT_EMP = 'D') AND r.STORE_CODE IN (SELECT w.STORE_CODE FROM WORKPLACE w WHERE w.STORE_CODE = r.STORE_CODE) -->
+<!-- 			</if> -->
+<!-- 		</trim>	 -->
+<!-- 	</select> -->
 	
 	
 	<!--선택한 매장의 하루 근무 스케줄 정보   -->
-	<select id="storedaySchedule" resultType="hashmap">
-		SELECT
-			 SCHEDULE_CODE
-			,st.STORE_NAME
-			,u.NAME AS PTJ_NAME
-			,WORK_DATE
-			,DATE_FORMAT(work_begin_time , '%H%i') AS WBT
-			,DATE_FORMAT(work_end_time , '%H%i') AS WET
-		FROM (schedule s JOIN USER u ON s.USER_CODE_PTJ = u.USER_NUMBER) JOIN STORE st 
-			ON s.STORE_CODE = st.STORE_CODE
-		<trim prefix="WHERE" prefixOverrides="AND | OR">
-			<if test="STORE_CODE != null and STORE_CODE != '' ">WORK_DATE = #{WORK_DATE} AND s.STORE_CODE = #{STORE_CODE}</if>
-			<if test="USER_CODE_PTJ != null and USER_CODE_PTJ != '' ">WORK_DATE = #{WORK_DATE} AND USER_CODE_PTJ = #{USER_CODE_PTJ}</if>
-		</trim>
-	</select>
+<!-- 	<select id="storedaySchedule" resultType="hashmap"> -->
+<!-- 		SELECT -->
+<!-- 			 SCHEDULE_CODE -->
+<!-- 			,st.STORE_NAME -->
+<!-- 			,u.NAME AS PTJ_NAME -->
+<!-- 			,WORK_DATE -->
+<!-- 			,DATE_FORMAT(work_begin_time , '%H%i') AS WBT -->
+<!-- 			,DATE_FORMAT(work_end_time , '%H%i') AS WET -->
+<!-- 		FROM (schedule s JOIN USER u ON s.USER_CODE_PTJ = u.USER_NUMBER) JOIN STORE st  -->
+<!-- 			ON s.STORE_CODE = st.STORE_CODE -->
+<!-- 		<trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+<!-- 			<if test="STORE_CODE != null and STORE_CODE != '' ">WORK_DATE = #{WORK_DATE} AND s.STORE_CODE = #{STORE_CODE}</if> -->
+<!-- 			<if test="USER_CODE_PTJ != null and USER_CODE_PTJ != '' ">WORK_DATE = #{WORK_DATE} AND USER_CODE_PTJ = #{USER_CODE_PTJ}</if> -->
+<!-- 		</trim> -->
+<!-- 	</select> -->
 	
 	
 	<!-- 스케줄 삭제 -->
-	<delete id="deletSchedule">
-		DELETE 
-		FROM schedule
-		WHERE schedule_code = #{UD_SCHEDULE_NUMBER}
-	</delete>
+<!-- 	<delete id="deletSchedule"> -->
+<!-- 		DELETE  -->
+<!-- 		FROM schedule -->
+<!-- 		WHERE schedule_code = #{UD_SCHEDULE_NUMBER} -->
+<!-- 	</delete> -->
 	
-	<update id="updateSchedule">
-		UPDATE SCHEDULE 
-		SET 
-			 breaktime = #{BREAKTIME}
-			,store_code = #{STORE_CODE}
-			,user_code_emp = #{USER_CODE_EMP}
-			,user_code_ptj = #{USER_CODE_PTJ}
-			,work_begin_time = #{WORK_BEGIN_TIME}
-			,work_date = #{WORK_DATE}
-			,work_end_time = #{WORK_END_TIME}
-		WHERE schedule_code = #{UD_SCHEDULE_NUMBER}
-	</update>
+<!-- 	<update id="updateSchedule"> -->
+<!-- 		UPDATE SCHEDULE  -->
+<!-- 		SET  -->
+<!-- 			 breaktime = #{BREAKTIME} -->
+<!-- 			,store_code = #{STORE_CODE} -->
+<!-- 			,user_code_emp = #{USER_CODE_EMP} -->
+<!-- 			,user_code_ptj = #{USER_CODE_PTJ} -->
+<!-- 			,work_begin_time = #{WORK_BEGIN_TIME} -->
+<!-- 			,work_date = #{WORK_DATE} -->
+<!-- 			,work_end_time = #{WORK_END_TIME} -->
+<!-- 		WHERE schedule_code = #{UD_SCHEDULE_NUMBER} -->
+<!-- 	</update> -->
 	
 	
 	<!-- 스케줄 추가 -->
-	<insert id="insertSchedule">
-		INSERT INTO schedule(
-			 breaktime
-			,store_code
-			,user_code_emp
-			,user_code_ptj
-			,work_begin_time
-			,work_date
-			,work_end_time
-		)VALUES(
-			 #{BREAKTIME}
-			,#{STORE_CODE}
-			,#{USER_CODE_EMP}
-			,#{USER_CODE_PTJ}
-			,#{WORK_BEGIN_TIME}
-			,#{WORK_DATE}
-			,#{WORK_END_TIME}		
-		)
-	</insert>
+<!-- 	<insert id="insertSchedule"> -->
+<!-- 		INSERT INTO schedule( -->
+<!-- 			 breaktime -->
+<!-- 			,store_code -->
+<!-- 			,user_code_emp -->
+<!-- 			,user_code_ptj -->
+<!-- 			,work_begin_time -->
+<!-- 			,work_date -->
+<!-- 			,work_end_time -->
+<!-- 		)VALUES( -->
+<!-- 			 #{BREAKTIME} -->
+<!-- 			,#{STORE_CODE} -->
+<!-- 			,#{USER_CODE_EMP} -->
+<!-- 			,#{USER_CODE_PTJ} -->
+<!-- 			,#{WORK_BEGIN_TIME} -->
+<!-- 			,#{WORK_DATE} -->
+<!-- 			,#{WORK_END_TIME}		 -->
+<!-- 		) -->
+<!-- 	</insert> -->
 	
 	<!-- 고용주가 승인 거절한 요청 업데이트 -->
 	<update id="deniedRequest">

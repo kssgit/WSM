@@ -4,29 +4,22 @@
  *
  * @author ksk19
  ************************************************/
+var userGender;
 
-
-
-/*
- * "업종 선택" 버튼에서 click 이벤트 발생 시 호출.
- * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
- */
-function onButtonClick3(/* cpr.events.CMouseEvent */ e){
-	/** 
-	 * @type cpr.controls.Button
-	 */
-	var button = e.control;
-	app.dialogManager.openDialog("3_cmn/store_lg_category", "A" ,{width : 1050, height : 800, left: 250, top : 50}, function(dialog){
-		dialog.ready(function(dialogApp){
-			// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
-			dialogApp.focus();
-		});
-		dialog.addEventListener("close",function(e){
-			button.focus();
-		});
-	}).then(function(returnValue){
-	});
+//라디오 버튼 selected 체크하기
+function radioCheck(selected, other){
+	// 1.one 체크
+		selected.style.addClass("selected");
+	// 2.other 체크 해제
+	if(other.style.hasClass("selected")){
+		other.style.removeClass("selected");
+	}
+	
+	selected.style.removeClass("cl-focus-red");
+	other.style.removeClass("cl-focus-red");
 }
+
+
 
 
 /*
@@ -48,7 +41,8 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 		if(app.lookup("dsStoreList").getRowCount() <1){
 			alert("등록된 매장이 없거나 이미 등록되었습나다.");
 		}else{
-			alert("매장이 검색되었습니다.")
+			alert("매장이 검색되었습니다.");
+			app.lookup("cmb2").open();
 		}
 	});
 }
@@ -59,7 +53,7 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(/* cpr.events.CEvent */ e){
-	app.lookup("ipb2").value = UserInfo.getUserInfo().getValue("USER_NAME");
+	app.lookup("ipb2").value = sessionStorage.getItem("USER_NAME");
 }
 
 
@@ -74,11 +68,56 @@ function onButtonClick2(/* cpr.events.CMouseEvent */ e){
 	var button = e.control;
 	// 유효성 체크
 	var  dmr = app.lookup("dmRequseLink");
-	var storeList = app.lookup("dsStoreList");
-	var i = app.lookup("cmb2").getSelectedIndices()[0]
-	dmr.setValue("user_code_ptj", UserInfo.getUserInfo().getValue("USER_NUMBER"));
-	dmr.setValue("store_name",storeList.getValue(i, "store_name"));
+	
+	if(dmr.getValue("store_code")== null || dmr.getValue("store_code") == ""){
+		alert("근무지를 선택해 주세요");
+		app.lookup("cmb2").focus();
+		return;
+	}
+	if(app.lookup("mse1").value == null ){
+		alert("전화번호를 입력해 주세요");
+		app.lookup("mse1").focus();
+		return;
+	}
+	if(userGender == null){
+		alert("성별을 선택해 주세요");
+		return;
+	}
+	dmr.setValue("user_code_ptj", sessionStorage.getItem("USER_NUMBER"));
+	dmr.setValue("call", app.lookup("mse1").value);
+	dmr.setValue("role",app.lookup("ipbRole").value);
+	dmr.setValue("gender",userGender);
 	app.lookup("smsRequestLink").send();
 	
 	app.close();
+}
+
+
+/*
+ * "남성" 버튼(MAN)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onMANClick(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var man = e.control;
+	var woman = app.lookup("WOMAN");
+	userGender = 'M';
+	radioCheck(man,woman);
+}
+
+
+/*
+ * "여성" 버튼(WOMAN)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onWOMANClick(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var woman = e.control;
+	var man = app.lookup("MAN");
+	userGender = 'F';
+	radioCheck(woman,man);
 }

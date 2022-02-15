@@ -14,11 +14,11 @@
         <cl:datarowlist>
           <cl:datarow>
             <cl:datavalue columnname="label">남</cl:datavalue>
-            <cl:datavalue columnname="value"><![CDATA[남]]></cl:datavalue>
+            <cl:datavalue columnname="value">남</cl:datavalue>
           </cl:datarow>
           <cl:datarow>
             <cl:datavalue columnname="label">여</cl:datavalue>
-            <cl:datavalue columnname="value"><![CDATA[여]]></cl:datavalue>
+            <cl:datavalue columnname="value">여</cl:datavalue>
           </cl:datarow>
         </cl:datarowlist>
       </cl:dataset>
@@ -30,13 +30,11 @@
       </cl:dataset>
       <cl:datamap std:sid="d-map-a7a7845d" id="dmRequseLink">
         <cl:datacolumnlist>
-          <cl:datacolumn std:sid="d-column-d3ea8b52" name="store_name"/>
-          <cl:datacolumn std:sid="d-column-a007800d" name="store_code"/>
-          <cl:datacolumn std:sid="d-column-038de281" name="user_name"/>
           <cl:datacolumn std:sid="d-column-5d541bf6" name="user_code_ptj" datatype="string"/>
           <cl:datacolumn std:sid="d-column-ed965975" name="call"/>
           <cl:datacolumn std:sid="d-column-3f4a0dbf" name="gender"/>
           <cl:datacolumn std:sid="d-column-29ea2400" name="role"/>
+          <cl:datacolumn std:sid="d-column-273a4603" name="store_code"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:datamap std:sid="d-map-33b5d35a" id="dmEmpInfo">
@@ -61,7 +59,7 @@
       <cl:xylayoutdata std:sid="xyl-data-a021abf7" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-10d1f132">
         <cl:formdata std:sid="f-data-0c409f19" row="7" col="0" rowspan="1" colspan="2"/>
-        <cl:button std:sid="button-39dab2e7" class="btn-success" prevcontrol="#r-button-89a2ec15" value="링크 요청하기">
+        <cl:button std:sid="button-39dab2e7" class="btn-success" value="링크 요청하기">
           <cl:listener std:sid="listener-982139d0" name="click" handler="onButtonClick2"/>
           <cl:formdata std:sid="f-data-264feb4b" row="0" col="1" rowspan="1" colspan="1"/>
         </cl:button>
@@ -82,7 +80,6 @@
         <cl:formdata std:sid="f-data-51cb40fc" row="3" col="0"/>
       </cl:output>
       <cl:inputbox std:sid="i-box-717d309a" id="ipb2" class="input" nextcontrol="#m-editor-1d05ace7" prevcontrol="#c-box-b22aaea3" readonly="true" placeholder="이름을 입력하세요">
-        <cl:datamapbind property="value" datacontrolid="dmRequseLink" columnname="user_name"/>
         <cl:formdata std:sid="f-data-21de2477" row="3" col="1"/>
       </cl:inputbox>
       <cl:output std:sid="output-8a5ef56b" class="output" value="연락처">
@@ -91,11 +88,6 @@
       <cl:output std:sid="output-b9d3bb29" class="output" value="성별">
         <cl:formdata std:sid="f-data-06c37ad0" row="6" col="0"/>
       </cl:output>
-      <cl:radiobutton std:sid="r-button-89a2ec15" id="rdb1" nextcontrol="#button-39dab2e7" prevcontrol="#i-box-50733d8e">
-        <cl:datamapbind property="value" datacontrolid="dmRequseLink" columnname="gender"/>
-        <cl:formdata std:sid="f-data-da305ede" row="6" col="1" rowspan="1" colspan="1"/>
-        <cl:itemset datasetid="dsGender" label="label" value="value"/>
-      </cl:radiobutton>
       <cl:group std:sid="group-a396f676">
         <cl:formdata std:sid="f-data-27f1693f" row="1" col="1"/>
         <cl:inputbox std:sid="i-box-155e2876" id="ipb1" class="input" readonly="false" placeholder="아이디로 검색해주세요">
@@ -120,7 +112,7 @@
         <cl:formdata std:sid="f-data-f310beff" row="2" col="1"/>
         <cl:itemset datasetid="dsStoreList" label="store_name" value="store_code"/>
       </cl:combobox>
-      <cl:inputbox std:sid="i-box-50733d8e" id="ipb5" class="input" nextcontrol="#r-button-89a2ec15" prevcontrol="#m-editor-1d05ace7">
+      <cl:inputbox std:sid="i-box-50733d8e" id="ipbRole" class="input" prevcontrol="#m-editor-1d05ace7">
         <cl:datamapbind property="value" category="PROPERTY" datacontrolid="dmRequseLink" columnname="role"/>
         <cl:formdata std:sid="f-data-52d90b58" row="5" col="1"/>
       </cl:inputbox>
@@ -128,9 +120,24 @@
         <cl:formdata std:sid="f-data-c97037a6" row="5" col="0"/>
       </cl:output>
       <cl:maskeditor std:sid="m-editor-1d05ace7" id="mse1" class="input" nextcontrol="#i-box-50733d8e" prevcontrol="#i-box-717d309a" mask="000-0000-0000">
-        <cl:datamapbind property="value" datacontrolid="dmRequseLink" columnname="call"/>
         <cl:formdata std:sid="f-data-c67b0884" row="4" col="1"/>
       </cl:maskeditor>
+      <cl:group std:sid="group-a19eb855" class="btn-radio">
+        <cl:formdata std:sid="f-data-184e1dfe" row="6" col="1"/>
+        <cl:button std:sid="button-c835090b" id="MAN" class="btn-radio btn-radio-ptj" value="남성">
+          <cl:listener std:sid="listener-93337e96" name="click" handler="onMANClick"/>
+          <cl:formdata std:sid="f-data-29cb8988" row="0" col="0"/>
+        </cl:button>
+        <cl:button std:sid="button-9f0c02ef" id="WOMAN" class="btn-radio btn-radio-emp" value="여성">
+          <cl:listener std:sid="listener-31da7662" name="click" handler="onWOMANClick"/>
+          <cl:formdata std:sid="f-data-175b515e" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-2a0f9325" scrollable="false" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        </cl:formlayout>
+      </cl:group>
       <cl:formlayout std:sid="f-layout-6852ff90" scrollable="true" hspace="10px" vspace="15px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
         <cl:rows length="1" unit="FRACTION" autoSizing="true" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:rows length="1" unit="FRACTION" autoSizing="true" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>

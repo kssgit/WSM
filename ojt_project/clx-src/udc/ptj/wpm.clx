@@ -19,16 +19,15 @@
       <cl:property name="wp_name" type="string" default="기본값"/>
       <cl:property name="store_code" type="number"/>
       <cl:property name="select" type="boolean"/>
+      <cl:property name="wp_color" type="string"/>
       <cl:event name="event" type="cpr.events.CAppEvent"/>
       <cl:event name="delete" type="cpr.events.CAppEvent"/>
     </cl:appspec>
   </head>
   <body std:sid="body-b2267fa5" style="top:0px; left:0px; width:400px; height:100px;">
     <cl:listener std:sid="listener-6d42092a" name="load" handler="onBodyLoad"/>
-    <cl:group std:sid="group-d7cd2822" id="grp" class="work-place">
-      <cl:responsivexylayoutdata std:sid="rxyl-data-d0c5a799">
-        <cl:xylayoutdata std:sid="sxyl-data-401359f2" width="360px" height="72px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="default"/>
-      </cl:responsivexylayoutdata>
+    <cl:group std:sid="group-d7cd2822" id="grp" style="box-shadow:none;" class="work-place">
+      <cl:xylayoutdata std:sid="xyl-data-729b7a88" width="360px" height="72px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
       <cl:output std:sid="output-075e1d26" class="store-name" value="근무지 A">
         <cl:apppropbind property="value" app-property="wp_name"/>
         <cl:xylayoutdata std:sid="xyl-data-b8d82b28" width="100px" height="20px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
@@ -45,7 +44,7 @@
       </cl:checkbox>
       <cl:xylayout std:sid="xylayout-2bc40a09"/>
     </cl:group>
-    <cl:responsivexylayout std:sid="r-xylayout-bfc1bf2b"/>
+    <cl:xylayout std:sid="xylayout-5457f0c2"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

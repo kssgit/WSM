@@ -1,6 +1,17 @@
 
 var util = createCommonUtil();
 
+
+/* cpr.expression.ExpressionEngine#registerFunction */
+/**
+ * 시작 시간 표현 식
+ * @param {String} time
+ */
+cpr.expression.ExpressionEngine.INSTANCE.registerFunction("substring", function(time) {
+	return time.substring(0,2) + ":"+ time.substring(2);
+});
+
+
 /*
  * "근무 추가" 버튼에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
@@ -11,9 +22,7 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 	 */
 	var button = e.control;
 	
-//	app.dialogManager.openDialog("1_emp/dialog/dialog_emp_daily_schedule_reg", "addSchedulePopup" ,{width : 450, height : 450})
-		
-	util.Dialog.open(app, "1_emp/dialog/dialog_emp_daily_schedule_reg", "450", "450", function(e){
+	util.Dialog.open(app, "1_emp/dialog/dialog_emp_daily_schedule_reg", "450", "650", function(e){
 		
 		/** @type cpr.controls.Dialog */
 		var dialog = e.control;
@@ -28,6 +37,7 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 				"PTJ_NAME" : app.lookup("opbUserName").value,
 				"WORK_BEGIN_TIME":returnValue["WORK_BEGIN_TIME"],
 				"WORK_DATE":returnValue["WORK_DATE"],
+				"WORK_END_DATE":returnValue["WORK_END_DATE"],
 				"WORK_END_TIME":returnValue["WORK_END_TIME"],
 				"STORE_CODE":app.lookup("storeCd").value,
 				"USER_CODE_EMP":UserInfo.getUserInfo().getValue("USER_EMAIL"),
@@ -53,6 +63,7 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(/* cpr.events.CEvent */ e){
+	
 	//매장 목록 가져오기
 	var dm = app.lookup("dmOnLoad")
 	var dmGetPtjList = app.lookup("dmGetPtjList")
@@ -126,14 +137,6 @@ function onButtonClick3(/* cpr.events.CMouseEvent */ e){
 		app.lookup("cl").redraw();
 	});
 	
-//	var dsEvnt = app.lookup("dsEvnt");
-//	var user_code_ptj = app.lookup("userNo");
-//
-//	dsEvnt.clearFilter();
-//	var filter = "store_code == "+ storeCd + " && user_code_ptj ==" + user_code_ptj.value +"&& start <= "+dtEnd
-//	console.log(filter)
-//	dsEvnt.setFilter(filter);
-//	app.lookup("cl").redraw();
 	
 }
 
@@ -185,11 +188,6 @@ function onGrd2CellClick2(/* cpr.events.CGridMouseEvent */ e){
 	var storeCd = app.lookup("storeCd");
 	var user_code_ptj = app.lookup("userNo");
 	
-//	app.lookup("dsSchedule").clear();
-	
-//	dsEvnt.clearFilter();
-//	dsEvnt.setFilter("store_code == "+ storeCd.value + " && user_code_ptj ==" + user_code_ptj.value);
-//	app.lookup("cl").redraw();
 	
 	//근무 버튼 활성화
 	app.lookup("btnAddWork").enabled = true;
@@ -275,10 +273,11 @@ function onButtonClick2(/* cpr.events.CMouseEvent */ e){
 	// 선택한 근무가 변경, 삭제 중인지(변경되어 없어진 스케줄인지) 확인 
 	var dm = app.lookup("dmCheckUD");
 	dm.setValue("SCHEDULE_CODE", selectRow.getRowData()["SCHEDULE_CODE"]);
+	console.log(selectRow.getRowData()["WORK_END_DATE"]);
 	app.lookup("smsCheckUD").send().then(function(input){
 		if(dm.getValue("RESULT") != 1){ //변경 상태가 아닐 경우
 			//다이얼로그 생성 
-			util.Dialog.open(app, "1_emp/dialog/dialog_emp_daily_schedule_reg", "450", "450", function(e){
+			util.Dialog.open(app, "1_emp/dialog/dialog_emp_daily_schedule_reg", "450", "650", function(e){
 				
 				/** @type cpr.controls.Dialog */
 				var dialog = e.control;
@@ -298,13 +297,13 @@ function onButtonClick2(/* cpr.events.CMouseEvent */ e){
 			}, {//initValue
 				"store_name": selectRow.getRowData()["STORE_NAME"],
 				"UC" : "U",
+				"WORK_END_DATE":selectRow.getRowData()["WORK_END_DATE"],
 				"WORK_DATE" : selectRow.getRowData()["WORK_DATE"],
 				"WORK_BEGIN_TIME" :selectRow.getRowData()["WORK_BEGIN_TIME"],
 				"WORK_END_TIME":selectRow.getRowData()["WORK_END_TIME"],
 				"BREAKTIME":selectRow.getRowData()["BREAKTIME"]
-				}
-			);
-		}else{
+				});
+		}else{//현재 변경 삭제 요청중인 근무일 경우
 			alert("현재 변경, 삭제 요청중인 근무입니다.");
 		}
 	});
@@ -442,4 +441,20 @@ function onClDateClick(/* cpr.events.CDateEvent */ e){
 	 */
 	var cl = e.control;
 	
+}
+
+
+/*
+ * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+ * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+ */
+function onBodyInit(/* cpr.events.CEvent */ e){
+	// session 확인
+	var sessionCheck = app.lookup("smsSessionCheck");
+	sessionCheck.setHeader("USER_EMAIL", sessionStorage.getItem("USER_EMAIL"));
+	sessionCheck.send().then(function(input){
+		if(app.lookup("dmSessionCheck").getValue("result") == 0 ){
+			logout(app.getHostAppInstance());
+		}
+	});
 }

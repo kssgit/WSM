@@ -44,7 +44,6 @@ public class UserService implements UserServiceInterface{
 		Map salt = userdao.findsalt(data.get("USER_NUMBER"));
 
 		//찾은 salt값으로 pwd 값 비교
-		
 		String realPwd =(String)data.get("PASSWORD");
 		
 		//조회한 salt값으로 들어온 비밀번호 암호화	

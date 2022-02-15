@@ -4,11 +4,46 @@
  *
  * @author ksk19
  ************************************************/
+
+/* 전역변수 */
 // 중복 확인 유무
 var duplicate = false; 
 //
 var passwordCheck = false;
+var userKind;
+var userGender;
 
+function pwCheck(){
+	var out = app.lookup("opbpwdCheck");
+	if(app.lookup("ipbPwd").value == app.lookup("ipbPasswordCheck").value){
+		out.visible= true;
+		passwordCheck = true;
+		out.value = "패스워드가 일치합니다."
+		out.style.css({
+			"color": "green",
+		})
+	}else{
+		out.visible= true;
+		out.value = "패스워드가 일치하지 않습니다."
+		passwordCheck=false;
+		out.style.css({
+			"color": "red",
+		})
+	}
+}
+
+//라디오 버튼 selected 체크하기
+function radioCheck(selected, other){
+	// 1.one 체크
+		selected.style.addClass("selected");
+	// 2.other 체크 해제
+	if(other.style.hasClass("selected")){
+		other.style.removeClass("selected");
+	}
+	
+	selected.style.removeClass("cl-focus-red");
+	other.style.removeClass("cl-focus-red");
+}
 
 /*
  * "중복확인" 버튼에서 click 이벤트 발생 시 호출.
@@ -24,6 +59,14 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 //		alert("이메일 형식이 잘못되었습니다.");
 //		return;
 //	}
+
+	var id = app.lookup("dmRegister").getValue("EMAIL");
+	if(id == null || id == "" ){
+		alert("아이디를 입력하세요");
+		app.lookup("ipbEmail").focus();
+		return ;
+	}
+	
 	app.lookup("smsDuplicate").send();
 }
 
@@ -53,36 +96,49 @@ function onSmsDuplicateSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
 function onButtonClick2(/* cpr.events.CMouseEvent */ e){
-	/** 
-	 * @type cpr.controls.Button
-	 */
-	var button = e.control;
-	//유효성 체크
+	var dmRegister = app.lookup("dmRegister");
+	//아이디 중복체크
 	if(!duplicate){
 		alert("아이디 중복 체크를 해주세요");
 		app.lookup("btnDuplicationCheck").focus();
 		return;
 	}
+	//패스워드 일치 유효성 검사
 	if(!passwordCheck){
 		alert("비밀번호 확인을 해주세요");
 		app.lookup("ipbPasswordCheck").focus();
 		return;
 	}
+	//이름 유효성 검사
 	var name = app.lookup("ipbName");
 	if(name.value == null || name.value == ""){
 		name.focus();
 		return;
 	}
+	
+	//userKind 유효성 검사 및 값 입력
+	if(userKind == null || userKind == ''){
+		app.lookup("ptj").style.addClass("cl-focus-red");
+		app.lookup("emp").style.addClass("cl-focus-red");
+		return;
+	}else{
+		dmRegister.setValue("USERKIND", userKind);
+	}
+	//생년월일 유효성 검사
 	var birthday = app.lookup("dtiBirthday");
 	if(birthday.value == null || birthday.value == ""){
 		birthday.focus();
 		return;
 	}
-	var gender = app.lookup("rdbgender");
-	if(gender.value == null || gender.value == "" ){
-		gender.focus();
+	//성별 유효성 검사
+	if(userGender == null || userGender == "" ){
+		app.lookup("MAN").style.addClass("cl-focus-red");
+		app.lookup("WOMAN").style.addClass("cl-focus-red");
 		return;
+	}else{
+		dmRegister.setValue("GENDER", userGender);
 	}
+	//연락처 유효성 검사
 	var call = app.lookup("mseCall");
 	console.log(call.value);
 	if(call.value == null || call.value == ""){
@@ -103,20 +159,7 @@ function onIpb3ValueChange(/* cpr.events.CValueChangeEvent */ e){
 	 * @type cpr.controls.InputBox
 	 */
 	var ipb3 = e.control;
-	var out = app.lookup("opbpwdCheck");
-	if(app.lookup("ipbPwd").value == ipb3.value){
-		passwordCheck = true;
-		out.value = "패스워드가 일치합니다."
-		out.style.css({
-			"color": "green",
-		})
-	}else{
-		out.value = "패스워드가 일치하지 않습니다."
-		passwordCheck=false;
-		out.style.css({
-			"color": "red",
-		})
-	}
+	pwCheck();
 }
 
 
@@ -146,7 +189,82 @@ function onIpbPwdValueChange(/* cpr.events.CValueChangeEvent */ e){
 	 * @type cpr.controls.InputBox
 	 */
 	var ipbPwd = e.control;
-	var out = app.lookup("opbpwdCheck");
-	passwordCheck=false;
-	out.value="";
+	pwCheck();
+//	var out = app.lookup("opbpwdCheck");
+//	passwordCheck=false;
+//	out.value="";
+}
+
+/*
+ * "emp" 버튼(ptj)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onPtjClick(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var ptj = e.control;
+	var emp = app.lookup("emp");
+	userKind = '0';
+	radioCheck(ptj,emp)
+	
+}
+
+
+/*
+ * "emp" 버튼(emp)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onEmpClick(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var emp = e.control;
+	var ptj = app.lookup("ptj");
+	userKind = '1';
+	radioCheck(emp,ptj)
+}
+
+/*
+ * "남성" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick4(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var man = e.control;
+	var woman = app.lookup("WOMAN");
+	userGender = 'M';
+	radioCheck(man,woman);
+}
+
+
+/*
+ * "여성" 버튼(WOMAN)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onWOMANClick(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var woman = e.control;
+	var man = app.lookup("MAN");
+	userGender = 'F';
+	radioCheck(woman,man);
+}
+
+
+/*
+ * "test" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick3(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var button = e.control;
+	
+	app.lookup("MAN").style.addClass("cl-focus-red");
+//	app.lookup("MAN").focus();
 }

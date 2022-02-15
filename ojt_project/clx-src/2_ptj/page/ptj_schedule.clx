@@ -84,18 +84,27 @@
           <cl:datacolumn std:sid="d-column-ff7c8181" name="user_code_ptj" datatype="number" defaultvalue=""/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-a4ca1c96" id="dmSessionCheck">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6f0e4c6a" name="result" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-66635012" id="subOnLoad" action="/ptj/onLoad.do">
         <cl:listener std:sid="listener-931948f5" name="submit-done" handler="onSubOnLoadSubmitDone"/>
         <cl:listener std:sid="listener-975d5ca1" name="submit-success" handler="onSubOnLoadSubmitSuccess"/>
         <cl:requestdata dataid="dmOnLoad"/>
         <cl:responsedata dataid="dsEvnt"/>
       </cl:submission>
+      <cl:submission std:sid="submission-bfe60d5d" id="smsSessionCheck" action="/main/sessionCheck.do">
+        <cl:requestheader name="USER_EMAIL"/>
+        <cl:responsedata dataid="dmSessionCheck"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec dev-comment="사장->직원 스케줄 변경 요청이 직원의 현재(승인 시점) 스케줄 현황과 중복되는 경우 승인 전에 알 수 있도록 + 승인 할 수 없도록. " title="알바생 메인 페이지"/>
   </head>
   <body std:sid="body-74e9cf2c" style="border-radius:0.25rem;">
     <cl:listener std:sid="listener-99801ba2" name="load" handler="onBodyLoad"/>
-    <cl:listener std:sid="listener-047499b6" name="init" handler="onBodyInit"/>
+    <cl:listener std:sid="listener-76102ead" name="init" handler="onBodyInit"/>
     <cl:group std:sid="group-1afeb239">
       <cl:xylayoutdata std:sid="xyl-data-c481e69f" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-8e8a008e">

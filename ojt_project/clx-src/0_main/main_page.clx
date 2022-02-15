@@ -54,7 +54,8 @@
       </cl:responsivexylayoutdata>
       <cl:menuitemset datasetid="dsMn" label="label" value="value" icon="icon" parent="parent"/>
     </cl:menu>
-    <cl:img std:sid="image-68e4d16c" src="../theme/images/logo-main.png">
+    <cl:img std:sid="image-68e4d16c" class="animate__lightSpeedInLeft" src="../theme/images/logo-main.png">
+      <cl:listener std:sid="listener-cd33a41d" name="click" handler="onImageClick"/>
       <cl:responsivexylayoutdata std:sid="rxyl-data-2ad659d8">
         <cl:xylayoutdata std:sid="sxyl-data-168bb654" top="44px" left="50px" width="227px" height="91px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
         <cl:xylayoutdata std:sid="sxyl-data-2fadbd52" top="10px" left="5px" width="73px" height="150px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
@@ -72,7 +73,7 @@
     <cl:output std:sid="output-52cd681c" id="ipbUserName" style="background-repeat:no-repeat; padding-left:12px; background-image:url('../theme/images/user-5-line.png'); background-position:left; text-align:center;" class="h1" value="UserName">
       <cl:listener std:sid="listener-d4aa8a4b" name="click" handler="onIpbUserNameClick"/>
       <cl:responsivexylayoutdata std:sid="rxyl-data-eaa2c872">
-        <cl:xylayoutdata std:sid="sxyl-data-7eee0349" top="22px" right="20px" width="127px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-7eee0349" top="20px" right="61px" width="127px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
         <cl:xylayoutdata std:sid="sxyl-data-d06376ce" top="22px" right="10px" width="62px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="tablet"/>
         <cl:xylayoutdata std:sid="sxyl-data-11c68a34" top="22px" right="7px" width="43px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="mobile"/>
       </cl:responsivexylayoutdata>
@@ -81,35 +82,35 @@
       <cl:listener std:sid="listener-2176289e" name="focusout" handler="onGrplogoutFocusout"/>
       <cl:listener std:sid="listener-ef41b78a" name="mouseleave" handler="onGrplogoutMouseleave"/>
       <cl:responsivexylayoutdata std:sid="rxyl-data-0e0a80a7">
-        <cl:xylayoutdata std:sid="sxyl-data-998f25ea" top="22px" right="20px" width="216px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-998f25ea" top="20px" right="61px" width="216px" height="163px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
         <cl:xylayoutdata std:sid="sxyl-data-75af1339" top="61px" right="10px" width="105px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="tablet"/>
         <cl:xylayoutdata std:sid="sxyl-data-5ee1c9fb" top="61px" right="7px" width="74px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="mobile"/>
       </cl:responsivexylayoutdata>
       <cl:output std:sid="output-3cfa4bc2" id="user_email" style="text-align:center;" class="h4">
         <cl:datamapbind property="value" datacontrolid="dmUserinfo" columnname="USER_EMAIL"/>
-        <cl:formdata std:sid="f-data-892328e1" row="2" col="0" rowspan="1" colspan="2"/>
+        <cl:formdata std:sid="f-data-6160bfbf" row="1" col="0" rowspan="1" colspan="2"/>
       </cl:output>
       <cl:button std:sid="button-a28752af" style="color:white;" class="btn-success" value="로그 아웃">
         <cl:listener std:sid="listener-2eca8d15" name="click" handler="onButtonClick"/>
         <cl:formdata std:sid="f-data-dc3584b2" row="4" col="0" rowspan="1" colspan="2"/>
       </cl:button>
-      <cl:output std:sid="output-31b8c68c" value="My Page">
+      <cl:output std:sid="output-31b8c68c" style="text-align:center;" class="h4" value="마이페이지">
         <cl:listener std:sid="listener-a30d0791" name="click" handler="onOutputClick"/>
-        <cl:formdata std:sid="f-data-2abbc363" row="3" col="0" rowspan="1" colspan="2"/>
+        <cl:formdata std:sid="f-data-76817653" row="3" col="0" rowspan="1" colspan="2"/>
       </cl:output>
-      <cl:output comment="시용자 종류" std:sid="output-3260457a" style="text-align:center;" class="h3">
+      <cl:output comment="사용자 종류" std:sid="output-3260457a" style="text-align:center;" class="h4">
         <cl:datamapbind property="value" datacontrolid="dmUserinfo" columnname="USER_KIND"/>
-        <cl:formdata std:sid="f-data-b53dac2c" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:formdata std:sid="f-data-2148cd65" row="2" col="0" rowspan="1" colspan="2"/>
       </cl:output>
-      <cl:output std:sid="output-3b37a49e" id="user_name" style="text-align:center;" class="h3" value="Output">
-        <cl:formdata std:sid="f-data-7808292e" row="1" col="0" rowspan="1" colspan="2"/>
+      <cl:output std:sid="output-3b37a49e" id="user_name" style="text-align:center;" class="h4" value="Output">
+        <cl:formdata std:sid="f-data-83a777f9" row="0" col="0" rowspan="1" colspan="2"/>
       </cl:output>
-      <cl:formlayout std:sid="f-layout-5c90ecfa" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
-        <cl:rows length="25" unit="PIXEL"/>
-        <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-        <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-        <cl:rows length="1" unit="FRACTION"/>
-        <cl:rows length="1" unit="FRACTION"/>
+      <cl:formlayout std:sid="f-layout-5c90ecfa" scrollable="false" hspace="5px" vspace="5px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:columns length="1" unit="FRACTION"/>
         <cl:columns length="1" unit="FRACTION"/>
       </cl:formlayout>

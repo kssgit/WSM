@@ -19,6 +19,7 @@ public class PtjDao {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	//전체 근무 스케줄 조회
 	public List workList(String user_code_ptj) {
 		// TODO Auto-generated method stub
 		Map<String,String> param = new HashMap<String, String>();
@@ -27,6 +28,7 @@ public class PtjDao {
 		return returnList;
 	}
 	
+	//하루 근무 스케줄
 	public List dailyworkList(String user_code_ptj,String workDate) {
 		
 		Map<String,String> param = new HashMap<String, String>();
@@ -35,6 +37,7 @@ public class PtjDao {
 		return sqlsession.selectList("ptj.dailySchedule",param);
 	}
 
+	//근무지 리스트 조회
 	public List workPlaceList(int user_number_ptj) {
 		// TODO Auto-generated method stub
 		Map<String, Integer> param = new HashedMap();
@@ -48,12 +51,9 @@ public class PtjDao {
 		// TODO Auto-generated method stub
 		Map<String , Object> data = new HashedMap();
 		data.put("user_code_ptj", param.getValue("user_code_ptj"));
-		data.put("store_name", param.getValue("store_name"));
 		data.put("store_code", param.getValue("store_code"));
-		data.put("ptj_name", param.getValue("user_name"));
 		data.put("gender", param.getValue("gender"));
 		data.put("link_stat", 'N');
-		
 		data.put("call", param.getValue("call"));
 		return sqlsession.insert("ptj.linkRequest", data);
 	}
@@ -66,7 +66,7 @@ public class PtjDao {
 		
 		data.put("USER_CODE_PTJ", user_code_ptj);
 		
-		return sqlsession.selectList("emp.scheduleChangeList",data);
+		return sqlsession.selectList("cmn.scheduleChangeList",data);
 	}
 
 	//요청한 스케줄 리스트
@@ -76,7 +76,7 @@ public class PtjDao {
 		
 		data.put("USER_CODE_PTJ2", user_code_ptj);
 		data.put("USER_KIND", user_kind);
-		return sqlsession.selectList("emp.scheduleChangeList",data);
+		return sqlsession.selectList("cmn.scheduleChangeList",data);
 	}
 	
 	//선택한 날짜의 스케줄 정보
@@ -85,12 +85,13 @@ public class PtjDao {
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("WORK_DATE", work_date);
 		data.put("USER_CODE_PTJ", user_code_ptj);
-		return sqlsession.selectList("emp.storedaySchedule",data);
+		return sqlsession.selectList("cmn.storedaySchedule",data);
 	}
 
+	// 요청 근무 삭제
 	public void deleteRequestChange(Map<String, String> map) {
 		// TODO Auto-generated method stub
-		sqlsession.delete("emp.deleteReqScheduleChage",map);
+		sqlsession.delete("cmn.deleteReqScheduleChage",map);
 		
 	}
 	//신규 스케줄 등록
@@ -102,7 +103,8 @@ public class PtjDao {
 		data.put("PTJ_NAME", param.getValue("ptj_name"));
 		data.put("WORK_DATE", param.getValue("work_date"));
 		data.put("WORK_BEGIN_TIME", param.getValue("work_date")+param.getValue("work_begin_time")+"00");
-		data.put("WORK_END_TIME", param.getValue("work_date")+param.getValue("work_end_time")+"00");
+		data.put("WORK_END_DATE", param.getValue("work_end_date"));
+		data.put("WORK_END_TIME", param.getValue("work_end_date")+param.getValue("work_end_time")+"00");
 		data.put("BREAKTIME", param.getValue("breaktime"));
 		data.put("DC", 'C');
 		
@@ -151,13 +153,14 @@ public class PtjDao {
 		System.out.println(result);
 		return result;
 	}
-
+	
+	
+	// 근무지 삭제
 	public void deleteStore(String store_code, String user_code_ptj) {
 		// TODO Auto-generated method stub
 		Map<String, String > data = new HashedMap();
 		data.put("USER_CODE_PTJ", user_code_ptj);
 		data.put("STORE_CODE", store_code);
-		System.out.println(data.toString());
 		// 근무지 삭제 
 		sqlsession.delete("ptj.deleteWorkplace", data);
 		//직원 목록 삭제
@@ -173,11 +176,20 @@ public class PtjDao {
 		if(map.get("ACCEPT_PTJ").equals("D")) { // 요청을 거절 할 경우
 			sqlsession.update("ptj.deniedRequest", map);
 		}else if(map.get("ACCEPT_PTJ").equals("Y")) { // 요청 승인 일 경우
-			// 요청 목록에서 삭제 
-			sqlsession.delete("emp.deleteReqScheduleChage",map);
-			
+
 			//스케줄에 업데이트 
-			sqlsession.insert("emp.insertSchedule",map);
+			if(map.get("DC").equals("C")) {
+				System.out.println("추가");
+				sqlsession.insert("cmn.insertSchedule",map);
+			}else if(map.get("DC").equals("D")) {
+				System.out.println("삭제");
+				sqlsession.delete("cmn.deletSchedule", map);
+			}else if(map.get("DC").equals("U")) {
+				System.out.println("변경");
+				sqlsession.update("cmn.updateSchedule",map);
+			}
+			// 요청 목록에서 삭제 
+			sqlsession.delete("cmn.deleteReqScheduleChage",map);
 		}
 	}
 	

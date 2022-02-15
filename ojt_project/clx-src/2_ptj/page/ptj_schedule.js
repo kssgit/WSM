@@ -50,6 +50,7 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 	util.Dialog.open(app, "2_ptj/dialog/dialog_work_place_list", "400", "550", function(e){
 		/** @type cpr.controls.Dialog */
 			var dialog = e.control;
+			dialog.style.overlay.css("background-color", "rgba(94, 94, 94, 0.3)");
 			var returnValue = dialog.returnValue;
 			var dsEvnt = app.lookup("dsEvnt");
 
@@ -71,6 +72,8 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 			if(Object.keys(localStorage).length < 1){
 				filter ="store_code == 0";
 			}
+			console.log("로컬 스토리지 ");
+			console.log(localStorage);
 			console.log(filter);
 			//필터 재 설정
 			dsEvnt.clearFilter();
@@ -96,28 +99,6 @@ function onBodyLoad(/* cpr.events.CEvent */ e){
 	app.lookup("dmOnLoad").setValue("user_code_ptj", userInfo.getValue("USER_NUMBER"));
 	app.lookup("subOnLoad").send();
 	app.lookup("month").value = setMonth(); 	
-}
-
-/*
- * 사용자 정의 컨트롤에서 addwork 이벤트 발생 시 호출.
- */
-function onMonthly_ptjAddwork(/* cpr.events.CAppEvent */ e){
-	/** 
-	 * @type udc.Monthly_ptj
-	 */
-	var monthly_ptj = e.control;
-	
-	var selectedDate = monthly_ptj.getAppProperty("clickdate");
-	var dialogW = 450;
-	var dialogH = 600;
-	var dialogX = screenWidth/2 - dialogW/2;
-	var dialogY = screenHeight/2 - dialogH/2;
-	
-	app.dialogManager.openDialog("2_ptj/dialog/dialog_ptj_daily_schedule", "dailySchedulePopup" ,{width : dialogW, height : dialogH, left: dialogX, top: dialogY}, function(dialog){
-		dialog.ready(function(dialogApp){
-			dialog.initValue = {"selectedDate": selectedDate};
-		});
-	})
 }
 
 /*
@@ -178,6 +159,7 @@ function onSubOnLoadSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 		filter ="store_code == 0";
 	}
 	console.log(filter);
+	console.log(localStorage);
 	dsEvnt.clearFilter();
 	dsEvnt.setFilter(filter);
 	app.lookup("cl").redraw();
@@ -196,13 +178,9 @@ function onCalendarDateClick(/* cpr.events.CDateEvent */ e){
 	var calendar = e.control;
 	var date = e.date;
 	
-//	var dialogW = 450;
-//	var dialogH = 600;
-//	var dialogX = screenWidth/2 - dialogW/2;
-//	var dialogY = screenHeight/2 - dialogH/2;
-	
 	app.getHostAppInstance().dialogManager.openDialog("2_ptj/dialog/dialog_ptj_daily_schedule", "dailySchedulePopup" ,{width : 450, height : 600}, function(dialog){
 					dialog.ready(function(dialogApp){
+						dialog.style.overlay.css("background-color", "rgba(94, 94, 94, 0.3)");
 						dialog.initValue = {
 							"selectedDate": moment(date).format("YYYYMMDD"),
 							"user_code_ptj" : UserInfo.getUserInfo().getValue("USER_EMAIL"),
@@ -225,6 +203,7 @@ function onCalendarItemClick(/* cpr.events.CItemEvent */ e){
 
 	app.getHostAppInstance().dialogManager.openDialog("2_ptj/dialog/dialog_ptj_daily_schedule", "dailySchedulePopup" ,{width : 450, height : 600, left: 100, top: 100}, function(dialog){
 					dialog.ready(function(dialogApp){
+					 	dialog.style.overlay.css("background-color", "rgba(94, 94, 94, 0.3)");
 						dialog.initValue = {
 							"selectedDate": moment(date).format("YYYYMMDD"),
 							"user_code_ptj" : UserInfo.getUserInfo().getValue("USER_EMAIL"),
@@ -288,4 +267,20 @@ function onClValueChange(/* cpr.events.CValueChangeEvent */ e){
 	 */
 	var cl = e.control;
 	app.lookup("month").value = setMonth();
+}
+
+
+/*
+ * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+ * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+ */
+function onBodyInit(/* cpr.events.CEvent */ e){
+	// session 확인
+	var sessionCheck = app.lookup("smsSessionCheck");
+	sessionCheck.setHeader("USER_EMAIL", sessionStorage.getItem("USER_EMAIL"));
+	sessionCheck.send().then(function(input){
+		if(app.lookup("dmSessionCheck").getValue("result") == 0 ){
+			logout(app.getHostAppInstance());
+		}
+	});
 }

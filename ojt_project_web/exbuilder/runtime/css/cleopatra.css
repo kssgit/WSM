@@ -520,6 +520,10 @@ body {
 .cl-grid-cell .cl-control.cl-border-none.cl-focus .cl-numbereditor-buttons {
   border-left-color: #C8C9CA;
 }
+.cl-grid-cell .cl-control.cl-checkboxgroup,
+.cl-grid-cell .cl-control.cl-radiobutton {
+  white-space: normal;
+}
 .cl-grid-cell.cl-dropleft {
   border-left: 2px dashed #757575;
 }
@@ -930,10 +934,22 @@ body {
   vertical-align: inherit;
   text-align: inherit;
 }
+.cl-calendar .cl-calendar-content .cl-other-month.cl-hidden:hover {
+  cursor: default;
+  background: none;
+}
 .cl-calendar .cl-calendar-content .cl-other-month.cl-disabled {
   background-color: #f2f2f2;
   color: #a7a6a6;
   cursor: default;
+}
+.cl-calendar .cl-calendar-content .cl-other-month.cl-range-selected {
+  background-color: #DAEFFC;
+  color: #333435;
+}
+.cl-calendar .cl-calendar-content .cl-other-month.cl-selected {
+  background-color: rgba(32, 138, 237, 0.5);
+  color: #FFFFFF;
 }
 .cl-calendar .cl-calendar-content .cl-calendar-content-day,
 .cl-calendar .cl-calendar-content .cl-calendar-content-month,
@@ -1029,6 +1045,10 @@ body {
 .cl-calendar .cl-calendar-item,
 .cl-calendar .cl-anniversary {
   background-color: #f6bf26;
+}
+.cl-calendar .cl-calendar-item.cl-hidden,
+.cl-calendar .cl-anniversary.cl-hidden {
+  display: none;
 }
 .cl-calendar .cl-calendar-item.cl-selected,
 .cl-calendar .cl-anniversary.cl-selected {
@@ -3081,7 +3101,7 @@ body {
   white-space: nowrap;
 }
 .cl-dialog .cl-dialog-header .cl-dialog-close {
-  background-image: url(icons/dialog-close.png);
+  background-image: url(icons/dialog-close-active.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -3389,7 +3409,6 @@ body {
   border-color: #1369C5;
 }
 .cl-navigationbar-list {
-  display: none;
   background-color: white;
   border: solid 1px #bbb;
   left: 0px;
@@ -3407,6 +3426,13 @@ body {
 }
 .cl-navigationbar-list .cl-navigationbar-category .sub-items .cl-navigationbar-listitem {
   width: 100%;
+}
+.cl-navigationbar-list.cl-navigationbar-fullmenu .cl-navigationbar-group:not(:first-child) {
+  border-left: 1px solid #bbb;
+}
+.cl-navigationbar-list.cl-navigationbar-fullmenu .cl-navigationbar-group .cl-navigationbar-category {
+  float: none;
+  width: auto;
 }
 .cl-navigationbar-list .cl-navigationbar-listitem[data-itemlevel='0'] {
   background-color: #E6EDF0;
@@ -4034,6 +4060,20 @@ input::-ms-clear {
   background-repeat: no-repeat;
   background-size: contain;
 }
+.cl-treecell .cl-treecell-item .cl-checkbox {
+  background-image: url(icons/checkbox.png);
+  background-size: 16px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 20px;
+  padding: 0px;
+}
+.cl-treecell .cl-treecell-item .cl-checkbox.cl-checked {
+  background-image: url(icons/checkbox-selected.png);
+}
+.cl-treecell .cl-treecell-item .cl-checkbox.cl-partialchecked {
+  background-image: url(icons/checkbox-partial-selected.png);
+}
 .cl-treecell .cl-treecell-item .cl-treecell-itemicon {
   width: 20px;
   background-image: url(icons/tree-file.png);
@@ -4326,6 +4366,131 @@ input::-ms-clear {
 .cl-hscrollbar .cl-arrow-right {
   right: 0;
   background: url(icons/scroll-right.png) no-repeat center;
+}
+/**
+ * SideNavigation
+ */
+.cl-sidenavigation {
+  text-align: left;
+  background-color: white;
+  border: 1px solid #bbb;
+  color: #333;
+  overflow: hidden;
+}
+.cl-sidenavigation.cl-focus {
+  border-color: #1369C5;
+}
+.cl-sidenavigation .cl-customscrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.cl-sidenavigation .cl-customscrollbar::-webkit-scrollbar {
+  display: none;
+}
+.cl-sidenavigation .cl-sidenavigation-item {
+  padding: 3px 10px 3px 3px;
+  display: block;
+  outline: none;
+  cursor: pointer;
+}
+.cl-sidenavigation .cl-sidenavigation-item .cl-icon {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  background-image: url(icons/tree-file.png);
+  background-position: center center;
+  background-size: 16px auto;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  box-sizing: content-box;
+}
+.cl-sidenavigation .cl-sidenavigation-item .cl-text {
+  white-space: nowrap;
+  color: inherit;
+  text-align: inherit;
+  font-family: inherit;
+  font-size: 1em;
+  font-style: inherit;
+  font-variant: inherit;
+  font-weight: inherit;
+  text-decoration: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-overflow: ellipsis;
+}
+.cl-sidenavigation .cl-sidenavigation-item .cl-badge {
+  white-space: nowrap;
+  text-align: right;
+  color: inherit;
+  font-family: inherit;
+  font-size: 1em;
+  font-style: inherit;
+  font-variant: inherit;
+  font-weight: inherit;
+  text-decoration: inherit;
+}
+.cl-sidenavigation .cl-sidenavigation-item .cl-expand-icon {
+  width: 16px;
+  height: 16px;
+  background-position: center center;
+  background-size: 16px auto;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  box-sizing: content-box;
+}
+.cl-sidenavigation .cl-sidenavigation-item.cl-folder .cl-icon {
+  background-image: url(icons/tree-folder.png);
+}
+.cl-sidenavigation .cl-sidenavigation-item.cl-folder.cl-expanded .cl-expand-icon {
+  background-image: url(icons/expanded.png);
+}
+.cl-sidenavigation .cl-sidenavigation-item.cl-folder.cl-collapsed .cl-expand-icon {
+  background-image: url(icons/collapsed.png);
+}
+.cl-sidenavigation .cl-sidenavigation-item:hover,
+.cl-sidenavigation .cl-sidenavigation-item.cl-hover,
+.cl-sidenavigation .cl-sidenavigation-item:focus {
+  background-color: #DAEFFC;
+  color: #333435;
+}
+.cl-sidenavigation .cl-sidenavigation-item.cl-selected {
+  background-color: rgba(32, 138, 237, 0.5);
+  color: #FFFFFF;
+}
+.cl-sidenavigation .cl-sidenavigation-item.cl-selected.cl-folder.cl-expanded .cl-expand-icon {
+  background-image: url(icons/expanded-selected.png);
+}
+.cl-sidenavigation .cl-sidenavigation-item.cl-selected.cl-folder.cl-collapsed .cl-expand-icon {
+  background-image: url(icons/collapsed-selected.png);
+}
+.cl-sidenavigation .cl-sidenavigation-item.cl-disabled {
+  color: #666;
+  cursor: default;
+}
+.cl-sidenavigation .cl-sidenavigation-item.cl-disabled:hover,
+.cl-sidenavigation .cl-sidenavigation-item.cl-disabled.cl-hover,
+.cl-sidenavigation .cl-sidenavigation-item.cl-disabled:focus {
+  background: none;
+}
+.cl-sidenavigation .cl-sidenavigation-item.cl-disabled.cl-selected {
+  color: #777;
+  background-color: #ccc;
+}
+.cl-sidenavigation.cl-disabled {
+  color: #666;
+}
+.cl-sidenavigation.cl-disabled .cl-sidenavigation-item {
+  color: #666;
+  cursor: default;
+}
+.cl-sidenavigation.cl-disabled .cl-sidenavigation-item:hover,
+.cl-sidenavigation.cl-disabled .cl-sidenavigation-item.cl-hover,
+.cl-sidenavigation.cl-disabled .cl-sidenavigation-item:focus {
+  background: none;
+}
+.cl-sidenavigation.cl-disabled .cl-sidenavigation-item.cl-selected {
+  background-color: #ccc;
+  color: #777;
 }
 .cl-resizable-s {
   position: absolute;

@@ -32,9 +32,8 @@ function setMonth(){
 function onBodyLoad(/* cpr.events.CEvent */ e){
 	initVal = app.getHost().initValue;
 	userInfo = initVal["userInfo"];
-	console.log("global :" +UserInfo.getUserInfo().getValue("USER_NAME"));
-	app.lookup("dmOnLoad").setValue("USER_EMAIL", userInfo.getValue("USER_EMAIL"));
-	app.lookup("dmOnLoad").setValue("USER_NUMBER", userInfo.getValue("USER_NUMBER"))
+	app.lookup("dmOnLoad").setValue("USER_EMAIL",sessionStorage.getItem("USER_EMAIL"));
+	app.lookup("dmOnLoad").setValue("USER_NUMBER", sessionStorage.getItem("USER_NUMBER"));
 	app.lookup("subOnLoad").send().then(function(input){
 //		localStorage.setItem(""+app.lookup("dsStoreList").getValue(0, "store_code"), app.lookup("dsStoreList").getValue(0, "store_code"));
 		
@@ -137,16 +136,16 @@ function addStoreUdc(){
 	//출판된 이벤트
 	storeTileAdd.addEventListener("groupClick", function (e){
 		util.Dialog.open(app, "1_emp/dialog/dialog_emp_register_store", "410", "350", function(e){
-				/** @type cpr.controls.Dialog */
-				var dialog = e.control;
-				console.log("wqewqrqwrwqe");
-				app.lookup("subOnLoad").send().then(function(input){
-					grp.removeAllChildren();
-					storeListDraw(false);
-					createMonthly(false);
-					addStoreUdc();
-				});;
-			}, {/*initValue*/});
+			/** @type cpr.controls.Dialog */
+			var dialog = e.control;
+			app.lookup("subOnLoad").send().then(function(input){
+				grp.removeAllChildren();
+				storeListDraw(false);
+				createMonthly(false);
+				addStoreUdc();
+			});;
+		}, {/*initValue*/
+		});
 	});
 }
 
@@ -217,7 +216,6 @@ function onButtonClick3(/* cpr.events.CMouseEvent */ e){
 	 */
 	var button = e.control;
 	var calendar = app.lookup("cl");
-	
 	// 오늘날짜로 이동
 	var now = new Date();
 	calendar.navigate(now);
@@ -240,7 +238,7 @@ function onButtonClick4(/* cpr.events.CMouseEvent */ e){
 //		"dsStoreList" : app.lookup("dsSelectList")
 //	});
 
-	util.Dialog.open(app, "1_emp/dialog/dialog_work_place_list", "400", "550", function(e){
+	util.Dialog.open(app, "1_emp/dialog/dialog_work_place_list_emp", "400", "550", function(e){
 		/** @type cpr.controls.Dialog */
 			var dialog = e.control;
 			var returnValue = dialog.returnValue;
@@ -284,4 +282,20 @@ function onClValueChange(/* cpr.events.CValueChangeEvent */ e){
 	 */
 	var cl = e.control;
 	app.lookup("month").value = setMonth();
+}
+
+
+/*
+ * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+ * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+ */
+function onBodyInit(/* cpr.events.CEvent */ e){
+	// session 확인
+	var sessionCheck = app.lookup("smsSessionCheck");
+	sessionCheck.setHeader("USER_EMAIL", sessionStorage.getItem("USER_EMAIL"));
+	sessionCheck.send().then(function(input){
+		if(app.lookup("dmSessionCheck").getValue("result") == 0 ){
+			logout(app.getHostAppInstance());
+		}
+	});
 }

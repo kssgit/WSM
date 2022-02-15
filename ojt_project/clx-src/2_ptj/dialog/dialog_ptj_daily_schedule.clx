@@ -63,7 +63,7 @@
         <cl:formdata std:sid="f-data-36bc49e4" row="2" col="0"/>
         <cl:verticallayout std:sid="v-layout-d9e7ac6c"/>
       </cl:group>
-      <cl:button std:sid="button-80364536" class="btn-cancel" value="닫기">
+      <cl:button std:sid="button-80364536" class="btn-outline-dark" value="닫기">
         <cl:listener std:sid="listener-e265fdbd" name="click" handler="onButtonClick2"/>
         <cl:formdata std:sid="f-data-9f4a90db" leftSpacing="40" rightSpacing="40" row="3" col="0"/>
       </cl:button>

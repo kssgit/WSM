@@ -21,6 +21,9 @@
   <body std:sid="body-2ee9db67" style="border-right-style:soild; border-top-width:1px; border-bottom-color:gray; border-right-width:1px; border-left-color:gray; border-right-color:gray; border-left-width:1px; border-top-style:soild; top:0px; left:0px; border-left-style:soild; width:400px; border-bottom-width:1px; border-top-color:gray; border-bottom-style:soild; height:80px;">
     <cl:group std:sid="group-a859d91e" class="schedule-udc">
       <cl:listener std:sid="listener-0c85bc45" name="click" handler="onGroupClick"/>
+      <cl:listener std:sid="listener-901686a5" name="mouseenter" handler="onGroupMouseenter"/>
+      <cl:listener std:sid="listener-5a81507f" name="mouseleave" handler="onGroupMouseleave"/>
+      <cl:listener std:sid="listener-7d44dbb4" name="mousedown" handler="onGroupMousedown"/>
       <cl:xylayoutdata std:sid="xyl-data-1adae6b7" width="400px" height="80px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
       <cl:output std:sid="output-f168f417" style="text-align:center;" class="font-store-title" value="근무지 이름">
         <cl:apppropbind property="value" app-property="storeName"/>
@@ -29,11 +32,11 @@
       <cl:output std:sid="output-7b4a4534" style="text-align:center;" value="~">
         <cl:xylayoutdata std:sid="xyl-data-b84b105f" top="51px" width="12px" height="20px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:maskeditor std:sid="m-editor-2c2249e6" id="mse1" style="border-right-style:none; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none; text-align:center;" readonly="true" mask="00:00">
+      <cl:maskeditor std:sid="m-editor-2c2249e6" id="mse1" style="border-right-style:none; background-color:transparent; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none; text-align:center;" readonly="true" mask="00:00">
         <cl:apppropbind property="value" app-property="workStartDt"/>
         <cl:xylayoutdata std:sid="xyl-data-36552eeb" top="51px" left="125px" width="68px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:maskeditor>
-      <cl:maskeditor std:sid="m-editor-1b29041f" id="mse2" style="border-right-style:none; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none; text-align:center;" readonly="true" mask="00:00">
+      <cl:maskeditor std:sid="m-editor-1b29041f" id="mse2" style="border-right-style:none; background-color:transparent; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none; text-align:center;" readonly="true" mask="00:00">
         <cl:apppropbind property="value" app-property="workEndDt"/>
         <cl:xylayoutdata std:sid="xyl-data-f70dee14" top="51px" left="203px" width="68px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:maskeditor>

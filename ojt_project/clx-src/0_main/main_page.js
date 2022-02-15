@@ -9,6 +9,9 @@ window.addEventListener("beforeunload",function(e){
 	localStorage.clear();
 });
 
+
+
+
 /**
  * 
  * 임베디드 앱에 연결된 앱 변경
@@ -62,7 +65,6 @@ function onBodyInit(/* cpr.events.CEvent */ e){
 
 
 
-
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
  * 통신이 성공하면 발생합니다.
@@ -83,7 +85,10 @@ function onSmsUserInfoSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 	}
 	
 	//글로벌 변수에 사용자 정보 저장
+	//수정
 	UserInfo.setUserInfo(dm);
+	Session.saveSessionStorage(dm);
+	
 	
 	// 사용자별 임베디드 앱 페이지 나누기
 	app.lookup("ipbUserName").value = dm.getValue("USER_NAME");
@@ -98,18 +103,14 @@ function onSmsUserInfoSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 		});
 		
 		appId = "1_emp/page/emp_store_list_tile";
-//		appId = "1_emp/test/emp_store_list_tile";
 	}else{
 		app.lookup("subPtjMn").send().then(function(input){
 			menu.redraw();
 			menu.selectItem(0);
 		});
 		appId = "2_ptj/page/ptj_schedule";
-//		appId = "2_ptj/test/ptj_schedule";
 	}
 	
-//	var formGrp = app.lookup("groForm1")
-//	app.floatControl(formGrp,{top : 0, left: 0, right:0});
 	
 	var vcEmb = app.lookup("ea1");
 	var voInitValue = {
@@ -152,12 +153,11 @@ function onNavigationBarItemClick2(/* cpr.events.CItemEvent */ e){
 	
 	var vsAppId = MnItem.row.getValue("appId");
 	
-	console.log(vsAppId)
 	
 	if (vsAppId == null || vsAppId == ""){
 		return;
 	}
-	var vcEmb = app.lookup("ea1")
+	var vcEmb = app.lookup("ea1");
 	var dm = app.lookup("dmUserinfo");
 	var voInitValue = {
 		"userInfo" : dm,
@@ -250,8 +250,10 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 	 * @type cpr.controls.Button
 	 */
 	var button = e.control;
+	//수정
 	UserInfo.clean();
 	localStorage.clear();
+	sessionStorage.clear();
 	app.close();
 	location.href = "/logout.jsp"
 }
@@ -286,4 +288,17 @@ function onOutputClick(/* cpr.events.CMouseEvent */ e){
  */
 function onBodyLoad(/* cpr.events.CEvent */ e){
 	cpr.core.ResourceLoader.loadScript("https://code.jquery.com/jquery-latest.min.js");
+}
+
+
+/*
+ * 이미지에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onImageClick(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Image
+	 */
+	var image = e.control;
+	location.href="/"
 }

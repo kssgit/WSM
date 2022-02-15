@@ -106,6 +106,7 @@ function scheduleFilter(){
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(/* cpr.events.CEvent */ e){
+	
 	app.lookup("dmUserInfo").setValue("user_code_ptj", UserInfo.getUserInfo().getValue("USER_NUMBER"));
 	app.lookup("dmOnLoad").setValue("user_code_ptj", UserInfo.getUserInfo().getValue("USER_NUMBER"));
 	app.lookup("subGetSchedule").send();
@@ -121,9 +122,14 @@ function onWorkDateValueChange(/* cpr.events.CValueChangeEvent */ e){
 	/** 
 	 * @type cpr.controls.DateInput
 	 */
-	var workDate = e.control;
-	
-	comboboxValidationCheck(workDate)
+	var dti1 = e.control;
+	var dti2 = app.lookup("workDate2");
+	var dti1Val = dti1.dateValue;
+	//선택일과 익일만 선택 가능
+	dti2.minDate = new Date(dti1.dateValue);
+	//선택일자 +1일
+	dti1Val.setDate(dti1Val.getDate()+1)
+	dti2. maxDate = new Date(dti1Val);
 	
 	var dsHour = app.lookup("dsHour");
 	var filter = scheduleFilter();

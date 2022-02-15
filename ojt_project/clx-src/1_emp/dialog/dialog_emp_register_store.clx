@@ -38,7 +38,7 @@
     <cl:group std:sid="group-1c5f2772" style="background-color:white; border-radius:1.25rem; background-image:none;">
       <cl:xylayoutdata std:sid="xyl-data-b195cda4" width="358px" height="320px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
       <cl:group std:sid="group-9f7625fd">
-        <cl:formdata std:sid="f-data-8fdeb312" row="1" col="0" rowspan="1" colspan="3"/>
+        <cl:formdata std:sid="f-data-8fdeb312" row="1" col="0" rowspan="1" colspan="4"/>
         <cl:output std:sid="output-b77e1b43" style="text-align:center;" class="h3" value="업장명/상호">
           <cl:formdata std:sid="f-data-87907e51" row="0" col="0"/>
         </cl:output>
@@ -69,16 +69,21 @@
         </cl:formlayout>
       </cl:group>
       <cl:output std:sid="output-652e301b" class="addStore" value="매장 등록">
-        <cl:formdata std:sid="f-data-287c039a" row="0" col="0" rowspan="1" colspan="3"/>
+        <cl:formdata std:sid="f-data-287c039a" row="0" col="0" rowspan="1" colspan="4"/>
       </cl:output>
       <cl:button std:sid="button-5785e4a4" class="btn-success" value="등록하기">
         <cl:listener std:sid="listener-47edb044" name="click" handler="onButtonClick"/>
-        <cl:formdata std:sid="f-data-2ff395c7" row="2" col="1"/>
+        <cl:formdata std:sid="f-data-2ff395c7" row="2" col="2"/>
+      </cl:button>
+      <cl:button std:sid="button-7f574fea" class="btn-secondary" value="닫기">
+        <cl:listener std:sid="listener-7ab6f840" name="click" handler="onButtonClick2"/>
+        <cl:formdata std:sid="f-data-489dc661" row="2" col="1"/>
       </cl:button>
       <cl:formlayout std:sid="f-layout-702be215" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
         <cl:rows length="60" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:rows length="180" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
         <cl:columns length="1" unit="FRACTION"/>
         <cl:columns length="1" unit="FRACTION"/>
         <cl:columns length="1" unit="FRACTION"/>

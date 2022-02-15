@@ -68,6 +68,11 @@
           <cl:datacolumn std:sid="d-column-17a25f89" name="USER_NUMBER"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-a4ca1c96" id="dmSessionCheck">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6f0e4c6a" name="result" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-de817713" id="smsSelectSchedule" action="/ptj/selectedChangeSchedul.do">
         <cl:requestdata dataid="dmSelectRow"/>
         <cl:responsedata dataid="dsSelectSchedule"/>
@@ -88,12 +93,17 @@
         <cl:requestdata dataid="dmOnLoad"/>
         <cl:responsedata dataid="dsRequest"/>
       </cl:submission>
+      <cl:submission std:sid="submission-bfe60d5d" id="smsSessionCheck" action="/main/sessionCheck.do">
+        <cl:requestheader name="USER_EMAIL"/>
+        <cl:responsedata dataid="dmSessionCheck"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec dev-comment="변경된 근무일자 캘린터 표시" title="근무 변경 승인 요청 목록"/>
   </head>
   <body std:sid="body-d721ad3b">
     <cl:listener std:sid="listener-5029eb3a" name="unload" handler="onBodyUnload"/>
     <cl:listener std:sid="listener-caf4a1a8" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-fc52d59b" name="init" handler="onBodyInit"/>
     <cl:group std:sid="group-cc6c8773">
       <cl:xylayoutdata std:sid="xyl-data-644a19ad" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-571f870f">

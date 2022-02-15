@@ -84,18 +84,18 @@
       <cl:formdata std:sid="f-data-6f89e53d" row="2" col="1"/>
       <cl:group std:sid="group-0be25ecb">
         <cl:formdata std:sid="f-data-eb4cb050" row="1" col="0" rowspan="1" colspan="1"/>
-        <cl:output std:sid="output-f81142b2" class="h3" value="ID">
+        <cl:output std:sid="output-f81142b2" class="h3" value="아이디">
           <cl:formdata std:sid="f-data-037f475f" row="0" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-d98cb099" class="h3" value="패스워드">
+        <cl:output std:sid="output-d98cb099" class="h3" value="비밀번호">
           <cl:formdata std:sid="f-data-3b843afd" row="2" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-b3982188" class="h3" value="패스워드 확인">
+        <cl:output std:sid="output-b3982188" class="h3" value="비밀번호 확인">
           <cl:formdata std:sid="f-data-84ac3853" row="4" col="0"/>
         </cl:output>
         <cl:group std:sid="group-396446f4">
           <cl:formdata std:sid="f-data-198580d4" row="1" col="0"/>
-          <cl:inputbox std:sid="i-box-be172cab" id="ipbEmail" style="border-radius:0.2rem;" class="form-control" nextcontrol="#button-11155585" placeholder="EMAIL">
+          <cl:inputbox std:sid="i-box-be172cab" id="ipbEmail" style="border-radius:0.2rem; padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;" class="form-control" nextcontrol="#button-11155585" placeholder="아이디">
             <cl:datamapbind property="value" datacontrolid="dmRegister" columnname="EMAIL"/>
             <cl:formdata std:sid="f-data-27160bd1" row="0" col="0"/>
           </cl:inputbox>
@@ -109,71 +109,94 @@
             <cl:columns length="1" unit="FRACTION"/>
           </cl:formlayout>
         </cl:group>
-        <cl:inputbox std:sid="i-box-11bcb7f8" id="ipbPwd" style="border-radius:0.2rem;" class="form-control" nextcontrol="#i-box-1638e888" prevcontrol="#button-11155585" secret="true" placeholder="PASWWORD">
+        <cl:inputbox std:sid="i-box-11bcb7f8" id="ipbPwd" style="border-radius:0.2rem; padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;" class="form-control" nextcontrol="#i-box-1638e888" prevcontrol="#button-11155585" secret="true" placeholder="비밀번호">
           <cl:listener std:sid="listener-9811e4c8" name="value-change" handler="onIpbPwdValueChange"/>
           <cl:datamapbind property="value" datacontrolid="dmRegister" columnname="PASSWORD"/>
           <cl:formdata std:sid="f-data-abc6f945" row="3" col="0"/>
         </cl:inputbox>
-        <cl:inputbox std:sid="i-box-1638e888" id="ipbPasswordCheck" style="border-radius:0.2rem;" class="form-control" nextcontrol="#i-box-1ad687d6" prevcontrol="#i-box-11bcb7f8" secret="true" placeholder="PASSWORD CHECK">
+        <cl:inputbox std:sid="i-box-1638e888" id="ipbPasswordCheck" style="border-radius:0.2rem; padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;" class="form-control" nextcontrol="#i-box-1ad687d6" prevcontrol="#i-box-11bcb7f8" secret="true" placeholder="비밀번호 확인">
           <cl:listener std:sid="listener-c5a49320" name="value-change" handler="onIpb3ValueChange"/>
           <cl:formdata std:sid="f-data-b722a4b2" row="5" col="0"/>
         </cl:inputbox>
-        <cl:output std:sid="output-2252090e" id="opbpwdCheck">
-          <cl:formdata std:sid="f-data-a864224b" row="6" col="0"/>
+        <cl:output std:sid="output-677ab39f" id="opbpwdCheck" visible="false" value="Output">
+          <cl:formdata std:sid="f-data-45f18c1f" row="6" col="0"/>
         </cl:output>
-        <cl:formlayout std:sid="f-layout-2badd1fa" scrollable="false" hspace="5px" vspace="5px" top-margin="20px" right-margin="20px" bottom-margin="20px" left-margin="20px">
+        <cl:formlayout std:sid="f-layout-2badd1fa" scrollable="false" hspace="5px" vspace="5px" top-margin="10px" right-margin="20px" bottom-margin="10px" left-margin="20px">
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:columns length="1" unit="FRACTION"/>
         </cl:formlayout>
       </cl:group>
       <cl:group std:sid="group-5c2c9e27">
         <cl:formdata std:sid="f-data-374ba6ad" row="2" col="0" rowspan="1" colspan="1"/>
         <cl:output std:sid="output-b3fdb49f" class="h3" value="이름">
-          <cl:formdata std:sid="f-data-c7077ae5" row="2" col="0"/>
+          <cl:formdata std:sid="f-data-840095fd" row="2" col="0" rowspan="1" colspan="2"/>
         </cl:output>
         <cl:output std:sid="output-e413c81a" class="h3" value="생년월일">
-          <cl:formdata std:sid="f-data-de2a6a3f" row="4" col="0"/>
+          <cl:formdata std:sid="f-data-7b4a98d4" row="4" col="0" rowspan="1" colspan="2"/>
         </cl:output>
         <cl:output std:sid="output-53721bcf" class="h3" value="성별">
-          <cl:formdata std:sid="f-data-00de4391" row="6" col="0"/>
+          <cl:formdata std:sid="f-data-8f446803" row="6" col="0" rowspan="1" colspan="2"/>
         </cl:output>
-        <cl:inputbox std:sid="i-box-1ad687d6" id="ipbName" style="border-radius:0.2rem;" class="form-control" prevcontrol="#i-box-1638e888" placeholder="Name">
+        <cl:inputbox std:sid="i-box-1ad687d6" id="ipbName" style="border-radius:0.2rem; padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;" class="form-control" prevcontrol="#i-box-1638e888" placeholder="이름">
           <cl:datamapbind property="value" datacontrolid="dmRegister" columnname="NAME"/>
-          <cl:formdata std:sid="f-data-9328fee5" row="3" col="0"/>
+          <cl:formdata std:sid="f-data-244e4d08" row="3" col="0" rowspan="1" colspan="2"/>
         </cl:inputbox>
-        <cl:radiobutton std:sid="r-button-9d8974aa" id="rdbgender" style="text-align:center;">
-          <cl:datamapbind property="value" datacontrolid="dmRegister" columnname="GENDER"/>
-          <cl:formdata std:sid="f-data-b2fb4e30" row="7" col="0"/>
-          <cl:itemset datasetid="dsGender" label="label" value="value"/>
-        </cl:radiobutton>
-        <cl:dateinput std:sid="d-input-a0cfb75b" id="dtiBirthday" placeholder="Enter Date">
+        <cl:dateinput std:sid="d-input-a0cfb75b" id="dtiBirthday" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;" placeholder="생년월일을 입력하세요">
           <cl:datamapbind property="value" datacontrolid="dmRegister" columnname="BIRTHDATE"/>
-          <cl:formdata std:sid="f-data-7b628af5" row="5" col="0"/>
+          <cl:formdata std:sid="f-data-665a3387" row="5" col="0" rowspan="1" colspan="2"/>
         </cl:dateinput>
         <cl:output std:sid="output-8902ff87" class="h3" value="사용자 종류">
-          <cl:formdata std:sid="f-data-7588ab93" row="0" col="0"/>
+          <cl:formdata std:sid="f-data-a48b6f6e" row="0" col="0" rowspan="1" colspan="2"/>
         </cl:output>
-        <cl:radiobutton std:sid="r-button-7b6d6d01" id="rdb1" style="text-align:center;">
-          <cl:datamapbind property="value" datacontrolid="dmRegister" columnname="USERKIND"/>
-          <cl:formdata std:sid="f-data-1b86fea5" row="1" col="0"/>
-          <cl:itemset datasetid="dsUserKind" label="CD_N" value="CD"/>
-        </cl:radiobutton>
-        <cl:formlayout std:sid="f-layout-b7babec7" scrollable="false" vspace="10px" top-margin="20px" right-margin="20px" bottom-margin="20px" left-margin="20px">
+        <cl:group std:sid="group-2297575a" class="btn-radio">
+          <cl:formdata std:sid="f-data-1362d807" row="1" col="0" rowspan="1" colspan="2"/>
+          <cl:button std:sid="button-b8a061f3" id="ptj" class="btn-radio btn-radio-ptj" value="직원">
+            <cl:listener std:sid="listener-89ddb2a7" name="click" handler="onPtjClick"/>
+            <cl:formdata std:sid="f-data-f08a3d27" row="0" col="0"/>
+          </cl:button>
+          <cl:button std:sid="button-1d37f1ff" id="emp" class="btn-radio btn-radio-emp" value="고용주">
+            <cl:listener std:sid="listener-b0f5bdfe" name="click" handler="onEmpClick"/>
+            <cl:formdata std:sid="f-data-00cf5228" row="0" col="1"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-ed7971b0" scrollable="false" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-a19eb855" class="btn-radio">
+          <cl:formdata std:sid="f-data-8fa135da" row="7" col="0" rowspan="1" colspan="2"/>
+          <cl:button std:sid="button-c835090b" id="MAN" class="btn-radio btn-radio-ptj" value="남성">
+            <cl:listener std:sid="listener-2ae4cc44" name="click" handler="onButtonClick4"/>
+            <cl:formdata std:sid="f-data-29cb8988" row="0" col="0"/>
+          </cl:button>
+          <cl:button std:sid="button-9f0c02ef" id="WOMAN" class="btn-radio btn-radio-emp" value="여성">
+            <cl:listener std:sid="listener-46de752b" name="click" handler="onWOMANClick"/>
+            <cl:formdata std:sid="f-data-175b515e" row="0" col="1"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-2a0f9325" scrollable="false" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-b7babec7" scrollable="false" vspace="10px" top-margin="0px" right-margin="20px" bottom-margin="0px" left-margin="20px">
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
         </cl:formlayout>
       </cl:group>
       <cl:group std:sid="group-7e7bd5bc">
@@ -195,28 +218,25 @@
         <std:metadata>
           <std:property key="locked" value="true"/>
         </std:metadata>
-        <cl:formdata std:sid="f-data-bc4f8ef7" row="3" col="0"/>
+        <cl:formdata std:sid="f-data-5a59ca0a" row="3" col="0" rowspan="1" colspan="1"/>
         <cl:output std:sid="output-23b39fa6" class="h3" value="연락처">
-          <cl:formdata std:sid="f-data-6e49a053" row="0" col="0" rowspan="1" colspan="3"/>
+          <cl:formdata std:sid="f-data-6e49a053" row="0" col="0" rowspan="1" colspan="1"/>
         </cl:output>
         <cl:maskeditor std:sid="m-editor-39a3ca6e" id="mseCall" style="border-radius:0.2rem; font-size:18px; text-align:center;" class="form-control" mask="000-0000-0000">
           <cl:datamapbind property="value" datacontrolid="dmRegister" columnname="CALL"/>
-          <cl:formdata std:sid="f-data-820476f1" row="1" col="0" rowspan="1" colspan="3"/>
+          <cl:formdata std:sid="f-data-820476f1" row="1" col="0" rowspan="1" colspan="1"/>
         </cl:maskeditor>
-        <cl:formlayout std:sid="f-layout-4f2b56e4" scrollable="false" hspace="5px" vspace="5px" top-margin="10px" right-margin="20px" bottom-margin="20px" left-margin="20px">
+        <cl:formlayout std:sid="f-layout-4f2b56e4" scrollable="false" hspace="5px" vspace="5px" top-margin="10px" right-margin="20px" bottom-margin="10px" left-margin="20px">
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="1" unit="FRACTION"/>
-          <cl:columns length="115" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="10" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:columns length="1" unit="FRACTION"/>
         </cl:formlayout>
       </cl:group>
       <cl:formlayout std:sid="f-layout-fbaab61a" scrollable="false" hspace="0px" vspace="2px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
         <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-        <cl:rows length="225" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-        <cl:rows length="300" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-        <cl:rows length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="250" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="280" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="76" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:rows length="1" unit="FRACTION"/>
         <cl:columns length="1" unit="FRACTION"/>

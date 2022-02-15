@@ -24,6 +24,7 @@ import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.protocol.data.ParameterRow;
 import com.cleopatra.spring.JSONDataView;
+import com.project.dao.ptj.PtjDao;
 import com.project.service.ptj.PtjService;
 
 
@@ -40,16 +41,18 @@ import com.project.service.ptj.PtjService;
 public class PtjController {
 
 	
-	private final PtjService serivce;
+//	private final PtjService serivce;
+	private final PtjDao dao;
 	
 	/**
 	 * 생성자
 	 * @param serivce
 	 */
 	@Autowired
-	public PtjController(PtjService serivce) {
+	public PtjController(/* PtjService serivce, */ PtjDao dao) {
 		// TODO Auto-generated constructor stub
-		this.serivce = serivce;
+//		this.serivce = serivce;
+		this.dao = dao;
 	}
 	
 	
@@ -68,18 +71,11 @@ public class PtjController {
 	@RequestMapping("/onLoad.do")
 	public View onload(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmOnLoad");
-//		System.out.println(param);
-		List workList = serivce.worktimeList(param.getValue("user_code_ptj"));
-		System.out.println(workList.toString());
+
+		List workList = dao.workList(param.getValue("user_code_ptj"));
+
 		dataReq.setResponse("dsEvnt", workList);
-		
-		Map<String, String> dmRes = new HashMap<String, String>();
-		dmRes.put("local", "en");
-		dmRes.put("dayOfWeekFom", "short");
-		
-		dataReq.setResponse("dmRes", dmRes);
-		
-		
+			
 		return new JSONDataView();
 	}
 	
@@ -99,25 +95,35 @@ public class PtjController {
 	@RequestMapping("/dailySchedule.do")
 	public View dailySchedule(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmDailySchedule");
-		System.out.println(param);
 
 		String work_date = param.getValue("work_date");
 		String format_date = work_date.substring(0, 4) + "-" + work_date.substring(4,6) + "-" + work_date.substring(6);
-		List workList = serivce.dayWorkTimeList(param.getValue("user_code_ptj"),format_date);
-		System.out.println("성공 : " + workList.toString());
+		List workList = dao.dailyworkList(param.getValue("user_code_ptj"),format_date);
 		
 		dataReq.setResponse("dsDailySchedule", workList);
 		
 		return new JSONDataView();
 	}
 	
+	/**
+	  * @Method Name : dailyScheduleReq
+	  * @작성일 : 2022. 2. 08.
+	  * @작성자 : KyeongSu
+	  * @변경이력 : 
+	  * @Method 설명 : 현재 요청중인 근무 목록 조회
+	  * @param req
+	  * @param res
+	  * @param dataReq
+	  * @return
+	  * @throws Exception
+	  */
 	@RequestMapping("/dailyScheduleReq.do")
 	public View dailyScheduleReq(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmDailySchedule");
 		String user_code_ptj = param.getValue("user_code_ptj");
 		String work_date = param.getValue("work_date");
 		String format_date = work_date.substring(0, 4) + "-" + work_date.substring(4,6) + "-" + work_date.substring(6);
-		List workList = serivce.dailyScheduleReq(user_code_ptj,format_date);
+		List workList = dao.dailyScheduleReq(user_code_ptj,format_date);
 		
 		dataReq.setResponse("dsDailyScheduleReq", workList);
 		
@@ -140,9 +146,9 @@ public class PtjController {
 	@RequestMapping("/workplace.do")
 	public View workPlace(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmUserInfo");
-		System.out.println(param);
-		List workPlaceList = serivce.workPlace(Integer.parseInt(param.getValue("user_code_ptj")));
-		System.out.println(workPlaceList.toString());
+
+		List workPlaceList = dao.workPlaceList(Integer.parseInt(param.getValue("user_code_ptj")));
+
 		dataReq.setResponse("dsWpName", workPlaceList);
 		
 		return new JSONDataView();
@@ -165,7 +171,7 @@ public class PtjController {
 	public View linkRequest(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		
 		ParameterGroup param = dataReq.getParameterGroup("dmRequseLink");
-		int result = serivce.linkRequst(param);
+		int result = dao.linkRequest(param);
 		
 		
 		return new JSONDataView();
@@ -189,7 +195,7 @@ public class PtjController {
 		
 		ParameterGroup param = dataReq.getParameterGroup("dmOnLoad");
 		
-		List changelist = serivce.getScheduleChange(param.getValue("USER_NUMBER"));
+		List changelist = dao.getScheduleChange(param.getValue("USER_NUMBER"));
 		
 		dataReq.setResponse("dsScheduleChange", changelist);
 		
@@ -212,7 +218,7 @@ public class PtjController {
 	@RequestMapping("/addNewScheduleReq.do")
 	public View addNewScheduleReq(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmNewSchedule");
-		serivce.addNewScheduleReq(param);
+		dao.addNewScheduleReq(param);
 		
 		return new JSONDataView();
 	}
@@ -235,9 +241,9 @@ public class PtjController {
 	public View requestScheduleChange(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmOnLoad");
-		System.out.println(param.toString());
-		List reqChangeList = serivce.getReqList(param.getValue("USER_NUMBER"),param.getValue("USER_KIND"));
-		System.out.println(reqChangeList.toString());
+
+		List reqChangeList = dao.getRequestSchedule(param.getValue("USER_NUMBER"),param.getValue("USER_KIND"));
+//		System.out.println(reqChangeList.toString());
 		dataRequest.setResponse("dsRequest", reqChangeList);
 		
 		return new JSONDataView();
@@ -261,7 +267,7 @@ public class PtjController {
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmSelectRow");
 		
-		List daySchedule = serivce.getDaySchedule(param.getValue("WORK_DATE"),param.getValue("USER_NUMBER"));
+		List daySchedule = dao.getDaySchedule(param.getValue("WORK_DATE"),param.getValue("USER_NUMBER"));
 		System.out.println(dataRequest.toString());
 		dataRequest.setResponse("dsSelectSchedule", daySchedule);
 		
@@ -291,7 +297,7 @@ public class PtjController {
 			
 			iter = param.getDeletedRows();
 			while(iter.hasNext()) {
-				serivce.deleteRequestChange(iter.next().toMap());
+				dao.deleteRequestChange(iter.next().toMap());
 			}
 		}
 		
@@ -314,7 +320,7 @@ public class PtjController {
 	@RequestMapping("/updateScheduleReq.do")
 	public View updateScheduleReq(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmUpdateSchedule");
-		serivce.updateScheduleReq(param);
+		dao.updateScheduleReq(param);
 		
 		return new JSONDataView();
 	}
@@ -334,7 +340,7 @@ public class PtjController {
 	@RequestMapping("/deleteScheduleReq.do")
 	public View deleteScheduleReq(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmUpdateSchedule");
-		serivce.deleteScheduleReq(param);
+		dao.deleteScheduleReq(param);
 		
 		return new JSONDataView();
 	}
@@ -357,13 +363,25 @@ public class PtjController {
 	public View deleteStore(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		
 		ParameterGroup param = dataReq.getParameterGroup("dmDeleteStore");
-		System.out.println(param);
-		serivce.deleteStore(param.getValue("STORE_CODE"),param.getValue("USER_NUMBER"));
+//		System.out.println(param);
+		dao.deleteStore(param.getValue("STORE_CODE"),param.getValue("USER_NUMBER"));
 		
 		
 		return new JSONDataView();
 	}
 	
+	/**
+	  * @Method Name : saveAcceptSchedule
+	  * @작성일 : 2022. 2. 15.
+	  * @작성자 : SeongSoo
+	  * @변경이력 : 
+	  * @Method 설명 : 요청 근무 수락 및 거절
+	  * @param req
+	  * @param res
+	  * @param dataReq
+	  * @return
+	  * @throws Exception
+	  */
 	@RequestMapping("/saveAcceptSchedule.do")
 	public View saveAcceptSchedule(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dsScheduleChange");
@@ -373,7 +391,7 @@ public class PtjController {
 			
 			iter = param.getUpdatedRows();
 			while(iter.hasNext()) {
-				serivce.saveAcceptSchedule(iter.next().toMap());
+				dao.saveAcceptSchedule(iter.next().toMap());
 			}
 		}
 		

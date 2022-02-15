@@ -10,6 +10,7 @@
         <cl:datacolumnlist>
           <cl:datacolumn std:sid="d-column-8f511b24" name="store_name"/>
           <cl:datacolumn std:sid="d-column-5f4b1aee" name="store_code"/>
+          <cl:datacolumn std:sid="d-column-5fd0052c" name="class"/>
         </cl:datacolumnlist>
         <cl:datarowlist>
           <cl:datarow>
@@ -69,23 +70,21 @@
   <body std:sid="body-6b707e7e">
     <cl:listener std:sid="listener-b1c0848a" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-8b4f37a8" id="wp_list">
-      <cl:verticaldata std:sid="v-data-6b51fe7c" width="400px" height="400px"/>
+      <cl:formdata std:sid="f-data-e91ac3a4" row="0" col="0"/>
       <cl:verticallayout std:sid="v-layout-c0f42de9"/>
     </cl:group>
     <cl:group std:sid="group-489ac625">
-      <cl:verticaldata std:sid="v-data-bcd39b5c" width="400px" height="90px"/>
+      <cl:formdata std:sid="f-data-08203a97" row="1" col="0"/>
       <cl:button std:sid="button-3c72668a" class="btn-success" value="사업장 연결">
         <cl:listener std:sid="listener-b59fc821" name="click" handler="onButtonClick2"/>
-        <cl:formdata std:sid="f-data-7da81938" row="1" col="3"/>
+        <cl:formdata std:sid="f-data-7da81938" row="0" col="3"/>
       </cl:button>
       <cl:button std:sid="button-cbbbd836" class="btn-primary" value="저장">
         <cl:listener std:sid="listener-b93c8ee9" name="click" handler="onButtonClick"/>
-        <cl:formdata std:sid="f-data-3ffa1aaf" row="1" col="1"/>
+        <cl:formdata std:sid="f-data-3ffa1aaf" row="0" col="1"/>
       </cl:button>
-      <cl:formlayout std:sid="f-layout-79763b3d" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-        <cl:rows length="1" unit="FRACTION"/>
-        <cl:rows length="1" unit="FRACTION"/>
-        <cl:rows length="1" unit="FRACTION"/>
+      <cl:formlayout std:sid="f-layout-79763b3d" scrollable="false" hspace="0px" vspace="0px" top-margin="10px" right-margin="0px" bottom-margin="20px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:columns length="1" unit="FRACTION"/>
         <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:columns length="1" unit="FRACTION"/>
@@ -93,7 +92,11 @@
         <cl:columns length="1" unit="FRACTION"/>
       </cl:formlayout>
     </cl:group>
-    <cl:verticallayout std:sid="v-layout-782fb34b" scrollable="false"/>
+    <cl:formlayout std:sid="f-layout-5d82030a" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:rows length="60" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
   </body>
   <std:studiosetting>
     <std:hruler/>

@@ -88,7 +88,8 @@ function onSmsDailyScheduleSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 					"work_date" : selectedDate,
 					"breaktime" : e.control.breaktime,
 					"scheduleCode" : e.control.scheduleCode
-				});	app.close();
+				});	
+			app.close();
 			});
 					
 		}
@@ -103,8 +104,11 @@ function onSmsDailyScheduleSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 		
 		//일정 추가 udc 이벤트 생성 
 		scheduleAddUDC.addEventListener("groupClick", function(e){ 
-			app.getHostAppInstance().dialogManager.openDialog("2_ptj/dialog/dialog_ptj_daily_schedule_reg", "dailySchedulePopup" ,{width : 450, height : 600}, function(dialog){
+			app.getHostAppInstance().dialogManager.openDialog("2_ptj/dialog/dialog_ptj_daily_schedule_reg", "dailySchedulePopup" ,{width : 450, height : 600 }, function(dialog){
 				dialog.ready(function(dialogApp){
+					dialog.initValue = {
+						"work_date" : selectedDate
+					};
 				});
 			})
 		});

@@ -315,8 +315,6 @@ body.cl-has-modal {
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-year.cl-selected,
 .cl-calendar:not(.cl-disabled) .cl-other-month.cl-selected {
   /* 선택된 날짜 셀 */
-  background-color: #1E9FF2;
-  color: #FFFFFF;
 }
 .cl-calendar .cl-calendar-content {
   /*날짜 달력의 헤더 스타일*/
@@ -368,7 +366,6 @@ body.cl-has-modal {
 .cl-calendar .cl-calendar-content .cl-calendar-content-day.cl-range-selected,
 .cl-calendar .cl-calendar-content .cl-calendar-content-month.cl-range-selected,
 .cl-calendar .cl-calendar-content .cl-calendar-content-year.cl-range-selected {
-  background-color: #EFF5FF;
   color: #4E5154;
 }
 .cl-calendar .cl-calendar-content .cl-calendar-content-day.cl-selected,
@@ -402,7 +399,7 @@ body.cl-has-modal {
   font-weight: 400;
 }
 .cl-calendar.cl-focus {
-  border-color: #1E9FF2;
+  border-color: #BABFC7;
 }
 .cl-calendar .cl-calendar-item {
   background-color: #FFC900;
@@ -713,7 +710,7 @@ body.cl-has-modal {
 }
 .cl-button:not(.cl-disabled).cl-activated,
 .cl-button:not(.cl-disabled):active {
-  background-image: linear-gradient(#ddd, #eee 5px, #ddd);
+  background-image: none;
 }
 /* Disable 상태의 버튼 */
 .cl-button.cl-disabled {

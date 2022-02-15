@@ -60,13 +60,15 @@
 		SELECT
 			w.store_code,
 			st.store_name,
-			workplace_code
+			workplace_code,
+			color as class
 		FROM workplace w JOIN STORE st ON w.store_code = st.store_code
 		<trim prefix="WHERE" prefixOverrides="AND |OR">
 			<if test="user_code_ptj !=null and user_code_ptj != 0 "> user_code_ptj = #{user_code_ptj}</if>
 		</trim>
 	</select>
 	
+	<!-- 매장 연결 요청 -->
 	<insert id="linkRequest">
 		INSERT INTO part_timer(
 			user_code_ptj,
@@ -105,6 +107,7 @@
 			user_code_ptj,
 			work_date,
 			work_begin_time,
+			work_end_date,
 			work_end_time,
 			breaktime,
 			accept_emp,
@@ -117,6 +120,7 @@
 			#{USER_CODE_PTJ},
 			#{WORK_DATE},
 			#{WORK_BEGIN_TIME},
+			#{WORK_END_DATE},
 			#{WORK_END_TIME},
 			#{BREAKTIME},
 			"N",

@@ -26,6 +26,7 @@
     <cl:appspec title="로그인"/>
   </head>
   <body std:sid="body-760d36c5" class="login-box body1">
+    <cl:listener std:sid="listener-05fddb86" name="init" handler="onBodyInit"/>
     <cl:group std:sid="group-fc534c17" style="border-right-style:none; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;" class="cl-form-group">
       <cl:formdata std:sid="f-data-fc5c2fe4" row="1" col="0" rowspan="1" colspan="3"/>
       <cl:img std:sid="image-d0bb1625" src="../theme/images/logo-login.png">
@@ -47,10 +48,10 @@
       </cl:output>
       <cl:group std:sid="group-114b3786">
         <cl:formdata std:sid="f-data-f62fccd6" row="1" col="0"/>
-        <cl:output std:sid="output-0468c620" class="h5" value="Email">
+        <cl:output std:sid="output-0468c620" class="h5" value="ID">
           <cl:verticaldata std:sid="v-data-4b9affc8" width="100px" height="25px"/>
         </cl:output>
-        <cl:inputbox std:sid="i-box-2ea8aaf3" id="ipbId" class="form-control" nextcontrol="#i-box-cd67fb94" placeholder="Email-Address">
+        <cl:inputbox std:sid="i-box-2ea8aaf3" id="ipbId" class="form-control" nextcontrol="#i-box-cd67fb94" placeholder="ID">
           <cl:datamapbind property="value" datacontrolid="dmLogin" columnname="EMAIL"/>
           <cl:verticaldata std:sid="v-data-647ed329" width="100px" height="35px"/>
         </cl:inputbox>

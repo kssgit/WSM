@@ -95,6 +95,7 @@
           <cl:datacolumn std:sid="d-column-84576fb7" name="ptj_name"/>
           <cl:datacolumn std:sid="d-column-292e889b" name="work_date"/>
           <cl:datacolumn std:sid="d-column-48c0d2b9" name="work_begin_time"/>
+          <cl:datacolumn std:sid="d-column-a13389c3" name="work_end_date"/>
           <cl:datacolumn std:sid="d-column-98873d5a" name="work_end_time"/>
           <cl:datacolumn std:sid="d-column-3182e067" name="breaktime"/>
           <cl:datacolumn std:sid="d-column-e46d7e9b" name="dc"/>
@@ -129,44 +130,51 @@
         <cl:output std:sid="output-2fff88e6" class="sm-title" value="근무지">
           <cl:formdata std:sid="f-data-b29e4431" row="2" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-be6463fc" class="sm-title" value="근무 일자">
-          <cl:formdata std:sid="f-data-12bb764f" row="4" col="0"/>
-        </cl:output>
-        <cl:output std:sid="output-0263d1f9" class="sm-title" value="근무 시작 시간">
-          <cl:formdata std:sid="f-data-65345f45" row="6" col="0"/>
-        </cl:output>
-        <cl:dateinput comment="근무일자" std:sid="d-input-019c029a" id="workDate" class="cl-combobox-underbar">
-          <cl:listener std:sid="listener-ed285d93" name="value-change" handler="onDti1ValueChange"/>
-          <cl:formdata std:sid="f-data-cc6ca7bb" row="5" col="0" rowspan="1" colspan="2"/>
-        </cl:dateinput>
-        <cl:output std:sid="output-e802c781" class="sm-title" value="휴게 시간 (분)">
-          <cl:formdata std:sid="f-data-5fe96370" row="10" col="0"/>
-        </cl:output>
-        <cl:output std:sid="output-d18e1c9f" class="sm-title" value="근무 종료 시간">
-          <cl:formdata std:sid="f-data-2a57eb80" row="8" col="0"/>
-        </cl:output>
-        <cl:inputbox std:sid="i-box-d5596f39" id="braekTime" style="background-image:none;" class="cl-combobox-underbar" showclearbutton="false" placeholder="분 단위로 입력해주세요" inputfilter="[0-9]">
-          <cl:formdata std:sid="f-data-f95a5464" row="11" col="0" rowspan="1" colspan="2"/>
-        </cl:inputbox>
-        <cl:combobox std:sid="c-box-e7a6f9e2" id="workBeginTime" class="cl-combobox-underbar">
-          <cl:listener std:sid="listener-c6f8b35b" name="selection-change" handler="onCmb2SelectionChange"/>
-          <cl:listener std:sid="listener-1441e4f9" name="close" handler="onCmb2Close"/>
-          <cl:listener std:sid="listener-c826c2ce" name="open" handler="onCmb2Open"/>
-          <cl:formdata std:sid="f-data-9d2bfe24" row="7" col="0" rowspan="1" colspan="2"/>
-          <cl:itemset datasetid="dsHour" label="label" value="value"/>
-        </cl:combobox>
-        <cl:combobox std:sid="c-box-5eb4238d" id="workEndTime" class="cl-combobox-underbar">
-          <cl:listener std:sid="listener-5f19e1e8" name="selection-change" handler="onWorkEndTimeSelectionChange"/>
-          <cl:listener std:sid="listener-ce256107" name="open" handler="onWorkEndTimeOpen"/>
-          <cl:formdata std:sid="f-data-a730dc9c" row="9" col="0" rowspan="1" colspan="2"/>
-          <cl:itemset datasetid="dsHour" label="label" value="value"/>
-        </cl:combobox>
         <cl:combobox std:sid="c-box-0638719e" id="workPlace" style="border-right-style:none; border-left-style:none; border-top-style:none;" class="cl-combobox-underbar">
           <cl:listener std:sid="listener-d861effe" name="selection-change" handler="onWorkPlaceSelectionChange"/>
           <cl:formdata std:sid="f-data-9842aca2" row="3" col="0" rowspan="1" colspan="2"/>
           <cl:itemset datasetid="dsWpName" label="store_name" value="store_code"/>
         </cl:combobox>
-        <cl:formlayout std:sid="f-layout-b0393cf6" scrollable="true" hspace="0px" vspace="5px" top-margin="10px" right-margin="30px" bottom-margin="10px" left-margin="30px">
+        <cl:output std:sid="output-be6463fc" class="sm-title" value="근무 시작 일자">
+          <cl:formdata std:sid="f-data-12bb764f" row="4" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-0263d1f9" class="sm-title" value="근무 시작 시간">
+          <cl:formdata std:sid="f-data-8c3aa538" row="4" col="1"/>
+        </cl:output>
+        <cl:dateinput comment="근무일자" std:sid="d-input-019c029a" id="workDate" class="cl-combobox-underbar">
+          <cl:listener std:sid="listener-ed285d93" name="value-change" handler="onDti1ValueChange"/>
+          <cl:formdata std:sid="f-data-ae855b66" row="5" col="0" rowspan="1" colspan="1"/>
+        </cl:dateinput>
+        <cl:combobox std:sid="c-box-e7a6f9e2" id="workBeginTime" class="cl-combobox-underbar">
+          <cl:listener std:sid="listener-c6f8b35b" name="selection-change" handler="onCmb2SelectionChange"/>
+          <cl:listener std:sid="listener-1441e4f9" name="close" handler="onCmb2Close"/>
+          <cl:listener std:sid="listener-c826c2ce" name="open" handler="onCmb2Open"/>
+          <cl:formdata std:sid="f-data-33fe2f8e" row="5" col="1"/>
+          <cl:itemset datasetid="dsHour" label="label" value="value"/>
+        </cl:combobox>
+        <cl:output std:sid="output-d18e1c9f" class="sm-title" value="근무 종료 시간">
+          <cl:formdata std:sid="f-data-9e09b533" row="6" col="1"/>
+        </cl:output>
+        <cl:dateinput comment="근무일자" std:sid="d-input-a7d18a5f" id="workDate2" class="cl-combobox-underbar">
+          <cl:listener std:sid="listener-4351b809" name="value-change" handler="onWorkDate2ValueChange"/>
+          <cl:formdata std:sid="f-data-dc01f52b" row="7" col="0"/>
+        </cl:dateinput>
+        <cl:combobox std:sid="c-box-5eb4238d" id="workEndTime" class="cl-combobox-underbar">
+          <cl:listener std:sid="listener-5f19e1e8" name="selection-change" handler="onWorkEndTimeSelectionChange"/>
+          <cl:listener std:sid="listener-ce256107" name="open" handler="onWorkEndTimeOpen"/>
+          <cl:formdata std:sid="f-data-9bf7e3c4" row="7" col="1"/>
+          <cl:itemset datasetid="dsHour" label="label" value="value"/>
+        </cl:combobox>
+        <cl:output std:sid="output-e802c781" class="sm-title" value="휴게 시간 (분)">
+          <cl:formdata std:sid="f-data-aba0cda5" row="8" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-d5596f39" id="braekTime" style="background-image:none;" class="cl-combobox-underbar" showclearbutton="false" placeholder="분 단위로 입력해주세요" inputfilter="[0-9]">
+          <cl:formdata std:sid="f-data-01652029" row="9" col="0" rowspan="1" colspan="2"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-0eb9e7b8" class="sm-title" value="근무 종료 일자">
+          <cl:formdata std:sid="f-data-7d9211e8" row="6" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-b0393cf6" scrollable="true" hspace="5px" vspace="5px" top-margin="10px" right-margin="30px" bottom-margin="10px" left-margin="30px">
           <cl:rows length="1" unit="FRACTION"/>
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
@@ -177,11 +185,9 @@
           <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="20" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="3" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         </cl:formlayout>
       </cl:group>
       <cl:group std:sid="group-566b1f8d">

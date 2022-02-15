@@ -9,10 +9,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
@@ -21,6 +23,7 @@ import com.cleopatra.protocol.data.DataResponse;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.protocol.data.ParameterRow;
 import com.cleopatra.spring.JSONDataView;
+import com.project.dao.emp.EmployerDao;
 import com.project.service.emp.EmployerService;
 
 /**
@@ -35,17 +38,20 @@ import com.project.service.emp.EmployerService;
 @RequestMapping("emp")
 public class EmployerController {
 	
-	private final EmployerService service;
-	
+//	private final EmployerService service;
+	private final EmployerDao dao;
 	/**
 	 * 생성자
 	 * @param service
 	 */
 	@Autowired
-	public EmployerController(EmployerService service) {
+	public EmployerController(/* EmployerService service, */ EmployerDao dao) {
 		// TODO Auto-generated constructor stub
-		this.service = service;
+//		this.service = service;
+		this.dao = dao;
 	}
+	
+	
 	
 	
 	/**
@@ -53,7 +59,7 @@ public class EmployerController {
 	  * @작성일 : 2022. 1. 25.
 	  * @작성자 : SeongSoo
 	  * @변경이력 : 
-	  * @Method 설명 : 고용주 메인 페이지 로드시 실행
+	  * @Method 설명 : 고용주 메인 페이지 로드 시 매장 리스트 및 스케줄 정보 조회
 	  * @param req
 	  * @param res
 	  * @param dataRequest
@@ -67,17 +73,12 @@ public class EmployerController {
 		String USER_EMAIL = param.getValue("USER_EMAIL");
 		String USER_NUMBER =param.getValue("USER_NUMBER");
 		//매장 리스트 
-		List storeList = service.storeList(USER_NUMBER,null,null);
-		//매장 스케즐 리스트
-		List storeScheduleList = service.storeScheduleList(USER_EMAIL);
-		System.out.println(storeScheduleList.toString());
-		//스케줄 환경 
-		Map<String, String> dmRes = new HashMap<String, String>();
-		dmRes.put("local", "en");
-		dmRes.put("dayOfWeekFom", "short");
+		List storeList = dao.storeList(USER_NUMBER,null,null);
+		//매장 스케줄 리스트
+		List storeScheduleList = dao.storeScheduleList(USER_EMAIL);
+
 		dataRequest.setResponse("dsStoreList", storeList);
 		dataRequest.setResponse("dsEvnt", storeScheduleList);
-		dataRequest.setResponse("dmRes", dmRes);
 			
 		return new JSONDataView();
 	}
@@ -98,9 +99,9 @@ public class EmployerController {
 	@RequestMapping("/ptjstoreList.do")
 	public View storeList(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{ 
 		ParameterGroup param = dataRequest.getParameterGroup("dmEmpInfo");
-		System.out.println(param);
-		List storeList = service.storeList(null, param.getValue("user_id"),param.getValue("user_code_ptj"));
-		System.out.println(storeList.toString());
+
+		List storeList = dao.storeList(null, param.getValue("user_id"),param.getValue("user_code_ptj"));
+
 		dataRequest.setResponse("dsStoreList", storeList);
 		
 		return new JSONDataView();
@@ -122,15 +123,10 @@ public class EmployerController {
 	public View addStore(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		ParameterGroup param = dataRequest.getParameterGroup("dmAddStore");
 		
-		Map<String, Object> storeData = new HashMap();
-		storeData.put("USER_NUMBER_EMP", param.getValue("USER_NUMBER_EMP"));
-		storeData.put("business_type_large", param.getValue("business_type_large"));
-		storeData.put("business_type_small", param.getValue("business_type_small"));
-		storeData.put("store_name", param.getValue("store_name"));
-		storeData.put("USER_EMAIL", param.getValue("USER_EMAIL"));
-		int result = service.addStore(storeData);
-		
-		
+		int result = dao.addStore(param);
+		if(result != 1) {
+			System.out.println("오류 발생");
+		}
 		return new JSONDataView();
 	}
 	
@@ -149,9 +145,9 @@ public class EmployerController {
 	@RequestMapping("/getPtjList.do")
 	public View getPtjList(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		ParameterGroup param = dataRequest.getParameterGroup("dmGetPtjList");
-		String storeCode = param.getValue("STORE_CODE");
+		/* String storeCode = param.getValue("STORE_CODE"); */
 		String userNumber = param.getValue("USER_NUMBER");
-		List<Map<String, Object>> result = service.getPtjList(storeCode,userNumber);
+		List<Map<String, Object>> result = dao.getPtjList(/* storeCode, */userNumber);
 		
 		dataRequest.setResponse("dsPtjList", result);
 		
@@ -175,25 +171,21 @@ public class EmployerController {
 	@RequestMapping("/getSchedule.do")
 	public View getSchedule(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		ParameterGroup param = dataRequest.getParameterGroup("dmGetSchedule");
-		Map<String, Object> scheduleData = new HashMap();
-		scheduleData.put("DT_BEGIN", param.getValue("DT_BEGIN"));
-		scheduleData.put("DT_END", param.getValue("DT_END"));
-		scheduleData.put("USER_NUMBER", param.getValue("USER_NUMBER"));
-		scheduleData.put("STORE_CODE", param.getValue("STORE_CODE"));
 		
-		List<Map<String, Object>> result = service.getschedule(scheduleData);
+		List<Map<String, Object>> result = dao.getschedule(param);
 		System.out.println(result.toString());
 		dataRequest.setResponse("dsSchedule", result);
 		
 		return new JSONDataView();
 	}
 	
+	
 	/**
-	  * @Method Name : onLoad
-	  * @작성일 : 2022. 1. 25.
+	  * @Method Name : requestList
+	  * @작성일 : 2022. 2. 15.
 	  * @작성자 : SeongSoo
 	  * @변경이력 : 
-	  * @Method 설명 : 고용주 메인 페이지 로드시 실행
+	  * @Method 설명 : 매장 연결 요청 목록 조회
 	  * @param req
 	  * @param res
 	  * @param dataRequest
@@ -207,10 +199,9 @@ public class EmployerController {
 		String USER_EMAIL = param.getValue("USER_EMAIL");
 		String USER_NUMBER =param.getValue("USER_NUMBER");
 		//매장 리스트 조회
-		List storeList = service.storeList(USER_NUMBER,null,null);
+		List storeList = dao.storeList(USER_NUMBER,null,null);
 		//매장 연결 요청 목록 조회
-		List requestList = service.requsetList(USER_NUMBER);
-//		System.out.println("★"+requestList);
+		List requestList = dao.getRequestList(USER_NUMBER);
 
 		dataRequest.setResponse("dsStoreList", storeList);
 		dataRequest.setResponse("dsRequest", requestList);
@@ -242,7 +233,7 @@ public class EmployerController {
 			//update
 			iter = param.getUpdatedRows();
 			while(iter.hasNext()) {
-				service.updatePtLinkjRequest(iter.next().toMap());
+				dao.updatePtLinkjRequest(iter.next().toMap());
 			}
 		}
 		
@@ -273,19 +264,19 @@ public class EmployerController {
 			//delete
 			iter = param.getDeletedRows();
 			while(iter.hasNext()) {
-				service.reqDeleteWork(iter.next().toMap());
+				dao.reqDeleteWork(iter.next().toMap());
 			}
 			
 			iter = param.getInsertedRows();
 			//Insert
 			while(iter.hasNext()) {
-				service.reqCreateWork(iter.next().toMap());
+				dao.reqCreateWork(iter.next().toMap());
 			}
 			
 			//update
 			iter = param.getUpdatedRows();
 			while(iter.hasNext()) {
-				service.reqUpdateWork(iter.next().toMap());
+				dao.reqUpdateWork(iter.next().toMap());
 			}
 		}
 		
@@ -309,10 +300,8 @@ public class EmployerController {
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmOnLoad");
 		
-		List changeList = service.getscheduleChange(param.getValue("USER_EMAIL"));
-		System.out.println("요청 받은 근무 ");
-		System.out.println(changeList.toString());
-		System.out.println();
+		List changeList = dao.getscheduleChange(param.getValue("USER_EMAIL"));
+
 		dataRequest.setResponse("dsScheduleChange", changeList);
 
 		return new JSONDataView();
@@ -336,9 +325,8 @@ public class EmployerController {
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmOnLoad");
 		
-		List reqChangeList = service.getReqList(param.getValue("USER_EMAIL"),param.getValue("USER_KIND"));
+		List reqChangeList = dao.getReqList(param.getValue("USER_EMAIL"),param.getValue("USER_KIND"));
 		
-		System.out.println(reqChangeList.toString());
 		dataRequest.setResponse("dsRequest", reqChangeList);
 		
 		return new JSONDataView();
@@ -361,8 +349,8 @@ public class EmployerController {
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmSelectRow");
 		
-		List daySchedule = service.getDaySchedule(param.getValue("WORK_DATE"),param.getValue("STORE_CODE"));
-		System.out.println(daySchedule.toString());
+		List daySchedule = dao.getDaySchedule(param.getValue("WORK_DATE"),param.getValue("STORE_CODE"));
+
 		dataRequest.setResponse("dsSelectSchedule", daySchedule);
 		
 		return new JSONDataView();
@@ -390,11 +378,9 @@ public class EmployerController {
 			
 			iter = param.getUpdatedRows();
 			while(iter.hasNext()) {
-				int result = service.updateAcceptScheduleChange(iter.next().toMap());
-				if(result == 1) {
+				int result = dao.updateAcceptScheduleChange(iter.next().toMap());
+				if(result == 1) { // 시간 중복 발생으로 해당 요천 근무는 거절 됨
 					exception.put("message", 1);
-					System.out.println(exception.toString());
-					System.out.println("시간 중복 발생");
 					dataRequest.setResponse("dmException", exception);
 				}
 			}
@@ -424,7 +410,7 @@ public class EmployerController {
 			
 			iter = param.getDeletedRows();
 			while(iter.hasNext()) {
-				service.deleteRequestChange(iter.next().toMap());
+				dao.deleteRequestChange(iter.next().toMap());
 			}
 		}
 		
@@ -449,7 +435,7 @@ public class EmployerController {
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmPtjDelete");
 		
-		service.deletePtj(param.getValue("PTJ_CODE"),param.getValue("USER_CODE_PTJ"));
+		dao.deletePtj(param.getValue("PTJ_CODE"),param.getValue("USER_CODE_PTJ"));
 		
 		return new JSONDataView();
 	}
@@ -470,9 +456,9 @@ public class EmployerController {
 	@RequestMapping("/checkSchedule.do")
 	public View checkSchedule(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		ParameterGroup param = dataRequest.getParameterGroup("dmCheckUD");
-		System.out.println(param);
-		int result = service.checkSchedule(param.getValue("SCHEDULE_CODE"));
-		System.out.println("변경 가능 여부 : "+result);
+
+		int result = dao.checkSchedule(param.getValue("SCHEDULE_CODE"));
+//		System.out.println("변경 가능 여부 : "+result);
 		Map<String, Integer> dm = new HashMap<String, Integer>();
 		dm.put("RESULT", result);
 		dataRequest.setResponse("dmCheckUD", dm);
@@ -494,8 +480,8 @@ public class EmployerController {
 	@RequestMapping("/deleteStore.do")
 	public View deleteStore(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		ParameterGroup param = dataRequest.getParameterGroup("dmDeleteStore");
-		System.out.println(param);
-		service.deleteStore(param.getValue("STORE_CODE"), param.getValue("USER_NUMBER"));
+//		System.out.println(param);
+		dao.deleteStore(param.getValue("STORE_CODE"), param.getValue("USER_NUMBER"));
 		
 		
 		return new JSONDataView();

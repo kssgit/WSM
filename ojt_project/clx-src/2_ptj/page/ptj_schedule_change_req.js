@@ -144,26 +144,6 @@ function onGrd1CellClick(/* cpr.events.CGridMouseEvent */ e){
 }
 
 
-/*
- * "승인" 버튼에서 click 이벤트 발생 시 호출.
- * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
- */
-function onButtonClick(/* cpr.events.CMouseEvent */ e){
-	/** 
-	 * @type cpr.controls.Button
-	 */
-	var button = e.control;
-	var grid = app.lookup("grd1");
-//	grid.getSelectedRows().forEach(function(each){
-//		each.setValue("ACCEPT_EMP", "Y");
-//	});
-// validation 확인 
-
-	grid.getSelectedRow().setValue("ACCEPT_PTJ", "Y");
-//	승인된 근무 요청 보내기 	
-	
-	app.lookup("dsSelectSchedule").clear();
-}
 
 /*
  * "거절" 버튼에서 click 이벤트 발생 시 호출.
@@ -191,9 +171,11 @@ function onButtonClick2(/* cpr.events.CMouseEvent */ e){
 	var button = e.control;
 	app.lookup("grd1").getSelectedRow().setValue("ACCEPT_PTJ", 'Y');
 	app.lookup("smsAcceptSave").send().then(function(input){
+		app.lookup("dsSelectSchedule").clear();
+		app.lookup("grd2").redraw();
 		app.lookup("smsScheduleChange").send().then(function(input){
 			app.lookup("grd1").redraw();
-			app.lookup("dsSelectSchedule").clear();
+			
 		});
 	});
 }
@@ -251,5 +233,21 @@ function onButtonClick5(/* cpr.events.CMouseEvent */ e){
 		app.lookup("smsRequestList").send().then(function(input){
 			app.lookup("grd3").redraw();
 		});
+	});
+}
+
+
+/*
+ * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+ * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+ */
+function onBodyInit(/* cpr.events.CEvent */ e){
+	// session 확인
+	var sessionCheck = app.lookup("smsSessionCheck");
+	sessionCheck.setHeader("USER_EMAIL", sessionStorage.getItem("USER_EMAIL"));
+	sessionCheck.send().then(function(input){
+		if(app.lookup("dmSessionCheck").getValue("result") == 0 ){
+			logout(app.getHostAppInstance());
+		}
 	});
 }

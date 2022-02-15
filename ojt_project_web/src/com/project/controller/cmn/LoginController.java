@@ -33,18 +33,29 @@ public class LoginController {
 		this.loginservice = loginservice;
 	}
 	
+	/**
+	  * @Method Name : logincheck
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : SeongSoo
+	  * @변경이력 : 
+	  * @Method 설명 : 로그인 체크
+	  * @param req
+	  * @param res
+	  * @param dataReq
+	  * @return
+	  * @throws Exception
+	  */
 	@RequestMapping("/login.do")
 	public View logincheck(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception{
 		
 		ParameterGroup param = dataReq.getParameterGroup("dmLogin");
-		System.out.println(param.toString());
 		// session이 존재하면 session객체 리턴, 없으면 null을 리턴
 		HttpSession session = req.getSession(false);
 		//로그인 check
 		Map data =loginservice.logincheck(param.getValue("EMAIL"), param.getValue("PASSWORD"));
 		
 		Map<String , String> map = new HashMap<String, String>();
-		System.out.println("로그인 : "+data.get("check"));
+
 		if(data.get("check").equals("1")) {// 로그인 성공
 			//session이 존재하면 session객체 리턴, 없으면 새로 생성해서 리턴
 			session = req.getSession(true);

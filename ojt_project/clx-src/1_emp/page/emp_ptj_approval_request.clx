@@ -47,6 +47,11 @@
           <cl:datacolumn std:sid="d-column-060a6b72" name="USER_NUMBER"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-a4ca1c96" id="dmSessionCheck">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6f0e4c6a" name="result" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-f1f9a76b" id="subOnLoad" action="/emp/requestList.do">
         <cl:listener std:sid="listener-f4b04886" name="submit-success" handler="onSubOnLoadSubmitSuccess"/>
         <cl:requestdata dataid="dmOnLoad"/>
@@ -56,12 +61,16 @@
       <cl:submission std:sid="submission-0adca68a" id="smsSave" action="/emp/acceptPtjRequest.do">
         <cl:requestdata dataid="dsRequest"/>
       </cl:submission>
+      <cl:submission std:sid="submission-bfe60d5d" id="smsSessionCheck" action="/main/sessionCheck.do">
+        <cl:requestheader name="USER_EMAIL"/>
+        <cl:responsedata dataid="dmSessionCheck"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec title="매장 연결 요청 승인"/>
   </head>
   <body std:sid="body-d0df2778">
     <cl:listener std:sid="listener-07125afa" name="load" handler="onBodyLoad"/>
-    <cl:listener std:sid="listener-4070792b" name="init" handler="onBodyInit"/>
+    <cl:listener std:sid="listener-177d20e7" name="init" handler="onBodyInit"/>
     <cl:group std:sid="group-acfb6c12" id="grpselect" class="cl-grp-box">
       <cl:selectioncontext selectionProvider="#grid-72c3bd89"/>
       <cl:xylayoutdata std:sid="xyl-data-83c87d8c" top="35px" right="10px" left="10px" height="40px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
@@ -146,20 +155,13 @@
       <cl:output std:sid="output-2ba03b2f" style="text-align:center;" value="승인 요청수 ">
         <cl:formdata std:sid="f-data-d73ead7d" valign="CENTER" height="35" row="0" col="3"/>
       </cl:output>
-      <cl:button std:sid="button-f6103907" class="btn-outline-danger" visible="false" value="거절">
-        <cl:formdata std:sid="f-data-e2cabf9d" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="7"/>
-      </cl:button>
-      <cl:button std:sid="button-7e884b7c" class="btn-outline-secondary" value="저장">
+      <cl:button std:sid="button-7e884b7c" class="btn-secondary" value="저장">
         <cl:listener std:sid="listener-b94de674" name="click" handler="onButtonClick"/>
         <cl:formdata std:sid="f-data-730198bc" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="8"/>
       </cl:button>
       <cl:output std:sid="output-bad32b69" id="rowCount" style="text-align:center;">
         <cl:formdata std:sid="f-data-f4e44c56" valign="CENTER" height="35" row="0" col="4"/>
       </cl:output>
-      <cl:button std:sid="button-fcc1cc19" class="btn-outline-success" visible="false" value="승인">
-        <cl:listener std:sid="listener-79c311cf" name="click" handler="onButtonClick2"/>
-        <cl:formdata std:sid="f-data-a8058eee" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="6"/>
-      </cl:button>
       <cl:combobox std:sid="c-box-8aa0015e" id="cmbStore" class="cl-combobox-green" placeholder="매장 선택">
         <cl:listener std:sid="listener-ae7ebf98" name="selection-change" handler="onComboBoxSelectionChange"/>
         <cl:formdata std:sid="f-data-a27082e5" valign="CENTER" height="35" row="0" col="0" rowspan="1" colspan="2"/>

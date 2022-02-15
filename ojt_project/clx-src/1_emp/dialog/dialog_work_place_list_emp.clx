@@ -13,6 +13,7 @@
           <cl:datacolumn std:sid="d-column-873e8705" name="store_code" datatype="number"/>
           <cl:datacolumn std:sid="d-column-93ab7f78" name="business_type_small"/>
           <cl:datacolumn std:sid="d-column-a1205dea" name="business_type_large"/>
+          <cl:datacolumn std:sid="d-column-e552a226" name="class"/>
         </cl:datacolumnlist>
         <cl:datarowlist/>
       </cl:dataset>

@@ -127,3 +127,19 @@ function onSubOnLoadSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 	app.lookup("grd1").redraw();
 }
 
+
+
+/*
+ * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+ * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+ */
+function onBodyInit(/* cpr.events.CEvent */ e){
+	// session 확인
+	var sessionCheck = app.lookup("smsSessionCheck");
+	sessionCheck.setHeader("USER_EMAIL", sessionStorage.getItem("USER_EMAIL"));
+	sessionCheck.send().then(function(input){
+		if(app.lookup("dmSessionCheck").getValue("result") == 0 ){
+			logout(app.getHostAppInstance());
+		}
+	});
+}

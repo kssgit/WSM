@@ -5,16 +5,16 @@
  * @author SeongSoo
  ************************************************/
 
-
-function CheckEmail(str){                                                 
-     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-     if(!reg_email.test(str)) {                            
-          return false;         
-     }                            
-     else {                       
-          return true;         
-     }                            
-}
+// 이메일 유효성 검사
+//function CheckEmail(str){                                                 
+//     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+//     if(!reg_email.test(str)) {                            
+//          return false;         
+//     }                            
+//     else {                       
+//          return true;         
+//     }                            
+//}
 
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -76,8 +76,6 @@ function onButtonClick2(/* cpr.events.CMouseEvent */ e){
 }
 
 
-
-
 /*
  * 인풋 박스에서 keydown 이벤트 발생 시 호출.
  * 사용자가 키를 누를 때 발생하는 이벤트.
@@ -94,9 +92,3 @@ function onIpbpwdKeydown(/* cpr.events.CKeyboardEvent */ e){
 }
 
 
-//
-var dateRange = new cpr.utils.DateRange();
-dateRange.contains();
-//
-//moment().valueOf()
-moment().diff()

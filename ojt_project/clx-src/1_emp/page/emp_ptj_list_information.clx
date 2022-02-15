@@ -63,8 +63,9 @@
           <cl:datacolumn std:sid="d-column-78c6a33e" name="USER_CODE_PTJ"/>
           <cl:datacolumn std:sid="d-column-0a4189e0" name="SCHEDULE_CODE"/>
           <cl:datacolumn std:sid="d-column-f20fa6ae" name="DC"/>
-          <cl:datacolumn std:sid="d-column-178cd8f6" name="value" datatype="expression" expression="WORK_BEGIN_TIME + &quot; &quot; + PTJ_NAME"/>
+          <cl:datacolumn std:sid="d-column-178cd8f6" name="value" datatype="expression" expression="substring(WORK_BEGIN_TIME)+ &quot; &quot; + PTJ_NAME"/>
           <cl:datacolumn std:sid="d-column-7e0bc5bd" name="Class"/>
+          <cl:datacolumn std:sid="d-column-7185e97b" name="WORK_END_DATE"/>
         </cl:datacolumnlist>
       </cl:dataset>
       <cl:datamap std:sid="d-map-edd1fecc" id="dmOnLoad">
@@ -99,6 +100,11 @@
           <cl:datacolumn std:sid="d-column-6dfb8c9d" name="RESULT" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-a4ca1c96" id="dmSessionCheck">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6f0e4c6a" name="result" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-f1f9a76b" id="subOnLoad" action="/emp/onLoad.do">
         <cl:listener std:sid="listener-22e42844" name="submit-success" handler="onSubOnLoad2SubmitSuccess"/>
         <cl:requestdata dataid="dmOnLoad"/>
@@ -125,11 +131,16 @@
         <cl:requestdata dataid="dmCheckUD"/>
         <cl:responsedata dataid="dmCheckUD"/>
       </cl:submission>
+      <cl:submission std:sid="submission-bfe60d5d" id="smsSessionCheck" action="/main/sessionCheck.do">
+        <cl:requestheader name="USER_EMAIL"/>
+        <cl:responsedata dataid="dmSessionCheck"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec title="사원 관리 "/>
   </head>
   <body std:sid="body-b6fe0a08">
     <cl:listener std:sid="listener-1ae87d07" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-4f39ce13" name="init" handler="onBodyInit"/>
     <cl:group std:sid="group-a658948c">
       <cl:responsivexylayoutdata std:sid="rxyl-data-3dd214f6">
         <cl:xylayoutdata std:sid="sxyl-data-65a40b06" top="0px" right="0px" left="0px" height="296px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
@@ -146,7 +157,6 @@
         <cl:listener std:sid="listener-03835427" name="rowgroup-click" handler="onGrd2RowgroupClick"/>
         <cl:listener std:sid="listener-27d11a75" name="cell-click" handler="onGrd2CellClick2"/>
         <cl:formdata std:sid="f-data-92520408" row="2" col="0" rowspan="1" colspan="4"/>
-        <cl:gridcolumn std:sid="g-column-3f334f06" width="25px"/>
         <cl:gridcolumn std:sid="g-column-4c247e8a" width="50px"/>
         <cl:gridcolumn std:sid="g-column-cfac1b4d"/>
         <cl:gridcolumn std:sid="g-column-1ce903d2"/>
@@ -157,31 +167,29 @@
         <cl:gridcolumn std:sid="g-column-c48bfd5b"/>
         <cl:gridheader std:sid="gh-band-095a91f8">
           <cl:gridrow std:sid="g-row-161dd397"/>
-          <cl:gridcell std:sid="gh-cell-0d6a70fb" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
-          <cl:gridcell std:sid="gh-cell-243d2e57" rowindex="0" colindex="1" sortable="false" filterable="false"/>
-          <cl:gridcell std:sid="gh-cell-7aec8383" rowindex="0" colindex="2" targetcolumnname="STORE_NAME" sortable="false" filterable="false" text="매장이름"/>
-          <cl:gridcell std:sid="gh-cell-4936acc3" rowindex="0" colindex="3" targetcolumnname="NAME" sortable="false" filterable="false" text="직원 이름"/>
-          <cl:gridcell std:sid="gh-cell-42ee4c7e" rowindex="0" colindex="4" targetcolumnname="USER_CALL" sortable="false" filterable="false" text="직원 전화번호"/>
-          <cl:gridcell std:sid="gh-cell-a7ea8bcb" rowindex="0" colindex="5" targetcolumnname="PAY_KIND" sortable="false" filterable="false" text="급여방식"/>
-          <cl:gridcell std:sid="gh-cell-63f1e6ba" rowindex="0" colindex="6" targetcolumnname="PAY_DAY" sortable="false" filterable="false" text="급여일"/>
-          <cl:gridcell std:sid="gh-cell-acb991ac" rowindex="0" colindex="7" targetcolumnname="TAX_STAT" sortable="false" filterable="false" text="세금"/>
-          <cl:gridcell std:sid="gh-cell-8dbe2e15" rowindex="0" colindex="8" targetcolumnname="TOTAL_WORK_HOUR" sortable="false" filterable="false" text="총 근무시간"/>
+          <cl:gridcell std:sid="gh-cell-243d2e57" rowindex="0" colindex="0" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-7aec8383" rowindex="0" colindex="1" targetcolumnname="STORE_NAME" sortable="false" filterable="false" text="매장이름"/>
+          <cl:gridcell std:sid="gh-cell-4936acc3" rowindex="0" colindex="2" targetcolumnname="NAME" sortable="false" filterable="false" text="직원 이름"/>
+          <cl:gridcell std:sid="gh-cell-42ee4c7e" rowindex="0" colindex="3" targetcolumnname="USER_CALL" sortable="false" filterable="false" text="직원 전화번호"/>
+          <cl:gridcell std:sid="gh-cell-a7ea8bcb" rowindex="0" colindex="4" targetcolumnname="PAY_KIND" sortable="false" filterable="false" text="급여방식"/>
+          <cl:gridcell std:sid="gh-cell-63f1e6ba" rowindex="0" colindex="5" targetcolumnname="PAY_DAY" sortable="false" filterable="false" text="급여일"/>
+          <cl:gridcell std:sid="gh-cell-acb991ac" rowindex="0" colindex="6" targetcolumnname="TAX_STAT" sortable="false" filterable="false" text="세금"/>
+          <cl:gridcell std:sid="gh-cell-8dbe2e15" rowindex="0" colindex="7" targetcolumnname="TOTAL_WORK_HOUR" sortable="false" filterable="false" text="총 근무시간"/>
         </cl:gridheader>
         <cl:griddetail std:sid="gd-band-fbc712ee">
           <cl:gridrow std:sid="g-row-964b7b09"/>
-          <cl:gridcell std:sid="gd-cell-49869c81" rowindex="0" colindex="0" columntype="checkbox"/>
-          <cl:gridcell std:sid="gd-cell-b382886f" rowindex="0" colindex="1" columntype="rowindex"/>
-          <cl:gridcell std:sid="gd-cell-284245e1" rowindex="0" colindex="2" columnname="STORE_NAME"/>
-          <cl:gridcell std:sid="gd-cell-528f7272" rowindex="0" colindex="3" columnname="NAME"/>
-          <cl:gridcell std:sid="gd-cell-c7abfaa2" rowindex="0" colindex="4" columnname="USER_CALL">
+          <cl:gridcell std:sid="gd-cell-b382886f" rowindex="0" colindex="0" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-284245e1" rowindex="0" colindex="1" columnname="STORE_NAME"/>
+          <cl:gridcell std:sid="gd-cell-528f7272" rowindex="0" colindex="2" columnname="NAME"/>
+          <cl:gridcell std:sid="gd-cell-c7abfaa2" rowindex="0" colindex="3" columnname="USER_CALL">
             <cl:maskeditor std:sid="m-editor-e27b282e" id="mse1" style="text-align:center;" readonly="true" mask="000-0000-0000">
               <cl:celldata std:sid="c-data-2be0958c"/>
             </cl:maskeditor>
           </cl:gridcell>
-          <cl:gridcell std:sid="gd-cell-b0202b24" rowindex="0" colindex="5" columnname="PAY_KIND"/>
-          <cl:gridcell std:sid="gd-cell-b3b45378" rowindex="0" colindex="6" columnname="PAY_DAY"/>
-          <cl:gridcell std:sid="gd-cell-d33d19fe" rowindex="0" colindex="7" columnname="TAX_STAT"/>
-          <cl:gridcell std:sid="gd-cell-efefa04e" rowindex="0" colindex="8" columnname="TOTAL_WORK_HOUR"/>
+          <cl:gridcell std:sid="gd-cell-b0202b24" rowindex="0" colindex="4" columnname="PAY_KIND"/>
+          <cl:gridcell std:sid="gd-cell-b3b45378" rowindex="0" colindex="5" columnname="PAY_DAY"/>
+          <cl:gridcell std:sid="gd-cell-d33d19fe" rowindex="0" colindex="6" columnname="TAX_STAT"/>
+          <cl:gridcell std:sid="gd-cell-efefa04e" rowindex="0" colindex="7" columnname="TOTAL_WORK_HOUR"/>
         </cl:griddetail>
       </cl:grid>
       <cl:button std:sid="button-a52b787a" class="btn-danger" value="퇴사">

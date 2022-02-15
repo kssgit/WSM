@@ -66,10 +66,8 @@ public class RegisterController {
 		
 		ParameterGroup param = datareq.getParameterGroup("dmRegister");
 		
-//		System.out.println(req.getAttribute("com.cleopatra.data_request"));
-		
 		Map<String, Integer> result = service.duplicate(param.getValue("EMAIL"));
-//		System.out.println(result.get("SUCCESS"));
+
 		Map<String, String> resMap = new HashMap();
 		
 		if(result.get("SUCCESS") ==(Integer)1) {//아이디 중복

@@ -39,17 +39,14 @@ function onButtonClick2(/* cpr.events.CMouseEvent */ e){
 	util.Dialog.open(app, "1_emp/dialog/dialog_emp_register_store", "410", "350", function(e){
 			/** @type cpr.controls.Dialog */
 			var dialog = e.control;
-//			console.log("wqewqrqwrwqe");
+			console.log("wqewqrqwrwqe");
 //			app.lookup("subOnLoad").send().then(function(input){
 //				grp.removeAllChildren();
 //				storeListDraw(false);
 //				createMonthly(false);
 //				addStoreUdc();
 //			});;
-		}, {/*initValue*/});
-	
-	
-	
+		});
 	app.close();
 }
 
@@ -81,7 +78,7 @@ function onSubOnLoadSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 		var value = dswpn.getValue(i, "store_name");
 		//udc 선언
 		var wpm = new udc.ptj.wpm();
-		console.log(dswpn.getValue(i, "store_code"));
+		//app 속성 설정
 		wpm.wp_name = value;
 		wpm.store_code = dswpn.getValue(i, "store_code");
 		//로컬 스토리지
@@ -96,9 +93,9 @@ function onSubOnLoadSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 				app.lookup("dmDeleteStore").setValue("STORE_CODE", wpm.store_code);
 				app.lookup("dmDeleteStore").setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
 				var sms = app.lookup("smsDeleteStore");
-				if(UserInfo.getUserInfo().getValue("USER_KIND") == "EMPLOYER"){
+				if(sessionStorage.getItem("USER_KIND")  == "EMPLOYER"){
 					sms.action ="/emp/deleteStore.do"
-				}else if(UserInfo.getUserInfo().getValue("USER_KIND") == "PARTTIMEJOB"){
+				}else if(sessionStorage.getItem("USER_KIND") == "PARTTIMEJOB"){
 					sms.action ="/ptj/deleteStore.do"
 					console.log("삭제 주소");
 				}

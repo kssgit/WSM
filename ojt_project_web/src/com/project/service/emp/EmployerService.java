@@ -3,6 +3,7 @@ package com.project.service.emp;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,38 +11,46 @@ import com.project.dao.emp.EmployerDao;
 import com.project.service.interfaces.EmployerServiceInterface;
 
 @Service
-public class EmployerService implements EmployerServiceInterface {
+public class EmployerService /* implements EmployerServiceInterface */ {
 
 	@Autowired
 	private EmployerDao dao;
 	
-	@Override
-	public List storeList(String user_umber_emp,  String user_email, String user_code_ptj) {
-		
-		return dao.storeList(user_umber_emp,user_email,user_code_ptj);
-	}
-
-	@Override
-	public List storeScheduleList(String user_id) {
-		
-		return dao.storeScheduleList(user_id);
-	}
-
-	@Override
-	public int addStore(Map<String, Object> storeData) {
-		// TODO Auto-generated method stub
-		return dao.addStore(storeData);
-	}
-
-	public List<Map<String, Object>> getPtjList(String storeCode, String userNumber) {
-		List result = dao.getPtjList(storeCode, userNumber);
+//	@Override
+//	public List storeList(String user_umber_emp,  String user_email, String user_code_ptj) {
+//		Map<String,String> param = new HashedMap();
+//		param.put("USER_NUMBER_EMP", user_umber_emp);
+//		param.put("USER_EMAIL", user_email);
+//		param.put("user_code_ptj", user_code_ptj);
+//				
+//		return dao.storeList(param);
+//	}
+//
+//	@Override
+//	public List storeScheduleList(String user_id) {
+//		Map<String, String> param = new HashedMap();
+//		param.put("USER_CODE_EMP", user_id);
+////		return dao.storeScheduleList(param);
+//		return new List;
+//	}
+//
+//	@Override
+//	public int addStore(Map<String, Object> storeData) {
+//		// TODO Auto-generated method stub
+////		return dao.addStore(storeData);
+//		return 0;
+//	}
+	
+	//직원 목록 조회
+	public List<Map<String, Object>> getPtjList(String userNumber) {
+		List result = dao.getPtjList(userNumber);
 		return result;
 	}
 
-	public List<Map<String, Object>> getschedule(Map<String, Object> scheduleData) {
-		List<Map<String, Object>> result = dao.getschedule(scheduleData);
-		return result;
-	}
+//	public List<Map<String, Object>> getschedule(Map<String, Object> scheduleData) {
+//		List<Map<String, Object>> result = dao.getschedule(scheduleData);
+//		return result;
+//	}
 	
 	//매장 연결 요청 리스트 조회
 	public List requsetList(String USER_NUMBER) {

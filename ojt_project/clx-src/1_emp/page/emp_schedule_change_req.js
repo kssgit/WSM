@@ -13,6 +13,7 @@
  */
 function onBodyLoad(/* cpr.events.CEvent */ e){
 	var dm = app.lookup("dmOnLoad");
+	
 	dm.setValue("USER_EMAIL", UserInfo.getUserInfo().getValue("USER_EMAIL"));
 	dm.setValue("USER_KIND", "EMP");
 	dm.setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
@@ -85,7 +86,7 @@ function onButtonClick3(/* cpr.events.CMouseEvent */ e){
 			var message = app.lookup("dmException").getValue("message");
 			console.log(message);
 			if(message == 1){
-				app.lookup("noti").warning("시간중복이 발생 했습니다!! 시작시간이 빠른 근무가 추가되었습니다");
+				app.lookup("noti").warning("시간중복이 발생 되어 시작시간이 빠른 근무만 승인되었습니다.");
 			}
 			app.lookup("grd1").redraw();
 			app.lookup("dsSelectSchedule").clear();
@@ -156,4 +157,34 @@ function onButtonClick6(/* cpr.events.CMouseEvent */ e){
 		grid.getRow(each).setValue("ACCEPT_EMP", "Y");
 	});
 	grid.getSelectedRow().setValue("ACCEPT_EMP", "Y");
+}
+
+
+/*
+ * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+ * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+ */
+function onBodyInit(/* cpr.events.CEvent */ e){
+	// session 확인
+	var sessionCheck = app.lookup("smsSessionCheck");
+	sessionCheck.setHeader("USER_EMAIL", sessionStorage.getItem("USER_EMAIL"));
+	sessionCheck.send().then(function(input){
+		if(app.lookup("dmSessionCheck").getValue("result") == 0 ){
+			logout(app.getHostAppInstance());
+		}
+	});
+}
+
+
+/*
+ * "취소" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var button = e.control;
+	app.lookup("dsRequest").revert();
+	app.lookup("grd3").redraw();
 }

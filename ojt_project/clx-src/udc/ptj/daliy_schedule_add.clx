@@ -15,6 +15,11 @@
   </head>
   <body std:sid="body-2ee9db67" style="border-right-style:soild; border-top-width:1px; border-bottom-color:gray; border-right-width:1px; border-left-color:gray; border-right-color:gray; border-left-width:1px; border-top-style:soild; top:0px; left:0px; border-left-style:soild; width:400px; border-bottom-width:1px; border-top-color:gray; border-bottom-style:soild; height:80px;">
     <cl:group std:sid="group-fc81819c" class="schedule-udc">
+      <cl:listener std:sid="listener-1d36c08c" name="click" handler="onGroupClick2"/>
+      <cl:listener std:sid="listener-52c7015d" name="mouseenter" handler="onGroupMouseenter"/>
+      <cl:listener std:sid="listener-68e590c7" name="mouseleave" handler="onGroupMouseleave"/>
+      <cl:listener std:sid="listener-32dc3b66" name="mouseup" handler="onGroupMouseup"/>
+      <cl:listener std:sid="listener-5a57efb5" name="mousedown" handler="onGroupMousedown"/>
       <cl:xylayoutdata std:sid="xyl-data-ecc3f1da" width="400px" height="80px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
       <cl:group std:sid="group-ae192969">
         <cl:listener std:sid="listener-68dc06ce" name="click" handler="onGroupClick"/>
