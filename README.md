@@ -12,7 +12,7 @@
 - **개발 언어**
 
   - 서버 : JAVA( zulu8.58.0.13 -ca -jdk8.0.312)
-  - 클라이언트 : javascript(ES5), HTML5, CSS
+  - 클라이언트 : javascript(ES5),Typescript, HTML5, CSS(less)
 
 - **프레임 워크**
 
