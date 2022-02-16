@@ -82,7 +82,8 @@ function onSmsUserInfoSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 	var dm = app.lookup("dmUserinfo");
 	// session  확인
 	if(dm.getValue("USER_KIND") == null ){
-		UserInfo.clean();
+//		UserInfo.clean();
+		sessionStorage.clear();
 		app.close();
 		location.href = "/";
 	}

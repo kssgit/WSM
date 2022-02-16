@@ -24,7 +24,7 @@ import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.protocol.data.ParameterRow;
 import com.cleopatra.spring.JSONDataView;
 import com.project.dao.emp.EmployerDao;
-import com.project.service.emp.EmployerService;
+//import com.project.service.emp.EmployerService;
 
 /**
   * @FileName : EmployerController.java
@@ -33,6 +33,7 @@ import com.project.service.emp.EmployerService;
   * @작성자 : SeongSoo
   * @변경이력 :
   * @프로그램 설명 : 고용주 Controller
+  * 총 16개 함수
   */
 @Controller
 @RequestMapping("emp")
@@ -148,7 +149,7 @@ public class EmployerController {
 		/* String storeCode = param.getValue("STORE_CODE"); */
 		String userNumber = param.getValue("USER_NUMBER");
 		List<Map<String, Object>> result = dao.getPtjList(/* storeCode, */userNumber);
-		
+		System.out.println(result.toString());
 		dataRequest.setResponse("dsPtjList", result);
 		
 		return new JSONDataView();
@@ -301,7 +302,8 @@ public class EmployerController {
 		ParameterGroup param = dataRequest.getParameterGroup("dmOnLoad");
 		
 		List changeList = dao.getscheduleChange(param.getValue("USER_EMAIL"));
-
+		System.out.println(changeList.toString());
+		
 		dataRequest.setResponse("dsScheduleChange", changeList);
 
 		return new JSONDataView();

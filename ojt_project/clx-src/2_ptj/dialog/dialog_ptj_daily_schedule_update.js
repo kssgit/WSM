@@ -5,36 +5,42 @@
  * @author SeongSoo
  ************************************************/
 /* ***********Break Point 찾기 함수************ */
-function getBreakPoint(){
-	var timeCon = scheduleFilter();
+function getBreakPoint(selectedDate, selectedTime){
+	var dti1 = app.lookup("workDate")
+	var dti2 = app.lookup("workDate2")
 	var dsHour = app.lookup("dsHour");
 	var dsEvnt = app.lookup("dsEvnt");
-	var selectedDate = app.lookup("workDate").value;
-	var selectedTime = app.lookup("workBeginTime").value.replace(":", "");
+	var timeCon = scheduleFilter(selectedDate);
+	var result;
 
+	// 해당 날짜의 일정이 있는 경우
 	if(dsEvnt.getRowCount() != 0){ // 해당 날짜의 일정이 있는 경우
 		dsEvnt.setSort("beginDt");//ds오름차순 정렬
 		var findBpCon = selectedDate+selectedTime+"00" //첫번째 bp찾는 조건
 		
-		if(dsEvnt.findFirstRow("beginDt>"+findBpCon) != null){ // 마지막 일정 선택시 bp가 없으므로 조건 처리
-			var firstRow = dsEvnt.findFirstRow("beginDt>"+findBpCon).getValue("beginDt"); // 조건에 부합하는 첫 번째 이벤트
+		if(dsEvnt.findFirstRow("beginDt >="+findBpCon) != null){ // 마지막 일정 이전 선택시(bp있을 때)
+			var firstRow = dsEvnt.findFirstRow("beginDt>="+findBpCon).getValue("beginDt"); // 조건에 부합하는 첫 번째 이벤트
 			console.log("firstRow ="+firstRow); 
 			var bp1 = firstRow.substring(firstRow.length-6, firstRow.length-2);
 			
 			if(timeCon != '' || timeCon != null){
 				timeCon += "&&"+ "("+" timeNum >= "+selectedTime+"&&"+ "timeNum <="+ bp1 +")";
 			}
-		}else{
-			
+			// 선택 일정 이후에 스케줄이 있다면 종료일을 시작일로 세팅하고 disable 처리
+			result = true
+		}else{ //마지막 일정 이후 선택시(bp 없을 때)
 			if(timeCon != '' || timeCon != null){
 				timeCon += "&&"+"("+" timeNum >= "+selectedTime+")";
 			}
+			result = false;
 		}
-		
+			dsHour.setFilter(timeCon);
+			return result;
+	}else{// 해당 날짜의 일정이 없는 경우
+		timeCon += "&&("+" timeNum >= "+selectedTime+")";
 		dsHour.setFilter(timeCon);
-	}else{
-		timeCon += "("+" timeNum >= "+selectedTime+")";
-		dsHour.setFilter(timeCon);
+		result = false;
+		return result;
 	}
 }
 
@@ -55,8 +61,7 @@ function comboboxValidationCheck(/*cpr.controls.ComboBox */ control){
 }
 
 /* ********** 선택 일자에 존재하는 스케줄을 반영하여 필터값 생성********** */
-function scheduleFilter(){
-	var selectedDate = app.lookup("workDate").value;
+function scheduleFilter(selectedDate){
 	var dsEvnt = app.lookup("dsEvnt");
 	var dsHour = app.lookup("dsHour");
 	var eventCon = "work_date == "+selectedDate+"000000";
@@ -76,9 +81,8 @@ function scheduleFilter(){
 		var edt = dsEvnt.getValue(i, "endDt");
 		var schedule = [bdt,edt];
 		if(bdt != WBT && edt != WET)
-		array1.push(schedule);
+		array1.push(schedule); // 변경시 선택한 일정은 시간 validation에서 제외;
 	}
-	console.log("array1 출력: "+ array1)//배열 출력 [[시작시간1,종료시간1], [시작시간2,종료시간2]]
 	
 	var timeCon = '(timeNum)';
 	for(var i=0; i<array1.length; i++){
@@ -123,6 +127,7 @@ function onWorkDateValueChange(/* cpr.events.CValueChangeEvent */ e){
 	 * @type cpr.controls.DateInput
 	 */
 	var dti1 = e.control;
+	
 	var dti2 = app.lookup("workDate2");
 	var dti1Val = dti1.dateValue;
 	//선택일과 익일만 선택 가능
@@ -132,7 +137,7 @@ function onWorkDateValueChange(/* cpr.events.CValueChangeEvent */ e){
 	dti2. maxDate = new Date(dti1Val);
 	
 	var dsHour = app.lookup("dsHour");
-	var filter = scheduleFilter();
+	var filter = scheduleFilter(dti1.value);
 	console.log(filter != null)
 	if(filter != ''){
 		dsHour.setFilter(filter);
@@ -147,12 +152,20 @@ function onWorkDateValueChange(/* cpr.events.CValueChangeEvent */ e){
  * ComboBox Item을 선택하여 선택된 값이 저장된 후에 발생하는 이벤트.
  */
 function onWorkBeginTimeSelectionChange(/* cpr.events.CSelectionEvent */ e){
-	/** 
-	 * @type cpr.controls.ComboBox
-	 */
-	var workBeginTime = e.control;
-	comboboxValidationCheck(workBeginTime)
-	getBreakPoint();
+	console.log("셀렉션 체인지")
+	var dsHour = app.lookup("dsHour");
+	var dti1 = app.lookup("workDate");
+	var dti2 = app.lookup("workDate2");
+	var selectedTime = app.lookup("workBeginTime").value.replace(":", "");
+	console.log("ㄱ근무시작시간: "+ selectedTime)
+	console.log("시작일자: "+ dti1.value)
+	
+	if(getBreakPoint(dti1.value, selectedTime)){
+		dti2.dateValue = dti1.dateValue;
+		dti2.enabled=false;
+	}else{
+		dti2.enabled = true;
+	}
 	
 	app.lookup("workEndTime").value = '';
 }
@@ -167,7 +180,6 @@ function onWorkEndTimeSelectionChange(/* cpr.events.CSelectionEvent */ e){
 	 * @type cpr.controls.ComboBox
 	 */
 	var workEndTime = e.control;
-	comboboxValidationCheck(workEndTime)
 }
 
 
@@ -178,8 +190,9 @@ function onWorkEndTimeSelectionChange(/* cpr.events.CSelectionEvent */ e){
 function onWorkBeginTimeOpen(/* cpr.events.CUIEvent */ e){
 	
 	var dsHour = app.lookup("dsHour");
+	var dti1 = app.lookup("workDate")
 	dsHour.clearFilter();
-	var filter = scheduleFilter();
+	var filter = scheduleFilter(dti1.value);
 	if(filter != null && filter != ''){
 		dsHour.setFilter(filter);
 	}
@@ -198,14 +211,16 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 		dataMap.setValue("ptj_name", UserInfo.getUserInfo().getValue("USER_NAME"));
 		dataMap.setValue("work_date", app.lookup("workDate").value);
 		dataMap.setValue("work_begin_time", app.lookup("workBeginTime").value.replace(":",""));
+		dataMap.setValue("work_end_date", app.lookup("workDate2").value);
 		dataMap.setValue("work_end_time", app.lookup("workEndTime").value.replace(":",""));
 		if(app.lookup("breaktime").value == null || app.lookup("breaktime").value == ""){
 			dataMap.setValue("breaktime", 0);
 		}else{
 			dataMap.setValue("breaktime", app.lookup("breaktime").value);
 		}
-		app.lookup("smsDelete").send();
-		app.close();
+		app.lookup("smsDelete").send().then(function(input){
+			app.close();
+		});
 	}
 }
 
@@ -238,6 +253,7 @@ function onButtonClick3(/* cpr.events.CMouseEvent */ e){
 	dataMap.setValue("ptj_name", UserInfo.getUserInfo().getValue("USER_NAME"));
 	dataMap.setValue("work_date", app.lookup("workDate").value);
 	dataMap.setValue("work_begin_time", app.lookup("workBeginTime").value.replace(":",""));
+	dataMap.setValue("work_end_date", app.lookup("workDate2").value);
 	dataMap.setValue("work_end_time", app.lookup("workEndTime").value.replace(":",""));
 	if(app.lookup("breaktime").value == null || app.lookup("breaktime").value == ""){
 		dataMap.setValue("breaktime", 0);
@@ -257,9 +273,10 @@ function onButtonClick3(/* cpr.events.CMouseEvent */ e){
 	}else{
 		app.lookup("smsSave").send().then(function(input){
 			alert("근무 변경 요청이 완료되었습니다.")
+			app.close();
 		});
 	}
-	app.close()
+
 }
 
 
@@ -268,18 +285,29 @@ function onButtonClick3(/* cpr.events.CMouseEvent */ e){
  * 리스트박스를 열때 발생하는 이벤트.
  */
 function onWorkEndTimeOpen(/* cpr.events.CUIEvent */ e){
-	getBreakPoint();
+	
 	var dsHour = app.lookup("dsHour");
-	var filter = dsHour.getFilter();
-	console.log(filter)
-	var selectedTime = app.lookup("workBeginTime").value.replace(":", "");
-	if(filter != ''){
-		filter += "&& timeNum > "+ selectedTime;
-	}else{
-		filter += "timeNum > "+ selectedTime;
+	var dsEvnt = app.lookup("dsEvnt");
+	var dti1 = app.lookup("workDate");
+	var dti2 = app.lookup("workDate2");
+	var timeCon;
+	var selectedTime;
+	if(dti1.value == dti2.value.substring(0, 8)){
+		//시작일과 종료일이 같으면 위의 필터 조건 그대로 쓰고 
+		timeCon = dsHour.getFilter();
+		selectedTime = app.lookup("workBeginTime").value.replace(":", "");
+		timeCon += "&& timeNum != "+ selectedTime;
+		console.log("timeCondition : " + timeCon)
+		dsHour.setFilter(timeCon);
+	}else {
+		//시작일과 종료일이 다르면 종료일의 스케줄 조회해서 새로운 필터 적용 (스케줄 + bp)
+		dsHour.clearFilter();
+		timeCon = scheduleFilter(dti2.value);
+		selectedTime = "0000";
+		console.log("timeCondition : " + timeCon)
+		getBreakPoint(dti2.value, selectedTime)
 	}
 	
-	dsHour.setFilter(filter);
 }
 
 
@@ -288,7 +316,7 @@ function onWorkEndTimeOpen(/* cpr.events.CUIEvent */ e){
  * 통신이 성공하면 발생합니다.
  */
 function onSubGetScheduleSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
-	
+	var dti1 = app.lookup("workDate");
 	var dsHour = app.lookup("dsHour");
 	
 	//10분 단위로 시간 만들기
@@ -311,26 +339,31 @@ function onSubGetScheduleSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 	
 	var initValue = app.getHostProperty("initValue");
 	var store_name = initValue["store_name"];
-	var work_begin_time = initValue["work_begin_time"];
-	var work_end_time = initValue["work_end_time"];
 	var work_date = initValue["work_date"];
+	var work_begin_time = initValue["work_begin_time"];
+	var work_end_date = initValue["work_end_date"];
+	var work_end_time = initValue["work_end_time"];
 	var store_code = initValue["storeCode"];
 	var breaktime = initValue["breaktime"];
 	var scheduleCode = initValue["scheduleCode"]
+	console.log(work_end_date)
+	console.log(work_date)
 	
 	//초기값과 저장 값 비교를 위한 데이터맵 dmOrigin
 	var origin = app.lookup("dmOrigin");
 	origin.setValue("work_date", work_date);
 	origin.setValue("work_begin_time", work_begin_time);
+	origin.setValue("work_end_date", work_end_date);
 	origin.setValue("work_end_time", work_end_time);
 	origin.setValue("breaktime", breaktime);
 	
 	//컨트롤에 선택한 스케줄 값 세팅
 	app.lookup("workPlace").putValue(store_name);
-	app.lookup("workDate").putValue("");
-	app.lookup("workDate").putValue(work_date);
-	app.lookup("workBeginTime").putValue("");
-	app.lookup("workBeginTime").putValue(work_begin_time);
+	app.lookup("workDate").value = work_date;
+	app.lookup("workBeginTime").value = work_begin_time;
+	onWorkBeginTimeOpen(e);
+	onWorkBeginTimeSelectionChange(e);
+	app.lookup("workDate2").putValue(work_end_date);
 	app.lookup("workEndTime").putValue(work_end_time);
 	app.lookup("breaktime").putValue(breaktime);
 	
@@ -338,5 +371,5 @@ function onSubGetScheduleSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 	app.lookup("dmUpdateSchedule").setValue("store_name", store_name);//데이터 맵에 미리 세팅하기(고정값)
 	app.lookup("dmUpdateSchedule").setValue("schedule_code", scheduleCode);//데이터 맵에 미리 세팅하기(고정값)
 	
-	dsHour.setFilter(scheduleFilter());
 }
+

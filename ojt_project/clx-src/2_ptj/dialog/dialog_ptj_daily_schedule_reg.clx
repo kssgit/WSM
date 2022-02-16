@@ -53,6 +53,7 @@
           <cl:datacolumn std:sid="d-column-48f37d46" name="WH"/>
           <cl:datacolumn std:sid="d-column-3545e7dc" name="work_date"/>
           <cl:datacolumn std:sid="d-column-f4f56001" name="start"/>
+          <cl:datacolumn std:sid="d-column-50973a70" name="work_end_date"/>
         </cl:datacolumnlist>
       </cl:dataset>
       <cl:dataset std:sid="d-set-5371410a" id="dsHour">
@@ -196,7 +197,7 @@
           <cl:listener std:sid="listener-f7579988" name="click" handler="onButtonClick"/>
           <cl:formdata std:sid="f-data-58b63fb1" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="1"/>
         </cl:button>
-        <cl:button std:sid="button-9e22774e" class="btn-outline-success" value="저장">
+        <cl:button std:sid="button-9e22774e" class="btn-outline-success" value="요청">
           <cl:listener std:sid="listener-aafc93d2" name="click" handler="onButtonClick2"/>
           <cl:formdata std:sid="f-data-ab93488e" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="3"/>
         </cl:button>

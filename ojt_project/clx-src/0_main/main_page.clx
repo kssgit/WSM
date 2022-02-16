@@ -65,7 +65,7 @@
     <cl:embeddedapp std:sid="e-app-7757ede1" id="ea1">
       <cl:listener std:sid="listener-8383ecd3" name="dblclick" handler="onEa1Dblclick"/>
       <cl:responsivexylayoutdata std:sid="rxyl-data-d72ecc42">
-        <cl:xylayoutdata std:sid="sxyl-data-562949e6" right="61px" width="1379px" height="880px" horizontalAnchor="RIGHT" verticalAnchor="CENTER" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-562949e6" top="80px" right="61px" bottom="60px" width="1379px" horizontalAnchor="RIGHT" verticalAnchor="BOTH" screenid="default"/>
         <cl:xylayoutdata std:sid="sxyl-data-cc8de9a7" right="43px" left="323px" height="880px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="tablet"/>
         <cl:xylayoutdata std:sid="sxyl-data-03fe0e51" right="30px" left="226px" height="880px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="mobile"/>
       </cl:responsivexylayoutdata>

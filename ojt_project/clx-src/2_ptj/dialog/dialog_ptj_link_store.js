@@ -85,11 +85,9 @@ function onButtonClick2(/* cpr.events.CMouseEvent */ e){
 	}
 	dmr.setValue("user_code_ptj", sessionStorage.getItem("USER_NUMBER"));
 	dmr.setValue("call", app.lookup("mse1").value);
-	dmr.setValue("role",app.lookup("ipbRole").value);
 	dmr.setValue("gender",userGender);
 	app.lookup("smsRequestLink").send();
 	
-	app.close();
 }
 
 
@@ -120,4 +118,31 @@ function onWOMANClick(/* cpr.events.CMouseEvent */ e){
 	var man = app.lookup("MAN");
 	userGender = 'F';
 	radioCheck(woman,man);
+}
+
+
+/*
+ * "취소" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick3(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var button = e.control;
+	app.close();
+}
+
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSmsRequestLinkSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
+	/** 
+	 * @type cpr.protocols.Submission
+	 */
+	var smsRequestLink = e.control;
+	alert("매장 연결 요청을 보냈습니다.");
+	app.close();
 }

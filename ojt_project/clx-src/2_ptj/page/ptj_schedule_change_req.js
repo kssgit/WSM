@@ -4,6 +4,25 @@
  *
  * @author SeongSoo
  ************************************************/
+/* cpr.expression.ExpressionEngine#registerFunction */
+cpr.expression.ExpressionEngine.INSTANCE.registerFunction("getND", function(nd) {
+	if(nd == "N"){
+		return "미승인";
+	}else{
+		return "거부";
+	}
+});
+
+cpr.expression.ExpressionEngine.INSTANCE.registerFunction("getUDC", function(udc) {
+	if(udc == "C"){
+		return "추가";
+	}else if(udc == "D"){
+		return "삭제";
+	}else{
+		return 	"변경";
+	}
+});
+
 
 // 스케줄 중복 유효성 검사
 function validation(ScheduleBegin, ScheduleEnd, NewScheduleBegin ,NewScheduleEnd){
@@ -47,10 +66,12 @@ function formatting(before){
  */
 function onBodyLoad(/* cpr.events.CEvent */ e){
 	var dm = app.lookup("dmOnLoad");
-	dm.setValue("USER_EMAIL", UserInfo.getUserInfo().getValue("USER_EMAIL"));
+//	dm.setValue("USER_EMAIL", UserInfo.getUserInfo().getValue("USER_EMAIL"));
+	dm.setValue("USER_EMAIL", sessionStorage.getItem("USER_EMAIL"));
 	dm.setValue("USER_KIND", "PTJ");
-	dm.setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
-	console.log(UserInfo.getUserInfo().getValue("USER_NUMBER"));
+//	dm.setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
+	dm.setValue("USER_NUMBER", sessionStorage.getItem("USER_NUMBER"));
+//	console.log(UserInfo.getUserInfo().getValue("USER_NUMBER"));
 	//요청 받은 목록
 	app.lookup("smsScheduleChange").send().then(function(input){
 		app.lookup("dsScheduleChange").setSort("WORK_BEGIN_TIME");
@@ -74,7 +95,8 @@ function onGrd1CellClick(/* cpr.events.CGridMouseEvent */ e){
 	var grd1 = e.control;
 	var dm = app.lookup("dmSelectRow");
 	dm.setValue("WORK_DATE", grd1.getSelectedRow().getRowData()["WORK_DATE"]);
-	dm.setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
+//	dm.setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
+	dm.setValue("USER_NUMBER", sessionStorage.getItem("USER_NUMBER"));
 	var select_schedule_code = grd1.getSelectedRow().getRowData()["UD_SCHEDULE_NUMBER"];
 	var UD = grd1.getSelectedRow().getRowData()["DC"];
 	
@@ -250,4 +272,18 @@ function onBodyInit(/* cpr.events.CEvent */ e){
 			logout(app.getHostAppInstance());
 		}
 	});
+}
+
+
+/*
+ * "취소" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Button
+	 */
+	var button = e.control;
+	app.lookup("dsRequest").revert();
+	app.lookup("grd3").redraw();
 }

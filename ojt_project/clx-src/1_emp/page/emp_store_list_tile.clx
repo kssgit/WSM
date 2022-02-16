@@ -64,16 +64,9 @@
     <cl:listener std:sid="listener-775d4450" name="load" handler="onBodyLoad"/>
     <cl:listener std:sid="listener-7debb98d" name="init" handler="onBodyInit"/>
     <cl:group std:sid="group-23987253">
-      <cl:xylayoutdata std:sid="xyl-data-40dac3ed" top="0px" right="0px" bottom="10px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:group std:sid="group-0f796b17" id="grpFlow" class="cl-grp-box bg-white" visible="false">
-        <cl:formdata std:sid="f-data-7e0e7ecc" halign="FILL" valign="FILL" width="250" height="40" row="0" col="2" ignore-layout-spacing="true"/>
-        <cl:verticallayout std:sid="v-layout-5d90726c" spacing="5" topmargin="25"/>
-      </cl:group>
-      <cl:output std:sid="output-9b1833eb" class="app-title" value="매장 Schedule">
-        <cl:formdata std:sid="f-data-3aa4b3bf" row="0" col="0"/>
-      </cl:output>
+      <cl:xylayoutdata std:sid="xyl-data-40dac3ed" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-29a4a01c">
-        <cl:formdata std:sid="f-data-d86fe1ca" row="1" col="0" rowspan="4" colspan="6"/>
+        <cl:formdata std:sid="f-data-d86fe1ca" row="0" col="0" rowspan="4" colspan="6"/>
         <cl:calendar std:sid="calendar-1d35979f" id="cl" class="mainCalendar" headervisible="false" footervisible="false">
           <cl:listener std:sid="listener-04820cff" name="date-click" handler="onCalendarDateClick"/>
           <cl:listener std:sid="listener-8435fde3" name="item-click" handler="onCalendarItemClick"/>
@@ -87,11 +80,11 @@
         </cl:calendar>
         <cl:group std:sid="group-0094a467">
           <cl:formdata std:sid="f-data-0d282b01" row="0" col="0" rowspan="1" colspan="4"/>
-          <cl:output std:sid="output-5a41afc2" id="month" style="text-align:center;" class="h1">
-            <cl:xylayoutdata std:sid="xyl-data-ff1a204f" width="255px" height="31px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+          <cl:output std:sid="output-5a41afc2" id="month" style="text-align:center;" class="calendar-date">
+            <cl:xylayoutdata std:sid="xyl-data-ff1a204f" width="255px" height="50px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
           </cl:output>
           <cl:group std:sid="group-02a12f2f">
-            <cl:xylayoutdata std:sid="xyl-data-552d1f9c" left="0px" width="213px" height="26px" horizontalAnchor="LEFT" verticalAnchor="CENTER"/>
+            <cl:xylayoutdata std:sid="xyl-data-552d1f9c" left="0px" width="213px" height="50px" horizontalAnchor="LEFT" verticalAnchor="CENTER"/>
             <cl:button std:sid="button-d088c2d6" class="btn-success" value="◀">
               <cl:listener std:sid="listener-40fca6f4" name="click" handler="onButtonClick"/>
               <cl:formdata std:sid="f-data-b5717ac0" row="0" col="0"/>
@@ -101,18 +94,22 @@
               <cl:formdata std:sid="f-data-73517330" row="0" col="1"/>
             </cl:button>
             <cl:formlayout std:sid="f-layout-b0786bc5" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-              <cl:rows length="1" unit="FRACTION"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
               <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
               <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
             </cl:formlayout>
           </cl:group>
           <cl:button std:sid="button-4c80b75d" class="btn-success" value="today">
             <cl:listener std:sid="listener-751cb52c" name="click" handler="onButtonClick3"/>
-            <cl:xylayoutdata std:sid="xyl-data-cc4361a1" right="0px" width="100px" height="26px" horizontalAnchor="RIGHT" verticalAnchor="CENTER"/>
+            <cl:xylayoutdata std:sid="xyl-data-cc4361a1" top="0px" right="110px" width="100px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-9c3f65fe" class="btn-primary" value="매장 리스트">
+            <cl:listener std:sid="listener-a0f8fa85" name="click" handler="onButtonClick4"/>
+            <cl:xylayoutdata std:sid="xyl-data-459f2c5e" top="0px" right="0px" width="100px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
           </cl:button>
           <cl:xylayout std:sid="xylayout-156d13cb"/>
         </cl:group>
-        <cl:formlayout std:sid="f-layout-6b071302" scrollable="false" hspace="5px" vspace="5px">
+        <cl:formlayout std:sid="f-layout-6b071302" scrollable="false" hspace="0px" vspace="0px">
           <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:columns length="300" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
@@ -121,12 +118,7 @@
           <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         </cl:formlayout>
       </cl:group>
-      <cl:button std:sid="button-9c3f65fe" class="btn-primary" value="매장 리스트">
-        <cl:listener std:sid="listener-a0f8fa85" name="click" handler="onButtonClick4"/>
-        <cl:formdata std:sid="f-data-1d55fe74" halign="RIGHT" valign="BOTTOM" row="0" col="5"/>
-      </cl:button>
-      <cl:formlayout std:sid="f-layout-9012c32e" scrollable="false" hspace="5px" vspace="5px" top-margin="10px" right-margin="10px" bottom-margin="10px" left-margin="10px">
-        <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:formlayout std:sid="f-layout-9012c32e" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
         <cl:rows length="57" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>

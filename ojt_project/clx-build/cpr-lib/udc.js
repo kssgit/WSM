@@ -1009,6 +1009,7 @@
 			app.declareAppProperty("storeCode", null);
 			app.declareAppProperty("breaktime", null);
 			app.declareAppProperty("scheduleCode", null);
+			app.declareAppProperty("workEndDate", null);
 			
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -1216,6 +1217,14 @@
 		},
 		set: function(newValue){
 			return this.getEmbeddedAppInstance().setAppProperty("scheduleCode", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.ptj.daliy_schedule.prototype, "workEndDate", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("workEndDate");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("workEndDate", newValue, true);
 		}
 	});
 	
@@ -1998,7 +2007,7 @@
 						if(color != null){
 							grp.style.css("border-left-color",color);
 						}else{
-							grp.style.css("border-left-color","blue");
+							grp.style.css("border-left-color","#28D094");
 						}
 					}else{
 			
@@ -2027,7 +2036,7 @@
 					if(color != null){
 						grp.style.css("border-left-color",color);
 					}else{
-						grp.style.css("border-left-color","blue");
+						grp.style.css("border-left-color","#28D094");
 					}
 					
 				}else{
@@ -2037,8 +2046,223 @@
 					grp.style.css("border-left-color"," none");
 				}
 				start = true;
+			}
+			
+			
+			/*
+			 * 그룹에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onGroupClick(/* cpr.events.CMouseEvent */ e){
+				/** 
+				 * @type cpr.controls.Container
+				 */
+				var button = e.control;
+				var cbx = app.lookup("cbx1");
+				if(cbx.checked){
+					cbx.checked = false;
+				}else{
+					cbx.checked = true;
+				}
 			};
 			// End - User Script
+			
+			// Header
+			app.declareAppProperty("wp_name", "기본값");
+			app.declareAppProperty("store_code", null);
+			app.declareAppProperty("select", null);
+			app.declareAppProperty("wp_color", null);
+			var dataMap_1 = new cpr.data.DataMap("dmDeleteStore");
+			dataMap_1.parseData({
+				"columns" : [
+					{"name": "STORE_CODE"},
+					{"name": "USER_NUMBER"}
+				]
+			});
+			app.register(dataMap_1);
+			var submission_1 = new cpr.protocols.Submission("smsDeleteStore");
+			submission_1.addRequestData(dataMap_1);
+			app.register(submission_1);
+			
+			app.supportMedia("all and (min-width: 1024px)", "default");
+			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
+			app.supportMedia("all and (max-width: 499px)", "mobile");
+			
+			// Configure root container
+			var container = app.getContainer();
+			container.style.css({
+				"width" : "100%",
+				"top" : "0px",
+				"height" : "100%",
+				"left" : "0px"
+			});
+			
+			// Layout
+			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			container.setLayout(xYLayout_1);
+			
+			// UI Configuration
+			var group_1 = new cpr.controls.Container("grp");
+			group_1.style.setClasses(["work-place"]);
+			group_1.style.css({
+				"box-shadow" : "none"
+			});
+			// Layout
+			var formLayout_1 = new cpr.controls.layouts.FormLayout();
+			formLayout_1.scrollable = true;
+			formLayout_1.topMargin = "0px";
+			formLayout_1.rightMargin = "0px";
+			formLayout_1.bottomMargin = "0px";
+			formLayout_1.leftMargin = "0px";
+			formLayout_1.horizontalSpacing = "0px";
+			formLayout_1.verticalSpacing = "0px";
+			formLayout_1.setColumns(["1fr", "100px", "40px"]);
+			formLayout_1.setRows(["1fr"]);
+			group_1.setLayout(formLayout_1);
+			(function(container){
+				var button_1 = new cpr.controls.Button();
+				button_1.value = "삭제";
+				button_1.style.setClasses(["btn-danger"]);
+				if(typeof onButtonClick == "function") {
+					button_1.addEventListener("click", onButtonClick);
+				}
+				container.addChild(button_1, {
+					"colIndex": 2,
+					"rowIndex": 0,
+					"horizontalAlign": "center",
+					"verticalAlign": "center",
+					"width": 40,
+					"height": 70
+				});
+				var group_2 = new cpr.controls.Container();
+				// Layout
+				var formLayout_2 = new cpr.controls.layouts.FormLayout();
+				formLayout_2.scrollable = true;
+				formLayout_2.horizontalSpacing = "0px";
+				formLayout_2.verticalSpacing = "0px";
+				formLayout_2.setColumns(["1fr", "100px"]);
+				formLayout_2.setRows(["1fr"]);
+				group_2.setLayout(formLayout_2);
+				(function(container){
+					var checkBox_1 = new cpr.controls.CheckBox("cbx1");
+					checkBox_1.visible = false;
+					checkBox_1.value = "";
+					checkBox_1.falseValue = "false";
+					checkBox_1.text = "";
+					checkBox_1.style.setClasses(["check-box"]);
+					checkBox_1.bind("value").toAppProperty("select");
+					if(typeof onCbx1Click == "function") {
+						checkBox_1.addEventListener("click", onCbx1Click);
+					}
+					if(typeof onCbx1ValueChange == "function") {
+						checkBox_1.addEventListener("value-change", onCbx1ValueChange);
+					}
+					container.addChild(checkBox_1, {
+						"colIndex": 1,
+						"rowIndex": 0
+					});
+					var output_1 = new cpr.controls.Output();
+					output_1.value = "근무지 A";
+					output_1.style.setClasses(["store-name"]);
+					output_1.style.css({
+						"text-align" : "center"
+					});
+					output_1.bind("value").toAppProperty("wp_name");
+					container.addChild(output_1, {
+						"colIndex": 0,
+						"rowIndex": 0
+					});
+				})(group_2);
+				if(typeof onGroupClick == "function") {
+					group_2.addEventListener("click", onGroupClick);
+				}
+				container.addChild(group_2, {
+					"colIndex": 0,
+					"rowIndex": 0,
+					"colSpan": 2,
+					"rowSpan": 1
+				});
+			})(group_1);
+			container.addChild(group_1, {
+				"width": "360px",
+				"height": "72px",
+				"left": "calc(50% - 180px)",
+				"top": "calc(50% - 36px)"
+			});
+			if(typeof onBodyLoad == "function"){
+				app.addEventListener("load", onBodyLoad);
+			}
+		}
+	});
+	internalApp.title = "근무지/매장";
+	
+	// Type declaration for wpm
+	cpr.utils.Util.ensurePackage("udc.ptj").wpm = function(id){
+		cpr.controls.UDCBase.call(this, "udc.ptj.wpm", internalApp, id);
+	};
+	
+	udc.ptj.wpm.prototype = Object.create(cpr.controls.UDCBase.prototype);
+	Object.defineProperty(udc.ptj.wpm.prototype, "type", {
+		get : function(){
+			return "udc.ptj.wpm";
+		},
+		
+		configurable: true
+	});
+	
+	// App Properties
+	Object.defineProperty(udc.ptj.wpm.prototype, "wp_name", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("wp_name");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("wp_name", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.ptj.wpm.prototype, "store_code", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("store_code");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("store_code", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.ptj.wpm.prototype, "select", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("select");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("select", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.ptj.wpm.prototype, "wp_color", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("wp_color");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("wp_color", newValue, true);
+		}
+	});
+	
+	// Register type into the Platform and package
+	cpr.core.Platform.INSTANCE.register(internalApp);
+})();
+/// end - udc.ptj.wpm
+/// start - udc.ptj.wpm2
+/*
+ * UDC Qualified Name: udc.ptj.wpm2
+ * App URI: udc/ptj/wpm2
+ * Source Location: udc/ptj/wpm2.clx
+ *
+ * This file was generated by eXbuilder6 compiler, Don't edit manually.
+ */
+(function(){
+	// App Declaration
+	var internalApp = new cpr.core.App("udc/ptj/wpm2", {
+		onPrepare: function(loader){
+		},
+		onCreate: function(/* cpr.core.AppInstance */ app, exports){
+			var linker = {};
 			
 			// Header
 			app.declareAppProperty("wp_name", "기본값");
@@ -2119,10 +2343,21 @@
 					checkBox_1.addEventListener("value-change", onCbx1ValueChange);
 				}
 				container.addChild(checkBox_1, {
-					"left": "10px",
-					"width": "100px",
+					"left": "237px",
+					"width": "22px",
 					"height": "25px",
 					"top": "calc(50% - 12px)"
+				});
+				var button_2 = new cpr.controls.Button();
+				button_2.value = "Button";
+				if(typeof onButtonClick2 == "function") {
+					button_2.addEventListener("click", onButtonClick2);
+				}
+				container.addChild(button_2, {
+					"top": "23px",
+					"left": "20px",
+					"width": "100px",
+					"height": "20px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
@@ -2138,22 +2373,22 @@
 	});
 	internalApp.title = "근무지/매장";
 	
-	// Type declaration for wpm
-	cpr.utils.Util.ensurePackage("udc.ptj").wpm = function(id){
-		cpr.controls.UDCBase.call(this, "udc.ptj.wpm", internalApp, id);
+	// Type declaration for wpm2
+	cpr.utils.Util.ensurePackage("udc.ptj").wpm2 = function(id){
+		cpr.controls.UDCBase.call(this, "udc.ptj.wpm2", internalApp, id);
 	};
 	
-	udc.ptj.wpm.prototype = Object.create(cpr.controls.UDCBase.prototype);
-	Object.defineProperty(udc.ptj.wpm.prototype, "type", {
+	udc.ptj.wpm2.prototype = Object.create(cpr.controls.UDCBase.prototype);
+	Object.defineProperty(udc.ptj.wpm2.prototype, "type", {
 		get : function(){
-			return "udc.ptj.wpm";
+			return "udc.ptj.wpm2";
 		},
 		
 		configurable: true
 	});
 	
 	// App Properties
-	Object.defineProperty(udc.ptj.wpm.prototype, "wp_name", {
+	Object.defineProperty(udc.ptj.wpm2.prototype, "wp_name", {
 		get: function(){
 			return this.getEmbeddedAppInstance().getAppProperty("wp_name");
 		},
@@ -2161,7 +2396,7 @@
 			return this.getEmbeddedAppInstance().setAppProperty("wp_name", newValue, true);
 		}
 	});
-	Object.defineProperty(udc.ptj.wpm.prototype, "store_code", {
+	Object.defineProperty(udc.ptj.wpm2.prototype, "store_code", {
 		get: function(){
 			return this.getEmbeddedAppInstance().getAppProperty("store_code");
 		},
@@ -2169,7 +2404,7 @@
 			return this.getEmbeddedAppInstance().setAppProperty("store_code", newValue, true);
 		}
 	});
-	Object.defineProperty(udc.ptj.wpm.prototype, "select", {
+	Object.defineProperty(udc.ptj.wpm2.prototype, "select", {
 		get: function(){
 			return this.getEmbeddedAppInstance().getAppProperty("select");
 		},
@@ -2177,7 +2412,7 @@
 			return this.getEmbeddedAppInstance().setAppProperty("select", newValue, true);
 		}
 	});
-	Object.defineProperty(udc.ptj.wpm.prototype, "wp_color", {
+	Object.defineProperty(udc.ptj.wpm2.prototype, "wp_color", {
 		get: function(){
 			return this.getEmbeddedAppInstance().getAppProperty("wp_color");
 		},
@@ -2189,7 +2424,7 @@
 	// Register type into the Platform and package
 	cpr.core.Platform.INSTANCE.register(internalApp);
 })();
-/// end - udc.ptj.wpm
+/// end - udc.ptj.wpm2
 /// start - udc.todayJop
 /*
  * UDC Qualified Name: udc.todayJop

@@ -49,6 +49,7 @@
           <cl:datacolumn std:sid="d-column-fb0e6f5a" name="workingHour"/>
           <cl:datacolumn std:sid="d-column-66bd5e34" name="dailyWage"/>
           <cl:datacolumn std:sid="d-column-3da69e74" name="workedHour" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b334645e" name="work_end_date"/>
         </cl:datacolumnlist>
         <cl:datarowlist>
           <cl:datarow>
@@ -84,6 +85,7 @@
           <cl:datacolumn std:sid="d-column-48f37d46" name="WH"/>
           <cl:datacolumn std:sid="d-column-3545e7dc" name="work_date"/>
           <cl:datacolumn std:sid="d-column-f4f56001" name="start"/>
+          <cl:datacolumn std:sid="d-column-aa04d89c" name="work_end_date"/>
         </cl:datacolumnlist>
       </cl:dataset>
       <cl:dataset std:sid="d-set-5371410a" id="dsHour">
@@ -127,6 +129,7 @@
           <cl:datacolumn std:sid="d-column-292e889b" name="work_date"/>
           <cl:datacolumn std:sid="d-column-48c0d2b9" name="work_begin_time"/>
           <cl:datacolumn std:sid="d-column-98873d5a" name="work_end_time"/>
+          <cl:datacolumn std:sid="d-column-a0b9c34e" name="work_end_date"/>
           <cl:datacolumn std:sid="d-column-3182e067" name="breaktime"/>
           <cl:datacolumn std:sid="d-column-1fe126f1" name="schedule_code"/>
         </cl:datacolumnlist>
@@ -135,6 +138,7 @@
         <cl:datacolumnlist>
           <cl:datacolumn std:sid="d-column-123524d6" name="work_date"/>
           <cl:datacolumn std:sid="d-column-5f8161d5" name="work_begin_time"/>
+          <cl:datacolumn std:sid="d-column-733f31cf" name="work_end_date"/>
           <cl:datacolumn std:sid="d-column-d4b81af3" name="work_end_time"/>
           <cl:datacolumn std:sid="d-column-e387e6d6" name="breaktime"/>
         </cl:datacolumnlist>
@@ -172,6 +176,31 @@
     <cl:listener std:sid="listener-80c3d67d" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-80e66c20">
       <cl:xylayoutdata std:sid="xyl-data-0727fb5a" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-566b1f8d">
+        <cl:formdata std:sid="f-data-a3f30fb6" row="1" col="0" rowspan="1" colspan="1"/>
+        <cl:button std:sid="button-3dce5eef" class="btn-outline-secondary" value="닫기">
+          <cl:listener std:sid="listener-11a60ba7" name="click" handler="onButtonClick2"/>
+          <cl:formdata std:sid="f-data-58b63fb1" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-9e22774e" class="btn-outline-success" value="요청">
+          <cl:listener std:sid="listener-7aecfa4c" name="click" handler="onButtonClick3"/>
+          <cl:formdata std:sid="f-data-ab93488e" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="5"/>
+        </cl:button>
+        <cl:button std:sid="button-96717fc0" class="btn-outline-danger" value="삭제">
+          <cl:listener std:sid="listener-73013813" name="click" handler="onButtonClick"/>
+          <cl:formdata std:sid="f-data-3b9636e3" halign="FILL" valign="FILL" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-85094522" scrollable="true" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" hidden="false" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
       <cl:group std:sid="group-2e93da0c">
         <cl:formdata std:sid="f-data-f997b688" row="0" col="0" rowspan="1" colspan="1"/>
         <cl:output std:sid="output-3c30cdf5" style="font-size:24px; text-align:center;" value="근무 변경">
@@ -205,15 +234,15 @@
           <cl:formdata std:sid="f-data-55834883" row="5" col="1"/>
           <cl:itemset datasetid="dsHour" label="label" value="value"/>
         </cl:combobox>
+        <cl:inputbox std:sid="i-box-cd841de8" id="workPlace" style="background-image:none;" class="cl-combobox-underbar" enabled="false" readonly="true">
+          <cl:formdata std:sid="f-data-a46c0695" row="3" col="0" rowspan="1" colspan="2"/>
+        </cl:inputbox>
         <cl:combobox std:sid="c-box-5eb4238d" id="workEndTime" class="cl-combobox-underbar">
           <cl:listener std:sid="listener-79098028" name="selection-change" handler="onWorkEndTimeSelectionChange"/>
           <cl:listener std:sid="listener-212acd51" name="open" handler="onWorkEndTimeOpen"/>
           <cl:formdata std:sid="f-data-7cbcea00" row="7" col="1"/>
           <cl:itemset datasetid="dsHour" label="label" value="value"/>
         </cl:combobox>
-        <cl:inputbox std:sid="i-box-cd841de8" id="workPlace" style="background-image:none;" class="cl-combobox-underbar" enabled="false" readonly="true">
-          <cl:formdata std:sid="f-data-a46c0695" row="3" col="0" rowspan="1" colspan="2"/>
-        </cl:inputbox>
         <cl:output std:sid="output-0eb9e7b8" class="sm-title" value="근무 종료 일자">
           <cl:formdata std:sid="f-data-98bbbfdc" row="6" col="0"/>
         </cl:output>
@@ -234,31 +263,6 @@
           <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-        </cl:formlayout>
-      </cl:group>
-      <cl:group std:sid="group-566b1f8d">
-        <cl:formdata std:sid="f-data-a3f30fb6" row="1" col="0" rowspan="1" colspan="1"/>
-        <cl:button std:sid="button-3dce5eef" class="btn-outline-secondary" value="닫기">
-          <cl:listener std:sid="listener-11a60ba7" name="click" handler="onButtonClick2"/>
-          <cl:formdata std:sid="f-data-58b63fb1" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="1"/>
-        </cl:button>
-        <cl:button std:sid="button-9e22774e" class="btn-outline-success" value="저장">
-          <cl:listener std:sid="listener-7aecfa4c" name="click" handler="onButtonClick3"/>
-          <cl:formdata std:sid="f-data-ab93488e" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="5"/>
-        </cl:button>
-        <cl:button std:sid="button-96717fc0" class="btn-outline-danger" value="삭제">
-          <cl:listener std:sid="listener-73013813" name="click" handler="onButtonClick"/>
-          <cl:formdata std:sid="f-data-3b9636e3" halign="FILL" valign="FILL" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="3"/>
-        </cl:button>
-        <cl:formlayout std:sid="f-layout-85094522" scrollable="true" hspace="0px" vspace="0px">
-          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
-          <cl:columns length="120" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="10" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="120" unit="PIXEL" autoSizing="false" hidden="false" minlength="0"/>
-          <cl:columns length="10" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="120" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="1" unit="FRACTION"/>
         </cl:formlayout>
       </cl:group>
       <cl:formlayout std:sid="f-layout-d2f35dfe" scrollable="true" hspace="0px" vspace="5px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">

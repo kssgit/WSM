@@ -15,6 +15,7 @@
       <cl:property name="storeCode" type="string"/>
       <cl:property name="breaktime" type="string"/>
       <cl:property name="scheduleCode" type="string"/>
+      <cl:property name="workEndDate" type="string"/>
       <cl:event name="scheduleClick" type="cpr.events.CMouseEvent"/>
     </cl:appspec>
   </head>

@@ -5,6 +5,14 @@
  * @author SeongSoo
  ************************************************/
 
+cpr.expression.ExpressionEngine.INSTANCE.registerFunction("changeMF", function(mf) {
+	if(mf == "M"){
+		return "남성";
+	}else if(mf == "M"){
+		return "여성";
+	}
+});
+
 function loadLibrary () {
 		cpr.core.ResourceLoader.loadScript("https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js").then(function(input){
 			cpr.core.ResourceLoader.loadCSS("https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css");
@@ -13,17 +21,16 @@ function loadLibrary () {
 }
 
 function createColorPicker(){
-	app.lookup("colorPicker").value = "<input id='color-picker' value='white' style='height: 38px; width :100%; border:none' readonly />";
+	app.lookup("colorPicker").value = "<input id='color-picker' value='black' style='height: 38px; width :100%; border:none' readonly />";
 	cpr.core.DeferredUpdateManager.INSTANCE.asyncExec(function(e){
 		 $('#color-picker').spectrum({
+			 //서식
 			  type: "component",
+			  showPalette: false,
 			  showPaletteOnly: true,
 			  togglePaletteOnly: true,
-			  showInitial: true,
-			  showAlpha: false
-		});
-		
-		$("#color-picker").spectrum({
+			  showAlpha: false,
+			 //이벤트
 		    change: function(color) { 
 		    	var selectedColor = color.toHexString();
 		    	app.lookup("cpV").value = selectedColor;
@@ -48,8 +55,10 @@ function onBodyLoad(/* cpr.events.CEvent */ e){
 	
 	
 	var dm = app.lookup("dmOnLoad");
-	var userEmail = UserInfo.getUserInfo().getValue("USER_EMAIL");
-	var userNumber = UserInfo.getUserInfo().getValue("USER_NUMBER");
+//	var userEmail = UserInfo.getUserInfo().getValue("USER_EMAIL");
+	var userEmail = sessionStorage.getItem("USER_EMAIL")
+//	var userNumber = UserInfo.getUserInfo().getValue("USER_NUMBER");
+	var userNumber = sessionStorage.getItem("USER_NUMBER");
 	dm.setValue("USER_EMAIL", userEmail);
 	dm.setValue("USER_NUMBER", userNumber);
 	app.lookup("subOnLoad").send();
@@ -67,7 +76,6 @@ function onComboBoxSelectionChange(/* cpr.events.CSelectionEvent */ e){
 	var comboBox = e.control;
 	var dsReqList = app.lookup("dsRequest");
 	var selectedStore = app.lookup("cmbStore").value;
-	console.log("$$$$$ " + selectedStore);
 	
 	var filterCondition = "STORE_CODE == "+selectedStore; 
 	

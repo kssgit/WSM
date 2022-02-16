@@ -57,7 +57,7 @@ function onCbx1ValueChange(/* cpr.events.CValueChangeEvent */ e){
 			if(color != null){
 				grp.style.css("border-left-color",color);
 			}else{
-				grp.style.css("border-left-color","blue");
+				grp.style.css("border-left-color","#28D094");
 			}
 		}else{
 
@@ -86,7 +86,7 @@ function onBodyLoad(/* cpr.events.CEvent */ e){
 		if(color != null){
 			grp.style.css("border-left-color",color);
 		}else{
-			grp.style.css("border-left-color","blue");
+			grp.style.css("border-left-color","#28D094");
 		}
 		
 	}else{
@@ -96,4 +96,22 @@ function onBodyLoad(/* cpr.events.CEvent */ e){
 		grp.style.css("border-left-color"," none");
 	}
 	start = true;
+}
+
+
+/*
+ * 그룹에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onGroupClick(/* cpr.events.CMouseEvent */ e){
+	/** 
+	 * @type cpr.controls.Container
+	 */
+	var button = e.control;
+	var cbx = app.lookup("cbx1");
+	if(cbx.checked){
+		cbx.checked = false;
+	}else{
+		cbx.checked = true;
+	}
 }

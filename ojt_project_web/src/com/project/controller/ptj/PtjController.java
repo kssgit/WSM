@@ -25,7 +25,7 @@ import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.protocol.data.ParameterRow;
 import com.cleopatra.spring.JSONDataView;
 import com.project.dao.ptj.PtjDao;
-import com.project.service.ptj.PtjService;
+//import com.project.service.ptj.PtjService;
 
 
 /**
@@ -35,6 +35,7 @@ import com.project.service.ptj.PtjService;
   * @작성자 : SeongSoo
   * @변경이력 :
   * @프로그램 설명 : 알바생 컨트롤러
+  *  총 14 개 함수 
   */
 @Controller
 @RequestMapping("ptj")

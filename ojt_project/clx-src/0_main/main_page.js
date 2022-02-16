@@ -80,6 +80,7 @@ function onSmsUserInfoSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 	// session  확인
 	if(dm.getValue("USER_KIND") == null ){
 		UserInfo.clean();
+		sessionStorage.clear();
 		app.close();
 		location.href = "/";
 	}

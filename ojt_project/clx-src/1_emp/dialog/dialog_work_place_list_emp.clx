@@ -48,7 +48,7 @@
     </cl:group>
     <cl:group std:sid="group-489ac625">
       <cl:verticaldata std:sid="v-data-bcd39b5c" width="400px" height="90px"/>
-      <cl:button std:sid="button-3c72668a" id="btnAddStore" class="btn-success" value="매장 추가">
+      <cl:button std:sid="button-3c72668a" id="btnAddStore" class="btn-success" value="매장 등록">
         <cl:listener std:sid="listener-b59fc821" name="click" handler="onButtonClick2"/>
         <cl:formdata std:sid="f-data-7da81938" row="1" col="3"/>
       </cl:button>
@@ -58,12 +58,12 @@
       </cl:button>
       <cl:formlayout std:sid="f-layout-79763b3d" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
         <cl:rows length="1" unit="FRACTION"/>
-        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:rows length="1" unit="FRACTION"/>
         <cl:columns length="1" unit="FRACTION"/>
-        <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:columns length="1" unit="FRACTION"/>
-        <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:columns length="1" unit="FRACTION"/>
       </cl:formlayout>
     </cl:group>

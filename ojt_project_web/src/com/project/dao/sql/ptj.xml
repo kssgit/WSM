@@ -17,8 +17,9 @@
 			st.store_name as label,
 			user_code_emp,
 			(SELECT color from workplace where user_code_ptj = s.user_code_ptj and store_code = s.store_code) as class,
-			work_begin_time as beginDt,
 			work_date,
+			work_begin_time as beginDt,
+			s.work_end_date,
 			work_end_time as endDt,
 			(time_to_sec(TIMEDIFF(work_end_time, work_begin_time))/60/60) as WH,
 			DATE_FORMAT(work_date, '%Y%m%d') as start,
@@ -38,6 +39,7 @@
 			st.store_name as storeName	,	
 			sc.work_begin_time as workStartDt	,			
 			sc.work_end_time as workEndDt	,			
+			sc.work_end_date as work_end_date	,			
 			date_format(timediff(work_end_time,work_begin_time),'%H:%i') as workedHour	 ,
 			sc.store_code		,
 			sc.breaktime	,
@@ -52,7 +54,7 @@
 			ud_schedule_number ,
 			dc
 		FROM request_schedule rs 
-		WHERE rs.user_code_ptj = #{USER_CODE_PTJ} AND dc != 'C'
+		WHERE rs.user_code_ptj = #{USER_CODE_PTJ} AND dc != 'C' AND (ACCEPT_PTJ != 'D' AND ACCEPT_EMP != 'D' )
 	</select>
 	
 	<!-- workPlaceList -->

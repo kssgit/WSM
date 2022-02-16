@@ -97,6 +97,7 @@ public class PtjDao {
 	//신규 스케줄 등록
 	public void addNewScheduleReq(ParameterGroup param) {
 		Map<String , Object> data = new HashedMap();
+		String workEndDate = param.getValue("work_end_date").substring(0, 8);
 		data.put("STORE_CODE", param.getValue("store_code"));
 		data.put("STORE_NAME", param.getValue("store_name"));
 		data.put("USER_CODE_PTJ", param.getValue("user_code_ptj"));
@@ -104,7 +105,7 @@ public class PtjDao {
 		data.put("WORK_DATE", param.getValue("work_date"));
 		data.put("WORK_BEGIN_TIME", param.getValue("work_date")+param.getValue("work_begin_time")+"00");
 		data.put("WORK_END_DATE", param.getValue("work_end_date"));
-		data.put("WORK_END_TIME", param.getValue("work_end_date")+param.getValue("work_end_time")+"00");
+		data.put("WORK_END_TIME", workEndDate+param.getValue("work_end_time")+"00");
 		data.put("BREAKTIME", param.getValue("breaktime"));
 		data.put("DC", 'C');
 		
@@ -113,13 +114,15 @@ public class PtjDao {
 	//스케줄 변경 요청
 	public void updateScheduleReq(ParameterGroup param) {
 		Map<String , Object> data = new HashedMap();
+		String workEndDate = param.getValue("work_end_date").substring(0, 8);
 		data.put("STORE_CODE", param.getValue("store_code"));
 		data.put("STORE_NAME", param.getValue("store_name"));
 		data.put("USER_CODE_PTJ", param.getValue("user_code_ptj"));
 		data.put("PTJ_NAME", param.getValue("ptj_name"));
 		data.put("WORK_DATE", param.getValue("work_date"));
 		data.put("WORK_BEGIN_TIME", param.getValue("work_date")+param.getValue("work_begin_time")+"00");
-		data.put("WORK_END_TIME", param.getValue("work_date")+param.getValue("work_end_time")+"00");
+		data.put("WORK_END_DATE", param.getValue("work_end_date"));
+		data.put("WORK_END_TIME", workEndDate+param.getValue("work_end_time")+"00");
 		data.put("BREAKTIME", param.getValue("breaktime"));
 		data.put("DC", 'U');
 		data.put("SCHEDULE_CODE",  param.getValue("schedule_code"));
@@ -130,13 +133,16 @@ public class PtjDao {
 	//스케줄 삭제 요청
 	public void deleteScheduleReq(ParameterGroup param) {
 		Map<String , Object> data = new HashedMap();
+		String workEndDate = param.getValue("work_end_date").substring(0, 8);
+		
 		data.put("STORE_CODE", param.getValue("store_code"));
 		data.put("STORE_NAME", param.getValue("store_name"));
 		data.put("USER_CODE_PTJ", param.getValue("user_code_ptj"));
 		data.put("PTJ_NAME", param.getValue("ptj_name"));
 		data.put("WORK_DATE", param.getValue("work_date"));
 		data.put("WORK_BEGIN_TIME", param.getValue("work_date")+param.getValue("work_begin_time")+"00");
-		data.put("WORK_END_TIME", param.getValue("work_date")+param.getValue("work_end_time")+"00");
+		data.put("WORK_END_DATE", param.getValue("work_end_date"));
+		data.put("WORK_END_TIME", workEndDate+param.getValue("work_end_time")+"00");
 		data.put("BREAKTIME", param.getValue("breaktime"));
 		data.put("DC", 'D');
 		data.put("SCHEDULE_CODE",  param.getValue("schedule_code"));

@@ -4,7 +4,24 @@
  *
  * @author SeongSoo
  ************************************************/
+/* cpr.expression.ExpressionEngine#registerFunction */
+cpr.expression.ExpressionEngine.INSTANCE.registerFunction("getND", function(nd) {
+	if(nd == "N"){
+		return "미승인";
+	}else{
+		return "거부";
+	}
+});
 
+cpr.expression.ExpressionEngine.INSTANCE.registerFunction("getUDC", function(udc) {
+	if(udc == "C"){
+		return "추가";
+	}else if(udc == "D"){
+		return "삭제";
+	}else{
+		return 	"변경";
+	}
+});
 
 
 /*
@@ -14,9 +31,11 @@
 function onBodyLoad(/* cpr.events.CEvent */ e){
 	var dm = app.lookup("dmOnLoad");
 	
-	dm.setValue("USER_EMAIL", UserInfo.getUserInfo().getValue("USER_EMAIL"));
+//	dm.setValue("USER_EMAIL", UserInfo.getUserInfo().getValue("USER_EMAIL"));
+	dm.setValue("USER_EMAIL",sessionStorage.getItem("USER_EMAIL"));
 	dm.setValue("USER_KIND", "EMP");
-	dm.setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
+//	dm.setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
+	dm.setValue("USER_NUMBER",sessionStorage.getItem("USER_NUMBER"));
 	app.lookup("smsScheduleChange").send().then(function(input){
 		app.lookup("dsScheduleChange").setSort("WORK_BEGIN_TIME");
 	});

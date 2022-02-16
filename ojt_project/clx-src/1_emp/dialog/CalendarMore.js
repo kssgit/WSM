@@ -23,9 +23,11 @@ function onBodyLoad(/* cpr.events.CEvent */ e){
 		for(var idx = 0; idx < voItems.length; idx++){
 			var opt = new cpr.controls.Output();
 			opt.value = voItems[idx].label;
-			
+			opt.style.css({
+				"text-align" : "center"
+			})
 			app.lookup("grpItem").addChild(opt, {
-				height : "30px"
+				height : "30px",
 			});
 		}
 		

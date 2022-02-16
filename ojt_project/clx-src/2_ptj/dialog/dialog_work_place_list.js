@@ -35,7 +35,7 @@ function onButtonClick2(/* cpr.events.CMouseEvent */ e){
 	var button = e.control;
 	
 	
-	util.Dialog.open(app, "2_ptj/dialog/dialog_ptj_link_store", "400", "550", function(e){
+	util.Dialog.open(app, "2_ptj/dialog/dialog_ptj_link_store", "400", "500", function(e){
 		
 	}, {});
 	app.close();

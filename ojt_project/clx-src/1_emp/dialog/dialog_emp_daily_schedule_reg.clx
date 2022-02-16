@@ -402,16 +402,20 @@
         <cl:formdata std:sid="f-data-a3f30fb6" row="1" col="0" rowspan="1" colspan="1"/>
         <cl:button std:sid="button-3dce5eef" class="btn-dark" value="닫기">
           <cl:listener std:sid="listener-f7579988" name="click" handler="onButtonClick"/>
-          <cl:formdata std:sid="f-data-7e550eea" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="0"/>
+          <cl:formdata std:sid="f-data-7e550eea" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="1" col="1"/>
         </cl:button>
         <cl:button std:sid="button-9e22774e" id="btnAddUpdate" class="btn-success" value="추가">
           <cl:listener std:sid="listener-34854fe4" name="click" handler="onButtonClick2"/>
-          <cl:formdata std:sid="f-data-026140c9" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="1"/>
+          <cl:formdata std:sid="f-data-026140c9" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="1" col="2"/>
         </cl:button>
         <cl:formlayout std:sid="f-layout-85094522" scrollable="true" hspace="0px" vspace="0px">
           <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
-          <cl:columns length="1" unit="FRACTION"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         </cl:formlayout>
       </cl:group>
       <cl:formlayout std:sid="f-layout-d2f35dfe" scrollable="true" hspace="0px" vspace="5px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">

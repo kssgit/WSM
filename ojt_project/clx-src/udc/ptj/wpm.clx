@@ -28,21 +28,35 @@
     <cl:listener std:sid="listener-6d42092a" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-d7cd2822" id="grp" style="box-shadow:none;" class="work-place">
       <cl:xylayoutdata std:sid="xyl-data-729b7a88" width="360px" height="72px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
-      <cl:output std:sid="output-075e1d26" class="store-name" value="근무지 A">
-        <cl:apppropbind property="value" app-property="wp_name"/>
-        <cl:xylayoutdata std:sid="xyl-data-b8d82b28" width="100px" height="20px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
-      </cl:output>
       <cl:button std:sid="button-65d15252" class="btn-danger" value="삭제">
         <cl:listener std:sid="listener-df9a0aa5" name="click" handler="onButtonClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-025019a6" right="10px" width="66px" height="20px" horizontalAnchor="RIGHT" verticalAnchor="CENTER"/>
+        <cl:formdata std:sid="f-data-dbacd7a2" halign="CENTER" valign="CENTER" width="40" height="70" row="0" col="2"/>
       </cl:button>
-      <cl:checkbox std:sid="c-box-64c83396" id="cbx1" class="check-box" value="" falsevalue="false" text="">
-        <cl:listener std:sid="listener-555b9be8" name="click" handler="onCbx1Click"/>
-        <cl:listener std:sid="listener-b8b9a368" name="value-change" handler="onCbx1ValueChange"/>
-        <cl:apppropbind property="value" app-property="select"/>
-        <cl:xylayoutdata std:sid="xyl-data-345178a3" left="10px" width="100px" height="25px" horizontalAnchor="LEFT" verticalAnchor="CENTER"/>
-      </cl:checkbox>
-      <cl:xylayout std:sid="xylayout-2bc40a09"/>
+      <cl:group std:sid="group-12f6acf8">
+        <cl:listener std:sid="listener-66ed8029" name="click" handler="onGroupClick"/>
+        <cl:formdata std:sid="f-data-bd9fa035" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:checkbox std:sid="c-box-64c83396" id="cbx1" class="check-box" visible="false" value="" falsevalue="false" text="">
+          <cl:listener std:sid="listener-555b9be8" name="click" handler="onCbx1Click"/>
+          <cl:listener std:sid="listener-b8b9a368" name="value-change" handler="onCbx1ValueChange"/>
+          <cl:apppropbind property="value" app-property="select"/>
+          <cl:formdata std:sid="f-data-5aa816a3" row="0" col="1"/>
+        </cl:checkbox>
+        <cl:output std:sid="output-075e1d26" style="text-align:center;" class="store-name" value="근무지 A">
+          <cl:apppropbind property="value" app-property="wp_name"/>
+          <cl:formdata std:sid="f-data-e56ff49e" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-5a21c706" scrollable="true" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-ef35603b" scrollable="true" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
     </cl:group>
     <cl:xylayout std:sid="xylayout-5457f0c2"/>
   </body>

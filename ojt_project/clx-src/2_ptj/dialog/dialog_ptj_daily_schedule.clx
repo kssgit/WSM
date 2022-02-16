@@ -16,6 +16,7 @@
           <cl:datacolumn std:sid="d-column-285b4097" name="store_code"/>
           <cl:datacolumn std:sid="d-column-d217829a" name="breaktime"/>
           <cl:datacolumn std:sid="d-column-3961924c" name="schedule_code"/>
+          <cl:datacolumn std:sid="d-column-968d61f2" name="work_end_date"/>
         </cl:datacolumnlist>
         <cl:datarowlist/>
       </cl:dataset>

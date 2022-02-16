@@ -43,15 +43,18 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 		return;
 	}
 	if(manager.value == null || manager.value == ''){
-		manager.value = UserInfo.getUserInfo().getValue("USER_NAME");
+//		manager.value = UserInfo.getUserInfo().getValue("USER_NAME");
+		manager.value = sessionStorage.getItem("USER_NAME");
 	}
 	var dm = app.lookup("dmAddStore");
 	dm.setValue("store_name", storeName.value);
 	dm.setValue("business_type_large", storeCtgr.values[0]);
 	dm.setValue("business_type_small", storeCtgr.values[1]);
-	dm.setValue("USER_NUMBER_EMP", UserInfo.getUserInfo().getValue("USER_NUMBER"));
+//	dm.setValue("USER_NUMBER_EMP", UserInfo.getUserInfo().getValue("USER_NUMBER"));
+	dm.setValue("USER_NUMBER_EMP", sessionStorage.getItem("USER_NUMBER"));
 	dm.setValue("MANAGEMENT", manager.value);
-	dm.setValue("USER_EMAIL", UserInfo.getUserInfo().getValue("USER_EMAIL"));
+//	dm.setValue("USER_EMAIL", UserInfo.getUserInfo().getValue("USER_EMAIL"));
+	dm.setValue("USER_EMAIL", sessionStorage.getItem("USER_EMAIL"));
 	app.lookup("smsAddSotre").send().then(function(input){
 		app.close();		
 	});;

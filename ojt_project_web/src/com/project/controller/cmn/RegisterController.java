@@ -71,10 +71,10 @@ public class RegisterController {
 		Map<String, String> resMap = new HashMap();
 		
 		if(result.get("SUCCESS") ==(Integer)1) {//아이디 중복
-			resMap.put("MSG", "같은 이메일의 회원이 있습니다.");
+			resMap.put("MSG", "중복된 아이디 입니다.");
 			resMap.put("RESULT", "fale");
 		}else {
-			resMap.put("MSG", "사용 가능한 이메일 입니다.");
+			resMap.put("MSG", "사용 가능한 아이디 입니다.");
 			resMap.put("RESULT", "success");
 		}
 		datareq.setResponse("dmDuplicateResult", resMap);

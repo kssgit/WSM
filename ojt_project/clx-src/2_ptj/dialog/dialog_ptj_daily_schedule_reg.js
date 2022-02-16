@@ -139,9 +139,9 @@ function onDti1ValueChange(/* cpr.events.CValueChangeEvent */ e){
 function onCmb2SelectionChange(/* cpr.events.CSelectionEvent */ e){
 	/** @type cpr.controls.ComboBox */
 	var cmb2 = e.control;
-	cbxValidationCheck(cmb2)
-	var dti1 = app.lookup("workDate").value;
-	var timeCon = scheduleFilter(dti1);
+	var dti1 = app.lookup("workDate");
+	var dti2 = app.lookup("workDate2");
+	var timeCon = scheduleFilter(dti1.value);
 	var dsHour = app.lookup("dsHour");
 	var dsEvnt = app.lookup("dsEvnt");
 	var selectedDate = app.lookup("workDate").value;
@@ -151,7 +151,7 @@ function onCmb2SelectionChange(/* cpr.events.CSelectionEvent */ e){
 		dsEvnt.setSort("beginDt");//ds오름차순 정렬
 		var findBpCon = selectedDate+selectedTime+"00" //첫번째 bp찾는 조건
 		
-		if(dsEvnt.findFirstRow("beginDt >="+findBpCon) != null){ // 마지막 일정 선택시 bp가 없으므로 조건 처리
+		if(dsEvnt.findFirstRow("beginDt >="+findBpCon) != null){ // 마지막 일정 이전 선택시(bp있을 때)
 			var firstRow = dsEvnt.findFirstRow("beginDt>="+findBpCon).getValue("beginDt"); // 조건에 부합하는 첫 번째 이벤트
 			console.log("firstRow ="+firstRow); 
 			var bp1 = firstRow.substring(firstRow.length-6, firstRow.length-2);
@@ -159,10 +159,14 @@ function onCmb2SelectionChange(/* cpr.events.CSelectionEvent */ e){
 			if(timeCon != '' || timeCon != null){
 				timeCon += "&&"+ "("+" timeNum >= "+selectedTime+"&&"+ "timeNum <="+ bp1 +")";
 			}
-		}else{
+			// 선택 일정 이후에 스케줄이 있다면 종료일을 시작일로 세팅하고 disable 처리
+			dti2.dateValue = dti1.dateValue;
+			dti2.enabled =false;
+		}else{ //마지막 일정 이후 선택시(bp 없을 때)
 			if(timeCon != '' || timeCon != null){
 				timeCon += "&&"+"("+" timeNum >= "+selectedTime+")";
 			}
+			dti2.enabled =true;
 		}
 			dsHour.setFilter(timeCon);
 	}else{// 해당 날짜의 일정이 없는 경우
@@ -238,20 +242,21 @@ function onWorkEndTimeOpen(/* cpr.events.CUIEvent */ e){
 	var dsEvnt = app.lookup("dsEvnt");
 	var dti1 = app.lookup("workDate");
 	var dti2 = app.lookup("workDate2");
-	
+	var timeCon;
+	var selectedTime;
 	
 	if(dti1.value == dti2.value){
 		//시작일과 종료일이 같으면 위의 필터 조건 그대로 쓰고 
-		var timeCon = dsHour.getFilter();
-		var selectedTime = app.lookup("workBeginTime").value.replace(":", "");
+		timeCon = dsHour.getFilter();
+		selectedTime = app.lookup("workBeginTime").value.replace(":", "");
 		timeCon += "&& timeNum != "+ selectedTime;
 		console.log("timeCondition : " + timeCon)
 		dsHour.setFilter(timeCon);
 	}else{
 		//시작일과 종료일이 다르면 종료일의 스케줄 조회해서 새로운 필터 적용 (스케줄 + bp)
 		dsHour.clearFilter();
-		var selectedTime = "0000";
-		var timeCon = scheduleFilter(dti2.value);
+		timeCon = scheduleFilter(dti2.value);
+		selectedTime = "0000";
 	
 		// 해당 날짜의 일정이 있는 경우
 		if(dsEvnt.getRowCount() != 0){ 

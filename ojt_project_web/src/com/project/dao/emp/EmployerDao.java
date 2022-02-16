@@ -165,6 +165,8 @@ public class EmployerDao {
 	//요청 근무 수락 
 	public int updateAcceptScheduleChange(Map<String, String> map){
 		// TODO Auto-generated method stub
+		System.out.println("파라미터");
+		System.out.println(map.toString());
 		try {
 			//고용주가 승낙한 요청이라면 
 			if(map.get("ACCEPT_EMP").equals("Y")) {

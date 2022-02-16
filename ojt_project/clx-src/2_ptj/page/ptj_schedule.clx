@@ -71,6 +71,7 @@
           <cl:datacolumn std:sid="d-column-516bf711" name="value" datatype="expression" expression="startTime + &quot;~&quot;+endTime +&quot; &quot; + label"/>
           <cl:datacolumn std:sid="d-column-663d6764" name="startTime"/>
           <cl:datacolumn std:sid="d-column-15d3f013" name="endTime"/>
+          <cl:datacolumn std:sid="d-column-e136895f" name="work_end_date"/>
         </cl:datacolumnlist>
       </cl:dataset>
       <cl:datamap std:sid="d-map-02411912" id="dmRes">
@@ -130,10 +131,6 @@
               <cl:columns length="1" unit="FRACTION"/>
             </cl:formlayout>
           </cl:group>
-          <cl:button std:sid="button-47b278a3" class="btn-green3" value="근무지 리스트">
-            <cl:listener std:sid="listener-3510b8a3" name="click" handler="onButtonClick"/>
-            <cl:formdata std:sid="f-data-933162ad" valign="CENTER" row="0" col="2"/>
-          </cl:button>
           <cl:formlayout std:sid="f-layout-78f69e5e" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
             <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
             <cl:columns length="300" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
@@ -153,21 +150,25 @@
           <cl:relativebind property="background-color" category="STYLER" columnname="class"/>
         </cl:itemstyle>
       </cl:calendar>
-      <cl:button std:sid="button-4c80b75d" class="btn-success" value="today">
+      <cl:button std:sid="button-4c80b75d" class="btn-success" value="Today">
         <cl:listener std:sid="listener-f9c64428" name="click" handler="onButtonClick4"/>
-        <cl:xylayoutdata std:sid="xyl-data-429b35a3" top="105px" right="0px" width="100px" height="25px" horizontalAnchor="RIGHT"/>
+        <cl:xylayoutdata std:sid="xyl-data-429b35a3" top="104px" right="110px" width="100px" height="30px" horizontalAnchor="RIGHT"/>
       </cl:button>
       <cl:button std:sid="button-d088c2d6" class="btn-success" value="◀">
         <cl:listener std:sid="listener-a5b76dcf" name="click" handler="onButtonClick2"/>
-        <cl:xylayoutdata std:sid="xyl-data-9c01500c" top="104px" left="0px" width="100px" height="26px"/>
+        <cl:xylayoutdata std:sid="xyl-data-9c01500c" top="104px" left="0px" width="100px" height="30px"/>
       </cl:button>
       <cl:button std:sid="button-670791aa" class="btn-success" value="▶">
         <cl:listener std:sid="listener-2803d87c" name="click" handler="onButtonClick3"/>
-        <cl:xylayoutdata std:sid="xyl-data-449b11bd" top="104px" left="110px" width="100px" height="26px"/>
+        <cl:xylayoutdata std:sid="xyl-data-449b11bd" top="104px" left="110px" width="100px" height="30px"/>
       </cl:button>
-      <cl:output std:sid="output-5a41afc2" id="month" style="text-align:center;" class="h1">
+      <cl:output std:sid="output-5a41afc2" id="month" style="text-align:center;" class="calendar-date">
         <cl:xylayoutdata std:sid="xyl-data-adb51ced" top="102px" width="255px" height="31px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:output>
+      <cl:button std:sid="button-47b278a3" style="font-size:13px;" class="btn-primary" value="근무지 리스트">
+        <cl:listener std:sid="listener-3510b8a3" name="click" handler="onButtonClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-b238fac2" top="104px" right="0px" width="100px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+      </cl:button>
       <cl:xylayout std:sid="xylayout-0f111f2f"/>
     </cl:group>
     <cl:xylayout std:sid="xylayout-5a3dfd9c"/>

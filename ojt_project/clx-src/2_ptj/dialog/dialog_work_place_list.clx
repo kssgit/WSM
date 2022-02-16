@@ -75,7 +75,7 @@
     </cl:group>
     <cl:group std:sid="group-489ac625">
       <cl:formdata std:sid="f-data-08203a97" row="1" col="0"/>
-      <cl:button std:sid="button-3c72668a" class="btn-success" value="사업장 연결">
+      <cl:button std:sid="button-3c72668a" class="btn-success" value="매장 연결">
         <cl:listener std:sid="listener-b59fc821" name="click" handler="onButtonClick2"/>
         <cl:formdata std:sid="f-data-7da81938" row="0" col="3"/>
       </cl:button>

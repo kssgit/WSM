@@ -13,14 +13,14 @@ var user ;
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(/* cpr.events.CEvent */ e){
-	user = UserInfo.getUserInfo();	
+//	user = UserInfo.getUserInfo();	
 	
 	//dataset 선언 
-	app.lookup("dmOnLoad").setValue("USER_NUMBER", user.getValue("USER_NUMBER"));
-	app.lookup("dmOnLoad").setValue("USER_EMAIL", user.getValue("USER_EMAIL"));
-	app.lookup("subOnLoad").send().then(function(input){
-		
-	});
+//	app.lookup("dmOnLoad").setValue("USER_NUMBER", user.getValue("USER_NUMBER"));
+	app.lookup("dmOnLoad").setValue("USER_NUMBER", sessionStorage.getItem("USER_NUMBER"));
+//	app.lookup("dmOnLoad").setValue("USER_EMAIL", user.getValue("USER_EMAIL"));
+	app.lookup("dmOnLoad").setValue("USER_EMAIL", sessionStorage.getItem("USER_EMAIL"));
+	app.lookup("subOnLoad").send();
 
 }
 
@@ -91,7 +91,8 @@ function onSubOnLoadSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 			if(confirm("정말 삭제하시겠습니까? 해당된 근무스케줄 및 정보가 삭제됩니다.")){
 				console.log("teqrw" + wpm.store_code);
 				app.lookup("dmDeleteStore").setValue("STORE_CODE", wpm.store_code);
-				app.lookup("dmDeleteStore").setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
+//				app.lookup("dmDeleteStore").setValue("USER_NUMBER", UserInfo.getUserInfo().getValue("USER_NUMBER"));
+				app.lookup("dmDeleteStore").setValue("USER_NUMBER", sessionStorage.getItem("USER_NUMBER"));
 				var sms = app.lookup("smsDeleteStore");
 				if(sessionStorage.getItem("USER_KIND")  == "EMPLOYER"){
 					sms.action ="/emp/deleteStore.do"

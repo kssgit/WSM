@@ -68,7 +68,7 @@
 	</select>
 
 
-	<!-- 고용주가, 알바생이 승인한 요청목록 삭제, 고용주가 삭제 -->
+	<!-- 고용주, 알바생이 승인한 요청목록 삭제, 고용주가 삭제 -->
 	<delete id="deleteReqScheduleChage">
 		DELETE
 		FROM REQUEST_SCHEDULE
@@ -85,6 +85,7 @@
 			,user_code_ptj
 			,work_begin_time
 			,work_date
+			,work_end_date
 			,work_end_time
 		)VALUES(
 			 #{BREAKTIME}
@@ -93,6 +94,7 @@
 			,#{USER_CODE_PTJ}
 			,#{WORK_BEGIN_TIME}
 			,#{WORK_DATE}
+			,#{WORK_END_DATE}
 			,#{WORK_END_TIME}		
 		)
 	</insert>
@@ -114,6 +116,7 @@
 			,user_code_ptj = #{USER_CODE_PTJ}
 			,work_begin_time = #{WORK_BEGIN_TIME}
 			,work_date = #{WORK_DATE}
+			,work_end_date = #{WORK_END_DATE}
 			,work_end_time = #{WORK_END_TIME}
 		WHERE schedule_code = #{UD_SCHEDULE_NUMBER}
 	</update>

@@ -56,11 +56,12 @@ function onSmsDailyScheduleSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 			scheduleUDC.storeName = dataSet.getValue(i, "storeName");
 			scheduleUDC.storeCode = dataSet.getValue(i, "store_code");
 			scheduleUDC.workStartDt = dataSet.getValue(i, "workStartDt").substring(8);
+			scheduleUDC.workEndDate = dataSet.getValue(i, "work_end_date");
 			scheduleUDC.workEndDt = dataSet.getValue(i, "workEndDt").substring(8);
 			scheduleUDC.workedHour = dataSet.getValue(i, "workedHour");
 			scheduleUDC.breaktime = dataSet.getValue(i, "breaktime");
 			scheduleUDC.scheduleCode = dataSet.getValue(i, "schedule_code");
-			
+			console.log(" 엔드 데이트 : "+scheduleUDC.workEndDate)
 			//스케줄 UDC 추가
 			grp.addChild(scheduleUDC, {
 				autoSize : "none",
@@ -86,6 +87,7 @@ function onSmsDailyScheduleSubmitSuccess(/* cpr.events.CSubmissionEvent */ e){
 					"work_end_time" : e.control.workEndDt.substring(0,4),
 					"storeCode" : e.control.storeCode,
 					"work_date" : selectedDate,
+					"work_end_date" : e.control.workEndDate,
 					"breaktime" : e.control.breaktime,
 					"scheduleCode" : e.control.scheduleCode
 				});	

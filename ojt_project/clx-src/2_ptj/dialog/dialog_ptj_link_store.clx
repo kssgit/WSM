@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-188d414b" version="1.0.3485">
   <head std:sid="head-8ed122e8">
-    <screen std:sid="screen-04b0fb66" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" customHeight="600" customWidth="800" active="false"/>
-    <screen std:sid="screen-7db9a828" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" active="false"/>
-    <screen std:sid="screen-187ee1e0" id="new-screen2" name="new-screen2" minwidth="400px" maxwidth="499px" width="400px" height="500px" active="true"/>
-    <screen std:sid="screen-f9b569af" id="mobile" name="mobile" maxwidth="399px" width="350px" height="525px" active="false"/>
+    <screen std:sid="screen-9bc23061" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-f04c4bce" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" active="false"/>
+    <screen std:sid="screen-1792f9bd" id="new-screen2" name="new-screen2" minwidth="400px" maxwidth="499px" width="400px" height="500px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="400" active="true"/>
+    <screen std:sid="screen-539681d2" id="mobile" name="mobile" maxwidth="399px" width="350px" height="525px" active="false"/>
     <cl:model std:sid="model-028f5246">
       <cl:dataset std:sid="d-set-c6ed15b1" id="dsGender">
         <cl:datacolumnlist>
@@ -33,7 +33,6 @@
           <cl:datacolumn std:sid="d-column-5d541bf6" name="user_code_ptj" datatype="string"/>
           <cl:datacolumn std:sid="d-column-ed965975" name="call"/>
           <cl:datacolumn std:sid="d-column-3f4a0dbf" name="gender"/>
-          <cl:datacolumn std:sid="d-column-29ea2400" name="role"/>
           <cl:datacolumn std:sid="d-column-273a4603" name="store_code"/>
         </cl:datacolumnlist>
       </cl:datamap>
@@ -48,6 +47,7 @@
         <cl:responsedata dataid="dsStoreList"/>
       </cl:submission>
       <cl:submission std:sid="submission-cf3d409c" id="smsRequestLink" action="/ptj/storeLinkRequest.do">
+        <cl:listener std:sid="listener-c968681e" name="submit-success" handler="onSmsRequestLinkSubmitSuccess"/>
         <cl:requestdata dataid="dmRequseLink"/>
       </cl:submission>
     </cl:model>
@@ -56,24 +56,29 @@
   <body std:sid="body-24589d77">
     <cl:listener std:sid="listener-9356461f" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-7c191a10" class="link-store-box">
-      <cl:xylayoutdata std:sid="xyl-data-a021abf7" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:xylayoutdata std:sid="xyl-data-a021abf7" top="10px" right="20px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-10d1f132">
-        <cl:formdata std:sid="f-data-0c409f19" row="7" col="0" rowspan="1" colspan="2"/>
-        <cl:button std:sid="button-39dab2e7" class="btn-success" value="링크 요청하기">
+        <cl:formdata std:sid="f-data-0c409f19" row="6" col="0" rowspan="1" colspan="2"/>
+        <cl:button std:sid="button-39dab2e7" class="btn-success" value="요청">
           <cl:listener std:sid="listener-982139d0" name="click" handler="onButtonClick2"/>
-          <cl:formdata std:sid="f-data-264feb4b" row="0" col="1" rowspan="1" colspan="1"/>
+          <cl:formdata std:sid="f-data-8cf7200b" halign="FILL" valign="FILL" height="25" row="0" col="2"/>
         </cl:button>
-        <cl:formlayout std:sid="f-layout-a441af3e" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-          <cl:rows length="1" unit="FRACTION"/>
+        <cl:button std:sid="button-fa19b228" class="btn-secondary" value="취소">
+          <cl:listener std:sid="listener-70afaa1a" name="click" handler="onButtonClick3"/>
+          <cl:formdata std:sid="f-data-838af3cb" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-a441af3e" scrollable="false" hspace="10px" vspace="0px" top-margin="5px" right-margin="0px" bottom-margin="8px" left-margin="0px">
+          <cl:rows length="35" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:columns length="1" unit="FRACTION"/>
-          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
           <cl:columns length="1" unit="FRACTION"/>
         </cl:formlayout>
       </cl:group>
       <cl:output std:sid="output-4b25f7e0" style="font-size:24px; text-align:center;" class="h1" value="매장 연결하기">
         <cl:formdata std:sid="f-data-22cb1871" row="0" col="0" rowspan="1" colspan="2"/>
       </cl:output>
-      <cl:output std:sid="output-4a4d1337" style="text-align:center;" class="output" value="매장 연락처">
+      <cl:output std:sid="output-4a4d1337" style="text-align:center;" class="output" value="고용주 ID">
         <cl:formdata std:sid="f-data-e3c30f16" row="1" col="0"/>
       </cl:output>
       <cl:output std:sid="output-c5b85827" class="output" value="이름">
@@ -86,7 +91,7 @@
         <cl:formdata std:sid="f-data-0ac754bb" row="4" col="0"/>
       </cl:output>
       <cl:output std:sid="output-b9d3bb29" class="output" value="성별">
-        <cl:formdata std:sid="f-data-06c37ad0" row="6" col="0"/>
+        <cl:formdata std:sid="f-data-06c37ad0" row="5" col="0"/>
       </cl:output>
       <cl:group std:sid="group-a396f676">
         <cl:formdata std:sid="f-data-27f1693f" row="1" col="1"/>
@@ -98,10 +103,10 @@
           <cl:formdata std:sid="f-data-9283a599" row="0" col="2" rowspan="1" colspan="1"/>
         </cl:button>
         <cl:formlayout std:sid="f-layout-99796770" scrollable="true" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
           <cl:columns length="160" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-          <cl:columns length="1" unit="FRACTION"/>
-          <cl:columns length="90" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="15" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         </cl:formlayout>
       </cl:group>
       <cl:output std:sid="output-74609626" class="output" value="매장 이름">
@@ -112,18 +117,11 @@
         <cl:formdata std:sid="f-data-f310beff" row="2" col="1"/>
         <cl:itemset datasetid="dsStoreList" label="store_name" value="store_code"/>
       </cl:combobox>
-      <cl:inputbox std:sid="i-box-50733d8e" id="ipbRole" class="input" prevcontrol="#m-editor-1d05ace7">
-        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="dmRequseLink" columnname="role"/>
-        <cl:formdata std:sid="f-data-52d90b58" row="5" col="1"/>
-      </cl:inputbox>
-      <cl:output std:sid="output-2ff0e3a9" class="output" value="담당 업무">
-        <cl:formdata std:sid="f-data-c97037a6" row="5" col="0"/>
-      </cl:output>
-      <cl:maskeditor std:sid="m-editor-1d05ace7" id="mse1" class="input" nextcontrol="#i-box-50733d8e" prevcontrol="#i-box-717d309a" mask="000-0000-0000">
+      <cl:maskeditor std:sid="m-editor-1d05ace7" id="mse1" class="input" prevcontrol="#i-box-717d309a" mask="000-0000-0000">
         <cl:formdata std:sid="f-data-c67b0884" row="4" col="1"/>
       </cl:maskeditor>
       <cl:group std:sid="group-a19eb855" class="btn-radio">
-        <cl:formdata std:sid="f-data-184e1dfe" row="6" col="1"/>
+        <cl:formdata std:sid="f-data-184e1dfe" row="5" col="1"/>
         <cl:button std:sid="button-c835090b" id="MAN" class="btn-radio btn-radio-ptj" value="남성">
           <cl:listener std:sid="listener-93337e96" name="click" handler="onMANClick"/>
           <cl:formdata std:sid="f-data-29cb8988" row="0" col="0"/>
@@ -140,12 +138,11 @@
       </cl:group>
       <cl:formlayout std:sid="f-layout-6852ff90" scrollable="true" hspace="10px" vspace="15px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
         <cl:rows length="1" unit="FRACTION" autoSizing="true" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-        <cl:rows length="1" unit="FRACTION" autoSizing="true" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-        <cl:rows length="1" unit="FRACTION" autoSizing="true" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
-        <cl:rows length="1" unit="FRACTION"/>
-        <cl:rows length="1" unit="FRACTION"/>
-        <cl:rows length="1" unit="FRACTION"/>
-        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="true" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="true" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:rows length="1" unit="FRACTION"/>
         <cl:columns length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
         <cl:columns length="6" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>

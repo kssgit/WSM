@@ -39,7 +39,7 @@
       <cl:xylayoutdata std:sid="xyl-data-b195cda4" width="358px" height="320px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
       <cl:group std:sid="group-9f7625fd">
         <cl:formdata std:sid="f-data-8fdeb312" row="1" col="0" rowspan="1" colspan="4"/>
-        <cl:output std:sid="output-b77e1b43" style="text-align:center;" class="h3" value="업장명/상호">
+        <cl:output std:sid="output-b77e1b43" style="text-align:center;" class="h3" value="매장 명">
           <cl:formdata std:sid="f-data-87907e51" row="0" col="0"/>
         </cl:output>
         <cl:inputbox std:sid="i-box-45776a44" id="ipbStoreName" style="border-radius:0.5rem;" class="input-center-green">
@@ -56,7 +56,7 @@
         </cl:inputbox>
         <cl:linkedcombobox std:sid="lc-box-eeefe1e8" id="lcbCtgr" class="cl-linkedcombobox-green">
           <cl:datarowcontext datacontrolid="dsStoreCtgr"/>
-          <cl:formdata std:sid="f-data-a8813926" row="1" col="1" rowspan="1" colspan="2"/>
+          <cl:formdata std:sid="f-data-a8813926" halign="FILL" row="1" col="1" rowspan="1" colspan="2"/>
           <cl:treeitemset datasetid="dsStoreCtgr" label="label" value="value" parent="parent"/>
         </cl:linkedcombobox>
         <cl:formlayout std:sid="f-layout-840b461d" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">

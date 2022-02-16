@@ -40,7 +40,8 @@ function onButtonClick(/* cpr.events.CMouseEvent */ e){
 				"WORK_END_DATE":returnValue["WORK_END_DATE"],
 				"WORK_END_TIME":returnValue["WORK_END_TIME"],
 				"STORE_CODE":app.lookup("storeCd").value,
-				"USER_CODE_EMP":UserInfo.getUserInfo().getValue("USER_EMAIL"),
+//				"USER_CODE_EMP":UserInfo.getUserInfo().getValue("USER_EMAIL"),
+				"USER_CODE_EMP": sessionStorage.getItem("USER_EMAIL"),
 				"USER_CODE_PTJ":app.lookup("userNo").value,
 				"STORE_NAME":app.lookup("oupStoreName").value,
 				"DC" : "C",
@@ -67,8 +68,10 @@ function onBodyLoad(/* cpr.events.CEvent */ e){
 	//매장 목록 가져오기
 	var dm = app.lookup("dmOnLoad")
 	var dmGetPtjList = app.lookup("dmGetPtjList")
-	var userEmail = UserInfo.getUserInfo().getValue("USER_EMAIL");
-	var userNumber = UserInfo.getUserInfo().getValue("USER_NUMBER");
+//	var userEmail = UserInfo.getUserInfo().getValue("USER_EMAIL");
+	var userEmail = sessionStorage.getItem("USER_EMAIL");
+//	var userNumber = UserInfo.getUserInfo().getValue("USER_NUMBER");
+	var userNumber = sessionStorage.getItem("USER_NUMBER");
 	dm.setValue("USER_EMAIL", userEmail);
 	dm.setValue("USER_NUMBER", userNumber);
 	dmGetPtjList.setValue("USER_NUMBER", userNumber);
@@ -91,7 +94,8 @@ function onCmb1SelectionChange(/* cpr.events.CSelectionEvent */ e){
 	 * @type cpr.controls.ComboBox
 	 */
 	var cmb1 = e.control;
-	var userNumber = UserInfo.getUserInfo().getValue("USER_NUMBER");
+//	var userNumber = UserInfo.getUserInfo().getValue("USER_NUMBER");
+	var userNumber = sessionStorage.getItem("USER_NUMBER");
 	// 데이터 맵에 쿼리 검색 조건 두 가지 입력.
 	var dm = app.lookup("dmGetPtjList")
 	dm.setValue("STORE_CODE", cmb1.value);
@@ -167,7 +171,7 @@ function onGrd2CellClick2(/* cpr.events.CGridMouseEvent */ e){
 	 */
 	var grd2 = e.control;
 	// 직원 클릭시 캘린더에 일정 표시하고 그리드에 일정 표시 
-	
+	app.lookup("btnFire").enabled = true;
 	app.lookup("dtEnd").value = null;
 	var dm = app.lookup("dmGetSchedule");
 	var dtBegin = app.lookup("dtBegin").value;
@@ -181,6 +185,7 @@ function onGrd2CellClick2(/* cpr.events.CGridMouseEvent */ e){
 	dm.setValue("USER_NUMBER", userNo);
 	dm.setValue("STORE_CODE", storeCd);
 	
+	//선택한 사원 근무 스케줄 조회
 	app.lookup("subGetSchedule").send();
 	
 	
@@ -189,11 +194,12 @@ function onGrd2CellClick2(/* cpr.events.CGridMouseEvent */ e){
 	var user_code_ptj = app.lookup("userNo");
 	
 	
-	//근무 버튼 활성화
+	//근무 버튼 활성화 및 비활성화
 	app.lookup("btnAddWork").enabled = true;
 	app.lookup("btnRollBack").enabled = true;
 	app.lookup("btnReqWork").enabled=true;
-	
+	app.lookup("btnUpdate").enabled = false;
+	app.lookup("btnDeleteWork").enabled = false;
 }
 
 
@@ -215,17 +221,17 @@ function onBtnDeleteWorkClick(/* cpr.events.CMouseEvent */ e){
 	app.lookup("smsCheckUD").send().then(function(input){
 		if(dm.getValue("RESULT") != 1){ //변경 상태가 아닐 경우
 			// 현재 선택된 cell이 삭제 상태인지 확인 
-			console.log(selectRow.getState());
+//			console.log(selectRow.getState());
 			if(selectRow.getState() == 8){ //이미 삭제한 cell일 경우 
 				selectRow.setState(cpr.data.tabledata.RowState.UNCHANGED);
 			}else{
-				var voCheckedIndices = grd.getCheckRowIndices();
+//				var voCheckedIndices = grd.getCheckRowIndices();
 		
 				var vnSelectedIndex = grd.getSelectedRowIndex();
 				
-				if (voCheckedIndices.length > 0) {
-					grd.deleteRow(voCheckedIndices);
-				} 
+//				if (voCheckedIndices.length > 0) {
+//					grd.deleteRow(voCheckedIndices);
+//				} 
 				if (vnSelectedIndex != -1) {
 					grd.deleteRow(vnSelectedIndex);
 				}
@@ -377,7 +383,7 @@ function onButtonClick4(/* cpr.events.CMouseEvent */ e){
 	var button = e.control;
 	var grid = app.lookup("grdPtjList");
 	var selectRow = grid.getSelectedRow();
-	util.Dialog.open(app, "1_emp/dialog/confirm", "500", "220", function(e){
+	util.Dialog.open(app, "1_emp/dialog/confirm", "400", "220", function(e){
 		/** @type cpr.controls.Dialog */
 		var dialog = e.control;
 		
@@ -430,18 +436,6 @@ function onBtnRollBackClick(/* cpr.events.CMouseEvent */ e){
 	app.lookup("cl").redraw();
 }
 
-
-/*
- * 캘린더에서 date-click 이벤트 발생 시 호출.
- * Calendar의 날짜를 클릭 했을때 발생하는 이벤트.
- */
-function onClDateClick(/* cpr.events.CDateEvent */ e){
-	/** 
-	 * @type cpr.controls.Calendar
-	 */
-	var cl = e.control;
-	
-}
 
 
 /*
