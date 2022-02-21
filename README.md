@@ -36,6 +36,12 @@
     eXBuilder6  라이브러리
 
     - cleopatra_server
+    
+  - 클라이언트
+
+    third party library
+
+    - goole chart(https://www.gstatic.com/charts/loader.js)
 
 - **Tools**
 
