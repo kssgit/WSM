@@ -17,6 +17,7 @@
 		WHERE EMAIL = #{email}
 		LIMIT 1
 	</select>
+	
 	<!--SALT 값 확인  -->
 	<select id="findsalt" resultType="hashmap">
 		SELECT
@@ -47,6 +48,7 @@
 				#{userkind}
 			)
 	</insert>
+	
 	<!-- 사용자 salt 저장 -->
 	<insert id="insertSalt">
 		INSERT INTO SALT(
@@ -87,6 +89,7 @@
 		WHERE USER_NUMBER = #{userNum}
 	</delete>
 	
+	<!-- 사용자 정보 업데이트 -->
 	<update id="updateUserInfo">
 		UPDATE user
 		SET 

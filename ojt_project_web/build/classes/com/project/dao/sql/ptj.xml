@@ -6,7 +6,7 @@
 
 <mapper namespace="ptj">
 	
-	<!-- workList-->
+	<!-- 근무지 스케줄 정보 조회-->
 	<select id="workList" resultType="hashmap">
 		SELECT
 			all_day as allDay,
@@ -27,8 +27,11 @@
 			DATE_FORMAT(work_end_time, '%H:%i') as endTime
 		FROM schedule s JOIN STORE st ON s.store_code = st.store_code
 		<trim prefix="WHERE" prefixOverrides="AND |OR">
+			<!-- 근무지 테이블에 존재하는 스케줄 정보 조회(현재 근무중인 근무지의 스케줄만 조회)  -->
 			<if test="user_code_ptj != null and user_code_ptj !=''"> user_code_ptj = #{user_code_ptj} AND s.store_code In (SELECT store_Code from workplace WHERE user_code_ptj = #{user_code_ptj})</if>
+			<!-- 선택한 날짜 스케줄 정보 조회 -->
 			<if test="WORK_DATE != null and WORK_DATE !=''">AND work_date = #{WORK_DATE}</if>
+			<!-- 선택한 근무지에대한 스케줄 정보 조회 -->
 			<if test="STROE_CODE != null and STROE_CODE !=''">AND store_code = #{STROE_CODE}</if>
 		</trim>
 	</select>
@@ -46,9 +49,10 @@
 			sc.schedule_code
 		FROM 
 			schedule sc JOIN store st ON sc.store_code = st.store_code
-		WHERE sc.work_date = #{WORK_DATE} and sc.user_code_ptj = #{user_code_ptj}
+		WHERE sc.work_date = #{WORK_DATE} and sc.user_code_ptj = #{user_code_ptj} AND st.store_code In (SELECT w.store_Code from workplace w WHERE w.user_code_ptj = #{user_code_ptj})
 	</select>
 	
+	<!-- 요청중인 스케줄정보 확인(중복 요청 방지를 위한 쿼리)  -->
 	<select id="dailyScheduleReq" resultType="hashmap">
 		SELECT 
 			ud_schedule_number ,
@@ -57,7 +61,7 @@
 		WHERE rs.user_code_ptj = #{USER_CODE_PTJ} AND dc != 'C' AND (ACCEPT_PTJ != 'D' AND ACCEPT_EMP != 'D' )
 	</select>
 	
-	<!-- workPlaceList -->
+	<!-- 근무지 리스트 조회 -->
 	<select id="workPlace" resultType="hashmap">
 		SELECT
 			w.store_code,
@@ -98,9 +102,11 @@
 		)VALUES(
 			#{STORE_CODE},
 			#{USER_CODE_PTJ},
+			<!-- 근무지별 구분 색상을 color 테이블에서 선택하여 자동으로 저장(중복색 저장 X)  -->
 			(SELECT CODE FROM COLOR WHERE CODE NOT IN (SELECT COLOR FROM WORKPLACE as ALIASIS WHERE user_code_ptj = #{USER_CODE_PTJ}) LIMIT 1)
 		)
 	</insert>
+	
 	<!-- 고용주 근무 추가 변경 삭제 요청 -->
 	<insert id="reqScheduleWork">
 		INSERT INTO request_schedule(
@@ -153,4 +159,5 @@
 			ACCEPT_PTJ = 'D'
 		WHERE reqschedule_number = #{REQ_CODE}
 	</update>	
+	
 </mapper>

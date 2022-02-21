@@ -14,7 +14,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-
+clx-build/
 # External tool builders
 .externalToolBuilders/
 
@@ -97,6 +97,4 @@ hs_err_pid*
 context.xml
 .svn
 .exbuilder-fragments/
-.settings/
-clx-build/
 theme/

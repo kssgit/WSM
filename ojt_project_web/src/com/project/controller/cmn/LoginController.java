@@ -35,7 +35,7 @@ public class LoginController {
 	
 	/**
 	  * @Method Name : logincheck
-	  * @작성일 : 2022. 2. 14.
+	  * @작성일 : 2022. 1. 28.
 	  * @작성자 : SeongSoo
 	  * @변경이력 : 
 	  * @Method 설명 : 로그인 체크
@@ -59,7 +59,8 @@ public class LoginController {
 		if(data.get("check").equals("1")) {// 로그인 성공
 			//session이 존재하면 session객체 리턴, 없으면 새로 생성해서 리턴
 			session = req.getSession(true);
-			System.out.println("로그인 성공 " +data.get("USER_KIND"));
+//			System.out.println("로그인 성공 " +data.get("USER_KIND"));
+			//세션에 사용자 정보 담기 
 			if(!(boolean) data.get("USER_KIND")) {
 				session.setAttribute("USER_KIND","PARTTIMEJOB");
 			}else {
@@ -74,7 +75,7 @@ public class LoginController {
 			dataReq.setResponse("dmLoginCheck", map);
 
 		}else if(data.get("check").equals("2")) {// 비밀번호가 잘못됬을 경우
-			String msg = "비밀번호가 틀렸습니다. 다시 확인해 주세요.";
+			String msg = "비밀번호가 맞지 않습니다. 다시 입력해주세요.";
 			map.put("MSG", msg);
 			map.put("FOCUS", "ipbpwd");
 			dataReq.setResponse("dmLoginCheck", map);

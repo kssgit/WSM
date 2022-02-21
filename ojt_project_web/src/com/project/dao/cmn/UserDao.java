@@ -45,7 +45,7 @@ public class UserDao {
 		param.put("gender", gender);
 		param.put("call", call);
 		param.put("name", name);
-		if(userkind.equals("EMPLOYER")) {
+		if(userkind.equals("1")) {
 			param.put("userkind", true );			
 		}else {
 			param.put("userkind", false);	

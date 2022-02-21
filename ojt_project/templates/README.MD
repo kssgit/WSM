@@ -1,1 +1,0 @@
-Place template CLX files for ojt_project here.

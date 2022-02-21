@@ -16,7 +16,7 @@
 			u.NAME as label,
 			s.user_code_emp,
 			s.user_code_ptj,
-			(select color from part_timer where user_code_ptj = s.user_code_ptj and store_code = s.store_code) as class,
+			pt.color as class,
 			s.work_begin_time as beginDt,
 			DATE_FORMAT(s.work_date, '%Y%m%d') as start,
 			s.work_end_time as endDt,
@@ -26,8 +26,11 @@
 			ON s.store_code = pt.store_code AND s.user_code_ptj = pt.user_code_ptj  ) JOIN USER u 
 			ON u.user_number = s.user_code_ptj 
 		<trim prefix="WHERE" prefixOverrides="AND |OR">
-			<if test="USER_CODE_EMP != null and USER_CODE_EMP !=''"> user_code_emp = #{USER_CODE_EMP} AND pt.resignation !='N'</if>
+			<!-- 현재 재직중인 근무자와 고용주가 등록한 매장의 스케줄만 조회 -->
+			<if test="USER_CODE_EMP != null and USER_CODE_EMP !=''"> user_code_emp = #{USER_CODE_EMP} AND pt.resignation !='N' AND s.store_code IN (SELECT st.store_code FROM store st WHERE st.emp_email = #{USER_CODE_EMP})</if>
+			<!-- 선택한 날에대한 스케줄 정보 조회 -->
 			<if test="WORK_DATE != null and WORK_DATE !=''">AND work_date = #{WORK_DATE}</if>
+			<!-- 선택한 매장에 대한 스케줄 정보 조회 -->
 			<if test="STROE_CODE != null and STROE_CODE !=''">AND store_code = #{STROE_CODE}</if>
 		</trim>
 	</select>
@@ -41,7 +44,9 @@
 			business_type_large
 		FROM store
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<!-- 고용주가 자신의 매장 리스트 조회 -->
 			<if test="USER_NUMBER_EMP != null and USER_NUMBER_EMP !=''"> USER_NUMBER_EMP = #{USER_NUMBER_EMP}</if>
+			<!-- 직원이 고용주의 매장 리스트를 조회 -->
 			<if test="USER_EMAIL != null and USER_EMAIL != '' "> 
 				emp_email =  #{USER_EMAIL} 
 				AND store_code NOT IN
@@ -96,8 +101,12 @@
 		FROM 
 			(part_timer pt JOIN store s ON pt.store_code =s.store_code) 
 			JOIN `user` u ON user_code_ptj =  u.USER_NUMBER
-		WHERE
-			s.USER_NUMBER_EMP = #{USER_NUMBER} AND pt.LINK_STAT = 'Y' AND pt.resignation = 'Y'
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<!-- 직원 목록 전체 조회(해당 고용주에 속하고 재직중인 직원) -->
+			<if test="USER_NUMBER != null and USER_NUMBER != '' ">s.USER_NUMBER_EMP = #{USER_NUMBER} AND pt.LINK_STAT = 'Y' AND pt.resignation = 'Y'</if>
+			<!-- 매장별 조회 -->
+			<if test="STORE_CODE != null and STORE_CODE != '' ">AND pt.store_code = #{STORE_CODE}</if>
+		</trim>
 
 	</select>
 	
@@ -117,16 +126,31 @@
 			, pt.USER_CODE_PTJ
 			, pt.role
 		FROM 
-			part_timer pt JOIN `user` u ON pt.user_code_ptj = u.USER_NUMBER	JOIN store s ON pt.store_code = s.store_code 
-		WHERE 
-			s.USER_NUMBER_EMP = #{USER_NUMBER} AND link_stat ='N'
+			(part_timer pt JOIN `user` u ON pt.user_code_ptj = u.USER_NUMBER) JOIN store s ON pt.store_code = s.store_code 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<!-- 조회하는 고용주의 매장에 해당하는 요청만 조회 -->
+			<if test="USER_NUMBER != null and USER_NUMBER != '' ">s.USER_NUMBER_EMP = #{USER_NUMBER} AND link_stat ='N'</if>
+			<!-- 매장 코드로 조회 -->
+			<if test="STORE_CODE != null and STORE_CODE != '' ">AND pt.STORE_CODE = #{STORE_CODE} </if>
+			<!-- 사원 이름으로 조회 -->
+			<if test="PTJ_NAME != null and PTJ_NAME != '' ">AND pt.USER_CODE_PTJ IN (SELECT USER_NUMBER FROM USER WHERE NAME LIKE CONCAT('%',#{PTJ_NAME},'%'))</if>
+		</trim>
 	</select>
+	
+	<!--매장 연결 승인  -->
+	<update id="ptjLinkRequest">
+		UPDATE part_timer SET
+			link_stat = 'Y'
+			<if test="color != null and color != '' ">,color = #{color}</if>
+			<if test="role !=null and role != '' ">,ROLE = #{role}</if>
+		WHERE ptj_code = #{PTJ_CODE}
+	</update>
 	
 	<!-- 메장 연결 요청 거절  -->
 	<delete id="deleteLinkRequest">
 		DELETE 
 		FROM part_timer 
-		WHERE USER_CODE_PTJ = #{USER_CODE_PTJ} AND STORE_CODE = #{STORE_CODE}
+		WHERE PTJ_CODE = #{PTJ_CODE}
 	</delete>
 	
 	<!-- 매장,직원별 총 근무시간 workHour  -->
@@ -155,21 +179,17 @@
 			,(SELECT color FROM request_schedule WHERE ud_schedule_number = s.SCHEDULE_CODE AND(ACCEPT_EMP !='D' AND ACCEPT_PTJ != 'D') ) AS Class
 		FROM (schedule s JOIN user u ON s.USER_CODE_PTJ = u.user_number ) JOIN store st ON s.store_code = st.store_code
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<!-- 시작일만 있을 경우 시작일 이후의 스케줄 가져오기 -->
 			<if test="(DT_BEGIN != null and DT_BEGIN != '') and (DT_END == null or DT_END == '' ) ">work_date <![CDATA[ >= ]]> #{DT_BEGIN}  AND</if>
+			<!-- 종료일만 있을 경우 종료일보다 전의 스케줄 가져오기 -->
 			<if test="(DT_BEGIN == null or DT_BEGIN == '') and (DT_END != null and DT_END != '' ) ">work_date <![CDATA[ <= ]]> #{DT_END}  AND</if>
+			<!-- 둘다 있을 경우 -->
 			<if test="(DT_BEGIN != null and DT_BEGIN != '') and (DT_END != null and DT_END != '' ) ">work_date between #{DT_BEGIN} AND #{DT_END} AND  </if>
 			<if test="USER_NUMBER != null and USER_NUMBER != '' ">user_code_ptj = #{USER_NUMBER} AND s.store_code = #{STORE_CODE}</if>
 		</trim>
 	</select>
 	
-	<!--매장 연결 승인  -->
-	<update id="ptjLinkRequest">
-		UPDATE part_timer SET
-			link_stat = #{LINK_STAT}
-			,color = #{color}
-			,ROLE = #{role}
-		WHERE ptj_code = #{PTJ_CODE}
-	</update>
+	
 	
 	<!-- 고용주 근무 추가 변경 삭제 요청 -->
 	<insert id="reqScheduleWork">
@@ -192,6 +212,7 @@
 			#{USER_CODE_EMP},
 			#{USER_CODE_PTJ},
 			#{WORK_DATE},
+			<!-- 종료날짜가 입력이 않되었을 경우 시작일과 동일한 날로 입력 -->
 			<if test="WORK_END_DATE == null or WORK_END_DATE == '' ">#{WORK_DATE},</if>
 			<if test="WORK_END_DATE != null and WORK_END_DATE != '' ">#{WORK_END_DATE},</if>
 			#{WORK_BEGIN_TIME},

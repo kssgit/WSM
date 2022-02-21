@@ -52,12 +52,16 @@ public class EmployerDao {
 		return sqlsession.insert("emp.addStore", storeData);
 	}
 	
-	//전체 직원 목록
-	public List<Map<String, Object>> getPtjList(String sessionUserNumber) {
-		List<Map<String, Object>> result = sqlsession.selectList("emp.ptjList", sessionUserNumber);
+	//직원 목록 조회
+	public List<Map<String, Object>> getPtjList(String storeCode, String userNumber) {
+		Map<String, Object> data = new HashMap();
+		data.put("STORE_CODE", storeCode);
+		data.put("USER_NUMBER", userNumber);
+		List<Map<String, Object>> result = sqlsession.selectList("emp.ptjList", data);
 		return result;
 	}
 
+	// 직원 스케줄 조회
 	public List<Map<String, Object>> getschedule(ParameterGroup param) {
 		Map<String, Object> scheduleData = new HashMap();
 		scheduleData.put("DT_BEGIN", param.getValue("DT_BEGIN"));
@@ -69,8 +73,14 @@ public class EmployerDao {
 		return result;
 	}
 
-	public List<Map<String, Object>> getRequestList(String USER_NUMBER) {
-		List<Map<String, Object>> result = sqlsession.selectList("emp.linkReqList", USER_NUMBER);
+	//매장 연결 요청 조회
+	public List<Map<String, Object>> getRequestList(String USER_NUMBER,String STORE_CODE, String PTJ_NAME) {
+		Map<String, Object> data = new HashMap();
+		data.put("USER_NUMBER",USER_NUMBER);
+		data.put("STORE_CODE",STORE_CODE);
+		data.put("PTJ_NAME",PTJ_NAME);
+		
+		List<Map<String, Object>> result = sqlsession.selectList("emp.linkReqList", data);
 //		System.out.println(result);
 		// TODO Auto-generated method stub
 		return result;
@@ -78,20 +88,29 @@ public class EmployerDao {
 
 	
 	//매장 연결 요청 승인 
-	public int updatePtLinkjRequest(Map<String, String> map) {
+	public void updatePtLinkjRequest(ParameterGroup param) {
 		// TODO Auto-generated method stub
+		Map<String, String > data = new HashMap<String, String>();
+		data.put("STORE_CODE", param.getValue("STORE_CODE"));
+		data.put("USER_CODE_PTJ", param.getValue("USER_CODE_PTJ"));
+		data.put("PTJ_CODE",param.getValue("ptj_code"));
+		
+		data.put("color",param.getValue("color"));
+		data.put("role",param.getValue("role"));
+		System.out.println(data.toString());
 		//승인 여부가 Y 일경우
 		//workplace 테이블에 값 생성 
-		if(map.get("LINK_STAT").equals("Y")) {			
-			sqlsession.insert("ptj.insertWorkPlace",map);
+		if(param.getValue("LINK_STAT").equals("Y")) {			
+			sqlsession.insert("ptj.insertWorkPlace",data);
+			//요청값 업데이트
+			sqlsession.update("emp.ptjLinkRequest",data);
 		}
 		//승인 여부가 D일 경우
-		if(map.get("LINK_STAT").equals("D")) {
-			sqlsession.delete("emp.deleteLinkRequest",map);
+		if(param.getValue("LINK_STAT").equals("D")) {
+			System.out.println("삭제");
+			sqlsession.delete("emp.deleteLinkRequest",data);
 		}
-		//요청 값 삭제 
 		
-		return sqlsession.update("emp.ptjLinkRequest",map);
 	}
 
 	//고용주 근무 삭제 요청

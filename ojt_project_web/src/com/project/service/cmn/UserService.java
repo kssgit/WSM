@@ -103,16 +103,19 @@ public class UserService implements UserServiceInterface{
 		return hex;
 	}
 
+	//사용자 정보 조회
 	public Map<String, String> getMyInfo(String userNum) {
 		
 		return userdao.getMyInfo(userNum);
 	}
 
+	//사용자 정보 변경 업데이트
 	public void updateUserInfo(ParameterGroup param) {
 		// TODO Auto-generated method stub
 		userdao.updateUserInfo(param);
 	}
 
+	//회원 탈퇴
 	public void deleteUserInfo(String userNum) {
 		// TODO Auto-generated method stub
 		userdao.deleteUserInfo(userNum);

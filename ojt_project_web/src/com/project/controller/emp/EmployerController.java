@@ -90,7 +90,7 @@ public class EmployerController {
 	  * @작성일 : 2022. 1. 27.
 	  * @작성자 : SeongSoo
 	  * @변경이력 : 
-	  * @Method 설명 : 사원 매장 리스트 조회
+	  * @Method 설명 : 사원이 매장을 연결하기위해 고용주의 아이디로 매장 리스트 조회
 	  * @param req
 	  * @param res
 	  * @param dataRequest
@@ -146,9 +146,9 @@ public class EmployerController {
 	@RequestMapping("/getPtjList.do")
 	public View getPtjList(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		ParameterGroup param = dataRequest.getParameterGroup("dmGetPtjList");
-		/* String storeCode = param.getValue("STORE_CODE"); */
+		String storeCode = param.getValue("STORE_CODE"); 
 		String userNumber = param.getValue("USER_NUMBER");
-		List<Map<String, Object>> result = dao.getPtjList(/* storeCode, */userNumber);
+		List<Map<String, Object>> result = dao.getPtjList(storeCode, userNumber);
 		System.out.println(result.toString());
 		dataRequest.setResponse("dsPtjList", result);
 		
@@ -195,16 +195,18 @@ public class EmployerController {
 	  */
 	@RequestMapping("/requestList.do")
 	public View requestList(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
-		ParameterGroup param = dataRequest.getParameterGroup("dmOnLoad");
+		ParameterGroup param = dataRequest.getParameterGroup("dmSearch");
+		System.out.println(param.toString());
+		String USER_NUMBER = param.getValue("USER_NUMBER");
+		String STORE_CODE =param.getValue("STORE_CODE");
+		String PTJ_NAME = param.getValue("PTJ_NAME");
 		
-		String USER_EMAIL = param.getValue("USER_EMAIL");
-		String USER_NUMBER =param.getValue("USER_NUMBER");
 		//매장 리스트 조회
-		List storeList = dao.storeList(USER_NUMBER,null,null);
+//		List storeList = dao.storeList(USER_NUMBER,null,null);
 		//매장 연결 요청 목록 조회
-		List requestList = dao.getRequestList(USER_NUMBER);
-
-		dataRequest.setResponse("dsStoreList", storeList);
+		List requestList = dao.getRequestList(USER_NUMBER,STORE_CODE,PTJ_NAME);
+		System.out.println(requestList.toString());
+//		dataRequest.setResponse("dsStoreList", storeList);
 		dataRequest.setResponse("dsRequest", requestList);
 			
 		return new JSONDataView();
@@ -227,16 +229,22 @@ public class EmployerController {
 	@RequestMapping("/acceptPtjRequest.do")
 	public View acceptPtjRequest(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		
-		ParameterGroup param = dataRequest.getParameterGroup("dsRequest");
+//		ParameterGroup param = dataRequest.getParameterGroup("dsRequest");
+//		
+//		if(param != null) {
+//			Iterator<ParameterRow> iter;
+//			//update
+//			iter = param.getUpdatedRows();
+//			while(iter.hasNext()) {
+//				dao.updatePtLinkjRequest(iter.next().toMap());
+//			}
+//		}
 		
-		if(param != null) {
-			Iterator<ParameterRow> iter;
-			//update
-			iter = param.getUpdatedRows();
-			while(iter.hasNext()) {
-				dao.updatePtLinkjRequest(iter.next().toMap());
-			}
-		}
+		ParameterGroup param = dataRequest.getParameterGroup("dmUpdate");
+		
+		System.out.println(param.toString());
+		
+		dao.updatePtLinkjRequest(param);
 		
 		
 		return new JSONDataView();

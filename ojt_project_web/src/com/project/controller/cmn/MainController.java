@@ -42,16 +42,15 @@ public class MainController {
 	
 	/**
 	  * @Method Name : SessionCheck
-	  * @작성일 : 2022. 2. 14.
+	  * @작성일 : 2022. 1. 28.
 	  * @작성자 : SeongSoo
 	  * @변경이력 : 
-	  * @Method 설명 : sessionCheck
+	  * @Method 설명 : 현재 저장된 세션값과 요청들어온 세션값이 일치하는지 확인하는 메서드
 	  * @param req
 	  * @param USER_EMAIL
 	  * @return
 	  */
 	public int SessionCheck(HttpServletRequest req, String USER_EMAIL) {
-	
 		HttpSession userSession = req.getSession(false);
 		if(userSession == null) {
 			return 0; // 
@@ -69,7 +68,7 @@ public class MainController {
 	  * @작성일 : 2022. 2. 14.
 	  * @작성자 : SeongSoo
 	  * @변경이력 : 
-	  * @Method 설명 : session check 
+	  * @Method 설명 : 요청 해더에 들어온 정보로 사용자 세션 확인(해당 사용자가 현재 저장된 사용자와 일치하는지)
 	  * @param req
 	  * @param res
 	  * @param dataRequest
@@ -94,7 +93,7 @@ public class MainController {
 	
 	/**
 	  * @Method Name : userInfo
-	  * @작성일 : 2022. 2. 14.
+	  * @작성일 : 2022. 1. 27.
 	  * @작성자 : SeongSoo
 	  * @변경이력 : 
 	  * @Method 설명 : session에 저장된 사용자 정보 조회
@@ -110,7 +109,7 @@ public class MainController {
 		HttpSession userssion = req.getSession(false);
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		if(userssion == null) {
+		if(userssion == null) { // 세션정보가 없을 경우
 			dataReq.setResponse("dmUserinfo", result);
 			return new JSONDataView();
 		}
@@ -147,7 +146,7 @@ public class MainController {
 	  * @작성일 : 2022. 2. 14.
 	  * @작성자 : KyeongSu
 	  * @변경이력 : 
-	  * @Method 설명 :
+	  * @Method 설명 : mypage 사용자 정보 조회
 	  * @param req
 	  * @param res
 	  * @param dataReq
@@ -157,9 +156,13 @@ public class MainController {
 	@RequestMapping("/getMyInfo.do")
 	public View getMyInfo(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception{
 		ParameterGroup param = dataReq.getParameterGroup("dmMyInfo");
-		String userNum = param.getValue("USER_NUMBER");
-		Map<String, String> result = service.getMyInfo(userNum);
-		dataReq.setResponse("dmGetMyInfo", result); 
+		if(param != null ) {
+			String userNum = param.getValue("USER_NUMBER");
+			
+			Map<String, String> result = service.getMyInfo(userNum);
+			
+			dataReq.setResponse("dmGetMyInfo", result);			
+		}
 		
 		return new JSONDataView();
 	}
@@ -179,8 +182,9 @@ public class MainController {
 	@RequestMapping("/updateMyInfo.do")
 	public View updateMyInfo(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception{
 		ParameterGroup param = dataReq.getParameterGroup("dmUpdateUserInfo");
+		
 		HttpSession userssion = req.getSession(false);
-		service.updateUserInfo(param);
+		
 		userssion.setAttribute("USER_NAME", param.getValue("USER_NAME")); // 변경된 사용자 이름 session에 다시 저장
 		
 		return new JSONDataView();
@@ -191,7 +195,7 @@ public class MainController {
 	  * @작성일 : 2022. 2. 14.
 	  * @작성자 : KyeongSu
 	  * @변경이력 : 
-	  * @Method 설명 :
+	  * @Method 설명 : 회원 탈퇴
 	  * @param req
 	  * @param res
 	  * @param dataReq

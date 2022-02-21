@@ -31,7 +31,18 @@ public class RegisterController {
 		this.service = service;
 	}
 	
-	//회원가입페이지 이동
+	/**
+	  * @Method Name : moveRegistPage
+	  * @작성일 : 2022. 1. 26.
+	  * @작성자 : SeongSoo
+	  * @변경이력 : 
+	  * @Method 설명 : 회원가입 페이지 이동
+	  * @param req
+	  * @param res
+	  * @param datareq
+	  * @return
+	  * @throws Exception
+	  */
 	@RequestMapping("mvRegist.do")
 	public View moveRegistPage(HttpServletRequest req, HttpServletResponse res, DataRequest datareq ) throws Exception{
 		
@@ -39,12 +50,23 @@ public class RegisterController {
 	}
 	
 	
-	//회원 가입
+	/**
+	  * @Method Name : register
+	  * @작성일 : 2022. 1. 26.
+	  * @작성자 : SeongSoo
+	  * @변경이력 : 
+	  * @Method 설명 : 회원 가입
+	  * @param req
+	  * @param res
+	  * @param datareq
+	  * @return
+	  * @throws Exception
+	  */
 	@RequestMapping("/register.do")
 	public View register(HttpServletRequest req, HttpServletResponse res, DataRequest datareq ) throws Exception{
 		
 		ParameterGroup param = datareq.getParameterGroup("dmRegister");
-		
+		System.out.println(param.toString());
 		//회원 정보 저장
 		int result = service.register(param);
 		
@@ -60,7 +82,18 @@ public class RegisterController {
 		return new JSONDataView();
 	}
 	
-	//아이디 중복 체크 
+	/**
+	  * @Method Name : duplicateID
+	  * @작성일 : 2022. 1. 26.
+	  * @작성자 : SeongSoo
+	  * @변경이력 : 
+	  * @Method 설명 : 아이디 중복 체크
+	  * @param req
+	  * @param res
+	  * @param datareq
+	  * @return
+	  * @throws Exception
+	  */
 	@RequestMapping("/idcheck.do")
 	public View duplicateID(HttpServletRequest req, HttpServletResponse res, DataRequest datareq ) throws Exception{
 		
