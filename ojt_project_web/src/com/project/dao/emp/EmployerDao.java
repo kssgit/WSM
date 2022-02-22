@@ -186,6 +186,7 @@ public class EmployerDao {
 		// TODO Auto-generated method stub
 		System.out.println("파라미터");
 		System.out.println(map.toString());
+		
 		try {
 			//고용주가 승낙한 요청이라면 
 			if(map.get("ACCEPT_EMP").equals("Y")) {
@@ -213,7 +214,7 @@ public class EmployerDao {
 				sqlsession.update("emp.deniedRequest", map);
 			}
 			return 0;
-		} catch (Exception e) {
+		} catch (Exception e) {//DB 트리거 exception 발생 
 			deniedRequest(map); //시간중복 발생시 해당 요청 근무 거절 
 			return 1;
 		}
@@ -268,6 +269,14 @@ public class EmployerDao {
 	public void deniedRequest(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		sqlsession.update("emp.deniedRequest", map);
+	}
+
+	public List getPtjList(String store_code) {
+		
+		Map<String, String> data = new HashedMap();
+		data.put("STORE_CODE",store_code);
+		return sqlsession.selectList("emp.ptjList",data);
+		
 	}
 
 	

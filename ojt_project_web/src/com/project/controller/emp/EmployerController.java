@@ -39,16 +39,16 @@ import com.project.dao.emp.EmployerDao;
 @RequestMapping("emp")
 public class EmployerController {
 	
-//	private final EmployerService service;
+
 	private final EmployerDao dao;
 	/**
 	 * 생성자
 	 * @param service
 	 */
 	@Autowired
-	public EmployerController(/* EmployerService service, */ EmployerDao dao) {
+	public EmployerController(EmployerDao dao) {
 		// TODO Auto-generated constructor stub
-//		this.service = service;
+
 		this.dao = dao;
 	}
 	
@@ -77,7 +77,7 @@ public class EmployerController {
 		List storeList = dao.storeList(USER_NUMBER,null,null);
 		//매장 스케줄 리스트
 		List storeScheduleList = dao.storeScheduleList(USER_EMAIL);
-
+		System.out.println(storeList.toString());
 		dataRequest.setResponse("dsStoreList", storeList);
 		dataRequest.setResponse("dsEvnt", storeScheduleList);
 			
@@ -229,16 +229,6 @@ public class EmployerController {
 	@RequestMapping("/acceptPtjRequest.do")
 	public View acceptPtjRequest(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		
-//		ParameterGroup param = dataRequest.getParameterGroup("dsRequest");
-//		
-//		if(param != null) {
-//			Iterator<ParameterRow> iter;
-//			//update
-//			iter = param.getUpdatedRows();
-//			while(iter.hasNext()) {
-//				dao.updatePtLinkjRequest(iter.next().toMap());
-//			}
-//		}
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmUpdate");
 		
@@ -336,7 +326,7 @@ public class EmployerController {
 		ParameterGroup param = dataRequest.getParameterGroup("dmOnLoad");
 		
 		List reqChangeList = dao.getReqList(param.getValue("USER_EMAIL"),param.getValue("USER_KIND"));
-		
+		System.out.println("히히 : "+reqChangeList);
 		dataRequest.setResponse("dsRequest", reqChangeList);
 		
 		return new JSONDataView();
@@ -360,7 +350,9 @@ public class EmployerController {
 		ParameterGroup param = dataRequest.getParameterGroup("dmSelectRow");
 		
 		List daySchedule = dao.getDaySchedule(param.getValue("WORK_DATE"),param.getValue("STORE_CODE"));
-
+		List ptjList = dao.getPtjList(param.getValue("STORE_CODE"));
+		
+		dataRequest.setResponse("dsPtjList", ptjList);
 		dataRequest.setResponse("dsSelectSchedule", daySchedule);
 		
 		return new JSONDataView();

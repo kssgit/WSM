@@ -84,6 +84,7 @@
 			, s.STORE_NAME
 			, pt.PAY_KIND
 			, pt.UNIT_PAY
+			, pt.COLOR
 			, pt.PAY_DAY
 			, pt.TAX_STAT
 			, pt.ROLE 
@@ -286,5 +287,4 @@
 		FROM WORKPLACE
 		WHERE USER_CODE_PTJ = #{USER_CODE_PTJ}
 	</delete>
-		
 </mapper>

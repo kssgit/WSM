@@ -65,7 +65,7 @@
 			ON s.STORE_CODE = st.STORE_CODE
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<!-- 고용주 -->
-			<if test="STORE_CODE != null and STORE_CODE != '' ">WORK_DATE = #{WORK_DATE} AND s.STORE_CODE = #{STORE_CODE}</if>
+			<if test="STORE_CODE != null and STORE_CODE != '' ">WORK_DATE = #{WORK_DATE} AND s.STORE_CODE = #{STORE_CODE} AND  s.user_code_ptj  in (select pt.user_code_ptj from part_timer pt where pt.store_code = #{STORE_CODE}) </if>
 			<!-- 알바생  -->
 			<if test="USER_CODE_PTJ != null and USER_CODE_PTJ != '' ">WORK_DATE = #{WORK_DATE} AND USER_CODE_PTJ = #{USER_CODE_PTJ}</if>
 		</trim>
