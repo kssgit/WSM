@@ -103,8 +103,10 @@
 			(part_timer pt JOIN store s ON pt.store_code =s.store_code) 
 			JOIN `user` u ON user_code_ptj =  u.USER_NUMBER
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
-			<!-- 직원 목록 전체 조회(해당 고용주에 속하고 재직중인 직원) -->
+			<!-- 직원 목록 전체 조회(해당 고용주에 매장에 속하고 재직중인 직원) -->
 			<if test="USER_NUMBER != null and USER_NUMBER != '' ">s.USER_NUMBER_EMP = #{USER_NUMBER} AND pt.LINK_STAT = 'Y' AND pt.resignation = 'Y'</if>
+			<!-- 직원 이름으로 검색 -->
+			<if test="PTJ_NAME != null and PTJ_NAME != '' ">AND u.NAME LIKE CONCAT('%',#{PTJ_NAME},'%')</if>
 			<!-- 매장별 조회 -->
 			<if test="STORE_CODE != null and STORE_CODE != '' ">AND pt.store_code = #{STORE_CODE}</if>
 		</trim>
@@ -287,4 +289,12 @@
 		FROM WORKPLACE
 		WHERE USER_CODE_PTJ = #{USER_CODE_PTJ}
 	</delete>
+	
+	<!-- 고용주가 근무자의 정보 수정  -->
+	<update id="updatePartTimer">
+		UPDATE PART_TIMER SET
+			<if test="COLOR != null and COLOR != '' ">COLOR = #{COLOR},</if>
+			<if test="ROLE != null and ROLE != '' ">ROLE = #{ROLE}</if>
+		WHERE PTJ_CODE = #{PTJ_CODE}
+	</update>
 </mapper>

@@ -24,7 +24,7 @@ import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.protocol.data.ParameterRow;
 import com.cleopatra.spring.JSONDataView;
 import com.project.dao.emp.EmployerDao;
-//import com.project.service.emp.EmployerService;
+
 
 /**
   * @FileName : EmployerController.java
@@ -148,7 +148,8 @@ public class EmployerController {
 		ParameterGroup param = dataRequest.getParameterGroup("dmGetPtjList");
 		String storeCode = param.getValue("STORE_CODE"); 
 		String userNumber = param.getValue("USER_NUMBER");
-		List<Map<String, Object>> result = dao.getPtjList(storeCode, userNumber);
+		String ptj_name = param.getValue("PTJ_NAME");
+		List<Map<String, Object>> result = dao.getPtjList(storeCode, userNumber,ptj_name);
 		System.out.println(result.toString());
 		dataRequest.setResponse("dsPtjList", result);
 		
@@ -228,14 +229,12 @@ public class EmployerController {
 	  */
 	@RequestMapping("/acceptPtjRequest.do")
 	public View acceptPtjRequest(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
-		
-		
+
 		ParameterGroup param = dataRequest.getParameterGroup("dmUpdate");
 		
 		System.out.println(param.toString());
 		
 		dao.updatePtLinkjRequest(param);
-		
 		
 		return new JSONDataView();
 	}
@@ -298,9 +297,9 @@ public class EmployerController {
 	public View scheduleChangeListEmp(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmOnLoad");
-		
-		List changeList = dao.getscheduleChange(param.getValue("USER_EMAIL"));
-		System.out.println(changeList.toString());
+		System.out.println(param.toString());
+		List changeList = dao.getscheduleChange(param.getValue("USER_EMAIL"),param.getValue("STORE_CODE"), param.getValue("PTJ_NAME"));
+
 		
 		dataRequest.setResponse("dsScheduleChange", changeList);
 
@@ -325,8 +324,8 @@ public class EmployerController {
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmOnLoad");
 		
-		List reqChangeList = dao.getReqList(param.getValue("USER_EMAIL"),param.getValue("USER_KIND"));
-		System.out.println("히히 : "+reqChangeList);
+		List reqChangeList = dao.getReqList(param.getValue("USER_EMAIL"),param.getValue("USER_KIND"),param.getValue("STORE_CODE"), param.getValue("PTJ_NAME"));
+		
 		dataRequest.setResponse("dsRequest", reqChangeList);
 		
 		return new JSONDataView();
@@ -460,7 +459,7 @@ public class EmployerController {
 		ParameterGroup param = dataRequest.getParameterGroup("dmCheckUD");
 
 		int result = dao.checkSchedule(param.getValue("SCHEDULE_CODE"));
-//		System.out.println("변경 가능 여부 : "+result);
+
 		Map<String, Integer> dm = new HashMap<String, Integer>();
 		dm.put("RESULT", result);
 		dataRequest.setResponse("dmCheckUD", dm);
@@ -482,8 +481,31 @@ public class EmployerController {
 	@RequestMapping("/deleteStore.do")
 	public View deleteStore(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		ParameterGroup param = dataRequest.getParameterGroup("dmDeleteStore");
-//		System.out.println(param);
+
 		dao.deleteStore(param.getValue("STORE_CODE"), param.getValue("USER_NUMBER"));
+		
+		
+		return new JSONDataView();
+	}
+	
+	
+	/**
+	  * @Method Name : updatePartTimer
+	  * @작성일 : 2022. 2. 23.
+	  * @작성자 : SeongSoo
+	  * @변경이력 : 
+	  * @Method 설명 : 근무자 정보 변경
+	  * @param req
+	  * @param res
+	  * @param dataRequest
+	  * @return
+	  * @throws Exception
+	  */
+	@RequestMapping("/updatePtj.do")
+	public View updatePartTimer(HttpServletRequest req, HttpServletResponse res, DataRequest dataRequest) throws Exception{
+		ParameterGroup param = dataRequest.getParameterGroup("dmUpdate");
+		System.out.println(param.toString());
+		dao.updatePartTimer(param.getValue("PTJ_CODE"), param.getValue("COLOR"),param.getValue("ROLE"));
 		
 		
 		return new JSONDataView();

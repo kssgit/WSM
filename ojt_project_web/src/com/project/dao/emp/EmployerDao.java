@@ -53,10 +53,11 @@ public class EmployerDao {
 	}
 	
 	//직원 목록 조회
-	public List<Map<String, Object>> getPtjList(String storeCode, String userNumber) {
+	public List<Map<String, Object>> getPtjList(String storeCode, String userNumber, String ptj_name) {
 		Map<String, Object> data = new HashMap();
 		data.put("STORE_CODE", storeCode);
 		data.put("USER_NUMBER", userNumber);
+		data.put("PTJ_NAME", ptj_name);
 		List<Map<String, Object>> result = sqlsession.selectList("emp.ptjList", data);
 		return result;
 	}
@@ -152,20 +153,24 @@ public class EmployerDao {
 		sqlsession.insert("emp.reqScheduleWork",map);
 	}
 	
-	//
-	public List getscheduleChange(String user_code_emp) {
+	//고용주가 요청 받은 근무지 변경 추가 삭제 리스트
+	public List getscheduleChange(String user_code_emp, String store_code, String ptj_name) {
 		// TODO Auto-generated method stub
 		Map<String, String> data = new HashedMap();
 		data.put("USER_CODE_EMP", user_code_emp);
+		data.put("STORE_CODE", store_code);
+		data.put("PTJ_NAME" , ptj_name);
 		return sqlsession.selectList("cmn.scheduleChangeList",data);
 	}
 	
 	//고용추가 요청한 근무 추가 삭제 요청 리스트
-	public List getReqList(String user_code_emp, String user_kind) {
+	public List getReqList(String user_code_emp, String user_kind,String store_code, String ptj_name) {
 		// TODO Auto-generated method stub
 		Map<String, String> data = new HashedMap();
 		data.put("USER_CODE_EMP2", user_code_emp);
 		data.put("USER_KIND", user_kind);
+		data.put("STORE_CODE", store_code);
+		data.put("PTJ_NAME" , ptj_name);
 		System.out.println(data.toString());
 		return sqlsession.selectList("cmn.scheduleChangeList",data);
 	}
@@ -277,6 +282,18 @@ public class EmployerDao {
 		data.put("STORE_CODE",store_code);
 		return sqlsession.selectList("emp.ptjList",data);
 		
+	}
+
+	
+	//근무자 정보 수정
+	public void updatePartTimer(String ptj_code, String color, String role) {
+		// TODO Auto-generated method stub
+		Map<String, String> data = new HashedMap();
+		data.put("PTJ_CODE",ptj_code);
+		data.put("COLOR", color);
+		data.put("ROLE", role);
+		
+		sqlsession.update("emp.updatePartTimer",data);
 	}
 
 	
