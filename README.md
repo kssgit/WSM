@@ -1,6 +1,6 @@
 # 토이 프로젝트
 # WSM(Work Schedule Management)
-알바생과 고용주간 근무 스케줄 관리 서비스 제작(SPA 
+알바생과 고용주간 근무 스케줄 관리 서비스 제작(SPA 서비스)
 
 
 
