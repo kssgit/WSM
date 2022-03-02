@@ -156,7 +156,6 @@ public class PtjDao {
 		data.put("WORK_DATE", format_date);
 		data.put("USER_CODE_PTJ", user_code_ptj);
 		List result = sqlsession.selectList("ptj.dailyScheduleReq",data);
-		System.out.println(result);
 		return result;
 	}
 	
@@ -185,17 +184,15 @@ public class PtjDao {
 
 			//스케줄에 업데이트 
 			if(map.get("DC").equals("C")) {
-				System.out.println("추가");
 				sqlsession.insert("cmn.insertSchedule",map);
 			}else if(map.get("DC").equals("D")) {
-				System.out.println("삭제");
+
 				sqlsession.delete("cmn.deletSchedule", map);
 			}else if(map.get("DC").equals("U")) {
-				System.out.println("변경");
 				sqlsession.update("cmn.updateSchedule",map);
 			}
-			// 요청 목록에서 삭제 
-			sqlsession.delete("cmn.deleteReqScheduleChage",map);
+			// 요청 목록 업데이트
+			sqlsession.update("ptj.deniedRequest", map);
 		}
 	}
 	

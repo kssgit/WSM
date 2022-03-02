@@ -66,7 +66,7 @@ public class RegisterController {
 	public View register(HttpServletRequest req, HttpServletResponse res, DataRequest datareq ) throws Exception{
 		
 		ParameterGroup param = datareq.getParameterGroup("dmRegister");
-		System.out.println(param.toString());
+
 		//회원 정보 저장
 		int result = service.register(param);
 		

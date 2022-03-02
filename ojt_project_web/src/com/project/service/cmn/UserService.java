@@ -80,7 +80,6 @@ public class UserService implements UserServiceInterface{
 		}
 		//사용자 정보를 통해 salt 테이블에 SALT 추가 
 		Map<String, Object> data = userdao.emailcheck(param.getValue("EMAIL"));
-		System.out.println(data.get("USER_NUMBER"));
 		return userdao.insertSalt((Integer)data.get("USER_NUMBER"), salt);
 	}
 	

@@ -82,7 +82,7 @@ public class EmployerDao {
 		data.put("PTJ_NAME",PTJ_NAME);
 		
 		List<Map<String, Object>> result = sqlsession.selectList("emp.linkReqList", data);
-//		System.out.println(result);
+
 		// TODO Auto-generated method stub
 		return result;
 	}
@@ -98,7 +98,7 @@ public class EmployerDao {
 		
 		data.put("color",param.getValue("color"));
 		data.put("role",param.getValue("role"));
-		System.out.println(data.toString());
+
 		//승인 여부가 Y 일경우
 		//workplace 테이블에 값 생성 
 		if(param.getValue("LINK_STAT").equals("Y")) {			
@@ -108,7 +108,7 @@ public class EmployerDao {
 		}
 		//승인 여부가 D일 경우
 		if(param.getValue("LINK_STAT").equals("D")) {
-			System.out.println("삭제");
+
 			sqlsession.delete("emp.deleteLinkRequest",data);
 		}
 		
@@ -124,8 +124,8 @@ public class EmployerDao {
 			map.put("WORK_END_TIME",map.get("WORK_DATE")+map.get("WORK_END_TIME")+"00");
 			map.put("DC", "D");
 			map.put("COLOR", "#FC4F4F");
-			System.out.println("DELETE");
-			System.out.println(map.toString());
+
+
 			// TODO Auto-generated method stub
 			sqlsession.insert("emp.reqScheduleWork", map);
 		}
@@ -136,8 +136,7 @@ public class EmployerDao {
 		map.put("WORK_BEGIN_TIME",map.get("WORK_DATE")+map.get("WORK_BEGIN_TIME")+"00");
 		map.put("WORK_END_TIME",map.get("WORK_DATE")+map.get("WORK_END_TIME")+"00");
 		map.put("DC","C");
-		System.out.println("CREATE");
-		System.out.println(map.toString());
+
 		
 		sqlsession.insert("emp.reqScheduleWork",map);
 	}
@@ -148,8 +147,7 @@ public class EmployerDao {
 		map.put("WORK_END_TIME",map.get("WORK_DATE")+map.get("WORK_END_TIME")+"00");
 		map.put("DC","U");
 		map.put("COLOR", "#FF9F45");
-		System.out.println("UPDATE");
-		System.out.println(map.toString());
+
 		sqlsession.insert("emp.reqScheduleWork",map);
 	}
 	
@@ -171,7 +169,7 @@ public class EmployerDao {
 		data.put("USER_KIND", user_kind);
 		data.put("STORE_CODE", store_code);
 		data.put("PTJ_NAME" , ptj_name);
-		System.out.println(data.toString());
+
 		return sqlsession.selectList("cmn.scheduleChangeList",data);
 	}
 
@@ -189,14 +187,12 @@ public class EmployerDao {
 	//요청 근무 수락 
 	public int updateAcceptScheduleChange(Map<String, String> map){
 		// TODO Auto-generated method stub
-		System.out.println("파라미터");
-		System.out.println(map.toString());
+
 		
 		try {
 			//고용주가 승낙한 요청이라면 
 			if(map.get("ACCEPT_EMP").equals("Y")) {
 				//근무 추가일경우
-				System.out.println(map.get("UD_SCHEDULE_NUMBER"));
 				if(map.get("DC").equals("C")) { 
 					//schedule 테이블에 추가
 					sqlsession.insert("cmn.insertSchedule", map);
@@ -204,16 +200,15 @@ public class EmployerDao {
 				// 근무 삭제일경우
 				}else if(map.get("DC").equals("D")){
 					//삭제
-					System.out.println("삭제");
 					sqlsession.delete("cmn.deletSchedule", map);
 					
 				}else {
-					//변경
-					System.out.println("변경");
+					//변경;
 					sqlsession.update("cmn.updateSchedule",map);
 				}
 				//request 테이블에서 삭제
-				sqlsession.delete("cmn.deleteReqScheduleChage",map);
+//				sqlsession.delete("cmn.deleteReqScheduleChage",map);
+				sqlsession.update("emp.deniedRequest", map);
 			//승낙하지 않은 요청
 			}else { 
 				sqlsession.update("emp.deniedRequest", map);
@@ -260,6 +255,7 @@ public class EmployerDao {
 		}
 	}
 
+	//매장 삭제
 	public void deleteStore(String store_code, String user_code_emp) {
 		// TODO Auto-generated method stub
 		Map<String, String> data = new HashedMap();
@@ -276,6 +272,7 @@ public class EmployerDao {
 		sqlsession.update("emp.deniedRequest", map);
 	}
 
+	//직원 목록 조회
 	public List getPtjList(String store_code) {
 		
 		Map<String, String> data = new HashedMap();
@@ -294,6 +291,16 @@ public class EmployerDao {
 		data.put("ROLE", role);
 		
 		sqlsession.update("emp.updatePartTimer",data);
+	}
+
+	//고용주 승인 거절 목록
+	public List getcheckReqResList(String USER_CODE_EMP3,String STORE_CODE, String PTJ_CODE) {
+		// TODO Auto-generated method stub
+		Map<String, String> data = new HashedMap();
+		data.put("PTJ_CODE",PTJ_CODE);
+		data.put("STORE_CODE", STORE_CODE);
+		data.put("USER_CODE_EMP3", USER_CODE_EMP3);
+		return sqlsession.selectList("cmn.scheduleChangeList",data);
 	}
 
 	

@@ -91,7 +91,6 @@
 			, pt.LINK_STAT
 			, u.USER_NUMBER
 			, s.STORE_CODE
-			, pt.COLOR 
 			<!-- 해당 직원의 당월 근무 총시간 -->
 			, IFNULL((
 				SELECT
@@ -190,6 +189,7 @@
 			<if test="(DT_BEGIN != null and DT_BEGIN != '') and (DT_END != null and DT_END != '' ) ">work_date between #{DT_BEGIN} AND #{DT_END} AND  </if>
 			<if test="USER_NUMBER != null and USER_NUMBER != '' ">user_code_ptj = #{USER_NUMBER} AND s.store_code = #{STORE_CODE}</if>
 		</trim>
+		ORDER BY work_begin_time
 	</select>
 	
 	
@@ -242,7 +242,8 @@
 	<!-- 고용주가 승인 거절한 요청 업데이트 -->
 	<update id="deniedRequest">
 		UPDATE REQUEST_SCHEDULE SET
-			ACCEPT_EMP = 'D'
+			ACCEPT_EMP = #{ACCEPT_EMP},
+			UPDATE_DATE = sysdate()
 		WHERE reqschedule_number = #{REQ_CODE}
 	</update>
 	

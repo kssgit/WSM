@@ -3101,7 +3101,7 @@ body {
   white-space: nowrap;
 }
 .cl-dialog .cl-dialog-header .cl-dialog-close {
-  background-image: url(icons/dialog-close-active.png);
+  background-image: url(icons/dialog-close.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: auto;

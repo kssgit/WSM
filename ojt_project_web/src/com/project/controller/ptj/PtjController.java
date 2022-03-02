@@ -41,8 +41,6 @@ import com.project.dao.ptj.PtjDao;
 @RequestMapping("ptj")
 public class PtjController {
 
-	
-//	private final PtjService serivce;
 	private final PtjDao dao;
 	
 	/**
@@ -50,9 +48,8 @@ public class PtjController {
 	 * @param serivce
 	 */
 	@Autowired
-	public PtjController(/* PtjService serivce, */ PtjDao dao) {
-		// TODO Auto-generated constructor stub
-//		this.serivce = serivce;
+	public PtjController(PtjDao dao) {
+
 		this.dao = dao;
 	}
 	
@@ -72,10 +69,11 @@ public class PtjController {
 	@RequestMapping("/onLoad.do")
 	public View onload(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmOnLoad");
+		if(param != null) {
+			List workList = dao.workList(param.getValue("user_code_ptj"));
 
-		List workList = dao.workList(param.getValue("user_code_ptj"));
-
-		dataReq.setResponse("dsEvnt", workList);
+			dataReq.setResponse("dsEvnt", workList);
+		}
 			
 		return new JSONDataView();
 	}
@@ -96,12 +94,14 @@ public class PtjController {
 	@RequestMapping("/dailySchedule.do")
 	public View dailySchedule(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmDailySchedule");
-
-		String work_date = param.getValue("work_date");
-		String format_date = work_date.substring(0, 4) + "-" + work_date.substring(4,6) + "-" + work_date.substring(6);
-		List workList = dao.dailyworkList(param.getValue("user_code_ptj"),format_date);
-		
-		dataReq.setResponse("dsDailySchedule", workList);
+		if(param != null) {
+			String work_date = param.getValue("work_date");
+			String format_date = work_date.substring(0, 4) + "-" + work_date.substring(4,6) + "-" + work_date.substring(6);
+			
+			List workList = dao.dailyworkList(param.getValue("user_code_ptj"),format_date);
+			
+			dataReq.setResponse("dsDailySchedule", workList);
+		}
 		
 		return new JSONDataView();
 	}
@@ -121,12 +121,15 @@ public class PtjController {
 	@RequestMapping("/dailyScheduleReq.do")
 	public View dailyScheduleReq(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmDailySchedule");
-		String user_code_ptj = param.getValue("user_code_ptj");
-		String work_date = param.getValue("work_date");
-		String format_date = work_date.substring(0, 4) + "-" + work_date.substring(4,6) + "-" + work_date.substring(6);
-		List workList = dao.dailyScheduleReq(user_code_ptj,format_date);
-		
-		dataReq.setResponse("dsDailyScheduleReq", workList);
+		if(param != null) {
+			String user_code_ptj = param.getValue("user_code_ptj");
+			String work_date = param.getValue("work_date");
+			String format_date = work_date.substring(0, 4) + "-" + work_date.substring(4,6) + "-" + work_date.substring(6);
+			
+			List workList = dao.dailyScheduleReq(user_code_ptj,format_date);
+			
+			dataReq.setResponse("dsDailyScheduleReq", workList);
+		}
 		
 		return new JSONDataView();
 	}
@@ -147,10 +150,11 @@ public class PtjController {
 	@RequestMapping("/workplace.do")
 	public View workPlace(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmUserInfo");
+		if(param != null) {
+			List workPlaceList = dao.workPlaceList(Integer.parseInt(param.getValue("user_code_ptj")));
 
-		List workPlaceList = dao.workPlaceList(Integer.parseInt(param.getValue("user_code_ptj")));
-
-		dataReq.setResponse("dsWpName", workPlaceList);
+			dataReq.setResponse("dsWpName", workPlaceList);
+		}
 		
 		return new JSONDataView();
 	}
@@ -172,8 +176,10 @@ public class PtjController {
 	public View linkRequest(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		
 		ParameterGroup param = dataReq.getParameterGroup("dmRequseLink");
-		int result = dao.linkRequest(param);
 		
+		if(param != null) {
+			dao.linkRequest(param);
+		}		
 		
 		return new JSONDataView();
 	}
@@ -195,11 +201,12 @@ public class PtjController {
 	public View scheduleChangeList(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		
 		ParameterGroup param = dataReq.getParameterGroup("dmOnLoad");
-		
-		List changelist = dao.getScheduleChange(param.getValue("USER_NUMBER"));
-		
-		dataReq.setResponse("dsScheduleChange", changelist);
-		
+		if(param != null ) {
+			List changelist = dao.getScheduleChange(param.getValue("USER_NUMBER"));
+			
+			dataReq.setResponse("dsScheduleChange", changelist);
+		}
+
 		return new JSONDataView();
 	}
 	
@@ -219,7 +226,9 @@ public class PtjController {
 	@RequestMapping("/addNewScheduleReq.do")
 	public View addNewScheduleReq(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmNewSchedule");
-		dao.addNewScheduleReq(param);
+		if(param != null) {			
+			dao.addNewScheduleReq(param);
+		}
 		
 		return new JSONDataView();
 	}
@@ -242,10 +251,12 @@ public class PtjController {
 	public View requestScheduleChange(HttpServletRequest req , HttpServletResponse res, DataRequest dataRequest) throws Exception{
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmOnLoad");
-
-		List reqChangeList = dao.getRequestSchedule(param.getValue("USER_NUMBER"),param.getValue("USER_KIND"));
-//		System.out.println(reqChangeList.toString());
-		dataRequest.setResponse("dsRequest", reqChangeList);
+		if(param != null) {
+			
+			List reqChangeList = dao.getRequestSchedule(param.getValue("USER_NUMBER"),param.getValue("USER_KIND"));
+			
+			dataRequest.setResponse("dsRequest", reqChangeList);
+		}
 		
 		return new JSONDataView();
 	}
@@ -268,9 +279,11 @@ public class PtjController {
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmSelectRow");
 		
-		List daySchedule = dao.getDaySchedule(param.getValue("WORK_DATE"),param.getValue("USER_NUMBER"));
-		System.out.println(dataRequest.toString());
-		dataRequest.setResponse("dsSelectSchedule", daySchedule);
+		if(param != null ) {
+			List daySchedule = dao.getDaySchedule(param.getValue("WORK_DATE"),param.getValue("USER_NUMBER"));
+			
+			dataRequest.setResponse("dsSelectSchedule", daySchedule);
+		}
 		
 		return new JSONDataView();
 	}
@@ -321,7 +334,10 @@ public class PtjController {
 	@RequestMapping("/updateScheduleReq.do")
 	public View updateScheduleReq(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmUpdateSchedule");
-		dao.updateScheduleReq(param);
+		
+		if(param != null) {
+			dao.updateScheduleReq(param);
+		}
 		
 		return new JSONDataView();
 	}
@@ -341,7 +357,10 @@ public class PtjController {
 	@RequestMapping("/deleteScheduleReq.do")
 	public View deleteScheduleReq(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		ParameterGroup param = dataReq.getParameterGroup("dmUpdateSchedule");
-		dao.deleteScheduleReq(param);
+		
+		if(param != null) {			
+			dao.deleteScheduleReq(param);
+		}
 		
 		return new JSONDataView();
 	}
@@ -364,9 +383,10 @@ public class PtjController {
 	public View deleteStore(HttpServletRequest req, HttpServletResponse res, DataRequest dataReq) throws Exception {
 		
 		ParameterGroup param = dataReq.getParameterGroup("dmDeleteStore");
-//		System.out.println(param);
-		dao.deleteStore(param.getValue("STORE_CODE"),param.getValue("USER_NUMBER"));
 		
+		if(param != null) {
+			dao.deleteStore(param.getValue("STORE_CODE"),param.getValue("USER_NUMBER"));
+		}	
 		
 		return new JSONDataView();
 	}

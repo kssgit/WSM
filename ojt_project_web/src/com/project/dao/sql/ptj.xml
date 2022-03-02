@@ -145,7 +145,7 @@
 		WHERE  store_code = #{STORE_CODE} AND USER_CODE_PTJ = #{USER_CODE_PTJ}
 	</delete>
 	
-	<!-- 직원 목록 삭제 -->
+	<!-- 직원이 근무지 삭제시 직원 목록 삭제 -->
 	<delete id="deletePartTimer">
 		DELETE
 		FROM PART_TIMER
@@ -156,7 +156,8 @@
 	<!-- 알바생이 승인 거절한 요청 업데이트 -->
 	<update id="deniedRequest">
 		UPDATE REQUEST_SCHEDULE SET
-			ACCEPT_PTJ = 'D'
+			ACCEPT_PTJ = #{ACCEPT_PTJ},
+			UPDATE_DATE = sysdate()
 		WHERE reqschedule_number = #{REQ_CODE}
 	</update>	
 	
