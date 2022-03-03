@@ -114,6 +114,7 @@ public class PtjDao {
 	//스케줄 변경 요청
 	public void updateScheduleReq(ParameterGroup param) {
 		Map<String , Object> data = new HashedMap();
+
 		String workEndDate = param.getValue("work_end_date").substring(0, 8);
 		data.put("STORE_CODE", param.getValue("store_code"));
 		data.put("STORE_NAME", param.getValue("store_name"));
@@ -127,6 +128,7 @@ public class PtjDao {
 		data.put("DC", 'U');
 		data.put("SCHEDULE_CODE",  param.getValue("schedule_code"));
 		data.put("COLOR", "#FF9F45");
+		
 		sqlsession.update("ptj.reqScheduleWork", data);
 	}
 	
@@ -134,7 +136,6 @@ public class PtjDao {
 	public void deleteScheduleReq(ParameterGroup param) {
 		Map<String , Object> data = new HashedMap();
 		String workEndDate = param.getValue("work_end_date").substring(0, 8);
-		
 		data.put("STORE_CODE", param.getValue("store_code"));
 		data.put("STORE_NAME", param.getValue("store_name"));
 		data.put("USER_CODE_PTJ", param.getValue("user_code_ptj"));
@@ -147,6 +148,7 @@ public class PtjDao {
 		data.put("DC", 'D');
 		data.put("SCHEDULE_CODE",  param.getValue("schedule_code"));
 		data.put("COLOR", "#FC4F4F");
+		
 		sqlsession.update("ptj.reqScheduleWork", data);
 	}
 	

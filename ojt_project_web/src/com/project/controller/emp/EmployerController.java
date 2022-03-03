@@ -582,18 +582,21 @@ public class EmployerController {
 		int end_index = totalRowCount;// 종료 index 값
 		List page = new ArrayList<Map<String, String>>();
 		int currpage =1;
+		
 		if(param.getValue("currpage") != null && param.getValue("currpage") != "" ) {
 			currpage= Integer.parseInt(param.getValue("currpage"));//현재 페이지 index
 			start_index = (currpage-1)*pageRowCount;
 			if(totalRowCount >= currpage*pageRowCount ) {
 				end_index = currpage*pageRowCount;					
 			}
-		}else {
+		}else {//처음 데이터를 받아올경우(currpage 가 1인 경우)
 			start_index = (currpage-1)*pageRowCount;
 			if(totalRowCount >= currpage*pageRowCount ) {
 				end_index = currpage*pageRowCount;					
 			}
 		}
+		
+		//해당 범위값에 해당하는 로우 값들을 새로운 List에 추가
 		for(int i = start_index ; i < end_index ; i++) {
 			page.add(result.get(i));
 		}		

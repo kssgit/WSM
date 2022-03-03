@@ -45,6 +45,7 @@
 			<if test="(USER_CODE_EMP2 != null and USER_CODE_EMP2 != '') and( USER_KIND != null and USER_KIND != '') ">
 				<!-- 고용주가 요청한 스케줄 목록중 직원 테이블에 등록된 요청목록만 조회 -->
 				USER_CODE_EMP = #{USER_CODE_EMP2} AND(ACCEPT_PTJ = 'N' OR ACCEPT_PTJ = 'D')  AND r.USER_CODE_PTJ IN (SELECT USER_CODE_PTJ FROM PART_TIMER p WHERE p.STORE_CODE = r.STORE_CODE)
+<!-- 				USER_CODE_EMP = #{USER_CODE_EMP2}  AND r.USER_CODE_PTJ IN (SELECT USER_CODE_PTJ FROM PART_TIMER p WHERE p.STORE_CODE = r.STORE_CODE) -->
 				<if test="STORE_CODE != null and STORE_CODE != '' "> AND r.STORE_CODE = #{STORE_CODE}</if>
 				<if test="PTJ_NAME != null and PTJ_NAME != '' ">AND u.NAME LIKE CONCAT('%', #{PTJ_NAME}, '%')</if>
 			</if>
@@ -57,7 +58,8 @@
 				USER_CODE_PTJ = #{USER_CODE_PTJ2} AND (ACCEPT_EMP = 'N' OR ACCEPT_EMP = 'D') AND r.STORE_CODE IN (SELECT w.STORE_CODE FROM WORKPLACE w WHERE w.USER_CODE_PTJ = #{USER_CODE_PTJ2})
 			</if>
 		</trim>
-		ORDER BY WORK_BEGIN_TIME DESC
+		<!-- 요청 수락 밎 거절한 순으로 출력 -->
+		ORDER BY UPDATE_DATE DESC 
 	</select>
 
 
