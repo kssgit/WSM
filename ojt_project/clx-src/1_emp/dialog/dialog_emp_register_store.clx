@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ac5a66eb" version="1.0.3485">
+  <head std:sid="head-f4aa30c6">
+    <screen std:sid="screen-f7c2bf9b" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="320" customWidth="400"/>
+    <screen std:sid="screen-cb1f15e6" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-634548de" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-8e4a6555">
+      <cl:dataset std:sid="d-set-cd0d29d9" id="dsStoreCtgr">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bd7d6be7" name="label"/>
+          <cl:datacolumn std:sid="d-column-ef0e7ddb" name="value"/>
+          <cl:datacolumn std:sid="d-column-98dce353" name="parent"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-f3b98e4a" id="dmAddStore">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-75824866" name="store_name"/>
+          <cl:datacolumn std:sid="d-column-69247d8c" name="business_type_large"/>
+          <cl:datacolumn std:sid="d-column-67388351" name="business_type_small"/>
+          <cl:datacolumn std:sid="d-column-bff33cba" name="USER_NUMBER_EMP"/>
+          <cl:datacolumn std:sid="d-column-b982ecf7" name="MANAGEMENT"/>
+          <cl:datacolumn std:sid="d-column-74aa6d2e" name="USER_EMAIL"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ed6142a8" id="smsGetStoreCtgr" action="data/business_type.json">
+        <cl:listener std:sid="listener-8a76b990" name="submit-success" handler="onSmsGetStoreCtgrSubmitSuccess"/>
+        <cl:responsedata dataid="dsStoreCtgr"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b9d15fbc" id="smsAddSotre" action="/emp/addStore.do">
+        <cl:requestdata dataid="dmAddStore"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec title="매장 등록"/>
+  </head>
+  <body std:sid="body-15743d0d" class="cl-form-group">
+    <cl:listener std:sid="listener-5965c1e9" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-1c5f2772" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+      <cl:xylayoutdata std:sid="xyl-data-b195cda4" width="358px" height="318px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+      <cl:group std:sid="group-9f7625fd">
+        <cl:formdata std:sid="f-data-8fdeb312" row="1" col="0" rowspan="1" colspan="4"/>
+        <cl:output std:sid="output-b77e1b43" style="text-align:center;" class="h3" value="매장 명">
+          <cl:formdata std:sid="f-data-87907e51" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-45776a44" id="ipbStoreName" style="border-radius:0.5rem;" class="input-center-green">
+          <cl:formdata std:sid="f-data-741d1216" row="0" col="1" rowspan="1" colspan="2"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-429edf7b" style="text-align:center;" class="h3" value="업종">
+          <cl:formdata std:sid="f-data-b83c1faa" row="1" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-1788bd35" style="text-align:center;" class="h3" value="담당자 명">
+          <cl:formdata std:sid="f-data-4450c662" row="2" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-88f5f346" id="ipbManagername" style="border-radius:0.5rem;" class="input-center-green">
+          <cl:formdata std:sid="f-data-2c33a52b" row="2" col="1" rowspan="1" colspan="2"/>
+        </cl:inputbox>
+        <cl:linkedcombobox std:sid="lc-box-eeefe1e8" id="lcbCtgr" class="cl-linkedcombobox-green">
+          <cl:datarowcontext datacontrolid="dsStoreCtgr"/>
+          <cl:formdata std:sid="f-data-a8813926" halign="FILL" row="1" col="1" rowspan="1" colspan="2"/>
+          <cl:treeitemset datasetid="dsStoreCtgr" label="label" value="value" parent="parent"/>
+        </cl:linkedcombobox>
+        <cl:formlayout std:sid="f-layout-840b461d" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="45" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="45" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="45" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-652e301b" class="addStore" value="매장 등록">
+        <cl:formdata std:sid="f-data-287c039a" row="0" col="0" rowspan="1" colspan="4"/>
+      </cl:output>
+      <cl:button std:sid="button-5785e4a4" class="btn-success" value="등록하기">
+        <cl:listener std:sid="listener-47edb044" name="click" handler="onButtonClick"/>
+        <cl:formdata std:sid="f-data-2ff395c7" row="2" col="2"/>
+      </cl:button>
+      <cl:button std:sid="button-7f574fea" class="btn-secondary" value="닫기">
+        <cl:listener std:sid="listener-7ab6f840" name="click" handler="onButtonClick2"/>
+        <cl:formdata std:sid="f-data-489dc661" row="2" col="1"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-702be215" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="60" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="180" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-9a9fb28b"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

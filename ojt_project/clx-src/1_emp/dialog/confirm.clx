@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-67576736" version="1.0.3485">
+  <head std:sid="head-bba35176">
+    <screen std:sid="screen-be05d21e" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="200" customWidth="400"/>
+    <screen std:sid="screen-b87611ac" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-e6ceb262" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-c31a6f56"/>
+    <cl:appspec title="퇴사 처리 재확인"/>
+  </head>
+  <body std:sid="body-f470b9e4" class="h2">
+    <cl:listener std:sid="listener-798684ee" name="load" handler="onBodyLoad"/>
+    <cl:output std:sid="output-c3edf2b8" id="opb1" class="text-warning" value="를(을) 퇴사처리 하시겠습니까? &#xD;&#xA;퇴사처리하게될경우 해당 직원의 스케줄 정보를 조회할 수 없습니다.">
+      <cl:formdata std:sid="f-data-b01c672d" row="0" col="1" rowspan="2" colspan="3"/>
+    </cl:output>
+    <cl:button std:sid="button-dea5a712" class="btn-outline-danger" value="예">
+      <cl:listener std:sid="listener-b6950597" name="click" handler="onButtonClick"/>
+      <cl:formdata std:sid="f-data-0d94caf6" row="2" col="1"/>
+    </cl:button>
+    <cl:button std:sid="button-8bf8c180" class="btn-outline-dark" value="아니오">
+      <cl:listener std:sid="listener-09d2cbf4" name="click" handler="onButtonClick2"/>
+      <cl:formdata std:sid="f-data-ab3cca6c" row="2" col="3"/>
+    </cl:button>
+    <cl:formlayout std:sid="f-layout-cf58514e" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+      <cl:rows length="2" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:columns length="1" unit="FRACTION"/>
+      <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="1" unit="FRACTION"/>
+      <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

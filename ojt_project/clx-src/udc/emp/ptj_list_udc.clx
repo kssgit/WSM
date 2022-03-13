@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-83f3457e" version="1.0.3485">
+  <head std:sid="head-4ca38df5">
+    <screen std:sid="screen-e92a7f1c" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-47f4fc87" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-4de9692c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-41d54389"/>
+    <cl:appspec>
+      <cl:property name="Name" type="string"/>
+      <cl:property name="selected" type="boolean"/>
+      <cl:property name="storecode" type="number"/>
+      <cl:property name="color" type="string"/>
+      <cl:property name="checked" type="boolean"/>
+      <cl:property name="bgcolor" type="string"/>
+      <cl:event name="udcClick" type="cpr.events.CMouseEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-9036239b" style="top:0px; left:0px; width:210px; height:40px;">
+    <cl:listener std:sid="listener-a2df161a" name="load" handler="onBodyLoad"/>
+    <cl:apppropbind property="border-left-color" category="STYLER" app-property="color"/>
+    <cl:group std:sid="group-42c4dd0e" id="grp" style="border-left-width:10px;" class="post-it-udc">
+      <cl:listener std:sid="listener-aaf5b07e" name="dblclick" handler="onGroupDblclick"/>
+      <cl:listener std:sid="listener-0ed3a187" name="click" handler="onGroupClick"/>
+      <cl:apppropbind property="border-left-color" category="STYLER" app-property="color"/>
+      <cl:apppropbind property="background-color" category="STYLER" app-property="bgcolor"/>
+      <cl:xylayoutdata std:sid="xyl-data-b91099ab" width="210px" height="40px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+      <cl:output std:sid="output-f3df383d" style="font-size:14px; font-family:Noto Sans KR Regular; text-align:left;" value="Output">
+        <cl:apppropbind property="value" app-property="Name"/>
+        <cl:xylayoutdata std:sid="xyl-data-8202e967" right="30px" width="100px" height="20px" horizontalAnchor="RIGHT" verticalAnchor="CENTER"/>
+      </cl:output>
+      <cl:checkbox std:sid="c-box-aa9483a2" id="cbx1" class="check-box" visible="false" truevalue="true" falsevalue="false">
+        <cl:listener std:sid="listener-bf21f7e5" name="value-change" handler="onCbx1ValueChange"/>
+        <cl:listener std:sid="listener-f0026b25" name="value-change" handler="onCbx1ValueChange2"/>
+        <cl:apppropbind property="value" category="PROPERTY" app-property="checked"/>
+        <cl:xylayoutdata std:sid="xyl-data-119a76e6" top="9px" left="0px" width="20px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:checkbox>
+      <cl:xylayout std:sid="xylayout-e4a90c5a"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-2dcedf65"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-0e94dd9d" version="1.0.0.0">
+  <head std:sid="head-f4f7ac63">
+    <title>CalendarMore</title>
+    <screen std:sid="screen-21e31751" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="300" customWidth="500"/>
+    <screen std:sid="screen-79b4e381" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-4e64125f" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-6e09b3bc">
+      <cl:dataset std:sid="d-set-11fe992a" id="dsEvnt" sortcondition="allDay">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3d957047" name="id"/>
+          <cl:datacolumn std:sid="d-column-dad235c1" name="label"/>
+          <cl:datacolumn std:sid="d-column-a6bbae6b" name="beginDt"/>
+          <cl:datacolumn std:sid="d-column-4f6e6fee" name="endDt"/>
+          <cl:datacolumn std:sid="d-column-7cafe95e" name="allDay"/>
+          <cl:datacolumn std:sid="d-column-d02b6f8e" name="memo"/>
+          <cl:datacolumn std:sid="d-column-e593cd4e" name="class"/>
+          <cl:datacolumn std:sid="d-column-98575c3f" name="store_code" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d4229fe6" name="start"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-edd1fecc" id="dmOnLoad">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b2657908" name="USER_EMAIL"/>
+          <cl:datacolumn std:sid="d-column-060a6b72" name="USER_NUMBER"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-66635012" id="subOnLoad" action="/emp/onLoad.do">
+        <cl:requestdata dataid="dmOnLoad"/>
+        <cl:responsedata dataid="dsEvnt"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-c2c48b8f" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-d3fb24ab" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-c391e606" class="card">
+      <cl:verticaldata std:sid="v-data-f4c214ce" width="400px" height="50px" autosize="height"/>
+      <cl:output std:sid="output-596661cb" class="card-title" value="아이템">
+        <cl:formdata std:sid="f-data-2af83a6f" row="0" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-e8c08581" id="grpItem">
+        <cl:formdata std:sid="f-data-2013145b" row="1" col="0"/>
+        <cl:verticallayout std:sid="v-layout-caaa1363"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-8e209cdf" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="BY_CLASS" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:verticallayout std:sid="v-layout-d4bc2c9d" leftmargin="20" rightmargin="20" topmargin="20" bottommargin="20"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

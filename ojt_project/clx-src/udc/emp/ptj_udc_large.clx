@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-22314203" version="1.0.3556">
+  <head std:sid="head-827afad1">
+    <screen std:sid="screen-dd462cfa" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-278b55a3" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-4c3b0d0e" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-191d4283">
+      <cl:dataset std:sid="d-set-ae9c05cb" id="dsColor">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ded17276" name="class"/>
+          <cl:datacolumn std:sid="d-column-c45dbc28" name="value"/>
+          <cl:datacolumn std:sid="d-column-4188dfcc" name="label"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="class"><![CDATA[url(./theme/images/calendar/monthly/icon-event-red.png)]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[#FE3677]]></cl:datavalue>
+            <cl:datavalue columnname="label"><![CDATA[red]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="class"><![CDATA[url(./theme/images/calendar/monthly/icon-event-orange.png)]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[#FCA429]]></cl:datavalue>
+            <cl:datavalue columnname="label"><![CDATA[orange]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="class"><![CDATA[url(./theme/images/calendar/monthly/icon-event-yellow.png)]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[#FFD949]]></cl:datavalue>
+            <cl:datavalue columnname="label"><![CDATA[yellow]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="class"><![CDATA[url(./theme/images/calendar/monthly/icon-event-green.png)]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[#97E879]]></cl:datavalue>
+            <cl:datavalue columnname="label"><![CDATA[green]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="class"><![CDATA[url(./theme/images/calendar/monthly/icon-event-blue.png)]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[#5BC5FD]]></cl:datavalue>
+            <cl:datavalue columnname="label"><![CDATA[blue]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="class"><![CDATA[url(./theme/images/calendar/monthly/icon-event-purple.png)]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[#E07BF7]]></cl:datavalue>
+            <cl:datavalue columnname="label"><![CDATA[purple]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="class"><![CDATA[url(./theme/images/calendar/monthly/icon-event-brown.png)]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[#D1A270]]></cl:datavalue>
+            <cl:datavalue columnname="label"><![CDATA[brown]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-44732fbf" id="dmUpdate">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c66059a6" name="ptj_code"/>
+          <cl:datacolumn std:sid="d-column-ca32f256" name="LINK_STAT"/>
+          <cl:datacolumn std:sid="d-column-7143f5cd" name="STORE_CODE"/>
+          <cl:datacolumn std:sid="d-column-923258fa" name="USER_CODE_PTJ"/>
+          <cl:datacolumn std:sid="d-column-7de97634" name="role"/>
+          <cl:datacolumn std:sid="d-column-faff00f3" name="color"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e43205f9" id="smsUpdate" action="/emp/acceptPtjRequest.do">
+        <cl:requestdata dataid="dmUpdate"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec>
+      <cl:property name="gender" type="string"/>
+      <cl:property name="ptj_name" type="string"/>
+      <cl:property name="store_name" type="string"/>
+      <cl:property name="ptj_code" type="string"/>
+      <cl:property name="role" type="string"/>
+      <cl:property name="color" type="string"/>
+      <cl:property name="store_code" type="string"/>
+      <cl:property name="user_code_ptj" type="string"/>
+      <cl:event name="deny" type="cpr.events.CMouseEvent"/>
+      <cl:event name="access" type="cpr.events.CMouseEvent"/>
+      <cl:event name="more" type="cpr.events.CMouseEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-2130b98e" style="top:0px; left:0px; width:700px; height:150px;">
+    <cl:listener std:sid="listener-ee9d252f" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-6f04c325">
+      <cl:xylayoutdata std:sid="xyl-data-bd6eb71b" top="0px" right="305px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:img std:sid="image-28d18214" id="gender" style="border-radius:50%; background-repeat:no-repeat; background-size:auto;">
+        <cl:xylayoutdata std:sid="xyl-data-4ab2d863" left="9px" width="90px" height="90px" horizontalAnchor="LEFT" verticalAnchor="CENTER"/>
+      </cl:img>
+      <cl:group std:sid="group-abc8f055">
+        <cl:xylayoutdata std:sid="xyl-data-71717434" left="109px" width="238px" height="104px" horizontalAnchor="LEFT" verticalAnchor="CENTER"/>
+        <cl:output std:sid="output-3d8fdfc7" style="text-align:center;" value="Output">
+          <cl:apppropbind property="value" app-property="store_name"/>
+          <cl:formdata std:sid="f-data-f4429682" row="1" col="1"/>
+        </cl:output>
+        <cl:output std:sid="output-2edd9a7a" style="text-align:center;" class="h4" value="Output">
+          <cl:apppropbind property="value" app-property="ptj_name"/>
+          <cl:formdata std:sid="f-data-ea18bd88" row="1" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-fb58ab2b" scrollable="false" hspace="5px" vspace="5px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="25" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:button std:sid="button-ee3b0576" value=">">
+        <cl:listener std:sid="listener-3abb308c" name="click" handler="onButtonClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-10236604" top="65px" left="357px" width="29px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:button>
+      <cl:xylayout std:sid="xylayout-6b4e6276"/>
+    </cl:group>
+    <cl:group std:sid="group-5703f750" id="grp" style="border-right-style:solid; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid;" visible="false">
+      <cl:xylayoutdata std:sid="xyl-data-630aac56" right="0px" width="290px" height="150px" horizontalAnchor="RIGHT" verticalAnchor="CENTER"/>
+      <cl:output std:sid="output-1694119d" value="업무">
+        <cl:formdata std:sid="f-data-b4a6b168" row="1" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-18a02371" value="구분 색상 ">
+        <cl:formdata std:sid="f-data-1706d8e8" row="0" col="0"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-53209fbe" id="cmb2" class="color-combo" placeholder="색 선택">
+        <cl:apppropbind property="value" app-property="color"/>
+        <cl:formdata std:sid="f-data-20b9302a" row="0" col="1" rowspan="1" colspan="2"/>
+        <cl:itemset datasetid="dsColor" label="label" value="value"/>
+        <cl:itemstyle style="background-repeat:no-repeat; background-position:center left;">
+          <cl:relativebind property="background-image" category="STYLER" columnname="class"/>
+        </cl:itemstyle>
+      </cl:combobox>
+      <cl:inputbox std:sid="i-box-fe11b6fd" id="ipb2">
+        <cl:apppropbind property="value" app-property="role"/>
+        <cl:formdata std:sid="f-data-906398c1" row="1" col="1" rowspan="1" colspan="2"/>
+      </cl:inputbox>
+      <cl:img std:sid="image-4080a580" style="background-repeat:no-repeat; background-position:center;" class="btn-check" tooltip="승인">
+        <cl:listener std:sid="listener-640a3df0" name="click" handler="onImageClick"/>
+        <cl:listener std:sid="listener-bdad68d3" name="value-change" handler="onImageValueChange"/>
+        <cl:formdata std:sid="f-data-6dc60588" row="2" col="0"/>
+      </cl:img>
+      <cl:img std:sid="image-b42ae857" style="background-repeat:no-repeat; background-position:center;" class="btn-close" tooltip="거부">
+        <cl:listener std:sid="listener-1d0f6c05" name="click" handler="onImageClick2"/>
+        <cl:formdata std:sid="f-data-992eec29" row="2" col="2"/>
+      </cl:img>
+      <cl:formlayout std:sid="f-layout-20e7b508" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-3c214243"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler>
+      <std:guide position="703"/>
+    </std:hruler>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

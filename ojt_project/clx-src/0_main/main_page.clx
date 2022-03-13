@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-48bc16e9" version="1.0.3485">
+  <head std:sid="head-f4492477">
+    <screen std:sid="screen-94c1a8c3" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1080" customWidth="1920" active="true"/>
+    <screen std:sid="screen-c4ae6326" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" active="false"/>
+    <screen std:sid="screen-46c89d82" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" active="false"/>
+    <cl:model std:sid="model-6e8b4b4b">
+      <cl:dataset std:sid="d-set-f4252369" id="dsMn">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b22924bf" name="label"/>
+          <cl:datacolumn std:sid="d-column-184ade3e" name="value"/>
+          <cl:datacolumn std:sid="d-column-47b1c157" name="parent"/>
+          <cl:datacolumn std:sid="d-column-bc59c586" name="appId"/>
+          <cl:datacolumn std:sid="d-column-b7befbf5" name="icon"/>
+          <cl:datacolumn std:sid="d-column-a235a760" name="class"/>
+          <cl:datacolumn std:sid="d-column-c832c436" name="topValue"/>
+        </cl:datacolumnlist>
+        <cl:dataview std:sid="d-view-96e7c8b8" id="dvRtMn" filtercondition="parent == ''"/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-f7938597" id="dmUserinfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1756718f" name="USER_NUMBER" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-dabcc366" name="USER_NAME" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-96d0ae72" name="USER_KIND" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-80f362e4" name="USER_EMAIL"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ad88922c" id="smsUserInfo" async="true" action="/main/userinfo.do">
+        <cl:listener std:sid="listener-e5f660e4" name="submit-success" handler="onSmsUserInfoSubmitSuccess"/>
+        <cl:responsedata dataid="dmUserinfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-3b7b13f0" id="subEmpMn" action="data/emp_menu.json">
+        <cl:responsedata dataid="dsMn"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a68fccbd" id="subPtjMn" action="data/ptj_menu.json">
+        <cl:responsedata dataid="dsMn"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec title="🧡메인🧡"/>
+  </head>
+  <body std:sid="body-8dbef5d9" class="body-bg">
+    <cl:listener std:sid="listener-0dc1949a" name="init" handler="onBodyInit"/>
+    <cl:listener std:sid="listener-ba015d70" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-9998cd2d">
+      <cl:xylayoutdata std:sid="xyl-data-24ec5621" left="50px" width="228px" height="374px" horizontalAnchor="LEFT" verticalAnchor="CENTER"/>
+      <cl:menu std:sid="menu-9869c78d" id="left-menu" style="padding-bottom:30px;" class="left-menu">
+        <cl:listener std:sid="listener-ccd2d34e" name="item-click" handler="onMenuItemClick"/>
+        <cl:listener std:sid="listener-d658febd" name="selection-change" handler="onLeft_menuSelectionChange"/>
+        <cl:xylayoutdata std:sid="xyl-data-f3e27b14" top="0px" bottom="0px" left="0px" width="228px" verticalAnchor="BOTH"/>
+        <cl:menuitemset datasetid="dsMn" label="label" value="value" icon="icon" parent="parent"/>
+      </cl:menu>
+      <cl:xylayout std:sid="xylayout-d13c277e"/>
+    </cl:group>
+    <cl:img std:sid="image-68e4d16c" class="animate__lightSpeedInLeft" src="../theme/images/logo-main.png">
+      <cl:listener std:sid="listener-cd33a41d" name="click" handler="onImageClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-5836b44b" top="20px" left="42px" width="227px" height="91px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:embeddedapp std:sid="e-app-7757ede1" id="ea1">
+      <cl:xylayoutdata std:sid="xyl-data-ccdff31e" top="100px" right="40px" bottom="80px" left="450px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+    </cl:embeddedapp>
+    <cl:group std:sid="group-709cb3bc">
+      <cl:xylayoutdata std:sid="xyl-data-97102f08" top="20px" left="1691px" width="188px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-52cd681c" id="ipbUserName" style="padding-left:25px; text-align:left;" class="h1" value="UserName">
+        <cl:listener std:sid="listener-d4aa8a4b" name="click" handler="onIpbUserNameClick"/>
+        <cl:formdata std:sid="f-data-4efb84e1" row="0" col="1"/>
+      </cl:output>
+      <cl:output std:sid="output-aec2c6f5" style="background-repeat:no-repeat; background-image:url('../theme/images/user-5-line.png'); background-position:center;" value="">
+        <cl:formdata std:sid="f-data-0e2cb602" row="0" col="0"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-08133c44" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-f50ee279" id="grplogout" style="background-color:white; border-radius:5px; box-shadow:0px 0px 8px 0px rgba(0,0,0,0.45);" visible="false">
+      <cl:listener std:sid="listener-ef41b78a" name="mouseleave" handler="onGrplogoutMouseleave"/>
+      <cl:xylayoutdata std:sid="xyl-data-81a1370e" top="20px" right="20px" width="216px" height="163px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-3cfa4bc2" id="user_email" style="text-align:center;" class="ojt-menu-item">
+        <cl:datamapbind property="value" datacontrolid="dmUserinfo" columnname="USER_EMAIL"/>
+        <cl:formdata std:sid="f-data-6160bfbf" row="1" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:output std:sid="output-31b8c68c" style="text-align:center;" class="ojt-menu-button" value="마이페이지">
+        <cl:listener std:sid="listener-a30d0791" name="click" handler="onOutputClick"/>
+        <cl:formdata std:sid="f-data-76817653" row="3" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:output std:sid="output-3b37a49e" id="user_name" style="text-align:center;" class="ojt-menu-item" value="Output">
+        <cl:formdata std:sid="f-data-83a777f9" row="0" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:output std:sid="output-778e3d8e" style="text-align:center;" class="ojt-menu-button" value="로그아웃">
+        <cl:listener std:sid="listener-da3d27a4" name="click" handler="onOutputClick2"/>
+        <cl:formdata std:sid="f-data-b71105d4" row="4" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:output std:sid="output-6a5f2195" style="border-top-width:1px; border-top-color:black; border-top-style:solid;" value="Output">
+        <cl:formdata std:sid="f-data-345e3709" row="2" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-5c90ecfa" scrollable="false" hspace="5px" vspace="5px" top-margin="5px" right-margin="10px" bottom-margin="5px" left-margin="10px">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-2491fba0"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

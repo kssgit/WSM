@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-835355e3" version="1.0.3485">
+  <head std:sid="head-953d3810">
+    <screen std:sid="screen-8bb303ea" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-8c38f379" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-50865384" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-9a8a444b">
+      <cl:dataset std:sid="d-set-9536e828" id="dstoday">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5e7540b7" name="wherejob"/>
+          <cl:datacolumn std:sid="d-column-561273d2" name="start_time"/>
+          <cl:datacolumn std:sid="d-column-76400c9b" name="end_time"/>
+          <cl:datacolumn std:sid="d-column-eee86182" name="total_time"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="wherejob"><![CDATA[싸다김밥]]></cl:datavalue>
+            <cl:datavalue columnname="start_time"><![CDATA[09:00]]></cl:datavalue>
+            <cl:datavalue columnname="end_time"><![CDATA[15:00]]></cl:datavalue>
+            <cl:datavalue columnname="total_time"><![CDATA[6]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="wherejob"><![CDATA[썬더치킨]]></cl:datavalue>
+            <cl:datavalue columnname="start_time"><![CDATA[16:00]]></cl:datavalue>
+            <cl:datavalue columnname="end_time"><![CDATA[20:00]]></cl:datavalue>
+            <cl:datavalue columnname="total_time"><![CDATA[4]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-acea04ee" id="dschangework">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4cd343cd" name="storeName"/>
+          <cl:datacolumn std:sid="d-column-64dae99f" name="date"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="storeName"><![CDATA[싸다김밥]]></cl:datavalue>
+            <cl:datavalue columnname="date"><![CDATA[2022-01-12]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="storeName"><![CDATA[싸다김밥]]></cl:datavalue>
+            <cl:datavalue columnname="date"><![CDATA[2022-01-13]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="storeName"><![CDATA[싸다김밥]]></cl:datavalue>
+            <cl:datavalue columnname="date"><![CDATA[2022-01-14]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="storeName"><![CDATA[싸다김밥]]></cl:datavalue>
+            <cl:datavalue columnname="date"><![CDATA[2022-01-15]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="storeName"><![CDATA[싸다김밥]]></cl:datavalue>
+            <cl:datavalue columnname="date"><![CDATA[2022-01-16]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-f9b7c6c8" id="dsEvnt" sortcondition="allDay">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-44e7ac57" name="id"/>
+          <cl:datacolumn std:sid="d-column-7e31a40e" name="label"/>
+          <cl:datacolumn std:sid="d-column-f5239541" name="beginDt"/>
+          <cl:datacolumn std:sid="d-column-dd9023b4" name="endDt"/>
+          <cl:datacolumn std:sid="d-column-8648834c" name="allDay"/>
+          <cl:datacolumn std:sid="d-column-c44f3188" name="memo"/>
+          <cl:datacolumn std:sid="d-column-cee8d239" name="class"/>
+          <cl:datacolumn std:sid="d-column-98575c3f" name="store_code" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-48f37d46" name="WH"/>
+          <cl:datacolumn std:sid="d-column-3545e7dc" name="work_date"/>
+          <cl:datacolumn std:sid="d-column-97af3316" name="start"/>
+          <cl:datacolumn std:sid="d-column-516bf711" name="value" datatype="expression" expression="startTime + &quot;~&quot;+endTime +&quot; &quot; + label"/>
+          <cl:datacolumn std:sid="d-column-663d6764" name="startTime"/>
+          <cl:datacolumn std:sid="d-column-15d3f013" name="endTime"/>
+          <cl:datacolumn std:sid="d-column-e136895f" name="work_end_date"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-02411912" id="dmRes">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c33f7ac8" name="locale"/>
+          <cl:datacolumn std:sid="d-column-5cc08158" name="dayOfWeekFom"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-7749315d" id="dmOnLoad">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ff7c8181" name="user_code_ptj" datatype="number" defaultvalue=""/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a4ca1c96" id="dmSessionCheck">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6f0e4c6a" name="result" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-66635012" id="subOnLoad" action="/ptj/onLoad.do">
+        <cl:listener std:sid="listener-931948f5" name="submit-done" handler="onSubOnLoadSubmitDone"/>
+        <cl:listener std:sid="listener-975d5ca1" name="submit-success" handler="onSubOnLoadSubmitSuccess"/>
+        <cl:requestdata dataid="dmOnLoad"/>
+        <cl:responsedata dataid="dsEvnt"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-bfe60d5d" id="smsSessionCheck" action="/main/sessionCheck.do">
+        <cl:requestheader name="USER_EMAIL"/>
+        <cl:responsedata dataid="dmSessionCheck"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="사장->직원 스케줄 변경 요청이 직원의 현재(승인 시점) 스케줄 현황과 중복되는 경우 승인 전에 알 수 있도록 + 승인 할 수 없도록. " title="알바생 메인 페이지"/>
+  </head>
+  <body std:sid="body-74e9cf2c" style="border-radius:0.25rem;">
+    <cl:listener std:sid="listener-99801ba2" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-76102ead" name="init" handler="onBodyInit"/>
+    <cl:group std:sid="group-1afeb239">
+      <cl:xylayoutdata std:sid="xyl-data-c481e69f" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-b71e6d3f">
+        <cl:xylayoutdata std:sid="xyl-data-498dc6de" top="4px" width="472px" height="31px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:button std:sid="button-d088c2d6" class="btn-success" value="◀">
+          <cl:listener std:sid="listener-a5b76dcf" name="click" handler="onButtonClick2"/>
+          <cl:formdata std:sid="f-data-f9460fee" row="0" col="0"/>
+        </cl:button>
+        <cl:button std:sid="button-670791aa" class="btn-success" value="▶">
+          <cl:listener std:sid="listener-2803d87c" name="click" handler="onButtonClick3"/>
+          <cl:formdata std:sid="f-data-8c7b7bd5" row="0" col="2"/>
+        </cl:button>
+        <cl:output std:sid="output-5a41afc2" id="month" style="text-align:center;" class="calendar-date">
+          <cl:formdata std:sid="f-data-8856f3b1" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-04a2bda3" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-12d44c47">
+        <cl:xylayoutdata std:sid="xyl-data-eda44f8d" top="4px" right="0px" width="300px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+        <cl:button std:sid="button-4c80b75d" class="btn-success" value="Today">
+          <cl:listener std:sid="listener-f9c64428" name="click" handler="onButtonClick4"/>
+          <cl:formdata std:sid="f-data-e22b4d6d" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-47b278a3" style="font-size:13px;" class="btn-primary" value="근무지 리스트">
+          <cl:listener std:sid="listener-3510b8a3" name="click" handler="onButtonClick"/>
+          <cl:formdata std:sid="f-data-b297d0d4" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-89bc6559" class="btn-refresh" tooltip="일정 재조회">
+          <cl:listener std:sid="listener-d153808a" name="click" handler="onButtonClick5"/>
+          <cl:formdata std:sid="f-data-7d92b295" halign="CENTER" valign="CENTER" width="25" row="0" col="0"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-e7f9d922" scrollable="false" hspace="2px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:calendar std:sid="calendar-1aea1a0e" id="cl" class="mainCalendar" calendartype="yearmonthdate" weekdays="short" headervisible="false" footervisible="false">
+        <cl:listener std:sid="listener-3f3e72b3" name="date-click" handler="onCalendarDateClick"/>
+        <cl:listener std:sid="listener-c6513f93" name="item-click" handler="onCalendarItemClick"/>
+        <cl:listener std:sid="listener-e4b067ec" name="value-change" handler="onClValueChange"/>
+        <cl:xylayoutdata std:sid="xyl-data-53b353fe" top="45px" right="0px" bottom="2px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:calendaritemset datasetid="dsEvnt" label="value" value="label" start="start" end="start"/>
+        <cl:itemstyle>
+          <cl:relativebind property="border-left-color" category="STYLER" columnname="class"/>
+        </cl:itemstyle>
+      </cl:calendar>
+      <cl:xylayout std:sid="xylayout-0f111f2f"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-5a3dfd9c"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

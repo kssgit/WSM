@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-a42cae13" version="1.0.3485">
+  <head std:sid="head-61a31ef9">
+    <screen std:sid="screen-66638f35" id="default" name="default" minwidth="1024px" width="1024px" height="768px" active="true"/>
+    <screen std:sid="screen-5d3cac03" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-8d6ed71d" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-73a27423">
+      <cl:dataset std:sid="d-set-6947af40" id="dsStoreList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-665c784d" name="store_name"/>
+          <cl:datacolumn std:sid="d-column-b0583c50" name="ptjCount"/>
+          <cl:datacolumn std:sid="d-column-873e8705" name="store_code" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-93ab7f78" name="business_type_small"/>
+          <cl:datacolumn std:sid="d-column-a1205dea" name="business_type_large"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-11fe992a" id="dsEvnt" sortcondition="allDay">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3d957047" name="id"/>
+          <cl:datacolumn std:sid="d-column-dad235c1" name="label"/>
+          <cl:datacolumn std:sid="d-column-a6bbae6b" name="beginDt"/>
+          <cl:datacolumn std:sid="d-column-4f6e6fee" name="endDt"/>
+          <cl:datacolumn std:sid="d-column-7cafe95e" name="allDay"/>
+          <cl:datacolumn std:sid="d-column-d02b6f8e" name="memo"/>
+          <cl:datacolumn std:sid="d-column-e593cd4e" name="class"/>
+          <cl:datacolumn std:sid="d-column-98575c3f" name="store_code" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-daab9920" name="start"/>
+          <cl:datacolumn std:sid="d-column-f7e48eed" name="value" datatype="expression" expression="startTime + &quot; ~ &quot;+endTime +&quot; &quot; + label"/>
+          <cl:datacolumn std:sid="d-column-83bed32f" name="startTime"/>
+          <cl:datacolumn std:sid="d-column-703363de" name="endTime"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-49661d70" id="dsSelectList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fce4ff5c" name="store_code"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-2d373718" id="dsPtjList">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="매장 이름" std:sid="d-column-e1a90b13" name="STORE_NAME" datatype="string" displayonly="false"/>
+          <cl:datacolumn comment="이름" std:sid="d-column-b693a7a2" name="NAME" datatype="string" displayonly="false"/>
+          <cl:datacolumn comment="연락처" std:sid="d-column-0a979150" name="USER_CALL" datatype="string" displayonly="false"/>
+          <cl:datacolumn comment="급여 형태" std:sid="d-column-de42e341" name="PAY_KIND" datatype="string" displayonly="false"/>
+          <cl:datacolumn comment="급여 정산일" std:sid="d-column-7cb5e677" info="이번달 기준" name="PAY_DAY" datatype="string" displayonly="false"/>
+          <cl:datacolumn comment="세금 여부" std:sid="d-column-5dd197eb" name="TAX_STAT" datatype="string" displayonly="false"/>
+          <cl:datacolumn comment="총 근무 시간" std:sid="d-column-a2ccd3b7" info="이번달 기준" name="TOTAL_WORK_HOUR" datatype="string" displayonly="false"/>
+          <cl:datacolumn comment="연결여부" std:sid="d-column-be35aa54" info="직원과 연결 여부" name="LINK_STAT" datatype="string" displayonly="true"/>
+          <cl:datacolumn std:sid="d-column-988b0669" name="USER_NUMBER"/>
+          <cl:datacolumn std:sid="d-column-df63c41f" name="STORE_CODE"/>
+          <cl:datacolumn comment="사원 번호" std:sid="d-column-19c0dd4a" name="PTJ_CODE"/>
+          <cl:datacolumn comment="담당 업무" std:sid="d-column-35e37125" name="ROLE"/>
+          <cl:datacolumn comment="구분 색" std:sid="d-column-c9d4cb0a" info=" " name="COLOR"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-edd1fecc" id="dmOnLoad">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b2657908" name="USER_EMAIL"/>
+          <cl:datacolumn std:sid="d-column-060a6b72" name="USER_NUMBER"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a4ca1c96" id="dmSessionCheck">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6f0e4c6a" name="result" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-95f4a49b" id="dmDeleteStore">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b289446f" name="STORE_CODE"/>
+          <cl:datacolumn std:sid="d-column-daaed93c" name="USER_NUMBER"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cc27ca63" id="dmGetPtjList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fa344668" name="STORE_CODE"/>
+          <cl:datacolumn std:sid="d-column-2ec3c7dd" name="USER_NUMBER"/>
+          <cl:datacolumn std:sid="d-column-06f68f97" name="PTJ_NAME"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-66635012" id="subOnLoad" action="/emp/onLoad.do">
+        <cl:listener std:sid="listener-b250fae1" name="submit-success" handler="onSubOnLoadSubmitSuccess"/>
+        <cl:requestdata dataid="dmOnLoad"/>
+        <cl:responsedata dataid="dsEvnt"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-bfe60d5d" id="smsSessionCheck" action="/main/sessionCheck.do">
+        <cl:requestheader name="USER_EMAIL"/>
+        <cl:responsedata dataid="dmSessionCheck"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-8df011a6" id="smsStoreList" action="/emp/onLoad.do">
+        <cl:listener std:sid="listener-bae8b476" name="submit-success" handler="onSmsStoreListSubmitSuccess"/>
+        <cl:requestdata dataid="dmOnLoad"/>
+        <cl:responsedata dataid="dsStoreList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-bf3a63e7" id="smsDeleteStore" action="/emp/deleteStore.do">
+        <cl:requestdata dataid="dmDeleteStore"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e7710059" id="subGetPtjList" action="/emp/getPtjList.do">
+        <cl:requestdata dataid="dmGetPtjList"/>
+        <cl:responsedata dataid="dsPtjList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec title="고용주 메인페이지"/>
+  </head>
+  <body std:sid="body-d721ad3b">
+    <cl:listener std:sid="listener-775d4450" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-7debb98d" name="init" handler="onBodyInit"/>
+    <cl:group std:sid="group-23987253">
+      <cl:xylayoutdata std:sid="xyl-data-40dac3ed" top="0px" right="0px" bottom="10px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-29a4a01c">
+        <cl:formdata std:sid="f-data-8b727856" row="0" col="0" rowspan="5" colspan="5"/>
+        <cl:calendar std:sid="calendar-1d35979f" id="cl" class="mainCalendar" showothermonths="true" headervisible="false" footervisible="false" showweeknumber="false">
+          <cl:listener std:sid="listener-8435fde3" name="item-click" handler="onCalendarItemClick"/>
+          <cl:listener std:sid="listener-a6343468" name="value-change" handler="onClValueChange"/>
+          <cl:formdata std:sid="f-data-3789a5e7" valign="FILL" row="1" col="0" rowspan="1" colspan="5"/>
+          <cl:calendaritemset datasetid="dsEvnt" label="value" value="label" start="start" end="start"/>
+          <cl:headerstyle style="background-color:#69f0ae;"/>
+          <cl:itemstyle style="background-color:none; text-align:center;">
+            <cl:relativebind property="border-left-color" category="STYLER" columnname="class"/>
+          </cl:itemstyle>
+        </cl:calendar>
+        <cl:group std:sid="group-0094a467">
+          <cl:formdata std:sid="f-data-0d282b01" row="0" col="0" rowspan="1" colspan="5"/>
+          <cl:group std:sid="group-02a12f2f">
+            <cl:xylayoutdata std:sid="xyl-data-552d1f9c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:button std:sid="button-d088c2d6" class="btn-success" value="◀">
+              <cl:listener std:sid="listener-40fca6f4" name="click" handler="onButtonClick"/>
+              <cl:formdata std:sid="f-data-b5717ac0" valign="CENTER" row="0" col="3"/>
+            </cl:button>
+            <cl:button std:sid="button-670791aa" class="btn-success" value="▶">
+              <cl:listener std:sid="listener-f08257ff" name="click" handler="onButtonClick2"/>
+              <cl:formdata std:sid="f-data-db0c8cc2" valign="CENTER" row="0" col="5"/>
+            </cl:button>
+            <cl:output std:sid="output-5a41afc2" id="month" style="text-align:center;" class="calendar-date">
+              <cl:formdata std:sid="f-data-5eeb0190" row="0" col="4"/>
+            </cl:output>
+            <cl:button std:sid="button-4c80b75d" class="btn-primary" value="Today">
+              <cl:listener std:sid="listener-751cb52c" name="click" handler="onButtonClick3"/>
+              <cl:formdata std:sid="f-data-46378af2" valign="CENTER" row="0" col="8"/>
+            </cl:button>
+            <cl:output std:sid="output-34506756" id="opbSelect" style="font-size:18px;" class="h4" value="">
+              <cl:formdata std:sid="f-data-2bf04ae7" row="0" col="0" rowspan="1" colspan="3"/>
+            </cl:output>
+            <cl:button std:sid="button-89bc6559" class="btn-refresh" tooltip="일정 재조회">
+              <cl:listener std:sid="listener-998b162c" name="click" handler="onButtonClick6"/>
+              <cl:formdata std:sid="f-data-705e947e" halign="CENTER" valign="CENTER" width="25" height="25" row="0" col="7"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-b0786bc5" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" minlength="0"/>
+              <cl:columns length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="250" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="30" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-156d13cb"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-6b071302" scrollable="false" hspace="0px" vspace="0px">
+          <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="300" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-e75c2c85" style="border-radius:1rem; font-size:17px; text-align:center;" class="h4" value="매장 리스트">
+        <cl:formdata std:sid="f-data-7f0b9a97" halign="FILL" row="0" col="5"/>
+      </cl:output>
+      <cl:group std:sid="group-cccfe6ed">
+        <cl:formdata std:sid="f-data-520b7208" valign="FILL" row="1" col="5" rowspan="3" colspan="1"/>
+        <cl:grid std:sid="grid-2cbbfae0" id="grd1" datasetid="dsStoreList" autofit="0" vscroll="auto" clickmode="edit">
+          <cl:listener std:sid="listener-5ce11329" name="cell-click" handler="onGrd1CellClick"/>
+          <cl:listener std:sid="listener-cde86afa" name="selection-change" handler="onGrd1SelectionChange"/>
+          <cl:verticaldata std:sid="v-data-b93c0bb1" width="150px" height="50px" minheight="50" syncminheight="true" autosize="height"/>
+          <cl:gridcolumn std:sid="g-column-9706299f"/>
+          <cl:gridcolumn std:sid="g-column-2f8ee9c8" width="50px"/>
+          <cl:gridcolumn std:sid="g-column-951d9999" width="30px"/>
+          <cl:griddetail std:sid="gd-band-ae6a5d60">
+            <cl:gridrow std:sid="g-row-e2e64d53" height="50px"/>
+            <cl:gridcell std:sid="gd-cell-00e446f1" rowindex="0" colindex="0" style="border-right-style:none;" columnname="store_name"/>
+            <cl:gridcell std:sid="gd-cell-1a6ee84e" rowindex="0" colindex="1" style="border-right-style:none; border-left-style:none;">
+              <cl:button std:sid="button-cf47e899" style="border-radius:0.5rem; background-color:transparent; background-size:cover; background-image:url('../../theme/images/navbar-icon/edit-2-line.svg');" class="btn-edit-img" value="">
+                <cl:listener std:sid="listener-c1f6ba2c" name="click" handler="onButtonClick7"/>
+                <cl:celldata std:sid="c-data-0cea6e9b" halign="CENTER" valign="CENTER" width="30" height="30"/>
+              </cl:button>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-85ec5e68" rowindex="0" colindex="2" style="border-left-style:none;">
+              <cl:button std:sid="button-691e30cf" style="background-color:transparent;" class="btn-trash" value="   ">
+                <cl:listener std:sid="listener-236fcd3f" name="click" handler="onButtonClick4"/>
+                <cl:celldata std:sid="c-data-6a075770" halign="CENTER" valign="CENTER" width="25"/>
+              </cl:button>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:button std:sid="button-7a977692" class="btn-success" value="매장 등록">
+          <cl:listener std:sid="listener-1101e353" name="click" handler="onButtonClick5"/>
+          <cl:verticaldata std:sid="v-data-d7404af6" width="100px" height="25px"/>
+        </cl:button>
+        <cl:group std:sid="group-675c9932">
+          <cl:verticaldata std:sid="v-data-6ac354b2" width="400px" height="50px"/>
+          <cl:xylayout std:sid="xylayout-9d5dc56b"/>
+        </cl:group>
+        <cl:group std:sid="group-4c77687e" id="grpPtjLit">
+          <cl:verticaldata std:sid="v-data-d4648dbf" width="400px" height="338px" autosize="both"/>
+          <cl:verticallayout std:sid="v-layout-02b28e8a" topmargin="0"/>
+        </cl:group>
+        <cl:verticallayout std:sid="v-layout-2bb45680" leftmargin="10" rightmargin="10" topmargin="0" bottommargin="10"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-9012c32e" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="25" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="300" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="5" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="230" unit="PIXEL" autoSizing="false" hidden="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-3b981881"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

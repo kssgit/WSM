@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-30c3ad2b" version="1.0.3485">
+  <head std:sid="head-66e365ee">
+    <screen std:sid="screen-282e9184" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-864bb024" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-9d7d0018" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-5422dc9e">
+      <cl:datamap std:sid="d-map-95f4a49b" id="dmDeleteStore">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b289446f" name="STORE_CODE"/>
+          <cl:datacolumn std:sid="d-column-daaed93c" name="USER_NUMBER"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-bf3a63e7" id="smsDeleteStore">
+        <cl:requestdata dataid="dmDeleteStore"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec title="근무지/매장">
+      <cl:property name="wp_name" type="string" default="기본값"/>
+      <cl:property name="store_code" type="number"/>
+      <cl:property name="select" type="boolean"/>
+      <cl:property name="wp_color" type="string"/>
+      <cl:event name="event" type="cpr.events.CAppEvent"/>
+      <cl:event name="delete" type="cpr.events.CAppEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-b2267fa5" style="top:0px; left:0px; width:400px; height:100px;">
+    <cl:listener std:sid="listener-6d42092a" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-d7cd2822" id="grp" style="box-shadow:none;" class="work-place">
+      <cl:xylayoutdata std:sid="xyl-data-729b7a88" width="360px" height="72px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+      <cl:output std:sid="output-075e1d26" class="store-name" value="근무지 A">
+        <cl:apppropbind property="value" app-property="wp_name"/>
+        <cl:xylayoutdata std:sid="xyl-data-b8d82b28" width="100px" height="20px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+      </cl:output>
+      <cl:button std:sid="button-65d15252" class="btn-danger" value="삭제">
+        <cl:listener std:sid="listener-df9a0aa5" name="click" handler="onButtonClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-025019a6" right="10px" width="66px" height="20px" horizontalAnchor="RIGHT" verticalAnchor="CENTER"/>
+      </cl:button>
+      <cl:checkbox std:sid="c-box-64c83396" id="cbx1" class="check-box" value="" falsevalue="false" text="">
+        <cl:listener std:sid="listener-555b9be8" name="click" handler="onCbx1Click"/>
+        <cl:listener std:sid="listener-b8b9a368" name="value-change" handler="onCbx1ValueChange"/>
+        <cl:apppropbind property="value" app-property="select"/>
+        <cl:xylayoutdata std:sid="xyl-data-345178a3" left="237px" width="22px" height="25px" horizontalAnchor="LEFT" verticalAnchor="CENTER"/>
+      </cl:checkbox>
+      <cl:button std:sid="button-e8adfa15" value="Button">
+        <cl:listener std:sid="listener-1c42de82" name="click" handler="onButtonClick2"/>
+        <cl:xylayoutdata std:sid="xyl-data-66f553aa" top="23px" left="20px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:button>
+      <cl:xylayout std:sid="xylayout-2bc40a09"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-5457f0c2"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>
