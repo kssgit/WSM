@@ -103,18 +103,21 @@ public class UserService implements UserServiceInterface{
 	}
 
 	//사용자 정보 조회
+	@Override
 	public Map<String, String> getMyInfo(String userNum) {
 		
 		return userdao.getMyInfo(userNum);
 	}
 
 	//사용자 정보 변경 업데이트
+	@Override
 	public void updateUserInfo(ParameterGroup param) {
 		// TODO Auto-generated method stub
 		userdao.updateUserInfo(param);
 	}
 
 	//회원 탈퇴
+	@Override
 	public void deleteUserInfo(String userNum) {
 		// TODO Auto-generated method stub
 		userdao.deleteUserInfo(userNum);

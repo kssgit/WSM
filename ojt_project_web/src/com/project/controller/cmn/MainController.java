@@ -12,22 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.JstlView;
 
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.spring.JSONDataView;
 import com.cleopatra.spring.UIView;
-import com.project.service.cmn.UserService;
+import com.project.service.interfaces.UserServiceInterface;
 
 @Controller
 @RequestMapping("main")
 public class MainController {
 	
-	private final UserService service;
+	private final UserServiceInterface service;
 	
 	@Autowired
-	public MainController(UserService service) {
+	public MainController(UserServiceInterface service) {
 		// TODO Auto-generated constructor stub
 		this.service = service;
 	}

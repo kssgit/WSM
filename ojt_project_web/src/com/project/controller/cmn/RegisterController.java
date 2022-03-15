@@ -16,17 +16,17 @@ import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.spring.JSONDataView;
 import com.cleopatra.spring.UIView;
-import com.project.service.cmn.UserService;
+import com.project.service.interfaces.UserServiceInterface;
 
 @Controller
 @Transactional(rollbackFor = Exception.class)
 @RequestMapping("regist")
 public class RegisterController {
 	
-	private final UserService service;
+	private final UserServiceInterface service;
 	
 	@Autowired
-	public RegisterController(UserService service) {
+	public RegisterController(UserServiceInterface service) {
 		// TODO Auto-generated constructor stub
 		this.service = service;
 	}

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,19 +15,17 @@ import org.springframework.web.servlet.View;
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.spring.JSONDataView;
-import com.cleopatra.spring.UIView;
-import com.project.service.cmn.UserService;
-import com.sun.istack.internal.logging.Logger;
+import com.project.service.interfaces.UserServiceInterface;
 
 @Controller
 @RequestMapping("user")
 public class LoginController {
 	
 
-	private final UserService loginservice;
+	private final UserServiceInterface loginservice;
 	
 	@Autowired
-	public LoginController(UserService loginservice) {
+	public LoginController(UserServiceInterface loginservice) {
 		// TODO Auto-generated constructor stub
 		this.loginservice = loginservice;
 	}
